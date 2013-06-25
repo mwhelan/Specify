@@ -1,0 +1,26 @@
+﻿using TestLibrary.Parliament.Transcripts.Hansard.UserStories.Scenarios;
+
+namespace AcceptanceTests.Parliament.Transcripts.Hansard.UserStories.WestminsterHall.US007
+{
+    
+    public abstract class us007_sc01<TScenario> : ScenarioFor<TScenario, us007_Add_Set_up_for_Westminster_Hall>
+        where TScenario : class
+
+    {
+        protected us007_sc01() : base(1, "Display Choose Chair Dialog")
+        {
+        }
+
+        
+        public abstract void Given_I_am_Transcribing();
+
+        public abstract void When_I_click_the_Setup_Button();
+
+        public abstract void Then_I_should_be_presented_with_the_Choose_Chair_dialog();
+
+        public abstract void And_ShortStar_should_be_selected();
+
+        public abstract void And_I_should_be_able_to_select_from_a_list_of_Commons_Members();
+
+    }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Specify</id>
+    <version>0.0.1</version>
+    <title>Specify</title>
+    <authors>Michael Whelan</authors>
+    <owners>Michael Whelan</owners>
+    <projectUrl>http://teststack.github.com/TestStack.Seleno/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Seleno helps you write automated UI tests in the right way (using Selenium WebDriver)</description>
+    <releaseNotes>The baseline for Specify</releaseNotes>
+    <copyright>Copyright 2012 TestStack</copyright>
+	<dependencies> 
+	  <dependency id="TestStack.BDDfy" version="3.13" />
+	</dependencies>
+  </metadata>
+</package>
