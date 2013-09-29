@@ -1,5 +1,5 @@
 ﻿using TestStack.BDDfy.Configuration;
-using TestStack.BDDfy.Processors.HtmlReporter;
+using TestStack.BDDfy.Processors.Reporters.Html;
 
 namespace Specify
 {
