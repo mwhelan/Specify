@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Specify.Tests.Example.CommandProcessing
+namespace Specify.Samples.CommandProcessing
 {
     public class ExecutionResult
     {

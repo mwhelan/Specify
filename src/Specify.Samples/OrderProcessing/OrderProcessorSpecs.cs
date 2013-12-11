@@ -1,8 +1,7 @@
 ﻿using FluentAssertions;
 using NSubstitute;
-using NUnit.Framework;
 
-namespace Specify.Tests.Example.OrderProcessing
+namespace Specify.Samples.OrderProcessing
 {
     public class given
     {
@@ -19,25 +18,22 @@ namespace Specify.Tests.Example.OrderProcessing
     {
         private OrderResult _result;
 
-        public void when_processing_an_order()
+        public void When_processing_an_order()
         {
             _result = SUT.Process(new Order { PartNumber = "TestPart", Quantity = 10 });
         }
 
-        [Test]
-        public void then_the_order_is_accepted()
+        public void Then_the_order_is_accepted()
         {
             _result.WasAccepted.Should().BeTrue();
         }
 
-        [Test]
-        public void then_it_checks_the_inventory()
+        public void AndThen_it_checks_the_inventory()
         {
             SubFor<IInventory>().Received().IsQuantityAvailable("TestPart", 10);
         }
 
-        [Test]
-        public void then_it_raises_an_order_submitted_event()
+        public void AndThen_it_raises_an_order_submitted_event()
         {
             SubFor<IPublisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
         }
@@ -47,25 +43,22 @@ namespace Specify.Tests.Example.OrderProcessing
     {
         private OrderResult _result;
 
-        protected void when_processing_an_order_with_a_negative_quantity()
+        protected void When_processing_an_order_with_a_negative_quantity()
         {
             _result = SUT.Process(new Order { PartNumber = "TestPart", Quantity = -1 });
         }
 
-        [Test]
-        public void then_the_order_is_rejected()
+        public void Then_the_order_is_rejected()
         {
             _result.WasAccepted.Should().BeFalse();
         }
 
-        [Test]
-        public void then_it_does_not_check_the_inventory()
+        public void AndThen_it_does_not_check_the_inventory()
         {
             SubFor<IInventory>().DidNotReceive().IsQuantityAvailable("TestPart", -1);
         }
 
-        [Test]
-        public void then_it_does_not_raise_an_order_submitted_event()
+        public void AndThen_it_does_not_raise_an_order_submitted_event()
         {
             SubFor<IPublisher>().DidNotReceive().Publish(Arg.Any<OrderSubmitted>());
         }

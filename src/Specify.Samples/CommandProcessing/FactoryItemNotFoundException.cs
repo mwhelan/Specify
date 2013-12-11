@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Specify.Tests.Example.CommandProcessing
+namespace Specify.Samples.CommandProcessing
 {
     public class FactoryItemNotFoundException : Exception
     {

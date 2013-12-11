@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using FluentAssertions;
 
-namespace Specify.Tests.Example.Katas.PrimeNumbers
+namespace Specify.Samples.Katas.PrimeNumbers
 {
     public class PrimeCalculator
     {
