@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BDDfy.readme.txt" />
-    <Content Include="bddifyCustom.css">
+    <Content Include="BDDfyCustom.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
