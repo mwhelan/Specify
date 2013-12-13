@@ -1,4 +1,5 @@
 using System;
+using Specify.Core;
 using TestStack.BDDfy.Core;
 using TestStack.BDDfy.Scanners;
 

@@ -3,7 +3,7 @@ using Humanizer;
 using NUnit.Framework;
 using TestStack.BDDfy;
 
-namespace Specify
+namespace Specify.Core
 {
     [TestFixture]
     public abstract class Specification : ISpecification
@@ -19,11 +19,6 @@ namespace Specify
         {
             return Title ?? GetType().Name.Humanize(LetterCasing.Title);
         }
-
-        // BDDfy methods
-        public virtual void EstablishContext() { }
-        public virtual void Setup() { }
-        public virtual void TearDown() { }
 
         public virtual Type Story { get { return GetType(); } }
         public virtual string Title { get; set; }

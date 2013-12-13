@@ -65,12 +65,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\AutoMockingContainer.cs" />
+    <Compile Include="Core\ISpecification.cs" />
+    <Compile Include="Core\Specification.cs" />
+    <Compile Include="Core\SpecificationFor.cs" />
     <Compile Include="SpecifyConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ISpecification.cs" />
     <Compile Include="SelenoDesignSpecsHtmlReportConfig.cs" />
-    <Compile Include="Specification.cs" />
-    <Compile Include="SpecificationFor.cs" />
     <Compile Include="SpecStoryMetaDataScanner.cs" />
   </ItemGroup>
   <ItemGroup>

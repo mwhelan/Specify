@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Specify
+namespace Specify.Core
 {
     public interface ISpecification
     {

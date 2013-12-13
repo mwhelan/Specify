@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
+using Specify.Core;
 
 namespace Specify.Samples.Katas.PrimeNumbers
 {

@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
+using Specify.Core;
 
 namespace Specify.Tests.Specifications
 {

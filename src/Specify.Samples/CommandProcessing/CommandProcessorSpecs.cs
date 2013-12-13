@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NSubstitute;
+using Specify.Core;
 
 namespace Specify.Samples.CommandProcessing
 {
