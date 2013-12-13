@@ -2,6 +2,7 @@
 using NSubstitute;
 using NUnit.Framework;
 using Specify.Core;
+using Specify.Scanners;
 
 namespace Specify.Tests.Specifications
 {

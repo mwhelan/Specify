@@ -3,7 +3,7 @@ using Specify.Core;
 using TestStack.BDDfy.Core;
 using TestStack.BDDfy.Scanners;
 
-namespace Specify
+namespace Specify.Scanners
 {
     public class SpecStoryMetaDataScanner : IStoryMetaDataScanner
     {

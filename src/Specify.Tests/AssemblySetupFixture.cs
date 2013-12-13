@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Specify.Configuration;
 
 namespace Specify.Tests
 {
@@ -8,7 +9,7 @@ namespace Specify.Tests
         [SetUp]
         public void SetUp()
         {
-            SpecifyConfiguration.InitializeSpecify();
+            //SpecifyConfigurator.Initialize();
         }
     }
 }

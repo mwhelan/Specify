@@ -65,14 +65,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ISpecifyConfig.cs" />
+    <Compile Include="Configuration\SpecifyConfigurator.cs" />
+    <Compile Include="Configuration\StartupScanner.cs" />
+    <Compile Include="Containers\AutofacDependencyLifetime.cs" />
+    <Compile Include="Containers\AutofacResolver.cs" />
     <Compile Include="Containers\AutoMockingContainer.cs" />
+    <Compile Include="Containers\IDependencyLifetime.cs" />
+    <Compile Include="Core\NotImplementedScenario.cs" />
+    <Compile Include="Core\ScenarioFor.cs" />
     <Compile Include="Core\ISpecification.cs" />
     <Compile Include="Core\Specification.cs" />
     <Compile Include="Core\SpecificationFor.cs" />
-    <Compile Include="SpecifyConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelenoDesignSpecsHtmlReportConfig.cs" />
-    <Compile Include="SpecStoryMetaDataScanner.cs" />
+    <Compile Include="Scanners\SpecStoryMetaDataScanner.cs" />
+    <Compile Include="Scanners\ScenarioStoryMetaDataScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
