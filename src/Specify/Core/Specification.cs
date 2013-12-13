@@ -1,14 +1,10 @@
 ﻿using System;
-using Humanizer;
-using NUnit.Framework;
 using TestStack.BDDfy;
 
 namespace Specify.Core
 {
-    [TestFixture]
     public abstract class Specification : ISpecification
     {
-        [Test]
         public virtual void Run()
         {
             string title = BuildTitle();
