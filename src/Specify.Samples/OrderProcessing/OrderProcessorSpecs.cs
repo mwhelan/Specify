@@ -1,6 +1,5 @@
-﻿using FluentAssertions;
-using NSubstitute;
-using Specify.Core;
+﻿using NSubstitute;
+using Shouldly;
 
 namespace Specify.Samples.OrderProcessing
 {
@@ -26,7 +25,7 @@ namespace Specify.Samples.OrderProcessing
 
         public void Then_the_order_is_accepted()
         {
-            _result.WasAccepted.Should().BeTrue();
+            _result.WasAccepted.ShouldBe(true);
         }
 
         public void AndThen_it_checks_the_inventory()
@@ -51,7 +50,7 @@ namespace Specify.Samples.OrderProcessing
 
         public void Then_the_order_is_rejected()
         {
-            _result.WasAccepted.Should().BeFalse();
+            _result.WasAccepted.ShouldBe(false);
         }
 
         public void AndThen_it_does_not_check_the_inventory()

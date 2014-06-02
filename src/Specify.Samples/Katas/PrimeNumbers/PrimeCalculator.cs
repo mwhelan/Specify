@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using FluentAssertions;
-using Specify.Core;
+using Shouldly;
 
 namespace Specify.Samples.Katas.PrimeNumbers
 {
@@ -30,7 +29,7 @@ namespace Specify.Samples.Katas.PrimeNumbers
 
         public void Then_should_return_false()
         {
-            Result.Should().BeFalse();
+            Result.ShouldBe(false);
         }
     }
 }

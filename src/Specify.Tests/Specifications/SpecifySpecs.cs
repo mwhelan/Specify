@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using NSubstitute;
+﻿using NSubstitute;
+using Shouldly;
 using Specify.Core;
 using Specify.Scanners;
 using Xunit;
@@ -12,7 +12,7 @@ namespace Specify.Tests.Specifications
         public void should_resolve_the_SUT()
         {
             var spec = new TestComponentSpecification();
-            spec.SUT.Should().BeAssignableTo<TestComponent>();
+            spec.SUT.ShouldBeAssignableTo<TestComponent>();
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Specify.Tests.Specifications
         {
             var scanner = new SpecStoryMetaDataScanner();
             var metatdata = scanner.Scan(new TestComponentSpecification());
-            metatdata.Title.Should().Be("TestComponent");
+            metatdata.Title.ShouldBe("TestComponent");
         }
 
         #region stubs

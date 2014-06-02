@@ -1,6 +1,5 @@
-﻿using FluentAssertions;
-using NSubstitute;
-using Specify.Core;
+﻿using NSubstitute;
+using Shouldly;
 
 namespace Specify.Samples.CommandProcessing
 {
@@ -43,7 +42,7 @@ namespace Specify.Samples.CommandProcessing
 
         public void AndThen_the_command_is_processed_successfully()
         {
-            _result.IsSuccessful.Should().BeTrue();
+            _result.IsSuccessful.ShouldBe(true);
         }
 
         public void AndThen_the_result_is_logged()

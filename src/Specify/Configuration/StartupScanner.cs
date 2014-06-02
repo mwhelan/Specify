@@ -23,7 +23,7 @@ namespace Specify.Configuration
             {
                 return (ISpecifyConfig)Activator.CreateInstance(lifecycleTypes[0]);
             }
-            throw new InvalidOperationException("No class was found that implements ITestLifecyle");
+            throw new InvalidOperationException("No class was found that implements ISpecifyConfig");
         }
 
         private static Func<Type, bool> ClassIsSpecifyConfig()
