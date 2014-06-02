@@ -15,7 +15,7 @@ namespace Specify.Configuration
             foreach (var assembly in assemblies)
             {
                 var typesInAssembly = GetTypesSafely(assembly)
-                    .Where(type => typeof(ISpecifyConfig).IsAssignableFrom(type) && !type.IsInterface)
+                    .Where(ClassIsSpecifyConfig())
                     .ToList();
                 lifecycleTypes.AddRange(typesInAssembly);
             }
@@ -24,6 +24,11 @@ namespace Specify.Configuration
                 return (ISpecifyConfig)Activator.CreateInstance(lifecycleTypes[0]);
             }
             throw new InvalidOperationException("No class was found that implements ITestLifecyle");
+        }
+
+        private static Func<Type, bool> ClassIsSpecifyConfig()
+        {
+            return type => typeof(ISpecifyConfig).IsAssignableFrom(type) && !type.IsInterface;
         }
 
         Func<Assembly, bool> _assembliesToScanForStartupConfig = assembly => true;
