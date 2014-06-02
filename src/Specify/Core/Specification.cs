@@ -8,7 +8,7 @@ namespace Specify.Core
         public virtual void Run()
         {
             string title = BuildTitle();
-            this.BDDfy(title, Category ?? string.Empty);
+            this.BDDfy(title);
         }
 
         protected virtual string BuildTitle()

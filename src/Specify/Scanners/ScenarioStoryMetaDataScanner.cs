@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Specify.Core;
-using TestStack.BDDfy.Core;
-using TestStack.BDDfy.Scanners;
+using TestStack.BDDfy;
 
 namespace Specify.Scanners
 {
-    public class ScenarioStoryMetaDataScanner : IStoryMetaDataScanner
+    public class ScenarioStoryMetaDataScanner : IStoryMetadataScanner
     {
-        public virtual StoryMetaData Scan(object testObject, Type explicityStoryType = null)
+        public virtual StoryMetadata Scan(object testObject, Type explicityStoryType = null)
         {
             var scenario = testObject as ISpecification;
             if (scenario == null)
@@ -18,7 +17,7 @@ namespace Specify.Scanners
             if (storyAttribute == null)
                 return null;
 
-            return new StoryMetaData(scenario.Story, storyAttribute);
+            return new StoryMetadata(scenario.Story, storyAttribute);
         }
 
         static StoryAttribute GetStoryAttribute(Type candidateStoryType)

@@ -51,8 +51,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestStack.BDDfy">
-      <HintPath>..\packages\TestStack.BDDfy.3.17.1\lib\NET40\TestStack.BDDfy.dll</HintPath>
+    <Reference Include="TestStack.BDDfy, Version=3.17.1.0, Culture=neutral, PublicKeyToken=a357057d05a879bd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TestStack.BDDfy.4.0.0-beta1\lib\NET40\TestStack.BDDfy.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
