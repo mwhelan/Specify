@@ -13,7 +13,7 @@ namespace Specify.Scanners
                 return null;
 
             string specificationTitle = CreateSpecificationTitle(specification);
-            var story = new StoryAttribute() {Title = specificationTitle};
+            var story = new StoryAttribute() {Title = specificationTitle, TitlePrefix = "Specifications For: "};
             return new StoryMetadata(specification.Story, story);
         }
 

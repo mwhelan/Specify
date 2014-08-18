@@ -1,21 +1,21 @@
 ﻿using NSubstitute;
+using NUnit.Framework;
 using Shouldly;
 using Specify.Core;
 using Specify.Scanners;
-using Xunit;
 
 namespace Specify.Tests.Specifications
 {
     public class when_creating_a_Specify_specification
     {
-        [Fact]
+        [Test]
         public void should_resolve_the_SUT()
         {
             var spec = new TestComponentSpecification();
             spec.SUT.ShouldBeAssignableTo<TestComponent>();
         }
 
-        [Fact]
+        [Test]
         public void should_resolve_the_Substitutes()
         {
             var spec = new TestComponentSpecification();
@@ -23,7 +23,7 @@ namespace Specify.Tests.Specifications
             spec.SubFor<IServiceA>().Received().RunA();
         }
 
-        [Fact]
+        [Test]
         public void should_set_the_correct_story_title()
         {
             var scanner = new SpecStoryMetaDataScanner();

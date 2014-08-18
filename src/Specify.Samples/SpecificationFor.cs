@@ -1,10 +1,10 @@
-﻿using Xunit;
+﻿using NUnit.Framework;
 
 namespace Specify.Samples
 {
     public abstract class SpecificationFor<T> : Core.SpecificationFor<T>
     {
-        [Fact]
+        [Test]
         public override void Run()
         {
             base.Run();
