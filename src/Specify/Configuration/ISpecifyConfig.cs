@@ -7,6 +7,7 @@ namespace Specify.Configuration
     {
         void BeforeAllTests();
         void AfterAllTests();
+        ReportConfig Report { get; set; }
         Func<IDependencyLifetime> GetChildContainer();
     }
 }

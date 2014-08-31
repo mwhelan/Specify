@@ -1,29 +1,31 @@
 ﻿using NSubstitute;
-using NUnit.Framework;
 using Shouldly;
 using Specify.Core;
 using Specify.Scanners;
+using Xunit;
 
 namespace Specify.Tests.Specifications
 {
     public class when_creating_a_Specify_specification
     {
-        [Test]
+        [Fact]
         public void should_resolve_the_SUT()
         {
             var spec = new TestComponentSpecification();
+            spec.Run();
             spec.SUT.ShouldBeAssignableTo<TestComponent>();
         }
 
-        [Test]
+        [Fact]
         public void should_resolve_the_Substitutes()
         {
             var spec = new TestComponentSpecification();
+            spec.Run();
             spec.SUT.RunAll();
-            spec.SubFor<IServiceA>().Received().RunA();
+            spec.DependencyFor<IServiceA>().Received().RunA();
         }
 
-        [Test]
+        [Fact]
         public void should_set_the_correct_story_title()
         {
             var scanner = new SpecStoryMetaDataScanner();

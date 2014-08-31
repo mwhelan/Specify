@@ -1,42 +1,18 @@
-﻿using System;
-using Specify.Configuration;
+using System;
 using Specify.Containers;
 
 namespace Specify.Core
 {
-    public abstract class ScenarioFor<T> : Specification
+    public abstract class ScenarioFor<TSut, TStory> : Specification<TSut, AutofacSutFactory<TSut>> 
+        where TSut : class 
+        where TStory : UserStory, new()
     {
-        public T SUT { get; set; }
-        public IDependencyLifetime Container { get; private set; }
-
-        static ScenarioFor()
+        protected ScenarioFor(AutofacSutFactory<TSut> container) : base(container)
         {
-            SpecifyConfigurator.Initialize();
         }
 
-        public ScenarioFor()
-        {
-            Container = SpecifyConfigurator.GetDependencyResolver();
-            InitialiseSystemUnderTest();
-        }
-
-        public virtual void InitialiseSystemUnderTest()
-        {
-            SUT = Container.Resolve<T>();
-        }
-
-        public virtual void TearDown()
-        {
-            Container.Dispose();
-        }
-
-        public abstract override Type Story { get; }
+        public override Type Story { get { return typeof (TStory); } }
         public abstract int ScenarioNumber { get; }
-        public abstract override string Title { get; }
-
-        protected override string BuildTitle()
-        {
-            return string.Format("Scenario {0}: {1}", ScenarioNumber.ToString("00"), Title);
-        }
+        public override string Title { get { return string.Format("Scenario {0}: {1}", ScenarioNumber.ToString("00"), Title); } }
     }
 }

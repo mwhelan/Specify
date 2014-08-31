@@ -9,8 +9,8 @@ namespace Specify.Samples.CommandProcessing
         {
             protected void Given_the_command_is_valid()
             {
-                SubFor<IValidateCommand<TestCommand>>().Validate(Arg.Any<TestCommand>()).Returns(new ExecutionResult(null));
-                SubFor<IValidateCommandFactory>().ValidatorForCommand(Arg.Any<TestCommand>()).Returns(SubFor<IValidateCommand<TestCommand>>());
+                DependencyFor<IValidateCommand<TestCommand>>().Validate(Arg.Any<TestCommand>()).Returns(new ExecutionResult(null));
+                DependencyFor<IValidateCommandFactory>().ValidatorForCommand(Arg.Any<TestCommand>()).Returns(DependencyFor<IValidateCommand<TestCommand>>());
             }
         }
     }
@@ -27,17 +27,17 @@ namespace Specify.Samples.CommandProcessing
 
         public void Then_the_processor_should_find_the_validator_for_the_command()
         {
-            SubFor<IValidateCommandFactory>().Received().ValidatorForCommand(_command);
+            DependencyFor<IValidateCommandFactory>().Received().ValidatorForCommand(_command);
         }
 
         public void AndThen_validate_the_command()
         {
-            SubFor<IValidateCommand<TestCommand>>().Received().Validate(_command);
+            DependencyFor<IValidateCommand<TestCommand>>().Received().Validate(_command);
         }
 
         public void AndThen_the_processor_should_find_the_handler_for_the_command()
         {
-            SubFor<IHandleCommandFactory>().Received().HandlerForCommand(_command);
+            DependencyFor<IHandleCommandFactory>().Received().HandlerForCommand(_command);
         }
 
         public void AndThen_the_command_is_processed_successfully()
@@ -47,7 +47,7 @@ namespace Specify.Samples.CommandProcessing
 
         public void AndThen_the_result_is_logged()
         {
-            SubFor<ILog>().Received().Info(Arg.Any<string>());
+            DependencyFor<ILog>().Received().Info(Arg.Any<string>());
         }
     }
 }

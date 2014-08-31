@@ -4,17 +4,17 @@ namespace Specify.Containers
 {
     public class AutofacResolver : AutofacDependencyLifetime
     {
-        readonly IContainer container;
+        readonly IContainer _container;
 
         public AutofacResolver(IContainer container)
             : base(container)
         {
-            this.container = container;
+            _container = container;
         }
 
         public IDependencyLifetime BeginScope()
         {
-            return new AutofacDependencyLifetime(container.BeginLifetimeScope());
+            return new AutofacDependencyLifetime(_container.BeginLifetimeScope());
         }
     }
 }

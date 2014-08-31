@@ -2,7 +2,7 @@
 
 namespace Specify.Samples
 {
-    public abstract class SpecificationFor<T> : Core.SpecificationFor<T>
+    public abstract class SpecificationFor<T> : Core.SpecificationFor<T> where T : class
     {
         [Test]
         public override void Run()

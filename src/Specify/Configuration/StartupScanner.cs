@@ -7,18 +7,15 @@ namespace Specify.Configuration
 {
     public class StartupScanner
     {
-        public ISpecifyConfig GetTestLifecycle()
+        public ISpecifyConfig GetConfig(Type type)
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(AssembliesToScanForStartupConfig);
+            var assembly = type.Assembly;
             List<Type> lifecycleTypes = new List<Type>();
-            foreach (var assembly in assemblies)
-            {
-                var typesInAssembly = GetTypesSafely(assembly)
-                    .Where(ClassIsSpecifyConfig())
-                    .ToList();
-                lifecycleTypes.AddRange(typesInAssembly);
-            }
+            var typesInAssembly = GetTypesSafely(assembly)
+                .Where(ClassIsSpecifyConfig())
+                .ToList();
+            lifecycleTypes.AddRange(typesInAssembly);
+
             if (lifecycleTypes.Count == 1)
             {
                 return (ISpecifyConfig)Activator.CreateInstance(lifecycleTypes[0]);
@@ -29,13 +26,6 @@ namespace Specify.Configuration
         private static Func<Type, bool> ClassIsSpecifyConfig()
         {
             return type => typeof(ISpecifyConfig).IsAssignableFrom(type) && !type.IsInterface;
-        }
-
-        Func<Assembly, bool> _assembliesToScanForStartupConfig = assembly => true;
-        public Func<Assembly, bool> AssembliesToScanForStartupConfig
-        {
-            get { return _assembliesToScanForStartupConfig; }
-            set { _assembliesToScanForStartupConfig = value; }
         }
 
         private static IEnumerable<Type> GetTypesSafely(Assembly assembly)
@@ -50,4 +40,5 @@ namespace Specify.Configuration
             }
         }
     }
+
 }

@@ -58,17 +58,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SpecifyExtensions.cs" />
     <Compile Include="Configuration\ISpecifyConfig.cs" />
+    <Compile Include="Configuration\ReportConfig.cs" />
     <Compile Include="Configuration\SpecifyConfigurator.cs" />
     <Compile Include="Configuration\StartupScanner.cs" />
     <Compile Include="Containers\AutofacDependencyLifetime.cs" />
     <Compile Include="Containers\AutofacResolver.cs" />
+    <Compile Include="Containers\AutofacSutFactory.cs" />
+    <Compile Include="Containers\AutoSubResolver.cs" />
     <Compile Include="Containers\IDependencyLifetime.cs" />
+    <Compile Include="Containers\ISutResolver.cs" />
     <Compile Include="Core\NotImplementedScenario.cs" />
-    <Compile Include="Core\ScenarioFor.cs" />
     <Compile Include="Core\ISpecification.cs" />
+    <Compile Include="Core\ScenarioFor.cs" />
     <Compile Include="Core\Specification.cs" />
     <Compile Include="Core\SpecificationFor.cs" />
+    <Compile Include="Core\Story.cs" />
     <Compile Include="Humanizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanners\SpecStoryMetaDataScanner.cs" />

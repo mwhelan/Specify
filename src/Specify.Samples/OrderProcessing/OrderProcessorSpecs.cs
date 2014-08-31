@@ -9,7 +9,7 @@ namespace Specify.Samples.OrderProcessing
         {
             protected void Given_the_item_is_available()
             {
-                SubFor<IInventory>().IsQuantityAvailable("TestPart", 10).Returns(true);
+                DependencyFor<IInventory>().IsQuantityAvailable("TestPart", 10).Returns(true);
             }
         }
     }
@@ -30,12 +30,12 @@ namespace Specify.Samples.OrderProcessing
 
         public void AndThen_it_checks_the_inventory()
         {
-            SubFor<IInventory>().Received().IsQuantityAvailable("TestPart", 10);
+            DependencyFor<IInventory>().Received().IsQuantityAvailable("TestPart", 10);
         }
 
         public void AndThen_it_raises_an_order_submitted_event()
         {
-            SubFor<IPublisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
+            DependencyFor<IPublisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
         }
     }
     
@@ -55,12 +55,12 @@ namespace Specify.Samples.OrderProcessing
 
         public void AndThen_it_does_not_check_the_inventory()
         {
-            SubFor<IInventory>().DidNotReceive().IsQuantityAvailable("TestPart", -1);
+            DependencyFor<IInventory>().DidNotReceive().IsQuantityAvailable("TestPart", -1);
         }
 
         public void AndThen_it_does_not_raise_an_order_submitted_event()
         {
-            SubFor<IPublisher>().DidNotReceive().Publish(Arg.Any<OrderSubmitted>());
+            DependencyFor<IPublisher>().DidNotReceive().Publish(Arg.Any<OrderSubmitted>());
         }
     }
 }
