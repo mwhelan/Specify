@@ -4,11 +4,11 @@ using Autofac.Builder;
 
 namespace Specify.Containers
 {
-    public class AutofacDependencyLifetime : IDependencyLifetime
+    public class AutofacDependencyScope : IDependencyScope
     {
         private ILifetimeScope _scope;
 
-        public AutofacDependencyLifetime(ILifetimeScope scope)
+        public AutofacDependencyScope(ILifetimeScope scope)
         {
             if (scope == null)
                 throw new ArgumentNullException("scope");

@@ -1,24 +1,42 @@
-﻿using Autofac;
-using Specify.Configuration;
-using TestStack.BDDfy;
+﻿using System;
 
 namespace Specify
 {
     public static class SpecifyExtensions
     {
-        public static void Specify(this object testObject, string scenarioTitle = null)
+        public static ISpecification Specify(this object testObject)
         {
-            var spec = GetTestObject(testObject);
-            spec.BDDfy(scenarioTitle);
+            Guard.Against(testObject == null, "testObject cannot be null");
+            return Host.PerformTest(testObject.GetType());
         }
 
-        private static object GetTestObject(object testObject)
+        public static bool IsScenarioFor(this ISpecification specification)
         {
-            if (SpecifyConfigurator.Container == null)
+            return specification.GetType().IsAssignableToGenericType(typeof(ScenarioFor<,>));
+        }
+
+        public static bool IsSpecificationFor(this ISpecification specification)
+        {
+            return specification.GetType().IsAssignableToGenericType(typeof(SpecificationFor<>));
+        }
+
+        public static bool IsAssignableToGenericType(this Type givenType, Type genericType)
+        {
+            var interfaceTypes = givenType.GetInterfaces();
+
+            foreach (var type in interfaceTypes)
             {
-                SpecifyConfigurator.Initialize(testObject);
+                if (type.IsGenericType && type.GetGenericTypeDefinition() == genericType)
+                    return true;
             }
-            return SpecifyConfigurator.Container.Resolve(testObject.GetType());
+
+            if (givenType.IsGenericType && givenType.GetGenericTypeDefinition() == genericType)
+                return true;
+
+            Type baseType = givenType.BaseType;
+            if (baseType == null) return false;
+
+            return IsAssignableToGenericType(baseType, genericType);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Specify.Containers
 {
-    public interface IDependencyLifetime : IDisposable
+    public interface IDependencyScope : IDisposable
     {
         TService Resolve<TService>();
         void Inject<TService>(TService instance);

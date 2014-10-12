@@ -1,11 +1,11 @@
 ﻿namespace Specify.Configuration
 {
-    public class ReportConfig
+    public class HtmlReportConfiguration
     {
-        public ReportConfig()
+        public HtmlReportConfiguration()
         {
-            Header = "BDDfy";
-            Name = "BDDfy.html";
+            Header = "Specify";
+            Name = "SpecifySpecs.html";
             Type = ReportType.Html;
         }
         public string Header { get; set; }
@@ -16,7 +16,7 @@
         public enum ReportType
         {
             Html,
-            Markdown
+            Metro
         }
     }
 }

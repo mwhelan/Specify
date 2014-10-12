@@ -57,32 +57,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Catch.cs" />
+    <Compile Include="Configuration\AppConfigurator.cs" />
+    <Compile Include="Configuration\HtmlReportConfiguration.cs" />
+    <Compile Include="Configuration\SpecifyConventions.cs" />
+    <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
+    <Compile Include="Containers\AutofacDependencyScope.cs" />
+    <Compile Include="Containers\AutoMockingContainer.cs" />
+    <Compile Include="Containers\IDependencyScope.cs" />
+    <Compile Include="Containers\IocContainer.cs" />
+    <Compile Include="Guard.cs" />
+    <Compile Include="Host.cs" />
+    <Compile Include="NullStory.cs" />
+    <Compile Include="ScenarioFor.cs" />
+    <Compile Include="Specification.cs" />
+    <Compile Include="SpecificationFor.cs" />
     <Compile Include="SpecifyExtensions.cs" />
-    <Compile Include="Configuration\ISpecifyConfig.cs" />
-    <Compile Include="Configuration\ReportConfig.cs" />
-    <Compile Include="Configuration\SpecifyConfigurator.cs" />
-    <Compile Include="Configuration\StartupScanner.cs" />
-    <Compile Include="Containers\AutofacDependencyLifetime.cs" />
-    <Compile Include="Containers\AutofacResolver.cs" />
-    <Compile Include="Containers\AutofacSutFactory.cs" />
-    <Compile Include="Containers\AutoSubResolver.cs" />
-    <Compile Include="Containers\IDependencyLifetime.cs" />
-    <Compile Include="Containers\ISutResolver.cs" />
-    <Compile Include="Core\NotImplementedScenario.cs" />
-    <Compile Include="Core\ISpecification.cs" />
-    <Compile Include="Core\ScenarioFor.cs" />
-    <Compile Include="Core\Specification.cs" />
-    <Compile Include="Core\SpecificationFor.cs" />
-    <Compile Include="Core\Story.cs" />
+    <Compile Include="Containers\ITestContainer.cs" />
     <Compile Include="Humanizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scanners\SpecStoryMetaDataScanner.cs" />
-    <Compile Include="Scanners\ScenarioStoryMetaDataScanner.cs" />
+    <Compile Include="Story.cs" />
+    <Compile Include="UserStory.cs" />
+    <Compile Include="ValueStory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

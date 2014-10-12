@@ -2,12 +2,12 @@
 
 namespace Specify.Samples
 {
-    public abstract class SpecificationFor<T> : Core.SpecificationFor<T> where T : class
+    public abstract class SpecificationFor<T> : Specify.SpecificationFor<T> where T : class
     {
         [Test]
-        public override void Run()
+        public override ISpecification ExecuteTest()
         {
-            base.Run();
+            return base.ExecuteTest();
         }
     }
 }
