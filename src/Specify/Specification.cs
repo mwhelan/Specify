@@ -10,15 +10,6 @@ namespace Specify
     //    TResolver Resolver { get; set; }
     //}
 
-    public interface ISpecification : IDisposable
-    {
-        ISpecification ExecuteTest();
-        T DependencyFor<T>();
-        void InjectDependency<TService>(TService instance) where TService : class;
-        Type Story { get; }
-        string Title { get; }
-    }
-
     public abstract class Specification<TSut, TResolver> : ISpecification//<TSut,TResolver> 
         where TSut : class
         where TResolver : ITestContainer<TSut>
@@ -32,7 +23,7 @@ namespace Specify
         }
         public virtual string Title { get { return GetType().Name.Humanize(LetterCasing.Title); } }
 
-        public ISpecification ExecuteTest()
+        public virtual ISpecification ExecuteTest()
         {
             return this.Specify();
         }

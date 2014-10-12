@@ -68,6 +68,7 @@
     <Compile Include="Containers\IocContainer.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="Host.cs" />
+    <Compile Include="ISpecification.cs" />
     <Compile Include="NullStory.cs" />
     <Compile Include="ScenarioFor.cs" />
     <Compile Include="Specification.cs" />

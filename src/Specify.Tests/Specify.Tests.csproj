@@ -72,6 +72,7 @@
     <Compile Include="Configuration\SpecifyStoryMetadataScannerSpecs.cs" />
     <Compile Include="Containers\AutoMockingContainerSpecs.cs" />
     <Compile Include="Containers\IocContainerSpecs.cs" />
+    <Compile Include="GuardSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScenarioForSpecs.cs" />
     <Compile Include="SpecificationForSpecs.cs" />

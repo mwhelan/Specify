@@ -14,6 +14,14 @@ namespace Specify.Tests
         }
 
         [Test]
+        public void should_return_overridden_properties()
+        {
+            var sut = new TicTacToeValueStory();
+            sut.AsA.Should().Be("As a player");
+            sut.IWant.Should().Be("I want to have a tic tac toe game");
+        }
+        
+        [Test]
         public void should_provide_omitted_clause_prefixes()
         {
             var sut = new TicTacToeValueStory();

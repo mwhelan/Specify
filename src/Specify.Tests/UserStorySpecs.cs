@@ -14,6 +14,13 @@ namespace Specify.Tests
         }
 
         [Test]
+        public void should_return_overridden_properties()
+        {
+            var sut = new WithdrawCashUserStory();
+            sut.AsA.Should().Be("As an Account Holder");
+        }
+
+        [Test]
         public void should_provide_omitted_clause_prefixes()
         {
             var sut = new WithdrawCashUserStory();
