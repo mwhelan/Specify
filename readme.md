@@ -1,4 +1,6 @@
-# What is it?
+# Specify
+
+## What is it?
 Specify is a small opinionated testing library for writing different kinds of tests in .Net. It is built on top of several other libraries:
 
 * BDDfy
