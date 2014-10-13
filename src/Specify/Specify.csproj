@@ -64,14 +64,14 @@
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Containers\AutofacDependencyScope.cs" />
     <Compile Include="Containers\AutoMockingContainer.cs" />
-    <Compile Include="Containers\IDependencyScope.cs" />
+    <Compile Include="Containers\SpecificationContext.cs" />
+    <Compile Include="Containers\IDependencyResolver.cs" />
     <Compile Include="Containers\IocContainer.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="NullStory.cs" />
     <Compile Include="ScenarioFor.cs" />
-    <Compile Include="Specification.cs" />
     <Compile Include="SpecificationFor.cs" />
     <Compile Include="SpecifyExtensions.cs" />
     <Compile Include="Containers\ITestContainer.cs" />

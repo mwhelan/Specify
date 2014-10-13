@@ -4,7 +4,7 @@ using Autofac.Builder;
 
 namespace Specify.Containers
 {
-    public class AutofacDependencyScope : IDependencyScope
+    public class AutofacDependencyScope : IDependencyResolver
     {
         private ILifetimeScope _scope;
 

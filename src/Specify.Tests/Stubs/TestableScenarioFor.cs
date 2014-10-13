@@ -10,7 +10,7 @@ namespace Specify.Tests.Stubs
 
         public TestableScenarioFor()
         {
-            Resolver = new IocContainer<TSut>(Substitute.For<IDependencyScope>());
+            Resolver = Substitute.For<IDependencyResolver>();
         }
         public List<string> Steps
         {

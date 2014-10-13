@@ -1,9 +1,8 @@
 using System;
-using Specify.Containers;
 
 namespace Specify
 {
-    public abstract class ScenarioFor<TSut, TStory> : Specification<TSut, IocContainer<TSut>>
+    public abstract class ScenarioFor<TSut, TStory> : SpecificationFor<TSut>
         where TSut : class
         where TStory : UserStory
     {

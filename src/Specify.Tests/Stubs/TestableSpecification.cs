@@ -1,15 +1,16 @@
 using System.Collections.Generic;
+using NSubstitute;
 using Specify.Containers;
 
 namespace Specify.Tests.Stubs
 {
-    abstract class TestableSpecification<TSut> : Specification<TSut, AutoMockingContainer<TSut>> where TSut : class
+    abstract class TestableSpecification<TSut> : SpecificationFor<TSut> where TSut : class
     {
         private List<string> _steps = new List<string>();
 
         public TestableSpecification()
         {
-            Resolver = new AutoMockingContainer<TSut>();
+            Resolver = Substitute.For<IDependencyResolver>();
         }
         public List<string> Steps
         {

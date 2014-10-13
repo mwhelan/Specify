@@ -5,9 +5,9 @@ namespace Specify.Containers
     public class IocContainer<TSut> : ITestContainer<TSut> where TSut : class
     {
         private TSut _systemUnderTest;
-        private readonly IDependencyScope _container;
+        private readonly IDependencyResolver _container;
 
-        public IocContainer(IDependencyScope container)
+        public IocContainer(IDependencyResolver container)
         {
             _container = container;
         }
