@@ -9,7 +9,7 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_provide_default_conventions()
         {
-            var sut = new SpecifyConventions();
+            var sut = new SpecifyConfiguration();
             sut.HtmlReport.Header.Should().Be("Specify");
             sut.HtmlReport.Name.Should().Be("SpecifySpecs.html");
             sut.HtmlReport.Type.Should().Be(HtmlReportConfiguration.ReportType.Html);
@@ -18,16 +18,16 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_be_able_to_provide_custom_conventions()
         {
-            var sut = new CustomConventions();
+            var sut = new CustomConfiguration();
             sut.HtmlReport.Description.Should().Be("Description1");
             sut.HtmlReport.Header.Should().Be("Header1");
             sut.HtmlReport.Name.Should().Be("Name1.html");
             sut.HtmlReport.Type.Should().Be(HtmlReportConfiguration.ReportType.Metro);
         }
 
-        private class CustomConventions : SpecifyConventions
+        private class CustomConfiguration : SpecifyConfiguration
         {
-            public CustomConventions()
+            public CustomConfiguration()
             {
                 HtmlReport = new HtmlReportConfiguration()
                 {

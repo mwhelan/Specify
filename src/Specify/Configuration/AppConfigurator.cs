@@ -12,22 +12,22 @@ namespace Specify.Configuration
     internal class AppConfigurator
     {
         private readonly Type _testObject;
-        public SpecifyConventions Conventions { get; set; }
+        public SpecifyConfiguration Configuration { get; set; }
         public IContainer Container { get; set; }
 
-        public AppConfigurator(Type testObject)
+        public AppConfigurator(ISpecification testObject)
         {
-            _testObject = testObject;
+            _testObject = testObject.GetType();
         }
 
         public void Configure()
         {
             Container = CreateContainer(_testObject.Assembly);
-            Conventions = GetConventions(_testObject.Assembly);
-            ConfigureBddfy(Conventions);
+            Configuration = GetConventions(_testObject.Assembly);
+            ConfigureBddfy(Configuration);
         }
 
-        public void ConfigureBddfy(SpecifyConventions config)
+        public void ConfigureBddfy(SpecifyConfiguration config)
         {
             var reportConfiguration = new DefaultHtmlReportConfiguration();
             reportConfiguration.ReportHeader = config.HtmlReport.Header;
@@ -47,13 +47,13 @@ namespace Specify.Configuration
             Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
         }
 
-        public SpecifyConventions GetConventions(Assembly assembly)
+        public SpecifyConfiguration GetConventions(Assembly assembly)
         {
             var customConvention = GetTypesSafely(assembly)
-                .FirstOrDefault(type => typeof(SpecifyConventions).IsAssignableFrom(type) && !type.IsInterface);
+                .FirstOrDefault(type => typeof(SpecifyConfiguration).IsAssignableFrom(type) && !type.IsInterface);
             return customConvention != null
-                ? (SpecifyConventions)Activator.CreateInstance(customConvention)
-                : new SpecifyConventions();
+                ? (SpecifyConfiguration)Activator.CreateInstance(customConvention)
+                : new SpecifyConfiguration();
         }
 
         private static IEnumerable<Type> GetTypesSafely(Assembly assembly)
@@ -71,8 +71,8 @@ namespace Specify.Configuration
         public IContainer CreateContainer(Assembly assembly)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterGeneric(typeof(AutoMockingContainer<>));
-            builder.RegisterGeneric(typeof(IocContainer<>));
+            //builder.RegisterGeneric(typeof(AutoMockingContainer<>));
+            //builder.RegisterGeneric(typeof(IocContainer<>));
             builder
                 .RegisterAssemblyTypes(assembly)
                 .Where(t => typeof(ISpecification).IsAssignableFrom(t))

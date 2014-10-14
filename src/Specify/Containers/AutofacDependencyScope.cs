@@ -4,7 +4,7 @@ using Autofac.Builder;
 
 namespace Specify.Containers
 {
-    public class AutofacDependencyScope : IDependencyResolver
+    public class AutofacDependencyScope : IDependencyScope
     {
         private ILifetimeScope _scope;
 
@@ -15,7 +15,7 @@ namespace Specify.Containers
 
             _scope = scope;
         }
-        public TService Resolve<TService>()
+        public TService Get<TService>()
         {
             if (_scope == null)
                 throw new ObjectDisposedException("this", "This scope has already been disposed.");
@@ -23,7 +23,12 @@ namespace Specify.Containers
             return _scope.Resolve<TService>();
         }
 
-        public void Inject<TService>(TService instance)
+        public object Resolve(Type type)
+        {
+            return _scope.Resolve(type);
+        }
+
+        public void Set<TService>(TService instance) where TService : class
         {
             _scope.ComponentRegistry.Register(RegistrationBuilder.ForDelegate((c, p) => instance)
                 .InstancePerLifetimeScope().CreateRegistration());

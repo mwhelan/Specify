@@ -10,7 +10,7 @@ namespace Specify.Tests.Stubs
 
         public TestableSpecification()
         {
-            Resolver = Substitute.For<IDependencyResolver>();
+            Scope = Substitute.For<IDependencyScope>();
         }
         public List<string> Steps
         {

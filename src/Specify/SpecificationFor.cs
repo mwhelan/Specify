@@ -8,11 +8,11 @@ namespace Specify
     {
         private readonly SpecificationContext<TSut> _context;
         public TSut SUT { get; set; }
-        internal IDependencyResolver Resolver { get; set; }
+        internal IDependencyScope Scope { get; set; }
 
         protected SpecificationFor()
         {
-            _context = new SpecificationContext<TSut>(Resolver);
+            _context = new SpecificationContext<TSut>(Scope);
         }
 
         public virtual Type Story

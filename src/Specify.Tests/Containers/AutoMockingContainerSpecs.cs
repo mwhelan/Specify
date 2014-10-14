@@ -84,9 +84,9 @@ namespace Specify.Tests.Containers
             result.Should().BeSameAs(expected);
         }
 
-        private static AutoMockingContainer<TSut> CreateSut<TSut>() where TSut : class
+        private static SpecificationContext<TSut> CreateSut<TSut>() where TSut : class
         {
-            return new AutoMockingContainer<TSut>();
+            return new SpecificationContext<TSut>(new NSubstituteDependencyScope());
         }
     }
 }

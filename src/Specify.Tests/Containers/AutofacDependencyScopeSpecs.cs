@@ -7,9 +7,9 @@ using Specify.Tests.Stubs;
 
 namespace Specify.Tests.Containers
 {
-    public class IocContainerSpecs
+    public class AutofacDependencyScopeSpecs
     {
-        private static IocContainer<TSut> CreateSut<TSut>() where TSut : class
+        private static SpecificationContext<TSut> CreateSut<TSut>() where TSut : class
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<Dependency1>().As<IDependency1>().InstancePerLifetimeScope();
@@ -19,7 +19,7 @@ namespace Specify.Tests.Containers
             builder.RegisterType<ConcreteObjectWithMultipleConstructors>().InstancePerLifetimeScope();
             var container = builder.Build();
             var scope = new AutofacDependencyScope(container);
-            return new IocContainer<TSut>(scope);
+            return new SpecificationContext<TSut>(scope);
         }
 
         [Test]

@@ -1,4 +1,7 @@
-﻿namespace Specify.Configuration
+﻿using System;
+using Specify.Containers;
+
+namespace Specify.Configuration
 {
     public class SpecifyConventions
     {
@@ -16,5 +19,10 @@
         public virtual void AfterAllTests()
         {
         }
+
+        public virtual Func<IDependencyScope> DependencyFactory()
+        {
+            return () => new NSubstituteDependencyScope();
+        } 
     }
 }
