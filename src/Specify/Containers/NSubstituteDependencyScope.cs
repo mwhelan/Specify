@@ -1,4 +1,6 @@
-﻿using AutofacContrib.NSubstitute;
+﻿using System;
+using Autofac;
+using AutofacContrib.NSubstitute;
 
 namespace Specify.Containers
 {
@@ -6,12 +8,17 @@ namespace Specify.Containers
     {
         private readonly AutoSubstitute _scope = new AutoSubstitute();
 
-        public TService Get<TService>()
+        public TService Resolve<TService>()
         {
             return _scope.Resolve<TService>();
         }
 
-        public void Set<TService>(TService instance) where TService : class
+        public object Resolve(Type type)
+        {
+            return _scope.Container.Resolve(type);
+        }
+
+        public void Inject<TService>(TService instance) where TService : class
         {
             _scope.Provide<TService>(instance);
         }

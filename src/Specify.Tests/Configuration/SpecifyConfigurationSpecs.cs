@@ -4,7 +4,7 @@ using Specify.Configuration;
 
 namespace Specify.Tests.Configuration
 {
-    public class SpecifyConventionSpecs
+    public class SpecifyConfigurationSpecs
     {
         [Test]
         public void should_provide_default_conventions()

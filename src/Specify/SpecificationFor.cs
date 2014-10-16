@@ -6,14 +6,9 @@ namespace Specify
     public abstract class SpecificationFor<TSut> : ISpecification
         where TSut : class
     {
-        private readonly SpecificationContext<TSut> _context;
+        private SpecificationContext<TSut> _context;
         public TSut SUT { get; set; }
-        internal IDependencyScope Scope { get; set; }
-
-        protected SpecificationFor()
-        {
-            _context = new SpecificationContext<TSut>(Scope);
-        }
+        public IDependencyScope Scope { get; set; }
 
         public virtual Type Story
         {
@@ -21,29 +16,39 @@ namespace Specify
         }
         public virtual string Title { get { return GetType().Name.Humanize(LetterCasing.Title); } }
 
+        internal SpecificationContext<TSut> Context
+        {
+            get
+            {
+                if(_context == null)
+                    _context = new SpecificationContext<TSut>(Scope);
+                return _context;
+            }
+        }
+
         public virtual ISpecification ExecuteTest()
         {
-            return this.Specify();
+            return Host.SpecificationRunner.Run(this);
         }
 
         protected virtual void EstablishContext()
         {
-            SUT = _context.SystemUnderTest();
+            SUT = Context.SystemUnderTest();
         }
 
         public T DependencyFor<T>()
         {
-            return _context.DependencyFor<T>();
+            return Context.DependencyFor<T>();
         }
 
         public void InjectDependency<TService>(TService instance) where TService : class
         {
-            _context.InjectDependency(instance);
+            Context.InjectDependency(instance);
         }
 
         public void Dispose()
         {
-            _context.Dispose();
+            Context.Dispose();
         }
     }
 }

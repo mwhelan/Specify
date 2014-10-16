@@ -40,15 +40,5 @@ namespace Specify.Configuration
             var story = new StoryAttribute() { Title = specificationTitle, TitlePrefix = "Specifications For: " };
             return new StoryMetadata(specification.Story, story);
         }
-
-        //private string CreateSpecificationTitle(ISpecification specification)
-        //{
-        //    string suffix = "Specification";
-        //    string title = specification.Story.Name;
-        //    if (title.EndsWith(suffix))
-        //        title = title.Remove(title.Length - suffix.Length, suffix.Length);
-        //    return title;
-        //}
-
     }
 }

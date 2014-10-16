@@ -16,14 +16,14 @@ namespace Specify.Containers
         {
             if (_systemUnderTest == null)
             {
-                _systemUnderTest = Scope.Get<TSut>();
+                _systemUnderTest = Scope.Resolve<TSut>();
             }
             return _systemUnderTest;
         }
 
         public TService DependencyFor<TService>()
         {
-            return Scope.Get<TService>();
+            return Scope.Resolve<TService>();
         }
 
         public void InjectDependency<TService>(TService instance) where TService : class
@@ -32,7 +32,7 @@ namespace Specify.Containers
             {
                 throw new InvalidOperationException("Cannot inject dependencies after the System Under Test has been created");
             }
-            Scope.Set(instance);
+            Scope.Inject(instance);
         }
 
         public void Dispose()

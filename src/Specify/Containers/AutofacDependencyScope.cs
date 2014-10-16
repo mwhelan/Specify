@@ -6,7 +6,7 @@ namespace Specify.Containers
 {
     public class AutofacDependencyScope : IDependencyScope
     {
-        private ILifetimeScope _scope;
+        private readonly ILifetimeScope _scope;
 
         public AutofacDependencyScope(ILifetimeScope scope)
         {
@@ -15,7 +15,7 @@ namespace Specify.Containers
 
             _scope = scope;
         }
-        public TService Get<TService>()
+        public TService Resolve<TService>()
         {
             if (_scope == null)
                 throw new ObjectDisposedException("this", "This scope has already been disposed.");
@@ -25,11 +25,15 @@ namespace Specify.Containers
 
         public object Resolve(Type type)
         {
+            if (_scope == null)
+                throw new ObjectDisposedException("this", "This scope has already been disposed.");
             return _scope.Resolve(type);
         }
 
-        public void Set<TService>(TService instance) where TService : class
+        public void Inject<TService>(TService instance) where TService : class
         {
+            if (_scope == null)
+                throw new ObjectDisposedException("this", "This scope has already been disposed.");
             _scope.ComponentRegistry.Register(RegistrationBuilder.ForDelegate((c, p) => instance)
                 .InstancePerLifetimeScope().CreateRegistration());
         }
@@ -37,7 +41,6 @@ namespace Specify.Containers
         public void Dispose()
         {
             _scope.Dispose();
-            _scope = null;
         }
     }
 }

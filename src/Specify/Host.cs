@@ -1,33 +1,20 @@
 ﻿using System;
-using Autofac;
 using Specify.Configuration;
-using TestStack.BDDfy;
 
 namespace Specify
 {
     internal static class Host
     {
-        private static IContainer _container;
-        private static SpecifyConfiguration _configuration;
+        private static readonly SpecifyConfiguration _configuration;
 
-        public static ISpecification PerformTest(ISpecification testObject)
-        {
-            InitializeSpecify(testObject);
-            var specification = (ISpecification)_container.Resolve(testObject.GetType());
-            specification.BDDfy(specification.Title);
-            return specification;
-        }
+        public static readonly TestRunner SpecificationRunner;
 
-        private static void InitializeSpecify(ISpecification testObject)
+        static Host()
         {
-            if (_container != null)
-            {
-                return;
-            }
-            var configurator = new AppConfigurator(testObject);
-            configurator.Configure();
-            _container = configurator.Container;
-            _configuration = configurator.Configuration;
+            var configurator = new AppConfigurator();
+            _configuration = configurator.Configure();
+            configurator.ConfigureBddfy(_configuration);
+            SpecificationRunner = new TestRunner(_configuration.DependencyResolver(), new BddfyTestEngine());
 
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
             _configuration.BeforeAllTests();
@@ -36,6 +23,7 @@ namespace Specify
         static void CurrentDomain_DomainUnload(object sender, EventArgs e)
         {
             _configuration.AfterAllTests();
+            SpecificationRunner.Dispose();
         }
     }
 }

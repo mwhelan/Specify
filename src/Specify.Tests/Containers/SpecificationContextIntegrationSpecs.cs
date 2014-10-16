@@ -6,8 +6,9 @@ using Specify.Tests.Stubs;
 
 namespace Specify.Tests.Containers
 {
-    public class AutoMockingContainerSpecs
+    public abstract class SpecificationContextIntegrationSpecs
     {
+        protected abstract SpecificationContext<TSut> CreateSut<TSut>() where TSut : class;
         [Test]
         public void should_create_sut_with_no_constructor()
         {
@@ -39,16 +40,15 @@ namespace Specify.Tests.Containers
             result.Dependency2.Should().NotBeNull();
         }
 
-
         [Test]
         public void should_be_able_to_inject_dependencies_into_sut_before_sut_creation()
         {
             var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.InjectDependency<IDependency1>(new Dependency1());
+            sut.InjectDependency<IDependency1>(new Dependency1 {Value = 15});
 
             var result = sut.SystemUnderTest();
 
-            result.Dependency1.Value.Should().Be(5);
+            result.Dependency1.Value.Should().Be(15);
         }
 
         [Test]
@@ -56,10 +56,11 @@ namespace Specify.Tests.Containers
         {
             var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.SystemUnderTest();
-            
-            var result = Catch.Exception(() => sut.InjectDependency<IDependency1>(new Dependency1()));
-            
-            result.Should().BeOfType<InvalidOperationException>();
+
+            Action result = () => sut.InjectDependency<IDependency1>(new Dependency1());
+
+            result.ShouldThrow<InvalidOperationException>()
+                .WithMessage("Cannot inject dependencies after the System Under Test has been created");
         }
 
         [Test]
@@ -82,11 +83,6 @@ namespace Specify.Tests.Containers
             var result = sut.DependencyFor<IDependency3>();
 
             result.Should().BeSameAs(expected);
-        }
-
-        private static SpecificationContext<TSut> CreateSut<TSut>() where TSut : class
-        {
-            return new SpecificationContext<TSut>(new NSubstituteDependencyScope());
         }
     }
 }

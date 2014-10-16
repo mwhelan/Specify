@@ -4,11 +4,11 @@ namespace Specify
 {
     public static class SpecifyExtensions
     {
-        public static ISpecification Specify(this ISpecification testObject)
-        {
-            Guard.Against(testObject == null, "testObject cannot be null");
-            return Host.PerformTest(testObject);
-        }
+        //public static ISpecification Specify(this ISpecification testObject)
+        //{
+        //    Guard.Against(testObject == null, "testObject cannot be null");
+        //    return Host.SpecificationRunner.Run(testObject);
+        //}
 
         internal static bool IsScenarioFor(this ISpecification specification)
         {

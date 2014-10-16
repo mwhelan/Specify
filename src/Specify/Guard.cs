@@ -11,5 +11,13 @@ namespace Specify
                 throw new ArgumentException(errorMessage);
             }
         }
+
+        public static void AgainstNull(object value, string argumentName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(argumentName);
+            }
+        }
     }
 }
