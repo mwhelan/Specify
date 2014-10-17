@@ -3,7 +3,7 @@ using Specify.Configuration;
 
 namespace Specify
 {
-    internal static class Host
+    public static class Host
     {
         private static readonly SpecifyConfiguration _configuration;
 

@@ -3,7 +3,7 @@ using Specify.Containers;
 
 namespace Specify
 {
-    internal class TestRunner : IDisposable
+    public class TestRunner : IDisposable
     {
         private readonly IDependencyResolver _container;
         private readonly ITestEngine _testEngine;

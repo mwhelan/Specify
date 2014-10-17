@@ -49,7 +49,17 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void should_dispose_container_scope_after_test()
+        public void should_dispose_container_lifetime_scope_after_each_test()
+        {
+            var sut = CreateSut();
+            var specification = new ConcreteObjectWithNoConstructorSpecification();
+            sut.Run(specification);
+
+            _dependencyScope.Received().Dispose();
+        }
+
+        [Test]
+        public void should_dispose_container_after_all_tests()
         {
             var sut = CreateSut();
             var specification = new ConcreteObjectWithNoConstructorSpecification();

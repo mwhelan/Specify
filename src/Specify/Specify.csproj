@@ -70,7 +70,6 @@
     <Compile Include="Containers\NSubstituteDependencyScope.cs" />
     <Compile Include="Containers\SpecificationContext.cs" />
     <Compile Include="Containers\IDependencyScope.cs" />
-    <Compile Include="Guard.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="ITestEngine.cs" />

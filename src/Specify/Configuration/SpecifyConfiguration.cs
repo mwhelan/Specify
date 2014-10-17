@@ -51,8 +51,10 @@ namespace Specify.Configuration
                     .PropertiesAutowired();
             }
 
-            builder.Register<Func<IDependencyScope>>(c => DependencyFactory());
+            //builder.Register<Func<IDependencyScope>>(c => DependencyFactory());
             //builder.Register<IDependencyResolver>(c => new AutofacDependencyResolver(c.Resolve<IContainer>())).SingleInstance();
+            builder.RegisterType<NSubstituteDependencyScope>().As<IDependencyScope>();
+            builder.RegisterGeneric(typeof (SpecificationContext<>));
             var container = builder.Build();
 
             return new AutofacDependencyResolver(container);

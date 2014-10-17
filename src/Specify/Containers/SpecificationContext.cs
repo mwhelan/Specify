@@ -9,6 +9,8 @@ namespace Specify.Containers
 
         public SpecificationContext(IDependencyScope scope)
         {
+            if(scope == null)
+                throw new ArgumentNullException("scope");
             Scope = scope;
         }
 

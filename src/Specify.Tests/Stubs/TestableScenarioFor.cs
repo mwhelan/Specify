@@ -10,7 +10,7 @@ namespace Specify.Tests.Stubs
 
         public TestableScenarioFor()
         {
-            Scope = Substitute.For<IDependencyScope>();
+            Context = new SpecificationContext<TSut>(Substitute.For<IDependencyScope>());
         }
         public List<string> Steps
         {

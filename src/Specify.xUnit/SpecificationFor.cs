@@ -5,9 +5,9 @@ namespace Specify.xUnit
     public abstract class SpecificationFor<TSut> : Specify.SpecificationFor<TSut> where TSut : class
     {
         [Fact]
-        public override ISpecification ExecuteTest()
+        public override void ExecuteTest()
         {
-            return base.ExecuteTest();
+            base.ExecuteTest();
         }
     }
 }

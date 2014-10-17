@@ -2,9 +2,9 @@
 
 namespace Specify
 {
-    public interface ISpecification : IDisposable
+    public interface ISpecification
     {
-        ISpecification ExecuteTest();
+        void ExecuteTest();
         T DependencyFor<T>();
         void InjectDependency<TService>(TService instance) where TService : class;
         Type Story { get; }
