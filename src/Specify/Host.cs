@@ -14,7 +14,7 @@ namespace Specify
             var configurator = new AppConfigurator();
             _configuration = configurator.Configure();
             configurator.ConfigureBddfy(_configuration);
-            SpecificationRunner = new TestRunner(_configuration.DependencyResolver(), new BddfyTestEngine());
+            SpecificationRunner = new TestRunner(_configuration.TestContainer(), new BddfyTestEngine());
 
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
             _configuration.BeforeAllTests();
