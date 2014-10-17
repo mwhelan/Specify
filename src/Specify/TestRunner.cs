@@ -5,10 +5,10 @@ namespace Specify
 {
     public class TestRunner : IDisposable
     {
-        private readonly IDependencyResolver _container;
+        private readonly ITestContainer _container;
         private readonly ITestEngine _testEngine;
 
-        public TestRunner(IDependencyResolver container, ITestEngine testEngine)
+        public TestRunner(ITestContainer container, ITestEngine testEngine)
         {
             _container = container;
             _testEngine = testEngine;
@@ -21,7 +21,7 @@ namespace Specify
                 throw new ArgumentNullException("testObject");
             }
 
-            using (var lifetimeScope = _container.CreateScope())
+            using (var lifetimeScope = _container.CreateTestLifetimeScope())
             {
                 var specification = (ISpecification)lifetimeScope.Resolve(testObject.GetType());
                 _testEngine.Execute(specification, specification.Title);
@@ -34,7 +34,7 @@ namespace Specify
             _container.Dispose();
         }
 
-        public IDependencyResolver Container
+        public ITestContainer Container
         {
             get { return _container; }
         }

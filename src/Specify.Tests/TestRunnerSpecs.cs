@@ -10,7 +10,7 @@ namespace Specify.Tests
     [TestFixture]
     public class TestRunnerSpecs
     {
-        private IDependencyScope _dependencyScope = Substitute.For<IDependencyScope>();
+        private IDependencyResolver _dependencyResolver = Substitute.For<IDependencyResolver>();
 
         [Test]
         public void should_throw_if_specification_is_null()
@@ -26,7 +26,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             sut.Run(new ConcreteObjectWithNoConstructorSpecification());
-            sut.Container.Received().CreateScope();
+            sut.Container.Received().CreateTestLifetimeScope();
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             sut.Run(new ConcreteObjectWithNoConstructorSpecification());
-            _dependencyScope.Received().Resolve(typeof(ConcreteObjectWithNoConstructorSpecification));
+            _dependencyResolver.Received().Resolve(typeof(ConcreteObjectWithNoConstructorSpecification));
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace Specify.Tests
             var specification = new ConcreteObjectWithNoConstructorSpecification();
             sut.Run(specification);
 
-            _dependencyScope.Received().Dispose();
+            _dependencyResolver.Received().Dispose();
         }
 
         [Test]
@@ -73,11 +73,11 @@ namespace Specify.Tests
 
         private TestRunner CreateSut()
         {
-            var sut = new TestRunner(Substitute.For<IDependencyResolver>(), Substitute.For<ITestEngine>());
-            _dependencyScope
+            var sut = new TestRunner(Substitute.For<ITestContainer>(), Substitute.For<ITestEngine>());
+            _dependencyResolver
                 .Resolve(typeof(ConcreteObjectWithNoConstructorSpecification))
                 .Returns(new ConcreteObjectWithNoConstructorSpecification());
-            sut.Container.CreateScope().Returns(_dependencyScope);
+            sut.Container.CreateTestLifetimeScope().Returns(_dependencyResolver);
             return sut;
         } 
     }

@@ -28,7 +28,7 @@ namespace Specify.Tests
         //public void Resolver_should_be_an_auto_mocking_container()
         //{
         //    var sut = new SpecWithAllSupportedStepsInRandomOrder();
-        //    sut.Scope.Should().BeOfType<AutoMockingContainer<object>>();
+        //    sut.Resolver.Should().BeOfType<AutoMockingContainer<object>>();
         //}
     }
 }

@@ -6,7 +6,7 @@ namespace Specify.Tests.Containers
     {
         protected override SpecificationContext<TSut> CreateSut<TSut>()
         {
-            return new SpecificationContext<TSut>(new NSubstituteDependencyScope());
+            return new SpecificationContext<TSut>(new NSubstituteDependencyResolver());
         }
     }
 }

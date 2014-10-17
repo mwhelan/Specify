@@ -10,7 +10,7 @@ namespace Specify.Tests.Stubs
 
         public TestableSpecification()
         {
-            Context = new SpecificationContext<TSut>(Substitute.For<IDependencyScope>());
+            Context = new SpecificationContext<TSut>(Substitute.For<IDependencyResolver>());
         }
         public List<string> Steps
         {

@@ -24,12 +24,12 @@ namespace Specify.Configuration
         {
         }
 
-        public virtual Func<IDependencyScope> DependencyFactory()
+        public virtual Func<IDependencyResolver> DependencyFactory()
         {
-            return () => new NSubstituteDependencyScope();
+            return () => new NSubstituteDependencyResolver();
         }
 
-        public virtual IDependencyResolver DependencyResolver()
+        public virtual ITestContainer DependencyResolver()
         {
             return CreateDependencyResolver();
         }
@@ -41,7 +41,7 @@ namespace Specify.Configuration
                 .Where(t => typeof(ISpecification).IsAssignableFrom(t));
         }
 
-        private IDependencyResolver CreateDependencyResolver()
+        private ITestContainer CreateDependencyResolver()
         {
             var builder = new ContainerBuilder();
 
@@ -51,13 +51,13 @@ namespace Specify.Configuration
                     .PropertiesAutowired();
             }
 
-            //builder.Register<Func<IDependencyScope>>(c => DependencyFactory());
-            //builder.Register<IDependencyResolver>(c => new AutofacDependencyResolver(c.Resolve<IContainer>())).SingleInstance();
-            builder.RegisterType<NSubstituteDependencyScope>().As<IDependencyScope>();
+            //builder.Register<Func<IDependencyResolver>>(c => DependencyFactory());
+            //builder.Register<ITestContainer>(c => new AutofacTestContainer(c.Resolve<IContainer>())).SingleInstance();
+            builder.RegisterType<NSubstituteDependencyResolver>().As<IDependencyResolver>();
             builder.RegisterGeneric(typeof (SpecificationContext<>));
             var container = builder.Build();
 
-            return new AutofacDependencyResolver(container);
+            return new AutofacTestContainer(container);
         }
 
     }

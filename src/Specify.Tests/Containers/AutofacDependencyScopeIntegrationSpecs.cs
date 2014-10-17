@@ -15,7 +15,7 @@ namespace Specify.Tests.Containers
             builder.RegisterType<ConcreteObjectWithNoConstructor>().InstancePerLifetimeScope();
             builder.RegisterType<ConcreteObjectWithMultipleConstructors>().InstancePerLifetimeScope();
             var container = builder.Build();
-            var scope = new AutofacDependencyScope(container);
+            var scope = new AutofacDependencyResolver(container);
             return new SpecificationContext<TSut>(scope);
         }
     }

@@ -11,7 +11,7 @@ namespace Specify.Tests
         //public void Resolver_should_be_an_ioc_container()
         //{
         //    var sut = new ScenarioWithAllSupportedStepsInRandomOrder();
-        //    sut.Scope.Should().BeOfType<IocContainer<object>>();
+        //    sut.Resolver.Should().BeOfType<IocContainer<object>>();
         //}
     }
 }

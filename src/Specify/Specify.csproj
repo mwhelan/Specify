@@ -64,12 +64,12 @@
     <Compile Include="Configuration\HtmlReportConfiguration.cs" />
     <Compile Include="Configuration\SpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
+    <Compile Include="Containers\AutofacTestContainer.cs" />
     <Compile Include="Containers\AutofacDependencyResolver.cs" />
-    <Compile Include="Containers\AutofacDependencyScope.cs" />
-    <Compile Include="Containers\IDependencyResolver.cs" />
-    <Compile Include="Containers\NSubstituteDependencyScope.cs" />
+    <Compile Include="Containers\ITestContainer.cs" />
+    <Compile Include="Containers\NSubstituteDependencyResolver.cs" />
     <Compile Include="Containers\SpecificationContext.cs" />
-    <Compile Include="Containers\IDependencyScope.cs" />
+    <Compile Include="Containers\IDependencyResolver.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="ITestEngine.cs" />

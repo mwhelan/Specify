@@ -4,6 +4,8 @@ namespace Specify.Containers
 {
     public interface IDependencyResolver : IDisposable
     {
-        IDependencyScope CreateScope();
+        TService Resolve<TService>();
+        object Resolve(Type type);
+        void Inject<TService>(TService instance) where TService : class;
     }
 }

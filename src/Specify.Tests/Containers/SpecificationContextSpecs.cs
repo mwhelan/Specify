@@ -9,7 +9,7 @@ namespace Specify.Tests.Containers
         [Test]
         public void should_dispose_dependency_scope_after_specification_completes()
         {
-            var dependencyScope = Substitute.For<IDependencyScope>();
+            var dependencyScope = Substitute.For<IDependencyResolver>();
             using (var context = new SpecificationContext<object>(dependencyScope))
             {
                 

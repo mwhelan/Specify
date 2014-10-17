@@ -5,27 +5,27 @@ namespace Specify.Containers
     public class SpecificationContext<TSut> : IDisposable where TSut : class
     {
         private TSut _systemUnderTest;
-        public IDependencyScope Scope { get; private set; }
+        public IDependencyResolver Resolver { get; private set; }
 
-        public SpecificationContext(IDependencyScope scope)
+        public SpecificationContext(IDependencyResolver resolver)
         {
-            if(scope == null)
-                throw new ArgumentNullException("scope");
-            Scope = scope;
+            if(resolver == null)
+                throw new ArgumentNullException("resolver");
+            Resolver = resolver;
         }
 
         public TSut SystemUnderTest()
         {
             if (_systemUnderTest == null)
             {
-                _systemUnderTest = Scope.Resolve<TSut>();
+                _systemUnderTest = Resolver.Resolve<TSut>();
             }
             return _systemUnderTest;
         }
 
         public TService DependencyFor<TService>()
         {
-            return Scope.Resolve<TService>();
+            return Resolver.Resolve<TService>();
         }
 
         public void InjectDependency<TService>(TService instance) where TService : class
@@ -34,12 +34,12 @@ namespace Specify.Containers
             {
                 throw new InvalidOperationException("Cannot inject dependencies after the System Under Test has been created");
             }
-            Scope.Inject(instance);
+            Resolver.Inject(instance);
         }
 
         public void Dispose()
         {
-            Scope.Dispose();
+            Resolver.Dispose();
         }
     }
 }

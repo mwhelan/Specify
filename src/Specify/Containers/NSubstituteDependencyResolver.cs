@@ -4,7 +4,7 @@ using AutofacContrib.NSubstitute;
 
 namespace Specify.Containers
 {
-    public class NSubstituteDependencyScope : IDependencyScope
+    public class NSubstituteDependencyResolver : IDependencyResolver
     {
         private readonly AutoSubstitute _scope = new AutoSubstitute();
 
