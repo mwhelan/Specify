@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.Models;
-using ContosoUniversity.DAL;
-using PagedList;
 using System.Data.Entity.Infrastructure;
 
 namespace ContosoUniversity.Controllers
 {
     public class StudentController : Controller
     {
-        private SchoolContext db = new SchoolContext();
+        private readonly ISchoolRepository _repository;
+
+        public StudentController(ISchoolRepository repository)
+        {
+            _repository = repository;
+        }
 
         // GET: /Student/
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -35,32 +35,11 @@ namespace ContosoUniversity.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var students = from s in db.Students
-                           select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                students = students.Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())
-                                       || s.FirstMidName.ToUpper().Contains(searchString.ToUpper()));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    students = students.OrderByDescending(s => s.LastName);
-                    break;
-                case "Date":
-                    students = students.OrderBy(s => s.EnrollmentDate);
-                    break;
-                case "date_desc":
-                    students = students.OrderByDescending(s => s.EnrollmentDate);
-                    break;
-                default:  // Name ascending 
-                    students = students.OrderBy(s => s.LastName);
-                    break;
-            }
-
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(students.ToPagedList(pageNumber, pageSize));
+
+            var students = _repository.GetStudents(sortOrder, searchString, pageNumber, pageSize);
+            return View(students);
         }
 
         // GET: /Student/Details/5
@@ -70,7 +49,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            Student student = _repository.FindStudentById(id.Value);
             if (student == null)
             {
                 return HttpNotFound();
@@ -95,8 +74,7 @@ namespace ContosoUniversity.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Students.Add(student);
-                    db.SaveChanges();
+                    _repository.Create(student);
                     return RedirectToAction("Index");
                 }
             }
@@ -115,7 +93,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            Student student = _repository.FindStudentById(id.Value);
             if (student == null)
             {
                 return HttpNotFound();
@@ -134,8 +112,7 @@ namespace ContosoUniversity.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(student).State = EntityState.Modified;
-                    db.SaveChanges();
+                    _repository.Update(student);
                     return RedirectToAction("Index");
                 }
             }
@@ -157,7 +134,7 @@ namespace ContosoUniversity.Controllers
             {
                 ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
-            Student student = db.Students.Find(id);
+            Student student = _repository.FindStudentById(id.Value);
             if (student == null)
             {
                 return HttpNotFound();
@@ -172,9 +149,7 @@ namespace ContosoUniversity.Controllers
         {
             try
             {
-                Student student = db.Students.Find(id);
-                db.Students.Remove(student);
-                db.SaveChanges();
+                _repository.Delete(id);
             }
             catch (RetryLimitExceededException/* dex */)
             {
@@ -182,15 +157,6 @@ namespace ContosoUniversity.Controllers
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
