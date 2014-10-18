@@ -11,7 +11,7 @@ namespace ContosoUniversity.UnitTests.Controllers
 {
     public class DetailsForExistingStudent : SpecificationFor<StudentController>
     {
-        ActionResult _result;
+        ViewResult _result;
         private Student _student = new Student {ID = 1};
 
         public void Given_an_existing_student()
@@ -22,17 +22,17 @@ namespace ContosoUniversity.UnitTests.Controllers
         }
         public void When_the_details_are_requested_for_that_Student()
         {
-            _result = SUT.Details(_student.ID);
+            _result = SUT.Details(_student.ID) as ViewResult;
         }
 
         public void Then_the_details_view_is_displayed()
         {
-            ((ViewResult) _result).ViewName.Should().Be(string.Empty);
+            _result.ViewName.Should().Be(string.Empty);
         }
 
         public void AndThen_the_details_are_of_the_requested_student()
         {
-            ((ViewResult) _result).Model.Should().Be(_student);
+            _result.Model.Should().Be(_student);
         }
     }
 
