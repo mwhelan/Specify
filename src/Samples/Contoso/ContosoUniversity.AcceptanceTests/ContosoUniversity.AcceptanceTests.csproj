@@ -50,11 +50,16 @@
     <Compile Include="Infrastructure\ViewControllerScenario.cs" />
     <Compile Include="SpecifyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentDetailsStory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Specify\Specify.csproj">
       <Project>{E0041C2F-CC2E-4F2E-AD11-4C9DDB2FCD14}</Project>
       <Name>Specify</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContosoUniversity\ContosoUniversity.csproj">
+      <Project>{DF021AA1-3663-4A2F-A744-18A1DC469C02}</Project>
+      <Name>ContosoUniversity</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
