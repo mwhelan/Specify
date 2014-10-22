@@ -10,4 +10,15 @@ namespace Specify.xUnit
             base.ExecuteTest();
         }
     }
+
+    public abstract class ScenarioFor<TSut, TStory> : Specify.ScenarioFor<TSut, TStory>
+        where TSut : class
+        where TStory : UserStory
+    {
+        [Fact]
+        public override void ExecuteTest()
+        {
+            base.ExecuteTest();
+        }
+    }
 }

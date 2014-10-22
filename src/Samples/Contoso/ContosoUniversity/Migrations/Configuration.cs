@@ -10,9 +10,9 @@ namespace ContosoUniversity.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(SchoolContext context)
-        {
-            SeedData.Create(context);
-        }
+        //protected override void Seed(SchoolContext context)
+        //{
+        //    SeedData.Create(context);
+        //}
     }
 }

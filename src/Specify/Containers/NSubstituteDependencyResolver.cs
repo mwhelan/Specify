@@ -18,6 +18,11 @@ namespace Specify.Containers
             return _scope.Container.Resolve(type);
         }
 
+        public bool CanResolve(Type type)
+        {
+            return true;
+        }
+
         public void Inject<TService>(TService instance) where TService : class
         {
             _scope.Provide<TService>(instance);

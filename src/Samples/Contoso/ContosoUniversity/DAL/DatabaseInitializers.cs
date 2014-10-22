@@ -1,11 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
 namespace ContosoUniversity.DAL
 {
-    public class DatabaseInitializers
+    public class CreateDatabaseInitializer : CreateDatabaseIfNotExists<SchoolContext>
     {
+        protected override void Seed(SchoolContext context)
+        {
+            SeedData.Create(context); 
+            base.Seed(context);
+        }
     }
+
+    public class DropCreateIfChangeInitializer : DropCreateDatabaseIfModelChanges<SchoolContext>
+    {
+        protected override void Seed(SchoolContext context)
+        {
+            SeedData.Create(context);
+            base.Seed(context);
+        }
+    } 
 }

@@ -66,6 +66,7 @@
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Containers\AutofacTestContainer.cs" />
     <Compile Include="Containers\AutofacDependencyResolver.cs" />
+    <Compile Include="Containers\DependencyResolverRegistrationHandler.cs" />
     <Compile Include="Containers\ITestContainer.cs" />
     <Compile Include="Containers\NSubstituteDependencyResolver.cs" />
     <Compile Include="Containers\SpecificationContext.cs" />

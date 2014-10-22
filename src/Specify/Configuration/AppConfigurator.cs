@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Autofac;
-using Specify.Containers;
 using TestStack.BDDfy.Configuration;
 using TestStack.BDDfy.Reporters.Html;
 

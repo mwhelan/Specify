@@ -1,6 +1,6 @@
 ﻿using Specify;
 
-namespace ContosoUniversity.AcceptanceTests
+namespace ContosoUniversity.FunctionalTests
 {
     public class StudentDetailsStory : UserStory
     {

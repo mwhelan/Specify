@@ -8,20 +8,17 @@ namespace ContosoUniversity
 {
     public static class DependenciesConfig
     {
-        public static void RegisterDependencies()
+        public static IContainer RegisterDependencies(ContainerBuilder builder = null)
         {
-            InitializeAutofac();
-        }
-
-        private static void InitializeAutofac()
-        {
-            var builder = new ContainerBuilder();
+            if(builder == null) 
+                builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<SchoolContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<SchoolRepository>().As<ISchoolRepository>().InstancePerRequest();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            return container;
         }
     }
 }

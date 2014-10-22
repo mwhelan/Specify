@@ -47,15 +47,17 @@ namespace Specify.Configuration
             foreach (var specification in ScanForSpecificationTypes())
             {
                 builder.RegisterType(specification)
-                    .PropertiesAutowired();
+                    .PropertiesAutowired()
+                    .InstancePerLifetimeScope();
             }
 
-            builder.RegisterType(DependencyResolver().GetType()).As<IDependencyResolver>();
+            var dependencyResolver = DependencyResolver();
+            builder.RegisterType(dependencyResolver.GetType()).As<IDependencyResolver>().InstancePerLifetimeScope();
+            builder.RegisterSource(new DependencyResolverRegistrationHandler(dependencyResolver));
             builder.RegisterGeneric(typeof (SpecificationContext<>));
             var container = builder.Build();
 
             return new AutofacTestContainer(container);
         }
-
     }
 }

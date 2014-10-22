@@ -6,6 +6,7 @@ namespace Specify.Containers
     {
         TService Resolve<TService>();
         object Resolve(Type type);
+        bool CanResolve(Type type);
         void Inject<TService>(TService instance) where TService : class;
     }
 }

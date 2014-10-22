@@ -30,6 +30,12 @@ namespace Specify.Containers
             return _scope.Resolve(type);
         }
 
+        public bool CanResolve(Type type)
+        {
+            object returnType;
+            return _scope.TryResolve(type, out returnType);
+        }
+
         public void Inject<TService>(TService instance) where TService : class
         {
             if (_scope == null)
