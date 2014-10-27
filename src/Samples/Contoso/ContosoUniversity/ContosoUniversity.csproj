@@ -139,7 +139,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="DAL\DatabaseInitializers.cs" />
     <Compile Include="DAL\Repositories\ISchoolRepository.cs" />
     <Compile Include="DAL\Repositories\SchoolRepository.cs" />
     <Compile Include="DAL\SchoolConfiguration.cs" />

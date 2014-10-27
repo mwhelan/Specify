@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using ContosoUniversity.Models;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -15,14 +16,16 @@ namespace ContosoUniversity.DAL
         public DbSet<Person> People { get; set; }
         public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
 
-        public SchoolContext()
+        public SchoolContext():base(GetConnectionString())
+        {
+        }
+
+        private static string GetConnectionString()
         {
             var environmentVariable = Environment.GetEnvironmentVariable("FunctionalTests");
-            if (environmentVariable != null)
-            {
-                // functional test code
-                Database.Connection.ConnectionString = "SchoolContext-FunctionalTests";
-            }
+            return environmentVariable == null 
+                ? ConfigurationManager.ConnectionStrings["SchoolContext"].ConnectionString 
+                : ConfigurationManager.ConnectionStrings["SchoolContext-FunctionalTests"].ConnectionString;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

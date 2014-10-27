@@ -3,6 +3,7 @@ using ContosoUniversity.Models;
 using FluentAssertions;
 using Specify.xUnit;
 using TestStack.Seleno.PageObjects;
+using TestStack.Seleno.PageObjects.Actions;
 
 namespace ContosoUniversity.FunctionalTests
 {
@@ -27,15 +28,29 @@ namespace ContosoUniversity.FunctionalTests
 
         public void AndThen_the_details_are_of_the_requested_student()
         {
-            Student student = _page.Read.ModelFromPage();
+            Student student = _page.ReadModelFromPage();
             student.ID.Should().Be(1);
-            student.FirstMidName.Should().Be("Alexander");
-            student.LastName.Should().Be("Carson");
+            student.FirstMidName.Should().Be("Carson");
+            student.LastName.Should().Be("Alexander");
+        }
+
+        public void AndThen_the_enrollments_for_the_student_are_displayed()
+        {
+            //var enrollments = _page.Enrollments();
+            //enrollments.NumberOfRows.Should().Be(3);
         }
     }
 
     public class ViewDetailsPage : Page<Student>
     {
-        
+        public Student ReadModelFromPage()
+        {
+            return Read.ModelFromPage();
+        }
+
+        public TableReader<Enrollment> Enrollments()
+        {
+            return TableFor<Enrollment>("Enrollments");
+        }
     }
 }

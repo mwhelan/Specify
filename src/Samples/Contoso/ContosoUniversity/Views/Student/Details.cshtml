@@ -7,9 +7,10 @@
 <h2>Details</h2>
 
 <div>
-    <h4>@Html.DisplayFor(model => model.LastName)
+    <h4>Student
 </h4>
-	<hr />
+    <hr />
+    @Html.HiddenFor(model => model.ID)
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.LastName)
@@ -39,7 +40,7 @@
             @Html.DisplayNameFor(model => model.Enrollments)
         </dt>
         <dd>
-            <table class="table">
+            <table id="Enrollments" class="table">
                 <tr>
                     <th>Course Title</th>
                     <th>Grade</th>

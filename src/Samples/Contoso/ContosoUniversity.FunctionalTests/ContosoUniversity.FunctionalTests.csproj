@@ -79,8 +79,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestStack.Seleno">
-      <HintPath>..\..\..\packages\TestStack.Seleno.0.8.2\lib\NET40\TestStack.Seleno.dll</HintPath>
+    <Reference Include="TestStack.Seleno, Version=0.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\TestStack.Seleno.1.0.0\lib\NET40\TestStack.Seleno.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>..\..\..\packages\Selenium.WebDriver.2.43.1\lib\net40\WebDriver.dll</HintPath>

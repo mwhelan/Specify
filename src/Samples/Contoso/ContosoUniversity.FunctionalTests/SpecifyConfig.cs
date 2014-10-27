@@ -37,6 +37,7 @@ namespace ContosoUniversity.FunctionalTests
                 .Run("ContosoUniversity", 18765, c =>
                     c.WithRouteConfig(RouteConfig.RegisterRoutes)
                     .UsingControlIdGenerator(new MvcControlIdGenerator())
+                    .WithEnvironmentVariable("FunctionalTests")
                 );
         }
     }
