@@ -1,17 +1,16 @@
 using System;
+using Chill;
 using Specify.Containers;
 
 namespace Specify
 {
-    public abstract class SpecificationFor<TSut> : ISpecification
-        where TSut : class
+    public abstract class SpecificationFor<TSubject>
+        : GivenSubject<TSubject>, ISpecification
+        where TSubject : class
     {
-        public TSut SUT { get; set; }
-        public SpecificationContext<TSut> Context { get; set; }
-
         public virtual Type Story
         {
-            get { return typeof(TSut); }
+            get { return typeof(TSubject); }
         }
         public virtual string Title { get { return GetType().Name.Humanize(LetterCasing.Title); } }
 
@@ -19,20 +18,25 @@ namespace Specify
         {
             Host.SpecificationRunner.Run(this);
         }
+    }
 
-        protected virtual void EstablishContext()
+    public abstract class SpecificationFor<TSubject, TResult>
+        : GivenSubject<TSubject, TResult>, ISpecification
+        where TSubject : class
+    {
+        public virtual Type Story
         {
-            SUT = Context.SystemUnderTest();
+            get { return typeof (TSubject); }
         }
 
-        public T DependencyFor<T>()
+        public virtual string Title
         {
-            return Context.DependencyFor<T>();
+            get { return GetType().Name.Humanize(LetterCasing.Title); }
         }
 
-        public void InjectDependency<TService>(TService instance) where TService : class
+        public virtual void ExecuteTest()
         {
-            Context.InjectDependency(instance);
+            Host.SpecificationRunner.Run(this);
         }
     }
 }

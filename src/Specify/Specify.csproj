@@ -64,6 +64,7 @@
     <Compile Include="Catch.cs" />
     <Compile Include="Chill\Autofac\AutofacChillContainer.cs" />
     <Compile Include="Chill\Autofac\AutofacNSubstituteChillContainer.cs" />
+    <Compile Include="Chill\ChillMethodNameStepScanner.cs" />
     <Compile Include="Configuration\AppConfigurator.cs" />
     <Compile Include="Configuration\AssemblyTypeResolver.cs" />
     <Compile Include="Configuration\HtmlReportConfiguration.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="NullStory.cs" />
     <Compile Include="ScenarioFor.cs" />
     <Compile Include="SpecificationFor.cs" />
+    <Compile Include="SpecifyChillTestInitializer.cs" />
     <Compile Include="SpecifyExtensions.cs" />
     <Compile Include="Humanizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -47,7 +47,7 @@ namespace Specify.Configuration
             foreach (var specification in ScanForSpecificationTypes())
             {
                 builder.RegisterType(specification)
-                    .PropertiesAutowired()
+                   // .PropertiesAutowired()
                     .InstancePerLifetimeScope();
             }
 

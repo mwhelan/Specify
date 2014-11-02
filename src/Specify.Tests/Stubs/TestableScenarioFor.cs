@@ -10,16 +10,16 @@ namespace Specify.Tests.Stubs
 
         public TestableScenarioFor()
         {
-            Context = new SpecificationContext<TSut>(Substitute.For<IDependencyResolver>());
+           // Context = new SpecificationContext<TSut>(Substitute.For<IDependencyResolver>());
         }
         public List<string> Steps
         {
             get { return _steps; }
         }
 
-        protected override void EstablishContext()
-        {
-            _steps.Add("SCENARIO - EstablishContext");
-        }
+        //protected override void EstablishContext()
+        //{
+        //    _steps.Add("SCENARIO - EstablishContext");
+        //}
     }
 }

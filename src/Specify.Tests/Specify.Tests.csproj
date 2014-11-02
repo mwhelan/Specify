@@ -38,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Chill, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Chill\Net40\Chill.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.3.2.1\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
@@ -68,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatchSpecs.cs" />
+    <Compile Include="UnitTestInitializer.cs" />
     <Compile Include="Configuration\SpecifyConfigurationSpecs.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScannerSpecs.cs" />
     <Compile Include="Containers\SpecificationContextIntegrationSpecs.cs" />

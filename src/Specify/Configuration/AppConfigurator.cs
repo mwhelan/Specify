@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Specify.Chill;
 using TestStack.BDDfy.Configuration;
 using TestStack.BDDfy.Reporters.Html;
 
@@ -34,6 +35,11 @@ namespace Specify.Configuration
             }
 
             Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
+
+            // Chill
+            Configurator.Scanners.DefaultMethodNameStepScanner.Disable();
+            Configurator.Scanners.Add(() => new ChillMethodNameStepScanner());
+
         }
     }
 }
