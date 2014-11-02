@@ -40,6 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutofacContrib.NSubstitute.3.3.2\lib\NET40\AutofacContrib.NSubstitute.dll</HintPath>
     </Reference>
+    <Reference Include="Chill">
+      <HintPath>..\lib\Chill\Net40\Chill.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute, Version=1.7.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NSubstitute.1.7.2.0\lib\NET40\NSubstitute.dll</HintPath>
@@ -59,6 +62,8 @@
   <ItemGroup>
     <Compile Include="BddfyTestEngine.cs" />
     <Compile Include="Catch.cs" />
+    <Compile Include="Chill\Autofac\AutofacChillContainer.cs" />
+    <Compile Include="Chill\Autofac\AutofacNSubstituteChillContainer.cs" />
     <Compile Include="Configuration\AppConfigurator.cs" />
     <Compile Include="Configuration\AssemblyTypeResolver.cs" />
     <Compile Include="Configuration\HtmlReportConfiguration.cs" />
