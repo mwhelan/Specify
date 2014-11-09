@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chill\AutofacChillContainer.cs" />
-    <Compile Include="Chill\AutoFacNSubstituteAutoMockingContainer.cs" />
+    <Compile Include="Chill\AutofacNSubstituteChillContainer.cs" />
     <Compile Include="Chill\DefaultChillContainer.cs" />
     <Compile Include="Controllers\StudentDetailSpecs.cs" />
     <Compile Include="SpecifyConfig.cs" />

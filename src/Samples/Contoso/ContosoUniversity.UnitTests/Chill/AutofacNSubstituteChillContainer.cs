@@ -4,7 +4,6 @@ using System.Linq;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using Chill.Autofac;
 using NSubstitute;
 
 namespace Chill.Autofac
