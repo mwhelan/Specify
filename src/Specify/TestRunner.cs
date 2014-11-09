@@ -1,47 +1,79 @@
 ﻿using System;
-using Specify.Containers;
+using System.Linq;
+using Specify.Configuration;
+using TestStack.BDDfy;
+using TestStack.BDDfy.Configuration;
+using TestStack.BDDfy.Reporters.Html;
 
 namespace Specify
 {
-    public class TestRunner : IDisposable
+    internal static class TestRunner
     {
-        private readonly ITestContainer _container;
-        private readonly ITestEngine _testEngine;
+        private static readonly SpecifyConfiguration _configuration;
 
-        public TestRunner(ITestContainer container, ITestEngine testEngine)
+        public static void Specify(object testObject, string scenarioTitle = null)
         {
-            _container = container;
-            _testEngine = testEngine;
-        }
-
-        public ISpecification Run(ISpecification testObject)
-        {
-            if (testObject == null)
+            foreach (var action in _configuration.PerTestActions)
             {
-                throw new ArgumentNullException("testObject");
+                action.Before();
             }
-
-            using (var lifetimeScope = _container.CreateTestLifetimeScope())
+            testObject.BDDfy(scenarioTitle);
+            foreach (var action in _configuration.PerTestActions.AsEnumerable().Reverse())
             {
-                var specification = (ISpecification)lifetimeScope.Resolve(testObject.GetType());
-                _testEngine.Execute(specification, specification.Title);
-                return specification;
+                action.After();
             }
         }
 
-        public void Dispose()
+        static TestRunner()
         {
-            _container.Dispose();
+            _configuration = Configure();
+            AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
+            _configuration.PerAppDomainActions.ForEach(action => action.Before());
         }
 
-        public ITestContainer Container
+        static void CurrentDomain_DomainUnload(object sender, EventArgs e)
         {
-            get { return _container; }
+            foreach (var action in _configuration.PerAppDomainActions.AsEnumerable().Reverse())
+            {
+                action.After();
+            }
         }
 
-        public ITestEngine TestEngine
+        static SpecifyConfiguration Configure()
         {
-            get { return _testEngine; }
+            var customConvention = AssemblyTypeResolver.GetAllTypesFromAppDomain()
+                .FirstOrDefault(type => typeof(SpecifyConfiguration).IsAssignableFrom(type) && type.IsClass);
+            var config = customConvention != null
+                ? (SpecifyConfiguration)Activator.CreateInstance(customConvention)
+                : new SpecifyConfiguration();
+
+            if (config.HtmlReport != null)
+            {
+                var reportConfiguration = new DefaultHtmlReportConfiguration();
+                reportConfiguration.ReportHeader = config.HtmlReport.Header;
+                reportConfiguration.ReportDescription = config.HtmlReport.Description;
+                reportConfiguration.OutputFileName = config.HtmlReport.Name;
+
+                Configurator.BatchProcessors.HtmlReport.Disable();
+                if (config.HtmlReport.Type == HtmlReportConfiguration.ReportType.Html)
+                {
+                    Configurator.BatchProcessors.Add(new HtmlReporter(reportConfiguration));
+                }
+                else
+                {
+                    Configurator.BatchProcessors.Add(new HtmlReporter(reportConfiguration, new MetroReportBuilder()));
+
+                }
+            }
+
+            Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
+
+            // Chill
+            Configurator.Scanners.DefaultMethodNameStepScanner.Disable();
+            Configurator.Scanners.Add(() => new ChillMethodNameStepScanner());
+
+            return config;
         }
+
     }
 }

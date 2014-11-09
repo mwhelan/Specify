@@ -32,63 +32,50 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+    <Reference Include="Chill, Version=2.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="AutofacContrib.NSubstitute, Version=3.3.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutofacContrib.NSubstitute.3.3.2\lib\NET40\AutofacContrib.NSubstitute.dll</HintPath>
-    </Reference>
-    <Reference Include="Chill">
-      <HintPath>..\lib\Chill\Net40\Chill.dll</HintPath>
-    </Reference>
-    <Reference Include="NSubstitute, Version=1.7.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSubstitute.1.7.2.0\lib\NET40\NSubstitute.dll</HintPath>
+      <HintPath>..\packages\Chill.2.0.0-beta0002\Lib\portable-net4+sl5+MonoAndroid1+MonoTouch1\Chill.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO">
+      <HintPath>..\packages\Chill.2.0.0-beta0002\Lib\portable-net4+sl5+MonoAndroid1+MonoTouch1\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime">
+      <HintPath>..\packages\Chill.2.0.0-beta0002\Lib\portable-net4+sl5+MonoAndroid1+MonoTouch1\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>..\packages\Chill.2.0.0-beta0002\Lib\portable-net4+sl5+MonoAndroid1+MonoTouch1\System.Threading.Tasks.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestStack.BDDfy, Version=4.0.0.0, Culture=neutral, PublicKeyToken=a357057d05a879bd, processorArchitecture=MSIL">
+    <Reference Include="TestStack.BDDfy, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TestStack.BDDfy.4.0.0\lib\NET40\TestStack.BDDfy.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BddfyTestEngine.cs" />
     <Compile Include="Catch.cs" />
-    <Compile Include="Chill\Autofac\AutofacChillContainer.cs" />
-    <Compile Include="Chill\Autofac\AutofacNSubstituteChillContainer.cs" />
-    <Compile Include="Chill\ChillMethodNameStepScanner.cs" />
-    <Compile Include="Configuration\AppConfigurator.cs" />
     <Compile Include="Configuration\AssemblyTypeResolver.cs" />
+    <Compile Include="Configuration\ChillMethodNameStepScanner.cs" />
     <Compile Include="Configuration\HtmlReportConfiguration.cs" />
+    <Compile Include="Configuration\ITestRunnerAction.cs" />
     <Compile Include="Configuration\SpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
-    <Compile Include="Containers\AutofacTestContainer.cs" />
-    <Compile Include="Containers\AutofacDependencyResolver.cs" />
-    <Compile Include="Containers\DependencyResolverRegistrationHandler.cs" />
-    <Compile Include="Containers\ITestContainer.cs" />
-    <Compile Include="Containers\NSubstituteDependencyResolver.cs" />
-    <Compile Include="Containers\SpecificationContext.cs" />
-    <Compile Include="Containers\IDependencyResolver.cs" />
-    <Compile Include="Host.cs" />
+    <Compile Include="Configuration\TestRunnerAction.cs" />
+    <Compile Include="TestRunner.cs" />
     <Compile Include="ISpecification.cs" />
-    <Compile Include="ITestEngine.cs" />
     <Compile Include="NullStory.cs" />
     <Compile Include="ScenarioFor.cs" />
     <Compile Include="SpecificationFor.cs" />
-    <Compile Include="SpecifyChillTestInitializer.cs" />
     <Compile Include="SpecifyExtensions.cs" />
     <Compile Include="Humanizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Story.cs" />
-    <Compile Include="TestRunner.cs" />
     <Compile Include="UserStory.cs" />
     <Compile Include="ValueStory.cs" />
   </ItemGroup>
@@ -98,6 +85,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

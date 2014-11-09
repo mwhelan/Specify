@@ -1,6 +1,5 @@
 using System;
 using Chill;
-using Specify.Containers;
 
 namespace Specify
 {
@@ -16,7 +15,7 @@ namespace Specify
 
         public virtual void ExecuteTest()
         {
-            Host.SpecificationRunner.Run(this);
+            TestRunner.Specify(this);
         }
     }
 
@@ -36,7 +35,7 @@ namespace Specify
 
         public virtual void ExecuteTest()
         {
-            Host.SpecificationRunner.Run(this);
+            TestRunner.Specify(this);
         }
     }
 }

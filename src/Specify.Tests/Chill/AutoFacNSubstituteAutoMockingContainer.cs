@@ -1,17 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+using Chill.Autofac;
 using NSubstitute;
 
-namespace Specify.Chill.Autofac
+namespace Chill.Autofac
 {
     /// <summary>
     /// Automocking container that uses NSubstitute to create mocks and Autofac as the container. 
     /// </summary>
-    public class AutofacNSubstituteChillContainer : AutofacChillContainer
+    internal class AutofacNSubstituteChillContainer : AutofacChillContainer
     {
 
         public AutofacNSubstituteChillContainer()

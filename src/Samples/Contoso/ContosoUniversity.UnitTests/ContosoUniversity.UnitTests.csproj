@@ -30,9 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Chill, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\Chill\Net40\Chill.dll</HintPath>
+      <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Chill, Version=2.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Chill.2.0.0-beta0002\Lib\net45\Chill.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions">
       <HintPath>..\..\..\packages\FluentAssertions.3.2.1\lib\net45\FluentAssertions.dll</HintPath>
@@ -81,7 +85,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTestInitializer.cs" />
+    <Compile Include="Chill\AutofacChillContainer.cs" />
+    <Compile Include="Chill\AutoFacNSubstituteAutoMockingContainer.cs" />
+    <Compile Include="Chill\DefaultChillContainer.cs" />
     <Compile Include="Controllers\StudentDetailSpecs.cs" />
     <Compile Include="SpecifyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

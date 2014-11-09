@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using NSubstitute;
-using Specify.Containers;
 
 namespace Specify.Tests.Stubs
 {

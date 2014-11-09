@@ -1,6 +1,5 @@
 using FluentAssertions;
 using NUnit.Framework;
-using Specify.Containers;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests

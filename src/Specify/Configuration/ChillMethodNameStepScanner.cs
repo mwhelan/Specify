@@ -1,7 +1,7 @@
 ﻿using System;
 using TestStack.BDDfy;
 
-namespace Specify.Chill
+namespace Specify.Configuration
 {
     public class ChillMethodNameStepScanner : MethodNameStepScanner
     {

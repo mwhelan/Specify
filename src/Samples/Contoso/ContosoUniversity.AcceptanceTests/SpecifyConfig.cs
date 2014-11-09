@@ -1,5 +1,4 @@
 ﻿using Specify.Configuration;
-using Specify.Containers;
 
 namespace ContosoUniversity.AcceptanceTests
 {
@@ -10,11 +9,6 @@ namespace ContosoUniversity.AcceptanceTests
             HtmlReport.Name = "ContosoAcceptanceTests.html";
             HtmlReport.Header = "Contoso University";
             HtmlReport.Description = "Acceptance Tests";
-        }
-
-        public override IDependencyResolver DependencyResolver()
-        {
-            return new AutofacDependencyResolver(null);
         }
     }
 }

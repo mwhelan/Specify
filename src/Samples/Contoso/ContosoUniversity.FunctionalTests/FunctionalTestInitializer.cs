@@ -1,13 +1,13 @@
-﻿using Chill;
-using ContosoUniversity.FunctionalTests;
-using Specify;
-using Specify.Chill.Autofac;
+﻿//using Chill;
+//using Chill.Autofac;
+//using ContosoUniversity.FunctionalTests;
+//using Specify;
 
-[assembly: ChillTestInitializer(typeof(FunctionalTestInitializer))]
+//[assembly: ChillContainerInitializer(typeof(FunctionalTestInitializer))]
 
-namespace ContosoUniversity.FunctionalTests
-{
-    public class FunctionalTestInitializer : SpecifyChillTestInitializer<AutofacChillContainer>
-    {
-    }
-}
+//namespace ContosoUniversity.FunctionalTests
+//{
+//    internal class FunctionalTestInitializer : SpecifyChillContainerInitializer<AutofacChillContainer>
+//    {
+//    }
+//}

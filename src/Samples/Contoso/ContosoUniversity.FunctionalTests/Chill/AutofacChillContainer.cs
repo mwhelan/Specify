@@ -1,9 +1,10 @@
-﻿using Autofac;
+using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 using Chill;
+using System;
 
-namespace Specify.Chill.Autofac
+namespace Chill.Autofac
 {
     public class AutofacChillContainer : IChillContainer
     {

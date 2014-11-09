@@ -7,15 +7,6 @@ namespace Specify.Tests.Configuration
     public class SpecifyConfigurationSpecs
     {
         [Test]
-        public void should_provide_default_conventions()
-        {
-            var sut = new SpecifyConfiguration();
-            sut.HtmlReport.Header.Should().Be("Specify");
-            sut.HtmlReport.Name.Should().Be("SpecifySpecs.html");
-            sut.HtmlReport.Type.Should().Be(HtmlReportConfiguration.ReportType.Html);
-        }
-
-        [Test]
         public void should_be_able_to_provide_custom_conventions()
         {
             var sut = new CustomConfiguration();
