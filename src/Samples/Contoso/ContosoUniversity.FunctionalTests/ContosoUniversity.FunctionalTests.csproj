@@ -34,7 +34,8 @@
       <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
-      <HintPath>..\..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Chill, Version=2.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -83,9 +84,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestStack.Seleno, Version=0.3.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\TestStack.Seleno.1.0.0\lib\NET40\TestStack.Seleno.dll</HintPath>
+    <Reference Include="TestStack.Seleno">
+      <HintPath>..\..\..\packages\TestStack.Seleno.0.8.38\lib\NET40\TestStack.Seleno.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>..\..\..\packages\Selenium.WebDriver.2.43.1\lib\net40\WebDriver.dll</HintPath>
