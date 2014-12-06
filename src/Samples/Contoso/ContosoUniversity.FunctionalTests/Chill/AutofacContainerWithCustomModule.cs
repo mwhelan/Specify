@@ -11,7 +11,7 @@ namespace Chill.Autofac
     /// This can either be done in the App. This class also creates a single 'parent' container and then child containers
     /// per test. 
     /// </summary>
-    public class AutofacContainerWithCustomModule : AutofacChillContainer
+    internal class AutofacContainerWithCustomModule : AutofacChillContainer
     {
         private static ILifetimeScope staticContainer;
         private static object syncRoot = new object();
