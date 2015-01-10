@@ -1,10 +1,11 @@
-﻿using Xunit;
+﻿using NUnit.Framework;
 
-namespace Specify.xUnit
+namespace Specify.WithNunit
 {
+    [TestFixture]
     public abstract class SpecificationFor<TSut> : Specify.SpecificationFor<TSut> where TSut : class
     {
-        [Fact]
+        [Test]
         public override void ExecuteTest()
         {
             base.ExecuteTest();

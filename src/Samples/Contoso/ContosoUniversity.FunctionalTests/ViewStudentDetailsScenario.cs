@@ -1,7 +1,7 @@
 ﻿using ContosoUniversity.Controllers;
 using ContosoUniversity.Models;
 using FluentAssertions;
-using Specify.xUnit;
+using Specify.WithNunit;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 

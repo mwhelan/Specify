@@ -1,11 +1,11 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Specify.NUnit
+namespace Specify.WithMsTest
 {
-    [TestFixture]
+    [TestClass]
     public abstract class SpecificationFor<TSut> : Specify.SpecificationFor<TSut> where TSut : class
     {
-        [Test]
+        [TestMethod]
         public override void ExecuteTest()
         {
             base.ExecuteTest();

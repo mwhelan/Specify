@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Specify.MSTest
+namespace Specify.WithMsTest
 {
     [TestClass]
     public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut> where TSut : class

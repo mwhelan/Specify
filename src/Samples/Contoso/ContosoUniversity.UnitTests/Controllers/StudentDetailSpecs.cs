@@ -5,7 +5,7 @@ using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.Models;
 using FluentAssertions;
 using NSubstitute;
-using Specify.NUnit;
+using Specify.WithMsTest;
 
 namespace ContosoUniversity.UnitTests.Controllers
 {

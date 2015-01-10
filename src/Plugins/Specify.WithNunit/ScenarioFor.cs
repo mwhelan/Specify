@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Specify.NUnit
+namespace Specify.WithNunit
 {
     [TestFixture]
     public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut> where TSut : class

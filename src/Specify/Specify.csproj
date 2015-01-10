@@ -34,18 +34,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Chill, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Chill, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Chill.2.0.0\Lib\net45\Chill.dll</HintPath>
+      <HintPath>..\packages\Chill.2.1.0\Lib\net45\Chill.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="TestStack.BDDfy">
       <HintPath>..\packages\TestStack.BDDfy.4.0.0\lib\NET40\TestStack.BDDfy.dll</HintPath>
       <Private>True</Private>
