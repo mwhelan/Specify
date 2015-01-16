@@ -34,9 +34,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Chill, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Chill.2.1.0\Lib\net45\Chill.dll</HintPath>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +56,9 @@
     <Compile Include="Configuration\SpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\TestRunnerAction.cs" />
+    <Compile Include="Providers\AutofacContainer.cs" />
+    <Compile Include="Providers\AutofacNSubstituteContainer.cs" />
+    <Compile Include="Providers\ISpecifyContainer.cs" />
     <Compile Include="TestRunner.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="NullStory.cs" />
@@ -67,7 +72,6 @@
     <Compile Include="ValueStory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
