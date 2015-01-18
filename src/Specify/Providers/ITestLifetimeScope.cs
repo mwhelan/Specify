@@ -8,6 +8,8 @@ namespace Specify.Providers
     /// </summary>
     public interface ITestLifetimeScope : IDisposable
     {
+        T SystemUnderTest<T>() where T : class;
+
         /// <summary>
         /// Registers a type to the container. 
         /// </summary>

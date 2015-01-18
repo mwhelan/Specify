@@ -56,6 +56,7 @@
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\TestRunnerAction.cs" />
     <Compile Include="Providers\AutofacContainer.cs" />
+    <Compile Include="Providers\AutofacNSubstituteTestLifetimeScope.cs" />
     <Compile Include="Providers\AutofacTestLifetimeScope.cs" />
     <Compile Include="Providers\AutofacNSubstituteContainer.cs" />
     <Compile Include="Providers\ISpecifyContainer.cs" />

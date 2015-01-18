@@ -3,6 +3,7 @@
 //using NSubstitute;
 //using NUnit.Framework;
 //using Specify.Containers;
+//using Specify.Providers;
 //using Specify.Tests.Stubs;
 
 //namespace Specify.Tests
@@ -64,7 +65,7 @@
 //            var sut = CreateSut();
 //            var specification = new ConcreteObjectWithNoConstructorSpecification();
 //            sut.Run(specification);
-                
+
 //            sut.Dispose();
 
 //            sut.Container.Received().Dispose();
@@ -79,6 +80,6 @@
 //                .Returns(new ConcreteObjectWithNoConstructorSpecification());
 //            sut.Container.CreateTestLifetimeScope().Returns(_dependencyResolver);
 //            return sut;
-//        } 
+//        }
 //    }
 //}

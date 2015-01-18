@@ -40,6 +40,16 @@ namespace Specify.Providers
         }
 
 
+        public T SystemUnderTest<T>() where T : class
+        {
+            if (!IsRegistered<T>())
+            {
+                Container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
+            }
+            return Resolve<T>();
+        }
+
         public void RegisterType<T>() where T : class
         {
             Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());

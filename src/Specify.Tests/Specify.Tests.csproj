@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatchSpecs.cs" />
+    <Compile Include="Providers\Class1.cs" />
     <Compile Include="SpecifyConfig.cs" />
     <Compile Include="Configuration\SpecifyConfigurationSpecs.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScannerSpecs.cs" />
