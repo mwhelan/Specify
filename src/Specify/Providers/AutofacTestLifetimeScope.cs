@@ -1,27 +1,25 @@
-using Autofac;
+﻿using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using Chill;
-using System;
 
-namespace Chill.Autofac
+namespace Specify.Providers
 {
-    internal class AutofacChillContainer : IChillContainer
+    internal class AutofacTestLifetimeScope : ITestLifetimeScope
     {
         private ILifetimeScope _container;
         private ContainerBuilder _containerBuilder;
 
-        public AutofacChillContainer()
+        public AutofacTestLifetimeScope()
             : this(new ContainerBuilder())
         {
         }
 
-        public AutofacChillContainer(ILifetimeScope container)
+        public AutofacTestLifetimeScope(ILifetimeScope container)
         {
             _container = container;
         }
 
-        public AutofacChillContainer(ContainerBuilder containerBuilder)
+        public AutofacTestLifetimeScope(ContainerBuilder containerBuilder)
         {
             _containerBuilder = containerBuilder;
         }
@@ -47,7 +45,7 @@ namespace Chill.Autofac
             Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
         }
 
-        public T Get<T>(string key = null) where T : class
+        public T Resolve<T>(string key = null) where T : class
         {
             if (key == null)
             {
@@ -59,7 +57,7 @@ namespace Chill.Autofac
             }
         }
 
-        public T Set<T>(T valueToSet, string key = null) where T : class
+        public T RegisterInstance<T>(T valueToSet, string key = null) where T : class
         {
             if (key == null)
             {
@@ -75,7 +73,7 @@ namespace Chill.Autofac
                         .As(new KeyedService(key, typeof(T)))
                         .InstancePerLifetimeScope().CreateRegistration());
             }
-            return Get<T>();
+            return Resolve<T>();
         }
 
 
@@ -87,21 +85,6 @@ namespace Chill.Autofac
         public bool IsRegistered(System.Type type)
         {
             return Container.IsRegistered(type);
-        }
-    }
-
-    public static class TestBaseExtensions
-    {
-        /// <summary>
-        /// Explicitly register a type so that it will be created from the chill container from now on. 
-        /// 
-        /// This is handy if you wish to create a concrete type from a container that typically doesn't allow
-        /// you to do so. (such as autofac)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        public static void RegisterConcreteType<T>(this TestBase testBase) where T : class
-        {
-            testBase.Container.RegisterType<T>();
         }
     }
 }

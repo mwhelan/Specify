@@ -18,7 +18,7 @@ namespace ContosoUniversity.FunctionalTests
         }
         public void When_the_details_are_requested_for_that_Student()
         {
-            _page = Subject.Host.NavigateToInitialPage<StudentController, ViewDetailsPage>(c => c.Details(_student.ID));
+            _page = SUT.Host.NavigateToInitialPage<StudentController, ViewDetailsPage>(c => c.Details(_student.ID));
         }
 
         public void Then_the_details_view_is_displayed()

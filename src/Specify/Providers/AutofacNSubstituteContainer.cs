@@ -8,13 +8,21 @@ using NSubstitute;
 
 namespace Specify.Providers
 {
+    internal class AutofacNSubstituteContainer : AutofacContainer
+    {
+        public override ITestLifetimeScope CreateTestLifetimeScope()
+        {
+            return new AutofacNSubstituteTestLifetimeScope();
+        }
+    }
+
     /// <summary>
     /// Automocking container that uses NSubstitute to create mocks and Autofac as the container. 
     /// </summary>
-    internal class AutofacNSubstituteContainer : AutofacContainer
+    internal class AutofacNSubstituteTestLifetimeScope : AutofacTestLifetimeScope
     {
 
-        public AutofacNSubstituteContainer()
+        public AutofacNSubstituteTestLifetimeScope()
             : base(CreateBuilder())
         {
         }

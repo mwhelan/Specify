@@ -50,16 +50,17 @@
   <ItemGroup>
     <Compile Include="Catch.cs" />
     <Compile Include="Configuration\AssemblyTypeResolver.cs" />
-    <Compile Include="Configuration\ChillMethodNameStepScanner.cs" />
     <Compile Include="Configuration\HtmlReportConfiguration.cs" />
     <Compile Include="Configuration\ITestRunnerAction.cs" />
     <Compile Include="Configuration\SpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\TestRunnerAction.cs" />
     <Compile Include="Providers\AutofacContainer.cs" />
+    <Compile Include="Providers\AutofacTestLifetimeScope.cs" />
     <Compile Include="Providers\AutofacNSubstituteContainer.cs" />
     <Compile Include="Providers\ISpecifyContainer.cs" />
-    <Compile Include="TestRunner.cs" />
+    <Compile Include="Providers\ITestLifetimeScope.cs" />
+    <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="NullStory.cs" />
     <Compile Include="ScenarioFor.cs" />

@@ -1,19 +1,26 @@
 ﻿using FluentAssertions;
-using NUnit.Framework;
 using Specify.Configuration;
 
 namespace Specify.Tests.Configuration
 {
-    public class SpecifyConfigurationSpecs
+    public class SpecifyConfigurationSpecs : WithNunit.SpecificationFor<SpecifyConfiguration>
     {
-        [Test]
-        public void should_be_able_to_provide_custom_conventions()
+        protected override void EstablishContext()
         {
-            var sut = new CustomConfiguration();
-            sut.HtmlReport.Description.Should().Be("Description1");
-            sut.HtmlReport.Header.Should().Be("Header1");
-            sut.HtmlReport.Name.Should().Be("Name1.html");
-            sut.HtmlReport.Type.Should().Be(HtmlReportConfiguration.ReportType.Metro);
+            
+        }
+
+        public void when_applying_a_Specify_configuration()
+        {
+            SUT = new CustomConfiguration();
+        }
+
+        public void Then_should_be_able_to_customise_the_report()
+        {
+            SUT.HtmlReport.Description.Should().Be("Description1");
+            SUT.HtmlReport.Header.Should().Be("Header1");
+            SUT.HtmlReport.Name.Should().Be("Name1.html");
+            SUT.HtmlReport.Type.Should().Be(HtmlReportConfiguration.ReportType.Metro);
         }
 
         private class CustomConfiguration : SpecifyConfiguration

@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Linq;
 using Specify.Configuration;
+using Specify.Providers;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
 using TestStack.BDDfy.Reporters.Html;
 
 namespace Specify
 {
-    internal static class TestRunner
+    internal static class Host
     {
         private static readonly SpecifyConfiguration _configuration;
+        private static readonly ISpecifyContainer _container;
 
         public static void Specify(object testObject, string scenarioTitle = null)
         {
@@ -17,16 +19,25 @@ namespace Specify
             {
                 action.Before();
             }
-            testObject.BDDfy(scenarioTitle);
+
+            using (var lifetimeScope = _container.CreateTestLifetimeScope())
+            {
+                var specification = _container.Resolve(testObject.GetType());
+                specification.Container = lifetimeScope;
+                specification.BDDfy(scenarioTitle);
+            }
+
+            
             foreach (var action in _configuration.PerTestActions.AsEnumerable().Reverse())
             {
                 action.After();
             }
         }
 
-        static TestRunner()
+        static Host()
         {
             _configuration = Configure();
+            _container = _configuration.GetSpecifyContainer();
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
             _configuration.PerAppDomainActions.ForEach(action => action.Before());
         }
@@ -37,11 +48,13 @@ namespace Specify
             {
                 action.After();
             }
+            _container.Dispose();
         }
 
         static SpecifyConfiguration Configure()
         {
-            var customConvention = AssemblyTypeResolver.GetAllTypesFromAppDomain()
+            var customConvention = AssemblyTypeResolver
+                .GetAllTypesFromAppDomain()
                 .FirstOrDefault(type => typeof(SpecifyConfiguration).IsAssignableFrom(type) && type.IsClass);
             var config = customConvention != null
                 ? (SpecifyConfiguration)Activator.CreateInstance(customConvention)
@@ -67,10 +80,6 @@ namespace Specify
             }
 
             Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
-
-            // Chill
-            Configurator.Scanners.DefaultMethodNameStepScanner.Disable();
-            Configurator.Scanners.Add(() => new ChillMethodNameStepScanner());
 
             return config;
         }

@@ -8,7 +8,7 @@ namespace Specify.Tests.Stubs
 
         public TestableSpecification()
         {
-          //  Context = new SpecificationContext<TSut>(Substitute.For<IDependencyResolver>());
+          //  Context = new SpecificationContext<TSut>(Substitute.For<ITestLifetimeScope>());
         }
         public List<string> Steps
         {

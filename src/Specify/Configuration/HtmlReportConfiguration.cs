@@ -4,7 +4,7 @@
     {
         public HtmlReportConfiguration()
         {
-            Header = "Specify";
+            Header = "BDDfy";
             Name = "SpecifySpecs.html";
             Type = ReportType.Html;
         }

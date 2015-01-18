@@ -1,90 +1,76 @@
-﻿using Autofac;
-using Autofac.Builder;
-using Autofac.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Autofac;
+using Specify.Configuration;
+using Module = Autofac.Module;
 
 namespace Specify.Providers
 {
     internal class AutofacContainer : ISpecifyContainer
     {
         private ILifetimeScope _container;
-        private ContainerBuilder _containerBuilder;
 
-        public AutofacContainer()
-            : this(new ContainerBuilder())
+        public ISpecification Resolve(Type type)
         {
+            return (ISpecification)Container.Resolve(type);
         }
 
-        public AutofacContainer(ILifetimeScope container)
+        public virtual ITestLifetimeScope CreateTestLifetimeScope()
         {
-            _container = container;
-        }
-
-        public AutofacContainer(ContainerBuilder containerBuilder)
-        {
-            _containerBuilder = containerBuilder;
-        }
-
-        protected ILifetimeScope Container
-        {
-            get
-            {
-                if (_container == null)
-                    _container = _containerBuilder.Build();
-                return _container;
-            }
+            return new AutofacTestLifetimeScope(Container.BeginLifetimeScope());
         }
 
         public void Dispose()
         {
-            Container.Dispose();
+            _container.Dispose();
         }
 
-
-        public void RegisterType<T>() where T : class
+        public ILifetimeScope Container
         {
-            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
-        }
+            get
+            {
+                if (_container == null)
+                {
+                    var builder = new ContainerBuilder();
+                    builder.RegisterAssemblyModules(GetType().Assembly, Assembly.GetExecutingAssembly());
+                    _container = builder.Build();
+                }
 
-        public T Get<T>(string key = null) where T : class
-        {
-            if (key == null)
-            {
-                return Container.Resolve<T>();
-            }
-            else
-            {
-                return Container.ResolveKeyed<T>(key);
+                return _container;
             }
         }
+    }
 
-        public T Set<T>(T valueToSet, string key = null) where T : class
+    public class SpecifyModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
         {
-            if (key == null)
-            {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .InstancePerLifetimeScope().CreateRegistration());
-
-            }
-            else
-            {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .As(new KeyedService(key, typeof(T)))
-                        .InstancePerLifetimeScope().CreateRegistration());
-            }
-            return Get<T>();
+            //var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain();
+            //builder.RegisterAssemblyTypes(assemblies.ToArray())
+            //       .Where(t => typeof(ISpecification).IsAssignableFrom(t))
+            //       .AsImplementedInterfaces();            
+            
+            //foreach (var specification in ScanForSpecificationTypes())
+            //{
+            //    builder.RegisterType(specification)
+            //        //.PropertiesAutowired()
+            //        .InstancePerLifetimeScope();
+            //}
+            var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
+            builder.RegisterAssemblyTypes(assemblies)
+                   .AsClosedTypesOf(typeof(SpecificationFor<>));
+            builder.RegisterAssemblyTypes(assemblies)
+                .AsClosedTypesOf(typeof(ScenarioFor<>));
         }
 
-
-        public bool IsRegistered<T>() where T : class
+        public virtual IEnumerable<Type> ScanForSpecificationTypes()
         {
-            return IsRegistered(typeof(T));
+            return AssemblyTypeResolver
+                .GetAllTypesFromAppDomain()
+                .Where(t => typeof(ISpecification).IsAssignableFrom(t));
         }
 
-        public bool IsRegistered(System.Type type)
-        {
-            return Container.IsRegistered(type);
-        }
     }
 }

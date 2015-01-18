@@ -22,6 +22,13 @@ namespace Specify.Configuration
                 .SelectMany(GetExportedTypes).ToArray();
         }
 
+        public static IEnumerable<Assembly> GetAllAssembliesFromAppDomain()
+        {
+            return AppDomain.CurrentDomain
+                .GetAssemblies()
+                .Where(a => !IsDynamic(a));
+        } 
+
         private static bool IsDynamic(Assembly assembly)
         {
             return (assembly is AssemblyBuilder) ||

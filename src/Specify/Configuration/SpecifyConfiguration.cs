@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Specify.Providers;
 
 namespace Specify.Configuration
 {
@@ -12,6 +14,11 @@ namespace Specify.Configuration
         {
             PerAppDomainActions = new List<ITestRunnerAction>();
             PerTestActions = new List<ITestRunnerAction>();
+        }
+
+        public virtual ISpecifyContainer GetSpecifyContainer()
+        {
+            throw new Exception("You must provide a Specify container");
         }
     }
 }

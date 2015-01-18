@@ -1,18 +1,20 @@
 using System;
 using Specify.Providers;
+using TestStack.BDDfy;
 
 namespace Specify
 {
     public abstract class SpecificationFor<TSubject> : ISpecification
         where TSubject : class
     {
-        private ISpecifyContainer _container = new AutofacNSubstituteContainer();
+        public ITestLifetimeScope Container { get; set; }
+        public ExampleTable Examples { get; set; }
 
-        public TSubject Subject { get; set; }
+        public TSubject SUT { get; set; }
 
-        public T The<T>() where T : class
+        public T Get<T>() where T : class
         {
-            return _container.Get<T>();
+            return Container.Resolve<T>();
         }
 
         public virtual Type Story
@@ -23,7 +25,13 @@ namespace Specify
 
         public virtual void ExecuteTest()
         {
-            TestRunner.Specify(this);
+            Host.Specify(this);
         }
+
+        protected virtual void EstablishContext()
+        {
+            SUT = Container.Resolve<TSubject>();
+        }
+
     }
 }

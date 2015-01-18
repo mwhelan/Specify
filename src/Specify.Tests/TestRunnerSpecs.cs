@@ -10,7 +10,7 @@
 //    [TestFixture]
 //    public class TestRunnerSpecs
 //    {
-//        private IDependencyResolver _dependencyResolver = Substitute.For<IDependencyResolver>();
+//        private ITestLifetimeScope _dependencyResolver = Substitute.For<ITestLifetimeScope>();
 
 //        [Test]
 //        public void should_throw_if_specification_is_null()
