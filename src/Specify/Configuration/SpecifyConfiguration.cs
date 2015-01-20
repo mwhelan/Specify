@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Specify.Providers;
 
 namespace Specify.Configuration
 {

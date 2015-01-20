@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Specify.Providers
+﻿namespace Specify
 {
+    using System;
+
     public interface ISpecifyContainer : IDisposable
     {
         ISpecification Resolve(Type type);

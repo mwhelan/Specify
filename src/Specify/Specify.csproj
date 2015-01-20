@@ -49,8 +49,8 @@
     <Compile Include="Configuration\SpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\TestRunnerAction.cs" />
-    <Compile Include="Providers\ISpecifyContainer.cs" />
-    <Compile Include="Providers\ITestLifetimeScope.cs" />
+    <Compile Include="ISpecifyContainer.cs" />
+    <Compile Include="ITestLifetimeScope.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="NullStory.cs" />

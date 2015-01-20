@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Specify.Configuration;
-using Specify.Providers;
+
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
 using TestStack.BDDfy.Reporters.Html;

@@ -11,6 +11,12 @@ namespace Specify.Tests.Stubs
         {
             Steps.Add("Implementation - TearDown");
         }
+
+        //public void EstabContext()
+        //{
+        //    Steps.Add("Implementation - EstablishContext");
+        //}
+
         public void Setup()
         {
             Steps.Add("Implementation - Setup");

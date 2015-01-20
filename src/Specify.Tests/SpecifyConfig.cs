@@ -1,5 +1,4 @@
 ﻿using Specify.Configuration;
-using Specify.Providers;
 
 namespace Specify.Tests
 {

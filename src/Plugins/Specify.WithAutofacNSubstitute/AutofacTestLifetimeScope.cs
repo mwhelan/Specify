@@ -2,8 +2,6 @@
 using Autofac.Builder;
 using Autofac.Core;
 
-using Specify.Providers;
-
 namespace Specify.WithAutofacNSubstitute
 {
     public class AutofacTestLifetimeScope : ITestLifetimeScope

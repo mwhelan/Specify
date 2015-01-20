@@ -1,5 +1,5 @@
 using System;
-using Specify.Providers;
+
 using Autofac;
 
 namespace Specify.WithAutofacNSubstitute

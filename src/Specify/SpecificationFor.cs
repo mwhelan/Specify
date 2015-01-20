@@ -1,5 +1,4 @@
 using System;
-using Specify.Providers;
 using TestStack.BDDfy;
 
 namespace Specify

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Specify.Providers
+﻿namespace Specify
 {
+    using System;
+
     /// <summary>
     /// Represents a container that provides the SUT and its dependencies to specifications. The container might be
     /// a full IoC container or an automocking container.
