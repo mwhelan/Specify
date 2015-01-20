@@ -2,9 +2,11 @@
 using Autofac.Builder;
 using Autofac.Core;
 
-namespace Specify.Providers
+using Specify.Providers;
+
+namespace Specify.WithAutofacNSubstitute
 {
-    internal class AutofacTestLifetimeScope : ITestLifetimeScope
+    public class AutofacTestLifetimeScope : ITestLifetimeScope
     {
         private ILifetimeScope _container;
         private ContainerBuilder _containerBuilder;
@@ -16,54 +18,54 @@ namespace Specify.Providers
 
         public AutofacTestLifetimeScope(ILifetimeScope container)
         {
-            _container = container;
+            this._container = container;
         }
 
         public AutofacTestLifetimeScope(ContainerBuilder containerBuilder)
         {
-            _containerBuilder = containerBuilder;
+            this._containerBuilder = containerBuilder;
         }
 
         protected ILifetimeScope Container
         {
             get
             {
-                if (_container == null)
-                    _container = _containerBuilder.Build();
-                return _container;
+                if (this._container == null)
+                    this._container = this._containerBuilder.Build();
+                return this._container;
             }
         }
 
         public void Dispose()
         {
-            Container.Dispose();
+            this.Container.Dispose();
         }
 
 
         public T SystemUnderTest<T>() where T : class
         {
-            if (!IsRegistered<T>())
+            if (!this.IsRegistered<T>())
             {
-                Container.ComponentRegistry.Register(
+                this.Container.ComponentRegistry.Register(
                     RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
             }
-            return Resolve<T>();
+            return this.Resolve<T>();
         }
 
         public void RegisterType<T>() where T : class
         {
-            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
+            this.Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
         }
 
         public T Resolve<T>(string key = null) where T : class
         {
             if (key == null)
             {
-                return Container.Resolve<T>();
+                return this.Container.Resolve<T>();
             }
             else
             {
-                return Container.ResolveKeyed<T>(key);
+                return this.Container.ResolveKeyed<T>(key);
             }
         }
 
@@ -71,30 +73,30 @@ namespace Specify.Providers
         {
             if (key == null)
             {
-                Container.ComponentRegistry
+                this.Container.ComponentRegistry
                     .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
                         .InstancePerLifetimeScope().CreateRegistration());
 
             }
             else
             {
-                Container.ComponentRegistry
+                this.Container.ComponentRegistry
                     .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
                         .As(new KeyedService(key, typeof(T)))
                         .InstancePerLifetimeScope().CreateRegistration());
             }
-            return Resolve<T>();
+            return this.Resolve<T>();
         }
 
 
         public bool IsRegistered<T>() where T : class
         {
-            return IsRegistered(typeof(T));
+            return this.IsRegistered(typeof(T));
         }
 
         public bool IsRegistered(System.Type type)
         {
-            return Container.IsRegistered(type);
+            return this.Container.IsRegistered(type);
         }
     }
 }

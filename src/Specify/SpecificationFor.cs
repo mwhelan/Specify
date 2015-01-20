@@ -21,6 +21,7 @@ namespace Specify
         {
             get { return typeof(TSubject); }
         }
+
         public virtual string Title { get { return GetType().Name.Humanize(LetterCasing.Title); } }
 
         public virtual void ExecuteTest()
@@ -28,10 +29,14 @@ namespace Specify
             Host.Specify(this);
         }
 
-        protected virtual void EstablishContext()
+        protected void EstablishContext()
         {
-            SUT = Container.Resolve<TSubject>();
+            CreateSut();
         }
 
+        protected virtual void CreateSut()
+        {
+            SUT = Container.SystemUnderTest<TSubject>();            
+        }
     }
 }

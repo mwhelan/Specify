@@ -62,9 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatchSpecs.cs" />
-    <Compile Include="Providers\Class1.cs" />
+    <Compile Include="WithAutofacNSubstitute\AutofacNSubstituteTestLifetimeScopeSpecs.cs" />
     <Compile Include="SpecifyConfig.cs" />
-    <Compile Include="Configuration\SpecifyConfigurationSpecs.cs" />
+    <Compile Include="Configuration\ApplyingSpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScannerSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScenarioForSpecs.cs" />
@@ -88,6 +88,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Plugins\Specify.WithAutofacNSubstitute\Specify.WithAutofacNSubstitute.csproj">
+      <Project>{af9368c7-7bb0-4e3c-8587-f99d69824e3d}</Project>
+      <Name>Specify.WithAutofacNSubstitute</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plugins\Specify.WithNunit\Specify.WithNunit.csproj">
       <Project>{88f13130-f886-4a61-8746-72fdfcfb9085}</Project>
       <Name>Specify.WithNunit</Name>

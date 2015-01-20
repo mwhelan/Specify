@@ -1,6 +1,8 @@
-namespace Specify.Providers
+namespace Specify.WithAutofacNSubstitute
 {
-    internal class AutofacNSubstituteContainer : AutofacContainer
+    using Specify.Providers;
+
+    public class AutofacNSubstituteContainer : AutofacContainer
     {
         public override ITestLifetimeScope CreateTestLifetimeScope()
         {

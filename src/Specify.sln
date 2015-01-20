@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specify", "Specify\Specify.csproj", "{E0041C2F-CC2E-4F2E-AD11-4C9DDB2FCD14}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specify.WithXunit", "Plugins\Specify.WithXunit\Specify.WithXunit.csproj", "{5C73484D-6515-44FC-A854-DEEBC0FDF682}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specify.WithNunit", "Plugins\Specify.WithNunit\Specify.WithNunit.csproj", "{88F13130-F886-4A61-8746-72FDFCFB9085}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specify.WithAutofacNSubstitute", "Plugins\Specify.WithAutofacNSubstitute\Specify.WithAutofacNSubstitute.csproj", "{AF9368C7-7BB0-4E3C-8587-F99D69824E3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{88F13130-F886-4A61-8746-72FDFCFB9085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88F13130-F886-4A61-8746-72FDFCFB9085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88F13130-F886-4A61-8746-72FDFCFB9085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF9368C7-7BB0-4E3C-8587-F99D69824E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF9368C7-7BB0-4E3C-8587-F99D69824E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF9368C7-7BB0-4E3C-8587-F99D69824E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF9368C7-7BB0-4E3C-8587-F99D69824E3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,5 +91,6 @@ Global
 		{B40A1DF4-8C6C-49F2-9A47-7A1BE455C57E} = {CCC65F2B-5815-49F7-8B04-FFB05B6E84E4}
 		{5C73484D-6515-44FC-A854-DEEBC0FDF682} = {CCC65F2B-5815-49F7-8B04-FFB05B6E84E4}
 		{88F13130-F886-4A61-8746-72FDFCFB9085} = {CCC65F2B-5815-49F7-8B04-FFB05B6E84E4}
+		{AF9368C7-7BB0-4E3C-8587-F99D69824E3D} = {CCC65F2B-5815-49F7-8B04-FFB05B6E84E4}
 	EndGlobalSection
 EndGlobal

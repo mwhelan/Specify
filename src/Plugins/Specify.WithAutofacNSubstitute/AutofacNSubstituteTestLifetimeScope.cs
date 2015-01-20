@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using Autofac.Features.ResolveAnything;
+
 using NSubstitute;
 
-namespace Specify.Providers
+namespace Specify.WithAutofacNSubstitute
 {
     /// <summary>
     /// Automocking container that uses NSubstitute to create mocks and Autofac as the container. 
     /// </summary>
-    internal class AutofacNSubstituteTestLifetimeScope : AutofacTestLifetimeScope
+    public class AutofacNSubstituteTestLifetimeScope : AutofacTestLifetimeScope
     {
 
         public AutofacNSubstituteTestLifetimeScope()

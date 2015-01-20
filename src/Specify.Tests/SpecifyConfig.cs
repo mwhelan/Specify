@@ -3,6 +3,8 @@ using Specify.Providers;
 
 namespace Specify.Tests
 {
+    using Specify.WithAutofacNSubstitute;
+
     public class SpecifyConfig : SpecifyConfiguration
     {
         public SpecifyConfig()
