@@ -11,7 +11,7 @@ namespace Specify.Tests.WithAutofacNSubstitute
     {
         private ConcreteObjectWithMultipleConstructors _result;
 
-        protected override void CreateSut()
+        protected override void CreateSystemUnderTest()
         {
             this.SUT = new AutofacNSubstituteTestLifetimeScope();
         }
@@ -54,7 +54,7 @@ namespace Specify.Tests.WithAutofacNSubstitute
     {
         private ConcreteObjectWithNoConstructor _result;
 
-        protected override void CreateSut()
+        protected override void CreateSystemUnderTest()
         {
             this.SUT = new AutofacNSubstituteTestLifetimeScope();
         }
@@ -74,7 +74,7 @@ namespace Specify.Tests.WithAutofacNSubstitute
     {
         private ConcreteObjectWithMultipleConstructors _result;
 
-        protected override void CreateSut()
+        protected override void CreateSystemUnderTest()
         {
             this.SUT = new AutofacNSubstituteTestLifetimeScope();
         }

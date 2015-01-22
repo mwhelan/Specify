@@ -16,6 +16,11 @@ namespace Specify
             return Container.Resolve<T>();
         }
 
+        public T Set<T>(T valueToSet, string key = null) where T : class
+        {
+            return Container.RegisterInstance(valueToSet, key);
+        }
+
         public virtual Type Story
         {
             get { return typeof(TSubject); }
@@ -28,12 +33,13 @@ namespace Specify
             Host.Specify(this);
         }
 
-        protected void EstablishContext()
+        [Executable(ExecutionOrder.Initialize, "", Order = -2)]
+        protected virtual void ConfigureContainer()
         {
-            CreateSut();
         }
 
-        protected virtual void CreateSut()
+        [Executable(ExecutionOrder.Initialize, "", Order = -1)]
+        protected virtual void CreateSystemUnderTest()
         {
             SUT = Container.SystemUnderTest<TSubject>();            
         }

@@ -80,9 +80,10 @@ namespace Specify
             }
 
             Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
+            Configurator.Scanners.ExecutableAttributeScanner.Disable();
+            Configurator.Scanners.Add(() => new InheritableExecutableAttributeStepScanner());
 
             return config;
         }
-
     }
 }
