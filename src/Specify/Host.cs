@@ -4,7 +4,6 @@ using Specify.Configuration;
 
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
-using TestStack.BDDfy.Reporters.Html;
 
 namespace Specify
 {
@@ -59,25 +58,6 @@ namespace Specify
             var config = customConvention != null
                 ? (SpecifyConfiguration)Activator.CreateInstance(customConvention)
                 : new SpecifyConfiguration();
-
-            if (config.HtmlReport != null)
-            {
-                var reportConfiguration = new DefaultHtmlReportConfiguration();
-                reportConfiguration.ReportHeader = config.HtmlReport.Header;
-                reportConfiguration.ReportDescription = config.HtmlReport.Description;
-                reportConfiguration.OutputFileName = config.HtmlReport.Name;
-
-                Configurator.BatchProcessors.HtmlReport.Disable();
-                if (config.HtmlReport.Type == HtmlReportConfiguration.ReportType.Html)
-                {
-                    Configurator.BatchProcessors.Add(new HtmlReporter(reportConfiguration));
-                }
-                else
-                {
-                    Configurator.BatchProcessors.Add(new HtmlReporter(reportConfiguration, new MetroReportBuilder()));
-
-                }
-            }
 
             Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
             Configurator.Scanners.ExecutableAttributeScanner.Disable();

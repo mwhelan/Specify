@@ -5,7 +5,6 @@ namespace Specify.Configuration
 {
     public class SpecifyConfiguration
     {
-        public HtmlReportConfiguration HtmlReport { get; protected set; }
         public List<ITestRunnerAction> PerAppDomainActions { get; private set; }
         public List<ITestRunnerAction> PerTestActions { get; private set; }
 

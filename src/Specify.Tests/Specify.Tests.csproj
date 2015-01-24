@@ -65,10 +65,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CatchSpecs.cs" />
     <Compile Include="WithAutofacNSubstitute\AutofacNSubstituteTestLifetimeScopeSpecs.cs" />
     <Compile Include="SpecifyConfig.cs" />
-    <Compile Include="Configuration\ApplyingSpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScannerSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScenarioForSpecs.cs" />

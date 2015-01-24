@@ -42,10 +42,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Catch.cs" />
     <Compile Include="Configuration\AssemblyTypeResolver.cs" />
     <Compile Include="Configuration\InheritableExecutableAttributeStepScanner.cs" />
-    <Compile Include="Configuration\HtmlReportConfiguration.cs" />
     <Compile Include="Configuration\ITestRunnerAction.cs" />
     <Compile Include="Configuration\SpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
