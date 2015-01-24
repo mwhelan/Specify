@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 using NSubstitute;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;

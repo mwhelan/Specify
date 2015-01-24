@@ -5,11 +5,10 @@ using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.Models;
 using FluentAssertions;
 using NSubstitute;
-using Specify.WithMsTest;
 
 namespace ContosoUniversity.UnitTests.Controllers
 {
-    public class DetailsForExistingStudent : SpecificationFor<StudentController>
+    public class DetailsForExistingStudent : Specify.WithNunit.SpecificationFor<StudentController>
     {
         ViewResult _result;
         private Student _student = new Student {ID = 1};
@@ -36,7 +35,7 @@ namespace ContosoUniversity.UnitTests.Controllers
         }
     }
 
-    public class DetailsForNonExistentStudent : SpecificationFor<StudentController>
+    public class DetailsForNonExistentStudent : Specify.WithNunit.SpecificationFor<StudentController>
     {
         ActionResult _result;
 
@@ -58,7 +57,7 @@ namespace ContosoUniversity.UnitTests.Controllers
         }
     }
 
-    public class DetailsForNoId : SpecificationFor<StudentController>
+    public class DetailsForNoId : Specify.WithNunit.SpecificationFor<StudentController>
     {
         ActionResult _result;
 

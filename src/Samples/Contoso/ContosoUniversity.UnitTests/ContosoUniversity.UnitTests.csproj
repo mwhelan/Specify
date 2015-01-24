@@ -34,9 +34,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Chill">
-      <HintPath>..\..\..\packages\Chill.2.1.0\Lib\net45\Chill.dll</HintPath>
-    </Reference>
     <Reference Include="FluentAssertions, Version=3.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.dll</HintPath>
@@ -45,6 +42,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -86,18 +84,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chill\AutofacChillContainer.cs" />
-    <Compile Include="Chill\AutoFacNSubstituteAutoMockingContainer.cs" />
-    <Compile Include="Chill\AutofacNSubstituteChillContainer.cs" />
-    <Compile Include="Chill\DefaultChillContainer.cs" />
     <Compile Include="Controllers\StudentDetailSpecs.cs" />
     <Compile Include="SpecifyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Plugins\Specify.WithMsTest\Specify.WithMsTest.csproj">
-      <Project>{b40a1df4-8c6c-49f2-9a47-7a1be455c57e}</Project>
-      <Name>Specify.WithMsTest</Name>
+    <ProjectReference Include="..\..\..\Plugins\Specify.WithAutofacNSubstitute\Specify.WithAutofacNSubstitute.csproj">
+      <Project>{af9368c7-7bb0-4e3c-8587-f99d69824e3d}</Project>
+      <Name>Specify.WithAutofacNSubstitute</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Plugins\Specify.WithNunit\Specify.WithNunit.csproj">
+      <Project>{88f13130-f886-4a61-8746-72fdfcfb9085}</Project>
+      <Name>Specify.WithNunit</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Specify\Specify.csproj">
       <Project>{E0041C2F-CC2E-4F2E-AD11-4C9DDB2FCD14}</Project>
