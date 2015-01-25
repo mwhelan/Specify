@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\AssemblyTypeResolver.cs" />
+    <Compile Include="Configuration\SpecifyMethodNameStepScanner.cs" />
     <Compile Include="Configuration\InheritableExecutableAttributeStepScanner.cs" />
     <Compile Include="Configuration\ITestRunnerAction.cs" />
     <Compile Include="Configuration\SpecifyConfiguration.cs" />
