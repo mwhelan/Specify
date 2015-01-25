@@ -31,14 +31,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\..\..\packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Chill">
-      <HintPath>..\..\..\packages\Chill.2.1.0\Lib\net45\Chill.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions, Version=3.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -98,15 +96,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrowserHost.cs" />
-    <Compile Include="Chill\AutofacChillContainer.cs" />
-    <Compile Include="Chill\DefaultChillContainer.cs" />
-    <Compile Include="FunctionalTestInitializer.cs" />
+    <Compile Include="FunctionalTestsAutofacModule.cs" />
     <Compile Include="StudentDetailsStory.cs" />
     <Compile Include="SpecifyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewStudentDetailsScenario.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Plugins\Specify.WithAutofacNSubstitute\Specify.WithAutofacNSubstitute.csproj">
+      <Project>{af9368c7-7bb0-4e3c-8587-f99d69824e3d}</Project>
+      <Name>Specify.WithAutofacNSubstitute</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Plugins\Specify.WithNunit\Specify.WithNunit.csproj">
       <Project>{88f13130-f886-4a61-8746-72fdfcfb9085}</Project>
       <Name>Specify.WithNunit</Name>

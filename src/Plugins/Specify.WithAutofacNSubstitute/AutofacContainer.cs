@@ -18,7 +18,7 @@ namespace Specify.WithAutofacNSubstitute
 
         public void Dispose()
         {
-            this._container.Dispose();
+            _container.Dispose();
         }
 
         private ILifetimeScope _container;
@@ -30,10 +30,10 @@ namespace Specify.WithAutofacNSubstitute
                 {
                     var builder = new ContainerBuilder();
                     builder.RegisterAssemblyModules(AppDomain.CurrentDomain.GetAssemblies());
-                    this._container = builder.Build();
+                    _container = builder.Build();
                 }
 
-                return this._container;
+                return _container;
             }
         }
     }
