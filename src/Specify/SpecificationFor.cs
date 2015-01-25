@@ -33,12 +33,12 @@ namespace Specify
             Host.Specify(this);
         }
 
-        [Executable(ExecutionOrder.Initialize, "", Order = -2)]
+        [Executable(ExecutionOrder.Initialize, "", Order = -2, ShouldReport = false)]
         protected virtual void ConfigureContainer()
         {
         }
 
-        [Executable(ExecutionOrder.Initialize, "", Order = -1)]
+        [Executable(ExecutionOrder.Initialize, "", Order = -1, ShouldReport = false)]
         protected virtual void CreateSystemUnderTest()
         {
             SUT = Container.SystemUnderTest<TSubject>();            
