@@ -8,7 +8,7 @@ namespace Specify.Tests
     public class SpecificationForSpecs
     {
         internal class specification_step_order_should_follow_standard_BDDfy_conventions
-            : WithNunit.SpecificationFor<SpecWithAllSupportedStepsInRandomOrder>
+            : SpecificationFor<SpecWithAllSupportedStepsInRandomOrder>
         {
             protected override void CreateSystemUnderTest()
             {

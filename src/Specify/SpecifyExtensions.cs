@@ -4,14 +4,25 @@ namespace Specify
 {
     public static class SpecifyExtensions
     {
+        public static bool IsScenarioFor(this Type specification)
+        {
+            return specification.IsAssignableToGenericType(typeof(ScenarioFor<,>));
+        }
+
         internal static bool IsScenarioFor(this ISpecification specification)
         {
-            return specification.GetType().IsAssignableToGenericType(typeof(ScenarioFor<,>));
+            return specification.GetType().IsScenarioFor();
+        }
+
+        public static bool IsSpecificationFor(this Type specification)
+        {
+            return specification.IsAssignableToGenericType(typeof(SpecificationFor<>))
+                && !specification.IsScenarioFor();
         }
 
         internal static bool IsSpecificationFor(this ISpecification specification)
         {
-            return specification.GetType().IsAssignableToGenericType(typeof(SpecificationFor<>))
+            return specification.GetType().IsSpecificationFor()
                 && !specification.IsScenarioFor();
         }
 

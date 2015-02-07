@@ -3,7 +3,7 @@ using Specify.Tests.Stubs;
 
 namespace Specify.Tests
 {
-    internal class UserStorySpecs : WithNunit.SpecificationFor<WithdrawCashUserStory>
+    internal class UserStorySpecs : SpecificationFor<WithdrawCashUserStory>
     {
         public void When_creating_a_user_story()
         {
