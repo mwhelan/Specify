@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 using Specify.Configuration;
 using Specify.Tests.Stubs;
 
@@ -12,7 +12,7 @@ namespace Specify.Tests.Configuration
         {
             var sut = new SpecifyStoryMetadataScanner();
             var result = sut.Scan(new ConcreteObjectWithMultipleConstructors());
-            result.Should().BeNull();
+            result.ShouldBe(null);
         }
 
         [Test]
@@ -20,8 +20,8 @@ namespace Specify.Tests.Configuration
         {
             var sut = new SpecifyStoryMetadataScanner();
             var result = sut.Scan(new StubSpecificationFor());
-            result.Title.Should().Be("ConcreteObjectWithMultipleConstructors");
-            result.TitlePrefix.Should().Be("Specifications For: ");
+            result.Title.ShouldBe("ConcreteObjectWithMultipleConstructors");
+            result.TitlePrefix.ShouldBe("Specifications For: ");
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace Specify.Tests.Configuration
         {
             var sut = new SpecifyStoryMetadataScanner();
             var result = sut.Scan(new StubScenarioFor());
-            result.Title.Should().Be("Stub Scenario For");
+            result.Title.ShouldBe("Stub Scenario For");
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace Specify.Tests.Configuration
         {
             var sut = new SpecifyStoryMetadataScanner();
             var result = sut.Scan(new StubScenarioFor());
-            result.TitlePrefix.Should().Be("Story: ");
+            result.TitlePrefix.ShouldBe("Story: ");
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Specify.Tests.Configuration
         {
             var sut = new SpecifyStoryMetadataScanner();
             var result = sut.Scan(new StubScenarioFor{ScenarioNumber = 3});
-            result.Title.Should().Be("Scenario 03: Stub Scenario For");
+            result.Title.ShouldBe("Scenario 03: Stub Scenario For");
         }
     }
 }

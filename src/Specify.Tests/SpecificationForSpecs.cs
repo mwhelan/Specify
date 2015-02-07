@@ -1,5 +1,5 @@
-using FluentAssertions;
 using NSubstitute;
+using Shouldly;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 
@@ -22,41 +22,41 @@ namespace Specify.Tests
 
             public void Then_first_ConfigureContainer_is_called()
             {
-                SUT.Steps[0].Should().Be("Implementation - Constructor");
-                SUT.Steps[1].Should().Be("ConfigureContainer");
+                SUT.Steps[0].ShouldBe("Implementation - Constructor");
+                SUT.Steps[1].ShouldBe("ConfigureContainer");
             }
 
             public void AndThen_CreateSystemUnderTest()
             {
-                SUT.Steps[2].Should().Be("CreateSystemUnderTest");
+                SUT.Steps[2].ShouldBe("CreateSystemUnderTest");
             }
 
             public void AndThen_Setup()
             {
-                SUT.Steps[3].Should().Be("Implementation - Setup");
+                SUT.Steps[3].ShouldBe("Implementation - Setup");
             }
 
             public void AndThen_the_Givens()
             {
-                SUT.Steps[4].Should().Be("Implementation - GivenSomePrecondition");
-                SUT.Steps[5].Should().Be("Implementation - AndGivenSomeOtherPrecondition");
+                SUT.Steps[4].ShouldBe("Implementation - GivenSomePrecondition");
+                SUT.Steps[5].ShouldBe("Implementation - AndGivenSomeOtherPrecondition");
             }
 
             public void AndThen_the_Whens()
             {
-                SUT.Steps[6].Should().Be("Implementation - WhenAction");
-                SUT.Steps[7].Should().Be("Implementation - AndWhenAnotherAction");
+                SUT.Steps[6].ShouldBe("Implementation - WhenAction");
+                SUT.Steps[7].ShouldBe("Implementation - AndWhenAnotherAction");
             }
 
             public void AndThen_the_Thens()
             {
-                SUT.Steps[8].Should().Be("Implementation - ThenAnExpectation");
-                SUT.Steps[9].Should().Be("Implementation - AndThenAnotherExpectation");
+                SUT.Steps[8].ShouldBe("Implementation - ThenAnExpectation");
+                SUT.Steps[9].ShouldBe("Implementation - AndThenAnotherExpectation");
             }
 
             public void AndThen_finally_TearDown()
             {
-                SUT.Steps[10].Should().Be("Implementation - TearDown");
+                SUT.Steps[10].ShouldBe("Implementation - TearDown");
             }
         }
 
@@ -65,7 +65,7 @@ namespace Specify.Tests
         //public void Resolver_should_be_an_auto_mocking_container()
         //{
         //    var sut = new SpecWithAllSupportedStepsInRandomOrder();
-        //    sut.Resolver.Should().BeOfType<AutoMockingContainer<object>>();
+        //    sut.Resolver.ShouldBeOfType<AutoMockingContainer<object>>();
         //}
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
-using FluentAssertions;
 using NUnit.Framework;
+using Shouldly;
 using Specify.Tests.Stubs;
 using Specify.WithAutofacNSubstitute;
 using TestStack.BDDfy;
@@ -13,40 +13,40 @@ namespace Specify.Tests.WithAutofacNSubstitute
 
         protected override void CreateSystemUnderTest()
         {
-            this.SUT = new AutofacNSubstituteTestLifetimeScope();
+            SUT = new AutofacNSubstituteTestLifetimeScope();
         }
 
         protected void When_creating_SUT_for_object_with_multiple_constructors()
         {
-            this._result = this.SUT.SystemUnderTest<ConcreteObjectWithMultipleConstructors>();
+            _result = SUT.SystemUnderTest<ConcreteObjectWithMultipleConstructors>();
         }
 
         public void Then_should_create_SUT()
         {
-            this._result.Should().BeOfType<ConcreteObjectWithMultipleConstructors>();
+            _result.ShouldBeOfType<ConcreteObjectWithMultipleConstructors>();
         }
 
         public void AndThen_should_create_SUT_using_the_greediest_constructor()
         {
-            this._result.Dependency1.Should().NotBeNull();
-            this._result.Dependency2.Should().NotBeNull();
+            _result.Dependency1.ShouldNotBe(null);
+            _result.Dependency2.ShouldNotBe(null);
         }
 
         public void AndThen_SUT_should_be_a_singleton()
         {
-            this._result.Should().BeSameAs(this.SUT.SystemUnderTest<ConcreteObjectWithMultipleConstructors>());
+            _result.ShouldBeSameAs(SUT.SystemUnderTest<ConcreteObjectWithMultipleConstructors>());
         }
 
         public void AndThen_SUT_dependencies_should_be_singletons()
         {
-            this.SUT.Resolve<IDependency1>().Should().BeSameAs(this.SUT.Resolve<IDependency1>());
-            this.SUT.Resolve<IDependency2>().Should().BeSameAs(this.SUT.Resolve<IDependency2>());
+            SUT.Resolve<IDependency1>().ShouldBeSameAs(SUT.Resolve<IDependency1>());
+            SUT.Resolve<IDependency2>().ShouldBeSameAs(SUT.Resolve<IDependency2>());
         }
 
         [AndThen("And non-SUT dependencies should be singletons")]
         public void AndThen_non_SUT_dependencies_should_be_singletons()
         {
-            this.SUT.Resolve<IDependency3>().Should().BeSameAs(this.SUT.Resolve<IDependency3>());
+            SUT.Resolve<IDependency3>().ShouldBeSameAs(SUT.Resolve<IDependency3>());
         }
     }
 
@@ -56,17 +56,17 @@ namespace Specify.Tests.WithAutofacNSubstitute
 
         protected override void CreateSystemUnderTest()
         {
-            this.SUT = new AutofacNSubstituteTestLifetimeScope();
+            SUT = new AutofacNSubstituteTestLifetimeScope();
         }
 
         protected void When_creating_SUT_for_object_with_no_constructor()
         {
-            this._result = this.SUT.SystemUnderTest<ConcreteObjectWithNoConstructor>();
+            _result = SUT.SystemUnderTest<ConcreteObjectWithNoConstructor>();
         }
 
         public void Then_should_create_SUT()
         {
-            this._result.Should().BeOfType<ConcreteObjectWithNoConstructor>();
+            _result.ShouldBeOfType<ConcreteObjectWithNoConstructor>();
         }
     }
 
@@ -76,22 +76,22 @@ namespace Specify.Tests.WithAutofacNSubstitute
 
         protected override void CreateSystemUnderTest()
         {
-            this.SUT = new AutofacNSubstituteTestLifetimeScope();
+            SUT = new AutofacNSubstituteTestLifetimeScope();
         }
 
         public void Given_a_constructor_dependency_has_been_provided()
         {
-            this.SUT.RegisterInstance<IDependency1>(new Dependency1 { Value = 15 });
+            SUT.RegisterInstance<IDependency1>(new Dependency1 { Value = 15 });
         }
 
         protected void When_creating_SUT()
         {
-            this._result = this.SUT.SystemUnderTest<ConcreteObjectWithMultipleConstructors>();
+            _result = SUT.SystemUnderTest<ConcreteObjectWithMultipleConstructors>();
         }
 
         public void Then_SUT_will_have_the_provided_dependency()
         {
-            //_result.Dependency1.Value.Should().Be(15);
+            //_result.Dependency1.Value.ShouldBe(15);
             throw new NotImplementedException();
         }
     }
@@ -108,7 +108,7 @@ namespace Specify.Tests.WithAutofacNSubstitute
 
             var result = sut.SystemUnderTest<ConcreteObjectWithMultipleConstructors>();
 
-            result.Dependency1.Value.Should().Be(15);
+            result.Dependency1.Value.ShouldBe(15);
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace Specify.Tests.WithAutofacNSubstitute
         {
             var sut = new AutofacNSubstituteTestLifetimeScope();
             sut.SystemUnderTest<ConcreteObjectWithNoConstructor>()
-                .Should().BeOfType<ConcreteObjectWithNoConstructor>();
+                .ShouldBeOfType<ConcreteObjectWithNoConstructor>();
         }
 
         //[Test]
@@ -139,7 +139,7 @@ namespace Specify.Tests.WithAutofacNSubstitute
             var sut = new AutofacNSubstituteTestLifetimeScope();
             var expected = sut.Resolve<IDependency2>();
             var result = sut.Resolve<IDependency2>();
-            result.Should().BeSameAs(expected);
+            result.ShouldBeSameAs(expected);
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace Specify.Tests.WithAutofacNSubstitute
             var sut = new AutofacNSubstituteTestLifetimeScope();
             var expected = sut.SystemUnderTest<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest<ConcreteObjectWithNoConstructor>();
-            result.Should().BeSameAs(expected);
+            result.ShouldBeSameAs(expected);
         }
 
         [Test]
@@ -159,9 +159,9 @@ namespace Specify.Tests.WithAutofacNSubstitute
             var sut = new AutofacNSubstituteTestLifetimeScope();
             var result = sut.SystemUnderTest<ConcreteObjectWithMultipleConstructors>();
 
-            result.Should().BeOfType<ConcreteObjectWithMultipleConstructors>();
-            result.Dependency1.Should().NotBeNull();
-            result.Dependency2.Should().NotBeNull();
+            result.ShouldBeOfType<ConcreteObjectWithMultipleConstructors>();
+            result.Dependency1.ShouldNotBe(null);
+            result.Dependency2.ShouldNotBe(null);
         }
 
         [Test]
@@ -173,7 +173,7 @@ namespace Specify.Tests.WithAutofacNSubstitute
 
             var result = sut.Resolve<IDependency3>();
 
-            result.Should().BeSameAs(expected);
+            result.ShouldBeSameAs(expected);
         }
     }
 }

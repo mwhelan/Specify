@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests
@@ -11,7 +11,7 @@ namespace Specify.Tests
         {
             new StubSpecificationFor()
                 .IsSpecificationFor()
-                .Should().BeTrue();
+                .ShouldBe(true);
         }
 
         [Test]
@@ -19,7 +19,7 @@ namespace Specify.Tests
         {
             new StubScenarioFor()
                 .IsSpecificationFor()
-                .Should().BeFalse();
+                .ShouldBe(false);;
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace Specify.Tests
         {
             new StubScenarioFor()
                 .IsScenarioFor()
-                .Should().BeTrue();
+                .ShouldBe(true);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace Specify.Tests
         {
             new StubSpecificationFor()
                 .IsScenarioFor()
-                .Should().BeFalse();
+                .ShouldBe(false);;
         }
     }
 }
