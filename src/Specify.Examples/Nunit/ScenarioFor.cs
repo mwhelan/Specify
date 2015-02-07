@@ -1,21 +1,23 @@
-﻿using Xunit;
+﻿using NUnit.Framework;
 
-namespace Specify.WithXunit
+namespace Specify.Examples.Nunit
 {
+    [TestFixture]
     public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut> where TSut : class
     {
-        [Fact]
+        [Test]
         public override void ExecuteTest()
         {
             base.ExecuteTest();
         }
     }
 
+    [TestFixture]
     public abstract class ScenarioFor<TSut, TStory> : Specify.ScenarioFor<TSut, TStory>
         where TSut : class
         where TStory : UserStory
     {
-        [Fact]
+        [Test]
         public override void ExecuteTest()
         {
             base.ExecuteTest();

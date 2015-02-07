@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Specify.WithXunit
+namespace Specify.Examples.Xunit
 {
     public abstract class SpecificationFor<TSut> : Specify.SpecificationFor<TSut> where TSut : class
     {

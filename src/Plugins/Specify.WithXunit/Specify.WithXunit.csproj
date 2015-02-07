@@ -39,9 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SpecificationFor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScenarioFor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Specify\Specify.csproj">

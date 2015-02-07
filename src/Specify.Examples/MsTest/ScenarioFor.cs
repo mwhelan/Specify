@@ -1,27 +1,26 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Specify.WithNunit
+namespace Specify.Examples.MsTest
 {
-    [TestFixture]
+    [TestClass]
     public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut> where TSut : class
     {
-        [Test]
+        [TestMethod]
         public override void ExecuteTest()
         {
             base.ExecuteTest();
         }
     }
 
-    [TestFixture]
+    [TestClass]
     public abstract class ScenarioFor<TSut, TStory> : Specify.ScenarioFor<TSut, TStory>
         where TSut : class
         where TStory : UserStory
     {
-        [Test]
+        [TestMethod]
         public override void ExecuteTest()
         {
             base.ExecuteTest();
         }
     }
-
 }

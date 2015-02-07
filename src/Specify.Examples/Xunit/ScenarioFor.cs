@@ -1,26 +1,25 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
-namespace Specify.WithMsTest
+namespace Specify.Examples.Xunit
 {
-    [TestClass]
     public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut> where TSut : class
     {
-        [TestMethod]
+        [Fact]
         public override void ExecuteTest()
         {
             base.ExecuteTest();
         }
     }
 
-    [TestClass]
     public abstract class ScenarioFor<TSut, TStory> : Specify.ScenarioFor<TSut, TStory>
         where TSut : class
         where TStory : UserStory
     {
-        [TestMethod]
+        [Fact]
         public override void ExecuteTest()
         {
             base.ExecuteTest();
         }
     }
+
 }

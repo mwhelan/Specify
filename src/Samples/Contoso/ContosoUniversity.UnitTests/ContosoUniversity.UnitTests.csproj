@@ -34,6 +34,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Fixie">
+      <HintPath>..\..\..\packages\Fixie.1.0.0.3\lib\net45\Fixie.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions, Version=3.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.dll</HintPath>
@@ -84,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FixieSpecifyConvention.cs" />
     <Compile Include="Controllers\StudentDetailSpecs.cs" />
     <Compile Include="SpecifyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,10 +96,6 @@
     <ProjectReference Include="..\..\..\Plugins\Specify.WithAutofacNSubstitute\Specify.WithAutofacNSubstitute.csproj">
       <Project>{af9368c7-7bb0-4e3c-8587-f99d69824e3d}</Project>
       <Name>Specify.WithAutofacNSubstitute</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Plugins\Specify.WithNunit\Specify.WithNunit.csproj">
-      <Project>{88f13130-f886-4a61-8746-72fdfcfb9085}</Project>
-      <Name>Specify.WithNunit</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Specify\Specify.csproj">
       <Project>{E0041C2F-CC2E-4F2E-AD11-4C9DDB2FCD14}</Project>
