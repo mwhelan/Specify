@@ -52,8 +52,6 @@
     <Compile Include="Containers\IContainer.cs" />
     <Compile Include="Containers\SutFactory.cs" />
     <Compile Include="Containers\TinyIoC.cs" />
-    <Compile Include="ISpecifyContainer.cs" />
-    <Compile Include="ITestLifetimeScope.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="NullStory.cs" />
