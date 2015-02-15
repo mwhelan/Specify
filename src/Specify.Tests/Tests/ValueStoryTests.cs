@@ -27,7 +27,7 @@ namespace Specify.Tests.Tests
         public void should_allow_omitting_clauses()
         {
             var sut = new WithdrawCashValueStory();
-            sut.InOrderTo.ShouldNotBe(null);
+            sut.InOrderTo.ShouldBe(null);
         }
 
         public void should_be_able_to_set_title_and_title_prefix()

@@ -64,7 +64,6 @@
     <Compile Include="Tests\SpecifyExtensionTests.cs" />
     <Compile Include="Tests\SpecifyStoryMetadataScannerTests.cs" />
     <Compile Include="Tests\ValueStoryTests.cs" />
-    <Compile Include="WithAutofacNSubstitute\AutofacNSubstituteTestLifetimeScopeSpecs.cs" />
     <Compile Include="SpecifyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScenarioForSpecs.cs" />
@@ -86,9 +85,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Plugins\Specify.WithAutofacNSubstitute\Specify.WithAutofacNSubstitute.csproj">
-      <Project>{af9368c7-7bb0-4e3c-8587-f99d69824e3d}</Project>
-      <Name>Specify.WithAutofacNSubstitute</Name>
+    <ProjectReference Include="..\Specify.Examples\Specify.Examples.csproj">
+      <Project>{b614edd2-3b31-434b-ad77-576d9cba0ec8}</Project>
+      <Name>Specify.Examples</Name>
     </ProjectReference>
     <ProjectReference Include="..\Specify\Specify.csproj">
       <Project>{e0041c2f-cc2e-4f2e-ad11-4c9ddb2fcd14}</Project>

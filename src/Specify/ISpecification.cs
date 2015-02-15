@@ -1,10 +1,11 @@
 ﻿using System;
+using Specify.Containers;
 
 namespace Specify
 {
     public interface ISpecification
     {
-        ITestLifetimeScope Container { get; set; }
+        SutFactory Container { get; set; }
         void ExecuteTest();
         Type Story { get; }
         string Title { get; }

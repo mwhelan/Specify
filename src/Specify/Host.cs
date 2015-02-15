@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Specify.Configuration;
-
+using Specify.Containers;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
 
@@ -10,7 +10,7 @@ namespace Specify
     internal static class Host
     {
         private static readonly SpecifyConfiguration _configuration;
-        private static readonly ISpecifyContainer _container;
+        private static readonly IContainer _container;
 
         public static void Specify(object testObject, string scenarioTitle = null)
         {
@@ -19,13 +19,12 @@ namespace Specify
                 action.Before();
             }
 
-            using (var lifetimeScope = _container.CreateTestLifetimeScope())
+            using (var lifetimeScope = _container.CreateChildContainer())
             {
-                var specification = _container.Resolve(testObject.GetType());
-                specification.Container = lifetimeScope;
+                var specification = (ISpecification) _container.Resolve(testObject.GetType());
+                specification.Container = new SutFactory(lifetimeScope);
                 specification.BDDfy(scenarioTitle);
             }
-
             
             foreach (var action in _configuration.PerTestActions.AsEnumerable().Reverse())
             {

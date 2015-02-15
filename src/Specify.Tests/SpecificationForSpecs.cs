@@ -1,5 +1,6 @@
 using NSubstitute;
 using Shouldly;
+using Specify.Containers;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 
@@ -12,7 +13,8 @@ namespace Specify.Tests
         {
             protected override void CreateSystemUnderTest()
             {
-                SUT = new SpecWithAllSupportedStepsInRandomOrder{Container = Substitute.For<ITestLifetimeScope>()};
+                var container = new SutFactory(Substitute.For<IContainer>());
+                SUT = new SpecWithAllSupportedStepsInRandomOrder{Container = container};
             }
 
             public void When_the_specification_is_run()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Specify.Containers;
 
 namespace Specify.Configuration
 {
@@ -14,7 +15,7 @@ namespace Specify.Configuration
             PerTestActions = new List<ITestRunnerAction>();
         }
 
-        public virtual ISpecifyContainer GetSpecifyContainer()
+        public virtual IContainer GetSpecifyContainer()
         {
             throw new Exception("You must provide a Specify container");
         }

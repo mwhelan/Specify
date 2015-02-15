@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Autofac;
 using Specify.Configuration;
 
-namespace Specify.WithAutofacNSubstitute
+namespace Specify.Examples.Autofac
 {
     public class SpecifyModule : Module
     {

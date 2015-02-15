@@ -1,4 +1,5 @@
 using System;
+using Specify.Containers;
 using TestStack.BDDfy;
 
 namespace Specify
@@ -6,7 +7,7 @@ namespace Specify
     public abstract class SpecificationFor<TSubject> : ISpecification
         where TSubject : class
     {
-        public ITestLifetimeScope Container { get; set; }
+        public SutFactory Container { get; set; }
         public ExampleTable Examples { get; set; }
 
         public TSubject SUT { get; set; }

@@ -1,10 +1,11 @@
-﻿namespace Specify
-{
-    using System;
+﻿using System;
+using Specify.Containers;
 
-    public interface ISpecifyContainer : IDisposable
-    {
-        ISpecification Resolve(Type type);
-        ITestLifetimeScope CreateTestLifetimeScope();
-    }
+namespace Specify
+{
+    //public interface ISpecifyContainer : IDisposable
+    //{
+    //    ISpecification Resolve(Type type);
+    //    SutFactory CreateTestLifetimeScope();
+    //}
 }

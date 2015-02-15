@@ -107,9 +107,9 @@
     <Compile Include="ViewStudentDetailsScenario.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Plugins\Specify.WithAutofacNSubstitute\Specify.WithAutofacNSubstitute.csproj">
-      <Project>{af9368c7-7bb0-4e3c-8587-f99d69824e3d}</Project>
-      <Name>Specify.WithAutofacNSubstitute</Name>
+    <ProjectReference Include="..\..\..\Specify.Examples\Specify.Examples.csproj">
+      <Project>{B614EDD2-3B31-434B-AD77-576D9CBA0EC8}</Project>
+      <Name>Specify.Examples</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Specify\Specify.csproj">
       <Project>{E0041C2F-CC2E-4F2E-AD11-4C9DDB2FCD14}</Project>
