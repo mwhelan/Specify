@@ -1,6 +1,6 @@
 ﻿using Fixie;
 
-namespace Specify.Tests
+namespace Specify.Examples.Fixie
 {
     public class FixieSpecifyConvention : Convention
     {

@@ -38,6 +38,9 @@
     <Reference Include="FakeItEasy">
       <HintPath>..\packages\FakeItEasy.2.0.0-beta006\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
+    <Reference Include="Fixie">
+      <HintPath>..\packages\Fixie.1.0.0.11\lib\net45\Fixie.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
@@ -69,6 +72,7 @@
     <Compile Include="Autofac\AutofacMoqContainer.cs" />
     <Compile Include="Autofac\AutofacNSubstituteContainer.cs" />
     <Compile Include="Autofac\SpecifyModule.cs" />
+    <Compile Include="Fixie\FixieSpecifyConvention.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactory.cs" />
     <Compile Include="Mocks\IMockFactory.cs" />
     <Compile Include="Mocks\MoqMockFactory.cs" />
@@ -86,9 +90,6 @@
       <Project>{e0041c2f-cc2e-4f2e-ad11-4c9ddb2fcd14}</Project>
       <Name>Specify</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
