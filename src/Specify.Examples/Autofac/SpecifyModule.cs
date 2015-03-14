@@ -14,7 +14,7 @@ namespace Specify.Examples.Autofac
             builder.RegisterAssemblyTypes(assemblies)
                 .AsClosedTypesOf(typeof(SpecificationFor<>));
             builder.RegisterAssemblyTypes(assemblies)
-                .AsClosedTypesOf(typeof(ScenarioFor<>));
+                .AsClosedTypesOf(typeof(SpecificationFor<,>));
         }
 
         public virtual IEnumerable<Type> ScanForSpecificationTypes()

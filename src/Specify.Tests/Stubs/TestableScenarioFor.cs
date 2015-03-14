@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Specify.Tests.Stubs
 {
-    abstract class TestableScenarioFor<TSut> : ScenarioFor<TSut> where TSut : class
+    abstract class TestableScenarioFor<TSut> : SpecificationFor<TSut, WithdrawCashUserStory> where TSut : class
     {
         private List<string> _steps = new List<string>();
 

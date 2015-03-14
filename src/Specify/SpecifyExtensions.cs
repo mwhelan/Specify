@@ -1,12 +1,33 @@
 ﻿using System;
+using Specify.Stories;
 
 namespace Specify
 {
     public static class SpecifyExtensions
     {
-        public static bool IsScenarioFor(this Type specification)
+        public static bool CanBeCastTo<T>(this Type type)
         {
-            return specification.IsAssignableToGenericType(typeof(ScenarioFor<,>));
+            if (type == null) return false;
+            Type destinationType = typeof(T);
+
+            return CanBeCastTo(type, destinationType);
+        }
+
+        public static bool CanBeCastTo(this Type type, Type destinationType)
+        {
+            if (type == null) return false;
+            if (type == destinationType) return true;
+
+            return destinationType.IsAssignableFrom(type);
+        }
+
+        public static bool IsScenarioFor(this Type type)
+        {
+            //return specification.IsAssignableToGenericType(typeof(ScenarioFor<,>));
+            if (!type.CanBeCastTo<ISpecification>())
+                return false;
+            var specification = type as ISpecification;
+            return specification.Story.CanBeCastTo<UserStory>() || specification.Story.CanBeCastTo<ValueStory>();
         }
 
         internal static bool IsScenarioFor(this ISpecification specification)

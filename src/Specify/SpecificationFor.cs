@@ -1,11 +1,16 @@
 using System;
 using Specify.Containers;
+using Specify.Stories;
 using TestStack.BDDfy;
 
 namespace Specify
 {
-    public abstract class SpecificationFor<TSubject> : ISpecification
+    public abstract class SpecificationFor<TSubject> 
+        : SpecificationFor<TSubject, SpecificationStory> where TSubject : class { }
+
+    public abstract class SpecificationFor<TSubject, TStory> : ISpecification
         where TSubject : class
+        where TStory : Stories.Story
     {
         public SutFactory Container { get; set; }
         public ExampleTable Examples { get; set; }
@@ -24,7 +29,7 @@ namespace Specify
 
         public virtual Type Story
         {
-            get { return typeof(TSubject); }
+            get { return typeof(TStory); }
         }
 
         public virtual string Title { get { return GetType().Name.Humanize(LetterCasing.Title); } }
