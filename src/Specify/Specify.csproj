@@ -54,15 +54,16 @@
     <Compile Include="Containers\TinyIoC.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
-    <Compile Include="NullStory.cs" />
     <Compile Include="ScenarioFor.cs" />
     <Compile Include="SpecificationFor.cs" />
     <Compile Include="SpecifyExtensions.cs" />
     <Compile Include="Humanizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Story.cs" />
-    <Compile Include="UserStory.cs" />
-    <Compile Include="ValueStory.cs" />
+    <Compile Include="Stories\NullStory.cs" />
+    <Compile Include="Stories\SpecificationStory.cs" />
+    <Compile Include="Stories\Story.cs" />
+    <Compile Include="Stories\UserStory.cs" />
+    <Compile Include="Stories\ValueStory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

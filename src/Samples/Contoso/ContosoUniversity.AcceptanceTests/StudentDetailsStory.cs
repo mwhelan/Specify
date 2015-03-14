@@ -1,4 +1,5 @@
 ﻿using Specify;
+using Specify.Stories;
 
 namespace ContosoUniversity.AcceptanceTests
 {

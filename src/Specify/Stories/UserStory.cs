@@ -1,4 +1,4 @@
-namespace Specify
+namespace Specify.Stories
 {
     public abstract class UserStory : Story
     {

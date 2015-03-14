@@ -1,10 +1,11 @@
 using System;
+using Specify.Stories;
 
 namespace Specify
 {
     public abstract class ScenarioFor<TSut, TStory> : SpecificationFor<TSut>
         where TSut : class
-        where TStory : UserStory
+        where TStory : Story
     {
         public override Type Story { get { return typeof(TStory); } }
         public int ScenarioNumber { get; set; }

@@ -58,5 +58,7 @@ namespace Specify.Containers
         {
             _container.Dispose();
         }
+
+        public IContainer Container { get { return _container; } }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Specify.Stories;
 
 namespace Specify.Examples.Nunit
 {

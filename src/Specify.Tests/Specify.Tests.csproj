@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\SutFactory.cs" />
+    <Compile Include="Stories\UserStoryTests.cs" />
     <Compile Include="Tests\SpecifyExtensionTests.cs" />
     <Compile Include="Tests\SpecifyStoryMetadataScannerTests.cs" />
     <Compile Include="Tests\ValueStoryTests.cs" />
@@ -72,7 +74,6 @@
     <Compile Include="Stubs\TestableSpecification.cs" />
     <Compile Include="Stubs\UserStories.cs" />
     <Compile Include="Tests\TestRunnerSpecs.cs" />
-    <Compile Include="UserStoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

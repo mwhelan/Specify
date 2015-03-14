@@ -1,11 +1,11 @@
 using System;
 using System.Text;
 
-namespace Specify
+namespace Specify.Stories
 {
     public abstract class Story
     {
-        public Story()
+        protected Story()
         {
             TitlePrefix = "Story: ";
         }

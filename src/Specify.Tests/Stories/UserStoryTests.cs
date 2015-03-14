@@ -2,7 +2,7 @@
 using Shouldly;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests
+namespace Specify.Tests.Stories
 {
     public class UserStoryTests
     {

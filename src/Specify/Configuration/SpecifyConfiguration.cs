@@ -17,7 +17,7 @@ namespace Specify.Configuration
 
         public virtual IContainer GetSpecifyContainer()
         {
-            throw new Exception("You must provide a Specify container");
+            return new DefaultContainer();
         }
     }
 }

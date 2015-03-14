@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using TestStack.BDDfy;
+using Story = Specify.Stories.Story;
 
 namespace Specify.Configuration
 {

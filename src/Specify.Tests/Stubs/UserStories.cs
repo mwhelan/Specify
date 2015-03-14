@@ -1,4 +1,6 @@
-﻿namespace Specify.Tests.Stubs
+﻿using Specify.Stories;
+
+namespace Specify.Tests.Stubs
 {
     class WithdrawCashUserStory : UserStory
     {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Specify.Stories;
 
 namespace Specify.Examples.MsTest
 {

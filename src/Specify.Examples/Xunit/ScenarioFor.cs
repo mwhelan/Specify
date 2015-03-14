@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Specify.Stories;
+using Xunit;
 
 namespace Specify.Examples.Xunit
 {
