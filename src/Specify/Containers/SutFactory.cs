@@ -60,5 +60,10 @@ namespace Specify.Containers
         }
 
         public IContainer Container { get { return _container; } }
+
+        public void SetSystemUnderTest<T>(T value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

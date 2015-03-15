@@ -10,12 +10,16 @@ namespace Specify
 
     public abstract class SpecificationFor<TSubject, TStory> : ISpecification
         where TSubject : class
-        where TStory : Stories.Story
+        where TStory : Stories.Story, new()
     {
-        public SutFactory Container { get; set; }
+        public SutFactory Container { get; internal set; }
         public ExampleTable Examples { get; set; }
 
-        public TSubject SUT { get; set; }
+        public TSubject SUT
+        {
+            get { return Container.SystemUnderTest<TSubject>(); }
+            set { Container.SetSystemUnderTest<TSubject>(value); }
+        }
 
         public T Get<T>() where T : class
         {
@@ -32,22 +36,42 @@ namespace Specify
             get { return typeof(TStory); }
         }
 
-        public virtual string Title { get { return GetType().Name.Humanize(LetterCasing.Title); } }
+        public virtual string Title
+        {
+            get
+            {
+                if (Story.Name == "SpecificationStory")
+                {
+                    return typeof (TSubject).Name;
+                }
+                else
+                {
+                    var title = GetType().Name.Humanize(LetterCasing.Title);
+                    if (Number != 0)
+                    {
+                        title = string.Format("Scenario {0}: {1}", Number.ToString("00"), title);
+                    }
+                    return title;
+                }
+            }
+        }
+
+        public int Number { get; set; }
 
         public virtual void ExecuteTest()
         {
             Host.Specify(this);
         }
 
-        [Executable(ExecutionOrder.Initialize, "", Order = -2, ShouldReport = false)]
-        protected virtual void ConfigureContainer()
-        {
-        }
+        //[Executable(ExecutionOrder.Initialize, "", Order = -2, ShouldReport = false)]
+        //protected virtual void ConfigureContainer()
+        //{
+        //}
 
-        [Executable(ExecutionOrder.Initialize, "", Order = -1, ShouldReport = false)]
-        protected virtual void CreateSystemUnderTest()
-        {
-            SUT = Container.SystemUnderTest<TSubject>();            
-        }
+        //[Executable(ExecutionOrder.Initialize, "", Order = -1, ShouldReport = false)]
+        //protected virtual void CreateSystemUnderTest()
+        //{
+        //    //SUT = Container.SystemUnderTest<TSubject>();            
+        //}
     }
 }

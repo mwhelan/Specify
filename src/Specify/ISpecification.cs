@@ -5,9 +5,10 @@ namespace Specify
 {
     public interface ISpecification
     {
-        SutFactory Container { get; set; }
+        SutFactory Container { get; }
         void ExecuteTest();
         Type Story { get; }
         string Title { get; }
+        int Number { get; set; }
     }
 }

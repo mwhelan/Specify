@@ -18,19 +18,17 @@ namespace Specify.Tests
          
             sut.BDDfy();
 
-            sut.Steps[0].ShouldBe("Implementation - Constructor");
-            sut.Steps[1].ShouldBe("ConfigureContainer");
-            sut.Steps[2].ShouldBe("CreateSystemUnderTest");
-            sut.Steps[3].ShouldBe("Implementation - Setup");
-            sut.Steps[4].ShouldBe("Implementation - GivenSomePrecondition");
-            sut.Steps[5].ShouldBe("Implementation - AndGivenSomeOtherPrecondition");
-            sut.Steps[6].ShouldBe("Implementation - WhenAction");
-            sut.Steps[7].ShouldBe("Implementation - AndWhenAnotherAction");
-            sut.Steps[8].ShouldBe("Implementation - ThenAnExpectation");
-            sut.Steps[9].ShouldBe("Implementation - AndThenAnotherExpectation");
-            sut.Steps[10].ShouldBe("Implementation - TearDown");
+            sut.Steps[0].ShouldBe("Constructor");
+            sut.Steps[1].ShouldBe("Setup");
+            sut.Steps[2].ShouldBe("EstablishContext");
+            sut.Steps[3].ShouldBe("GivenSomePrecondition");
+            sut.Steps[4].ShouldBe("AndGivenSomeOtherPrecondition");
+            sut.Steps[5].ShouldBe("WhenAction");
+            sut.Steps[6].ShouldBe("AndWhenAnotherAction");
+            sut.Steps[7].ShouldBe("ThenAnExpectation");
+            sut.Steps[8].ShouldBe("AndThenAnotherExpectation");
+            sut.Steps[9].ShouldBe("TearDown");
         }
-
 
         //[Test]
         //public void Resolver_should_be_an_auto_mocking_container()

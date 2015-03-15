@@ -4,51 +4,51 @@ namespace Specify.Tests.Stubs
     {
         public SpecWithAllSupportedStepsInRandomOrder()
         {
-            Steps.Add("Implementation - Constructor");
+            Steps.Add("Constructor");
         }
         
         public void TearDown()
         {
-            Steps.Add("Implementation - TearDown");
+            Steps.Add("TearDown");
         }
-
-        //public void EstabContext()
-        //{
-        //    Steps.Add("Implementation - EstablishContext");
-        //}
 
         public void Setup()
         {
-            Steps.Add("Implementation - Setup");
+            Steps.Add("Setup");
         }
 
         public void AndGivenSomeOtherPrecondition()
         {
-            Steps.Add("Implementation - AndGivenSomeOtherPrecondition");
+            Steps.Add("AndGivenSomeOtherPrecondition");
         }
 
         public void ThenAnExpectation()
         {
-            Steps.Add("Implementation - ThenAnExpectation");
+            Steps.Add("ThenAnExpectation");
+        }
+
+        public void EstabablishContext()
+        {
+            Steps.Add("EstablishContext");
         }
 
         public void AndThenAnotherExpectation()
         {
-            Steps.Add("Implementation - AndThenAnotherExpectation");
+            Steps.Add("AndThenAnotherExpectation");
         }
         public void WhenAction()
         {
-            Steps.Add("Implementation - WhenAction");
+            Steps.Add("WhenAction");
         }
 
         public void GivenSomePrecondition()
         {
-            Steps.Add("Implementation - GivenSomePrecondition");
+            Steps.Add("GivenSomePrecondition");
         }
 
         public void AndWhenAnotherAction()
         {
-            Steps.Add("Implementation - AndWhenAnotherAction");
+            Steps.Add("AndWhenAnotherAction");
         }
     }
 }

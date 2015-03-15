@@ -37,7 +37,7 @@ namespace Specify.Configuration
 
         private StoryMetadata CreateSpecificationMetadata(ISpecification specification)
         {
-            string specificationTitle = specification.Story.Name;// CreateSpecificationTitle(specification);
+            string specificationTitle = specification.Title;// CreateSpecificationTitle(specification);
             var story = new StoryAttribute() { Title = specificationTitle, TitlePrefix = "Specifications For: " };
             return new StoryMetadata(specification.Story, story);
         }

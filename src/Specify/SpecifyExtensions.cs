@@ -23,11 +23,12 @@ namespace Specify
 
         public static bool IsScenarioFor(this Type type)
         {
-            //return specification.IsAssignableToGenericType(typeof(ScenarioFor<,>));
             if (!type.CanBeCastTo<ISpecification>())
                 return false;
-            var specification = type as ISpecification;
-            return specification.Story.CanBeCastTo<UserStory>() || specification.Story.CanBeCastTo<ValueStory>();
+            var instance = (ISpecification)Activator.CreateInstance(type);
+
+            return instance.Story.CanBeCastTo<UserStory>()
+                   || instance.Story.CanBeCastTo<ValueStory>();
         }
 
         internal static bool IsScenarioFor(this ISpecification specification)

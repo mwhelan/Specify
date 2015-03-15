@@ -11,16 +11,16 @@ namespace Specify.Tests.Stubs
             get { return _steps; }
         }
 
-        protected override void ConfigureContainer()
-        {
-            Steps.Add("ConfigureContainer");
-            base.ConfigureContainer();
-        }
+        //protected override void ConfigureContainer()
+        //{
+        //    Steps.Add("ConfigureContainer");
+        //    base.ConfigureContainer();
+        //}
 
-        protected override void CreateSystemUnderTest()
-        {
-            Steps.Add("CreateSystemUnderTest");
-            base.CreateSystemUnderTest();
-        }
+        //protected override void CreateSystemUnderTest()
+        //{
+        //    Steps.Add("CreateSystemUnderTest");
+        //    base.CreateSystemUnderTest();
+        //}
     }
 }

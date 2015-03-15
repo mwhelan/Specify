@@ -6,7 +6,7 @@ namespace Specify.Examples.MsTest
     [TestClass]
     public abstract class SpecificationFor<TSut, TStory> : Specify.SpecificationFor<TSut, TStory>
         where TSut : class
-        where TStory : Story
+        where TStory : Story, new()
     {
         [TestMethod]
         public override void ExecuteTest()

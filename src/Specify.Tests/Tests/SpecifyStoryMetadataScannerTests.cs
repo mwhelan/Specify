@@ -45,7 +45,7 @@ namespace Specify.Tests.Tests
         public void Scenario_title_should_include_number_if_it_has_been_set()
         {
             var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubScenarioFor{ScenarioNumber = 3});
+            var result = sut.Scan(new StubScenarioFor {Number = 3});
             result.Title.ShouldBe("Scenario 03: Stub Scenario For");
         }
     }

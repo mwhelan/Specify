@@ -34,6 +34,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="TestStack.BDDfy, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -54,7 +55,6 @@
     <Compile Include="Containers\TinyIoC.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
-    <Compile Include="ScenarioFor.cs" />
     <Compile Include="SpecificationFor.cs" />
     <Compile Include="SpecifyExtensions.cs" />
     <Compile Include="Humanizer.cs" />

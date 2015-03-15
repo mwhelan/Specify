@@ -59,13 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Containers\SutFactory.cs" />
+    <Compile Include="Containers\SutFactoryTests.cs" />
     <Compile Include="Stories\UserStoryTests.cs" />
     <Compile Include="Tests\SpecifyExtensionTests.cs" />
     <Compile Include="Tests\SpecifyStoryMetadataScannerTests.cs" />
     <Compile Include="Tests\ValueStoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecificationForSpecs.cs" />
+    <Compile Include="SpecificationForTests.cs" />
     <Compile Include="Stubs\AutoMockingStubs.cs" />
     <Compile Include="Stubs\ScenarioWithAllSupportedStepsInRandomOrder.cs" />
     <Compile Include="Stubs\Specifications.cs" />

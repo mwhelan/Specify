@@ -21,7 +21,7 @@ namespace Specify
 
             using (var lifetimeScope = _container.CreateChildContainer())
             {
-                var specification = (ISpecification) _container.Resolve(testObject.GetType());
+                var specification = (dynamic) _container.Resolve(testObject.GetType());
                 specification.Container = new SutFactory(lifetimeScope);
                 specification.BDDfy(scenarioTitle);
             }
