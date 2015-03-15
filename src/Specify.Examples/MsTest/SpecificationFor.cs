@@ -9,9 +9,9 @@ namespace Specify.Examples.MsTest
         where TStory : Story, new()
     {
         [TestMethod]
-        public override void ExecuteTest()
+        public override void Specify()
         {
-            base.ExecuteTest();
+            base.Specify();
         }
     }
 
@@ -20,9 +20,9 @@ namespace Specify.Examples.MsTest
         where TSut : class
     {
         [TestMethod]
-        public override void ExecuteTest()
+        public override void Specify()
         {
-            base.ExecuteTest();
+            base.Specify();
         }
     }
 }

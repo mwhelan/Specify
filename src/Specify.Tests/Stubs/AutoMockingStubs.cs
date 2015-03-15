@@ -25,7 +25,6 @@
     {
         int Value { get; set; }
     }
-
     class Dependency1 : IDependency1
     {
         private int _value = 5;

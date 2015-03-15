@@ -15,7 +15,7 @@ namespace Specify.Containers
         void RegisterType<T>() where T : class;
 
         /// <summary>
-        /// Sets a value in the container, so that from now on, it will be returned when you call <see cref="Resolve{T}"/>
+        /// Sets a value in the container, so that from now on, it will be returned when you call <see cref="Get{T}"/>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="valueToSet">The value to set.</param>
@@ -29,9 +29,9 @@ namespace Specify.Containers
         /// <typeparam name="T"></typeparam>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        T Resolve<T>(string key = null) where T : class;
+        T Get<T>(string key = null) where T : class;
 
-        object Resolve(Type serviceType, string key = null);
+        object Get(Type serviceType, string key = null);
  
 
         /// <summary>

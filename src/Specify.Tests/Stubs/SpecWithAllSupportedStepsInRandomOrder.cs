@@ -1,6 +1,7 @@
 namespace Specify.Tests.Stubs
 {
-    internal class SpecWithAllSupportedStepsInRandomOrder : TestableSpecification<object>
+    internal class SpecWithAllSupportedStepsInRandomOrder 
+        : TestableSpecification<ConcreteObjectWithNoConstructor>
     {
         public SpecWithAllSupportedStepsInRandomOrder()
         {

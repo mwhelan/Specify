@@ -12,23 +12,28 @@ namespace Specify
         where TSubject : class
         where TStory : Stories.Story, new()
     {
-        public SutFactory Container { get; internal set; }
+        public SutFactory<TSubject> Context { get; internal set; }
         public ExampleTable Examples { get; set; }
 
         public TSubject SUT
         {
-            get { return Container.SystemUnderTest<TSubject>(); }
-            set { Container.SetSystemUnderTest<TSubject>(value); }
+            get { return Context.SystemUnderTest; }
+            set { Context.SystemUnderTest = value; }
         }
 
-        public T Get<T>() where T : class
+        public T Get<T>(string key = null) where T : class
         {
-            return Container.Resolve<T>();
+            return Context.Get<T>(key);
         }
 
         public T Set<T>(T valueToSet, string key = null) where T : class
         {
-            return Container.RegisterInstance(valueToSet, key);
+            return Context.RegisterInstance(valueToSet, key);
+        }
+
+        public void Set<T>() where T : class
+        {
+            Context.RegisterType<T>();
         }
 
         public virtual Type Story
@@ -58,20 +63,14 @@ namespace Specify
 
         public int Number { get; set; }
 
-        public virtual void ExecuteTest()
+        public void SetContainer(IContainer container)
+        {
+            Context = new SutFactory<TSubject>(container);
+        }
+
+        public virtual void Specify()
         {
             Host.Specify(this);
         }
-
-        //[Executable(ExecutionOrder.Initialize, "", Order = -2, ShouldReport = false)]
-        //protected virtual void ConfigureContainer()
-        //{
-        //}
-
-        //[Executable(ExecutionOrder.Initialize, "", Order = -1, ShouldReport = false)]
-        //protected virtual void CreateSystemUnderTest()
-        //{
-        //    //SUT = Container.SystemUnderTest<TSubject>();            
-        //}
     }
 }

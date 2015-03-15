@@ -35,7 +35,7 @@ namespace Specify.Containers
             return valueToSet;
         }
 
-        public T Resolve<T>(string key = null) where T : class
+        public T Get<T>(string key = null) where T : class
         {
             if (key == null)
             {
@@ -47,7 +47,7 @@ namespace Specify.Containers
             }
         }
 
-        public object Resolve(Type serviceType, string key = null)
+        public object Get(Type serviceType, string key = null)
         {
             if (key == null)
             {

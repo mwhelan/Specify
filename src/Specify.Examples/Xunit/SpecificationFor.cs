@@ -8,9 +8,9 @@ namespace Specify.Examples.Xunit
         where TStory : Story, new()
     {
         [Fact]
-        public override void ExecuteTest()
+        public override void Specify()
         {
-            base.ExecuteTest();
+            base.Specify();
         }
     }
 
@@ -18,9 +18,9 @@ namespace Specify.Examples.Xunit
         where TSut : class
     {
         [Fact]
-        public override void ExecuteTest()
+        public override void Specify()
         {
-            base.ExecuteTest();
+            base.Specify();
         }
     }
 }

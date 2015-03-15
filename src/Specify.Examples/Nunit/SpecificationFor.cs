@@ -9,9 +9,9 @@ namespace Specify.Examples.Nunit
         where TStory : Story, new()
     {
         [Test]
-        public override void ExecuteTest()
+        public override void Specify()
         {
-            base.ExecuteTest();
+            base.Specify();
         }
     }
 
@@ -20,9 +20,9 @@ namespace Specify.Examples.Nunit
         where TSut : class
     {
         [Test]
-        public override void ExecuteTest()
+        public override void Specify()
         {
-            base.ExecuteTest();
+            base.Specify();
         }
     }
 }

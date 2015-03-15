@@ -46,7 +46,7 @@ namespace Specify.Examples.Autofac
             Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
         }
 
-        public T Resolve<T>(string key = null) where T : class
+        public T Get<T>(string key = null) where T : class
         {
             if (key == null)
             {
@@ -58,7 +58,7 @@ namespace Specify.Examples.Autofac
             }
         }
 
-        public object Resolve(Type serviceType, string key = null)
+        public object Get(Type serviceType, string key = null)
         {
             if (key == null)
             {
@@ -86,7 +86,7 @@ namespace Specify.Examples.Autofac
                         .As(new KeyedService(key, typeof(T)))
                         .InstancePerLifetimeScope().CreateRegistration());
             }
-            return Resolve<T>();
+            return Get<T>();
         }
 
         public bool IsRegistered<T>() where T : class

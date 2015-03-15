@@ -1,6 +1,6 @@
 namespace Specify.Tests.Stubs
 {
-    internal class ScenarioWithAllSupportedStepsInRandomOrder : TestableScenarioFor<object>
+    internal class ScenarioWithAllSupportedStepsInRandomOrder : TestableScenarioFor<ConcreteObjectWithNoConstructor>
     {
         public ScenarioWithAllSupportedStepsInRandomOrder()
         {

@@ -2,23 +2,28 @@ using System;
 
 namespace Specify.Containers
 {
-    public class SutFactory : IDisposable
+    public class SutFactory<TSut> : IDisposable 
+        where TSut : class
     {
         private readonly IContainer _container;
-        private object _systemUnderTest;
+        private TSut _systemUnderTest;
 
         public SutFactory(IContainer container)
         {
             _container = container;
         }
 
-        public T SystemUnderTest<T>() where T : class
+        public TSut SystemUnderTest
         {
-            if (_systemUnderTest == null)
+            get
             {
-                _systemUnderTest = _container.Resolve<T>();
+                if (_systemUnderTest == null)
+                {
+                    _systemUnderTest = _container.Get<TSut>();
+                }
+                return _systemUnderTest;
             }
-            return (T) _systemUnderTest;
+            set { _systemUnderTest = value; }
         }
 
         public void RegisterType<T>() where T : class
@@ -39,9 +44,14 @@ namespace Specify.Containers
             return _container.RegisterInstance(valueToSet, key);
         }
 
-        public T Resolve<T>(string key = null) where T : class
+        public T Get<T>(string key = null) where T : class
         {
-            return _container.Resolve<T>(key);
+            return _container.Get<T>(key);
+        }
+
+        public object Get(Type serviceType, string key = null)
+        {
+            return _container.Get(serviceType, key);
         }
 
         public bool IsRegistered<T>() where T : class
@@ -59,11 +69,6 @@ namespace Specify.Containers
             _container.Dispose();
         }
 
-        public IContainer Container { get { return _container; } }
-
-        public void SetSystemUnderTest<T>(T value)
-        {
-            throw new NotImplementedException();
-        }
+        internal IContainer Container { get { return _container; } }
     }
 }

@@ -31,14 +31,14 @@ namespace Specify.Containers
             return _container.RegisterInstance(valueToSet, key);
         }
 
-        public T Resolve<T>(string key = null) where T : class
+        public T Get<T>(string key = null) where T : class
         {
-            return _container.Resolve<T>(key);
+            return _container.Get<T>(key);
         }
 
-        public object Resolve(Type serviceType, string key = null)
+        public object Get(Type serviceType, string key = null)
         {
-            return _container.Resolve(serviceType, key);
+            return _container.Get(serviceType, key);
         }
 
         public bool IsRegistered<T>() where T : class
