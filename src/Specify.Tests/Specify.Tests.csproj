@@ -59,7 +59,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Containers\SutFactoryTests.cs" />
+    <Compile Include="Configuration\BddfyTestEngineTests.cs" />
+    <Compile Include="Configuration\StubAction.cs" />
+    <Compile Include="Configuration\TestableTestRunner.cs" />
+    <Compile Include="Configuration\TestRunnerTests.cs" />
+    <Compile Include="Containers\SpecificationContextTests.cs" />
     <Compile Include="Stories\UserStoryTests.cs" />
     <Compile Include="Tests\SpecifyExtensionTests.cs" />
     <Compile Include="Tests\SpecifyStoryMetadataScannerTests.cs" />
@@ -94,9 +98,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

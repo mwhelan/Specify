@@ -35,7 +35,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            sut.Context.Container.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Specify.Tests
             var result = sut.SUT;
 
             sut.SUT.ShouldBeSameAs(result);
-            sut.Context.Container.Received(1).Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
         }
         [Test]
         public void should_be_able_to_set_sut_independently()
@@ -61,48 +61,48 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void Set_type_should_call_container_to_register_type_if_SUT_not_set()
+        public void Container_RegisterType_should_call_container_to_register_type_if_SUT_not_set()
         {
             var sut = CreateSut();
-            sut.Set<ConcreteObjectWithNoConstructor>();
-            sut.Context.Container.Received().RegisterType<ConcreteObjectWithNoConstructor>();
+            sut.Container.RegisterType<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().RegisterType<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
-        public void Set_type_should_throw_if_SUT_is_set()
+        public void Container_RegisterType_should_throw_if_SUT_is_set()
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            Should.Throw<InvalidOperationException>(() => sut.Set<ConcreteObjectWithNoConstructor>())
+            Should.Throw<InvalidOperationException>(() => sut.Container.RegisterType<ConcreteObjectWithNoConstructor>())
                 .Message.ShouldBe("Cannot register type after SUT is created.");
         }
 
         [Test]
-        public void Set_instance_should_call_container_to_register_instance_if_SUT_not_set()
+        public void Container_RegisterInstance_should_call_container_to_register_instance_if_SUT_not_set()
         {
             var instance = new ConcreteObjectWithNoConstructor();
             var sut = CreateSut();
 
-            sut.Set(instance);
+            sut.Container.RegisterInstance(instance);
 
-            sut.Context.Container.Received().RegisterInstance(instance);
+            sut.Container.SourceContainer.Received().RegisterInstance(instance);
         }
 
         [Test]
-        public void Set_instance_should_throw_if_SUT_is_set()
+        public void Container_RegisterInstance_should_throw_if_SUT_is_set()
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            Should.Throw<InvalidOperationException>(() => sut.Set(new ConcreteObjectWithNoConstructor()))
+            Should.Throw<InvalidOperationException>(() => sut.Container.RegisterInstance(new ConcreteObjectWithNoConstructor()))
                 .Message.ShouldBe("Cannot register instance after SUT is created.");
         }    
     
         [Test]
-        public void Get_should_call_container_resolve()
+        public void Container_Get_should_call_container_resolve()
         {
             var sut = CreateSut();
-            sut.Get<ConcreteObjectWithNoConstructor>();
-            sut.Context.Container.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -115,21 +115,21 @@ namespace Specify.Tests
         [Test]
         public void scenario_title_should_be_class_name_only_if_scenario_is_zero()
         {
-            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
-            var sut = new ScenarioWithAllSupportedStepsInRandomOrder {Context = container};
+            var container = new SpecificationContext<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var sut = new ScenarioWithAllSupportedStepsInRandomOrder {Container = container};
             sut.Title.ShouldBe("Scenario With All Supported Steps In Random Order");
         }
         [Test]
         public void scenario_title_should_be_number_and_class_name_if_number_greater_than_zero()
         {
-            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
-            var sut = new ScenarioWithAllSupportedStepsInRandomOrder {Context = container, Number = 3};
+            var container = new SpecificationContext<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var sut = new ScenarioWithAllSupportedStepsInRandomOrder {Container = container, Number = 3};
             sut.Title.ShouldBe("Scenario 03: Scenario With All Supported Steps In Random Order");
         }
         private static SpecWithAllSupportedStepsInRandomOrder CreateSut()
         {
-            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
-            var sut = new SpecWithAllSupportedStepsInRandomOrder { Context = container };
+            var container = new SpecificationContext<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var sut = new SpecWithAllSupportedStepsInRandomOrder { Container = container };
             return sut;
         }
     }
@@ -140,7 +140,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
-            sut.Container.Received().IsRegistered(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received().IsRegistered(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]
@@ -148,12 +148,12 @@ namespace Specify.Tests
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Dispose();
-            sut.Container.Received().Dispose();
+            sut.SourceContainer.Received().Dispose();
         }
 
-        private SutFactory<T> CreateSut<T>() where T : class
+        private SpecificationContext<T> CreateSut<T>() where T : class
         {
-            return new SutFactory<T>(Substitute.For<IContainer>());
+            return new SpecificationContext<T>(Substitute.For<IContainer>());
         }
     }
 

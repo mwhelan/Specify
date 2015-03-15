@@ -12,28 +12,13 @@ namespace Specify
         where TSubject : class
         where TStory : Stories.Story, new()
     {
-        public SutFactory<TSubject> Context { get; internal set; }
+        public SpecificationContext<TSubject> Container { get; internal set; }
         public ExampleTable Examples { get; set; }
 
         public TSubject SUT
         {
-            get { return Context.SystemUnderTest; }
-            set { Context.SystemUnderTest = value; }
-        }
-
-        public T Get<T>(string key = null) where T : class
-        {
-            return Context.Get<T>(key);
-        }
-
-        public T Set<T>(T valueToSet, string key = null) where T : class
-        {
-            return Context.RegisterInstance(valueToSet, key);
-        }
-
-        public void Set<T>() where T : class
-        {
-            Context.RegisterType<T>();
+            get { return Container.SystemUnderTest; }
+            set { Container.SystemUnderTest = value; }
         }
 
         public virtual Type Story
@@ -65,7 +50,7 @@ namespace Specify
 
         public void SetContainer(IContainer container)
         {
-            Context = new SutFactory<TSubject>(container);
+            Container = new SpecificationContext<TSubject>(container);
         }
 
         public virtual void Specify()

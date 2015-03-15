@@ -8,14 +8,14 @@ using Specify.Tests.Stubs;
 namespace Specify.Tests.Containers
 {
     [TestFixture]
-    public class SutFactoryTests
+    public class SpecificationContextTests
     {
         [Test]
         public void should_use_container_to_create_sut()
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
-            sut.Container.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace Specify.Tests.Containers
             var result = sut.SystemUnderTest;
 
             sut.SystemUnderTest.ShouldBeSameAs(result);
-            sut.Container.Received(1).Get<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace Specify.Tests.Containers
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.RegisterType<ConcreteObjectWithNoConstructor>();
-            sut.Container.Received().RegisterType<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().RegisterType<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace Specify.Tests.Containers
 
             sut.RegisterInstance(instance);
             
-            sut.Container.Received().RegisterInstance(instance);
+            sut.SourceContainer.Received().RegisterInstance(instance);
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace Specify.Tests.Containers
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get<ConcreteObjectWithNoConstructor>();
-            sut.Container.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace Specify.Tests.Containers
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get(typeof(ConcreteObjectWithNoConstructor));
-            sut.Container.Received().Get(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received().Get(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace Specify.Tests.Containers
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.IsRegistered<ConcreteObjectWithNoConstructor>();
-            sut.Container.Received().IsRegistered<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().IsRegistered<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace Specify.Tests.Containers
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
-            sut.Container.Received().IsRegistered(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received().IsRegistered(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]
@@ -115,12 +115,12 @@ namespace Specify.Tests.Containers
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Dispose();
-            sut.Container.Received().Dispose();
+            sut.SourceContainer.Received().Dispose();
         }
 
-        private SutFactory<T> CreateSut<T>() where T : class
+        private SpecificationContext<T> CreateSut<T>() where T : class
         {
-            return new SutFactory<T>(Substitute.For<IContainer>());
+            return new SpecificationContext<T>(Substitute.For<IContainer>());
         }
     }
 }

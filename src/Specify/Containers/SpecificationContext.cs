@@ -2,24 +2,24 @@ using System;
 
 namespace Specify.Containers
 {
-    public class SutFactory<TSut> : IDisposable 
+    public class SpecificationContext<TSut> : IDisposable 
         where TSut : class
     {
-        private readonly IContainer _container;
+        private readonly IContainer _sourceContainer;
         private TSut _systemUnderTest;
 
-        public SutFactory(IContainer container)
+        public SpecificationContext(IContainer sourceContainer)
         {
-            _container = container;
+            _sourceContainer = sourceContainer;
         }
 
-        public TSut SystemUnderTest
+        internal TSut SystemUnderTest
         {
             get
             {
                 if (_systemUnderTest == null)
                 {
-                    _systemUnderTest = _container.Get<TSut>();
+                    _systemUnderTest = _sourceContainer.Get<TSut>();
                 }
                 return _systemUnderTest;
             }
@@ -32,7 +32,7 @@ namespace Specify.Containers
             {
                 throw new InvalidOperationException("Cannot register type after SUT is created.");
             }
-            _container.RegisterType<T>();
+            _sourceContainer.RegisterType<T>();
         }
 
         public T RegisterInstance<T>(T valueToSet, string key = null) where T : class
@@ -41,34 +41,34 @@ namespace Specify.Containers
             {
                 throw new InvalidOperationException("Cannot register instance after SUT is created.");
             }
-            return _container.RegisterInstance(valueToSet, key);
+            return _sourceContainer.RegisterInstance(valueToSet, key);
         }
 
         public T Get<T>(string key = null) where T : class
         {
-            return _container.Get<T>(key);
+            return _sourceContainer.Get<T>(key);
         }
 
         public object Get(Type serviceType, string key = null)
         {
-            return _container.Get(serviceType, key);
+            return _sourceContainer.Get(serviceType, key);
         }
 
         public bool IsRegistered<T>() where T : class
         {
-            return _container.IsRegistered<T>();
+            return _sourceContainer.IsRegistered<T>();
         }
 
         public bool IsRegistered(Type type)
         {
-            return _container.IsRegistered(type);
+            return _sourceContainer.IsRegistered(type);
         }
 
         public void Dispose()
         {
-            _container.Dispose();
+            _sourceContainer.Dispose();
         }
 
-        internal IContainer Container { get { return _container; } }
+        internal IContainer SourceContainer { get { return _sourceContainer; } }
     }
 }

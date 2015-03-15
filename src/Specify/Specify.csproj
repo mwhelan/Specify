@@ -44,14 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\AssemblyTypeResolver.cs" />
+    <Compile Include="Configuration\BddfyTestEngine.cs" />
+    <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\ITestRunnerAction.cs" />
     <Compile Include="Configuration\SpecifyConfiguration.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
+    <Compile Include="Configuration\TestRunner.cs" />
     <Compile Include="Configuration\TestRunnerAction.cs" />
     <Compile Include="Containers\ContainerAdapter.cs" />
     <Compile Include="Containers\DefaultContainer.cs" />
     <Compile Include="Containers\IContainer.cs" />
-    <Compile Include="Containers\SutFactory.cs" />
+    <Compile Include="Containers\SpecificationContext.cs" />
     <Compile Include="Containers\TinyIoC.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />

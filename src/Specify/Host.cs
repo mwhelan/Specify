@@ -2,7 +2,6 @@
 using System.Linq;
 using Specify.Configuration;
 using Specify.Containers;
-using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
 
 namespace Specify
@@ -11,31 +10,18 @@ namespace Specify
     {
         private static readonly SpecifyConfiguration _configuration;
         private static readonly IContainer _container;
+        private static readonly TestRunner _testRunner;
 
-        public static void Specify(object testObject, string scenarioTitle = null)
+        public static void Specify(ISpecification testObject, string scenarioTitle = null)
         {
-            foreach (var action in _configuration.PerTestActions)
-            {
-                action.Before();
-            }
-
-            using (var lifetimeScope = _container.CreateChildContainer())
-            {
-                var specification = (ISpecification) _container.Get(testObject.GetType());
-                specification.SetContainer(lifetimeScope);
-                specification.BDDfy(scenarioTitle);
-            }
-            
-            foreach (var action in _configuration.PerTestActions.AsEnumerable().Reverse())
-            {
-                action.After();
-            }
+            _testRunner.Execute(testObject, scenarioTitle);
         }
 
         static Host()
         {
             _configuration = Configure();
             _container = _configuration.GetSpecifyContainer();
+            _testRunner = new TestRunner(_configuration, _container,new BddfyTestEngine());
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
             _configuration.PerAppDomainActions.ForEach(action => action.Before());
         }
