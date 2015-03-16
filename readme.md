@@ -5,6 +5,8 @@ Specify is a .Net context-specification testing library that builds on top of BD
 
 When I first started using BDDfy for acceptance testing, I would use a different framework for unit testing, but I didn't like the context switching between different frameworks, syntaxes and testing styles. The goal of Specify is to provide a consistent experience for all types of tests. Why not have the fantastic BDDfy reports for all of your different test types?
 
+[![Build status](https://ci.appveyor.com/api/projects/status/vj6ec2yubg8ii9sn?svg=true)](https://ci.appveyor.com/project/mwhelan/specify)
+
 ## Overview of Features
 * Tests use a context-specification style, with a class per test.
 * Supports automocking containers for unit tests and IoC containers for larger tests.
