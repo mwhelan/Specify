@@ -29,6 +29,7 @@ namespace Specify.Tests.Stubs
         {
             AsA = "As an Account Holder";
             IWant = "withdraw cash from an ATM";
+            InOrderTo = null;
         }
     }
 

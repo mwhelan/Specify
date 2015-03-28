@@ -35,7 +35,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().Resolve<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Specify.Tests
             var result = sut.SUT;
 
             sut.SUT.ShouldBeSameAs(result);
-            sut.Container.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received(1).Resolve<ConcreteObjectWithNoConstructor>();
         }
         [Test]
         public void should_be_able_to_set_sut_independently()
@@ -64,8 +64,8 @@ namespace Specify.Tests
         public void Container_RegisterType_should_call_container_to_register_type_if_SUT_not_set()
         {
             var sut = CreateSut();
-            sut.Container.RegisterType<ConcreteObjectWithNoConstructor>();
-            sut.Container.SourceContainer.Received().RegisterType<ConcreteObjectWithNoConstructor>();
+            sut.Container.Register<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().Register<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            Should.Throw<InvalidOperationException>(() => sut.Container.RegisterType<ConcreteObjectWithNoConstructor>())
+            Should.Throw<InvalidOperationException>(() => sut.Container.Register<ConcreteObjectWithNoConstructor>())
                 .Message.ShouldBe("Cannot register type after SUT is created.");
         }
 
@@ -83,9 +83,9 @@ namespace Specify.Tests
             var instance = new ConcreteObjectWithNoConstructor();
             var sut = CreateSut();
 
-            sut.Container.RegisterInstance(instance);
+            sut.Container.Register(instance);
 
-            sut.Container.SourceContainer.Received().RegisterInstance(instance);
+            sut.Container.SourceContainer.Received().Register(instance);
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            Should.Throw<InvalidOperationException>(() => sut.Container.RegisterInstance(new ConcreteObjectWithNoConstructor()))
+            Should.Throw<InvalidOperationException>(() => sut.Container.Register(new ConcreteObjectWithNoConstructor()))
                 .Message.ShouldBe("Cannot register instance after SUT is created.");
         }    
     
@@ -102,7 +102,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             sut.Container.Get<ConcreteObjectWithNoConstructor>();
-            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().Resolve<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
-            sut.SourceContainer.Received().IsRegistered(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received().CanResolve(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]

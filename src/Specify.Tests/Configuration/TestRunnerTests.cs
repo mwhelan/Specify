@@ -55,7 +55,7 @@ namespace Specify.Tests.Configuration
 
             sut.Execute(spec);
 
-            sut.Container.Received(1).Get(typeof(ScenarioWithAllSupportedStepsInRandomOrder));
+            sut.Container.Received(1).Resolve(typeof(ScenarioWithAllSupportedStepsInRandomOrder));
         }
 
         private static TestableTestRunner CreateSut(ISpecification spec)

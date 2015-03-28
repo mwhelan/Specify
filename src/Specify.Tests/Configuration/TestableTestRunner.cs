@@ -19,7 +19,7 @@ namespace Specify.Tests.Configuration
                 .CreateChildContainer()
                 .Returns(ChildContainer);
             Container
-                .Get(Arg.Any<Type>())
+                .Resolve(Arg.Any<Type>())
                 .Returns(_specification);
         }
 

@@ -1,7 +1,9 @@
 using System;
+using System.Globalization;
 using Specify.Containers;
 using Specify.Stories;
 using TestStack.BDDfy;
+using TestStack.BDDfy.Configuration;
 
 namespace Specify
 {
@@ -36,7 +38,8 @@ namespace Specify
                 }
                 else
                 {
-                    var title = GetType().Name.Humanize(LetterCasing.Title);
+                    var title = Configurator.Scanners.Humanize(GetType().Name);
+                    title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title);
                     if (Number != 0)
                     {
                         title = string.Format("Scenario {0}: {1}", Number.ToString("00"), title);
@@ -48,7 +51,7 @@ namespace Specify
 
         public int Number { get; set; }
 
-        public void SetContainer(IContainer container)
+        public virtual void SetContainer(IContainer container)
         {
             Container = new SpecificationContext<TSubject>(container);
         }

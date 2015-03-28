@@ -26,7 +26,7 @@ namespace Specify.Configuration
 
             using (var lifetimeScope = _container.CreateChildContainer())
             {
-                var specification = (ISpecification)_container.Get(testObject.GetType());
+                var specification = (ISpecification)_container.Resolve(testObject.GetType());
                 specification.SetContainer(lifetimeScope);
                 _testEngine.Execute(specification);
             }
@@ -38,6 +38,5 @@ namespace Specify.Configuration
         }
 
         internal IContainer Container { get { return _container; } }
-        internal ITestEngine TestEngine { get { return _testEngine; } }
     }
 }

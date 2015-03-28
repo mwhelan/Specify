@@ -1,59 +1,66 @@
-﻿using System;
+﻿//using System;
 
-namespace Specify.Containers
-{
-    public class ContainerAdapter : IContainer
-    {
-        private IContainer _container;
+//namespace Specify.Containers
+//{
+//    public class ContainerAdapter : IContainer
+//    {
+//        private IContainer _container;
 
-        public ContainerAdapter()
-        {
-            _container = new DefaultContainer();    
-        }
+//        public ContainerAdapter()
+//        {
+//            _container = new DefaultContainer();    
+//        }
 
-        public void SetContainer(IContainer container)
-        {
-            _container = container;
-        }
+//        public void SetContainer(IContainer container)
+//        {
+//            _container = container;
+//        }
 
-        public void Dispose()
-        {
-            _container.Dispose();
-        }
+//        public void Dispose()
+//        {
+//            _container.Dispose();
+//        }
 
-        public void RegisterType<T>() where T : class
-        {
-            _container.RegisterType<T>();
-        }
+//        public void Register<T>() where T : class
+//        {
+//            _container.Register<T>();
+//        }
 
-        public T RegisterInstance<T>(T valueToSet, string key = null) where T : class
-        {
-            return _container.RegisterInstance(valueToSet, key);
-        }
+//        public void Register<TService, TImplementation>() 
+//            where TService : class 
+//            where TImplementation : class, TService
+//        {
+//            _container.Register<TService,TImplementation>();
+//        }
 
-        public T Get<T>(string key = null) where T : class
-        {
-            return _container.Get<T>(key);
-        }
+//        public T Register<T>(T valueToSet, string key = null) where T : class
+//        {
+//            return _container.Register(valueToSet, key);
+//        }
 
-        public object Get(Type serviceType, string key = null)
-        {
-            return _container.Get(serviceType, key);
-        }
+//        public T Resolve<T>(string key = null) where T : class
+//        {
+//            return _container.Resolve<T>(key);
+//        }
 
-        public bool IsRegistered<T>() where T : class
-        {
-            return _container.IsRegistered<T>();
-        }
+//        public object Resolve(Type serviceType, string key = null)
+//        {
+//            return _container.Resolve(serviceType, key);
+//        }
 
-        public bool IsRegistered(Type type)
-        {
-            return _container.IsRegistered(type);
-        }
+//        public bool CanResolve<T>() where T : class
+//        {
+//            return _container.CanResolve<T>();
+//        }
 
-        public IContainer CreateChildContainer()
-        {
-            return _container.CreateChildContainer();
-        }
-    }
-}
+//        public bool CanResolve(Type type)
+//        {
+//            return _container.CanResolve(type);
+//        }
+
+//        public IContainer CreateChildContainer()
+//        {
+//            return _container.CreateChildContainer();
+//        }
+//    }
+//}

@@ -41,12 +41,21 @@ namespace Specify.Examples.Autofac
             Container.Dispose();
         }
 
-        public void RegisterType<T>() where T : class
+        public void Register<T>() where T : class
         {
             Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
         }
 
-        public T Get<T>(string key = null) where T : class
+        public void Register<TService, TImplementation>() 
+            where TService : class 
+            where TImplementation : class, TService
+        {
+            Container
+                .ComponentRegistry
+                .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>().InstancePerLifetimeScope().CreateRegistration());
+        }
+
+        public T Resolve<T>(string key = null) where T : class
         {
             if (key == null)
             {
@@ -58,7 +67,7 @@ namespace Specify.Examples.Autofac
             }
         }
 
-        public object Get(Type serviceType, string key = null)
+        public object Resolve(Type serviceType, string key = null)
         {
             if (key == null)
             {
@@ -70,7 +79,7 @@ namespace Specify.Examples.Autofac
             }
         }
 
-        public T RegisterInstance<T>(T valueToSet, string key = null) where T : class
+        public T Register<T>(T valueToSet, string key = null) where T : class
         {
             if (key == null)
             {
@@ -86,15 +95,15 @@ namespace Specify.Examples.Autofac
                         .As(new KeyedService(key, typeof(T)))
                         .InstancePerLifetimeScope().CreateRegistration());
             }
-            return Get<T>();
+            return Resolve<T>();
         }
 
-        public bool IsRegistered<T>() where T : class
+        public bool CanResolve<T>() where T : class
         {
-            return IsRegistered(typeof(T));
+            return CanResolve(typeof(T));
         }
 
-        public bool IsRegistered(Type type)
+        public bool CanResolve(Type type)
         {
             return Container.IsRegistered(type);
         }

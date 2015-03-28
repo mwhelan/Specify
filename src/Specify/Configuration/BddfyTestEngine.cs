@@ -14,8 +14,8 @@ namespace Specify.Configuration
             else
             {
                 specification
-                    .BDDfy()
-                    .WithExamples(specification.Examples);
+                    .WithExamples(specification.Examples)
+                    .BDDfy();
             }
         }
     }

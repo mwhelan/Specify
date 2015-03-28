@@ -43,7 +43,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\AssemblyTypeResolver.cs" />
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\ITestRunnerAction.cs" />
@@ -55,12 +54,12 @@
     <Compile Include="Containers\DefaultContainer.cs" />
     <Compile Include="Containers\IContainer.cs" />
     <Compile Include="Containers\SpecificationContext.cs" />
-    <Compile Include="Containers\TinyIoC.cs" />
+    <Compile Include="lib\TinyIoC.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
+    <Compile Include="lib\AssemblyTypeResolver.cs" />
     <Compile Include="SpecificationFor.cs" />
     <Compile Include="SpecifyExtensions.cs" />
-    <Compile Include="Humanizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stories\NullStory.cs" />
     <Compile Include="Stories\SpecificationStory.cs" />

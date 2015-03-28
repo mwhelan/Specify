@@ -20,9 +20,8 @@ namespace Specify.Configuration
 
         private StoryMetadata CreateScenarioMetadata(ISpecification scenario)
         {
-            var storyAttribute = (StoryAttribute)scenario
-                .Story
-                .GetCustomAttributes(typeof(StoryAttribute), true)
+            var storyAttribute = (StoryNarrativeAttribute)scenario.GetType()
+                .GetCustomAttributes(typeof(StoryNarrativeAttribute), true)
                 .FirstOrDefault();
 
             if (storyAttribute != null)
@@ -37,9 +36,9 @@ namespace Specify.Configuration
 
         private StoryMetadata CreateSpecificationMetadata(ISpecification specification)
         {
-            string specificationTitle = specification.Title;// CreateSpecificationTitle(specification);
-            var story = new StoryAttribute() { Title = specificationTitle, TitlePrefix = "Specifications For: " };
-            return new StoryMetadata(specification.Story, story);
+            var story = (Story)Activator.CreateInstance(specification.Story);
+            var storyAttribute = new StoryAttribute() { Title = specification.Title, TitlePrefix = story.TitlePrefix };
+            return new StoryMetadata(specification.Story, storyAttribute);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Specify.Configuration;
+using Specify.lib;
 
 namespace Specify.Examples.Autofac
 {

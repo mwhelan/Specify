@@ -12,16 +12,25 @@ namespace Specify.Containers
         /// Registers a type to the container. 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void RegisterType<T>() where T : class;
+        void Register<T>() where T : class;
+
+       /// <summary>
+       /// Registers an implementation type for a service interface
+       /// </summary>
+       /// <typeparam name="TService">The interface type</typeparam>
+       /// <typeparam name="TImplementation">The type that implements the service interface</typeparam>
+        void Register<TService, TImplementation>() 
+            where TService : class 
+            where TImplementation : class, TService;
 
         /// <summary>
-        /// Sets a value in the container, so that from now on, it will be returned when you call <see cref="Get{T}"/>
+        /// Sets a value in the container, so that from now on, it will be returned when you call <see cref="Resolve{T}"/>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="valueToSet">The value to set.</param>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        T RegisterInstance<T>(T valueToSet, string key = null) where T : class;
+        T Register<T>(T valueToSet, string key = null) where T : class;
 
         /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.
@@ -29,9 +38,9 @@ namespace Specify.Containers
         /// <typeparam name="T"></typeparam>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        T Get<T>(string key = null) where T : class;
+        T Resolve<T>(string key = null) where T : class;
 
-        object Get(Type serviceType, string key = null);
+        object Resolve(Type serviceType, string key = null);
  
 
         /// <summary>
@@ -39,14 +48,14 @@ namespace Specify.Containers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        bool IsRegistered<T>() where T : class;
+        bool CanResolve<T>() where T : class;
 
         /// <summary>
         /// Determines whether an instance of this type is registered.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns></returns>
-        bool IsRegistered(Type type);
+        bool CanResolve(Type type);
 
         IContainer CreateChildContainer();
     }

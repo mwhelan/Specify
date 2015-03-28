@@ -17,54 +17,40 @@ namespace Specify.Containers
             _container = container;
         }
 
-        public void RegisterType<T>() where T : class
+        public void Register<T>() where T : class
         {
             _container.Register<T>();
         }
 
-        public T RegisterInstance<T>(T valueToSet, string key = null) where T : class
+        public void Register<TService, TImplementation>() 
+            where TService : class 
+            where TImplementation : class, TService
         {
-            if (key == null)
-            {
-                _container.Register<T>(valueToSet);
-            }
-            else
-            {
-                _container.Register<T>(valueToSet, key);
-            }
+            _container.Register<TService, TImplementation>();
+        }
+
+        public T Register<T>(T valueToSet, string key = null) where T : class
+        {
+            _container.Register<T>(valueToSet, key);
             return valueToSet;
         }
 
-        public T Get<T>(string key = null) where T : class
+        public T Resolve<T>(string key = null) where T : class
         {
-            if (key == null)
-            {
-                return _container.Resolve<T>();
-            }
-            else
-            {
-                return _container.Resolve<T>(key);
-            }
+            return _container.Resolve<T>(key);
         }
 
-        public object Get(Type serviceType, string key = null)
+        public object Resolve(Type serviceType, string key = null)
         {
-            if (key == null)
-            {
-                return _container.Resolve(serviceType);
-            }
-            else
-            {
-                return _container.Resolve(serviceType, key);
-            }
+            return _container.Resolve(serviceType, key);
         }
 
-        public bool IsRegistered<T>() where T : class
+        public bool CanResolve<T>() where T : class
         {
             return _container.CanResolve<T>();
         }
 
-        public bool IsRegistered(Type type)
+        public bool CanResolve(Type type)
         {
             return _container.CanResolve(type);
         }

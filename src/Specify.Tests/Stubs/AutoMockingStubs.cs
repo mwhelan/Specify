@@ -3,6 +3,24 @@
     class ConcreteObjectWithNoConstructor
     {
     }
+    class ConcreteObjectWithOneInterfaceConstructor
+    {
+        public readonly IDependency1 Dependency1;
+
+        public ConcreteObjectWithOneInterfaceConstructor(IDependency1 dependency1)
+        {
+            Dependency1 = dependency1;
+        }
+    }
+    class ConcreteObjectWithOneConcreteConstructor
+    {
+        public readonly Dependency1 Dependency1;
+
+        public ConcreteObjectWithOneConcreteConstructor(Dependency1 dependency1)
+        {
+            Dependency1 = dependency1;
+        }
+    }
 
     class ConcreteObjectWithMultipleConstructors
     {
@@ -25,7 +43,7 @@
     {
         int Value { get; set; }
     }
-    class Dependency1 : IDependency1
+    public class Dependency1 : IDependency1
     {
         private int _value = 5;
 

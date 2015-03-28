@@ -2,7 +2,7 @@ using NUnit.Framework;
 using Shouldly;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Tests
+namespace Specify.Tests.Stories
 {
     [TestFixture]
     public class ValueStoryTests

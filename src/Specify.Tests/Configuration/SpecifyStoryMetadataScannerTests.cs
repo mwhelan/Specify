@@ -3,7 +3,7 @@ using Shouldly;
 using Specify.Configuration;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Tests
+namespace Specify.Tests.Configuration
 {
     [TestFixture]
     public class SpecifyStoryMetadataScannerTests
@@ -48,5 +48,18 @@ namespace Specify.Tests.Tests
             var result = sut.Scan(new StubScenarioFor {Number = 3});
             result.Title.ShouldBe("Scenario 03: Stub Scenario For");
         }
+
+        [Test]
+        public void should_use_story_attribute_if_present()
+        {
+            var sut = new SpecifyStoryMetadataScanner();
+            var result = sut.Scan(new StubScenarioForWithStoryAttribute());
+            result.Title.ShouldBe("Title from attribute");
+            result.TitlePrefix.ShouldBe("Title prefix from attribute");
+            result.Narrative1.ShouldBe("As a programmer");
+            result.Narrative2.ShouldBe("I want to be able to explicitly specify a story");
+            result.Narrative3.ShouldBe("So that I can share a story definition between several scenarios");
+        }
+
     }
 }

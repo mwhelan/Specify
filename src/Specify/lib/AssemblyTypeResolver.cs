@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Specify.Configuration
+namespace Specify.lib
 {
     /// <summary>
     /// Class that helps to resolve assembly types. If an error occurs while loading assembly types, it will catch and continue
