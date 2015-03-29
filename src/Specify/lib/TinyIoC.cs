@@ -858,12 +858,12 @@ namespace TinyIoC
     }
     #endregion
 
-//#if TINYIOC_INTERNAL
-//    internal
-//#else
-//    public
-//#endif
-    public sealed partial class TinyIoCContainer : IDisposable
+#if TINYIOC_INTERNAL
+    internal
+#else
+    public
+#endif
+    sealed partial class TinyIoCContainer : IDisposable
     {
         #region Fake NETFX_CORE Classes
 #if NETFX_CORE
@@ -1267,7 +1267,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a given implementation and default options.
         /// </summary>
         /// <param name="registerType">Type to register</param>
-        /// <param name="registerImplementation">Type to instantiate that implements Register</param>
+        /// <param name="registerImplementation">Type to instantiate that implements RegisterType</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, Type registerImplementation)
         {
@@ -1278,7 +1278,7 @@ namespace TinyIoC
         /// Creates/replaces a named container class registration with a given implementation and default options.
         /// </summary>
         /// <param name="registerType">Type to register</param>
-        /// <param name="registerImplementation">Type to instantiate that implements Register</param>
+        /// <param name="registerImplementation">Type to instantiate that implements RegisterType</param>
         /// <param name="name">Name of registration</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, Type registerImplementation, string name)
@@ -1290,7 +1290,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a specific, strong referenced, instance.
         /// </summary>
         /// <param name="registerType">Type to register</param>
-        /// <param name="instance">Instance of Register to register</param>
+        /// <param name="instance">Instance of RegisterType to register</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, object instance)
         {
@@ -1301,7 +1301,7 @@ namespace TinyIoC
         /// Creates/replaces a named container class registration with a specific, strong referenced, instance.
         /// </summary>
         /// <param name="registerType">Type to register</param>
-        /// <param name="instance">Instance of Register to register</param>
+        /// <param name="instance">Instance of RegisterType to register</param>
         /// <param name="name">Name of registration</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, object instance, string name)
@@ -1313,7 +1313,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a specific, strong referenced, instance.
         /// </summary>
         /// <param name="registerType">Type to register</param>
-        /// <param name="registerImplementation">Type of instance to register that implements Register</param>
+        /// <param name="registerImplementation">Type of instance to register that implements RegisterType</param>
         /// <param name="instance">Instance of RegisterImplementation to register</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, Type registerImplementation, object instance)
@@ -1325,7 +1325,7 @@ namespace TinyIoC
         /// Creates/replaces a named container class registration with a specific, strong referenced, instance.
         /// </summary>
         /// <param name="registerType">Type to register</param>
-        /// <param name="registerImplementation">Type of instance to register that implements Register</param>
+        /// <param name="registerImplementation">Type of instance to register that implements RegisterType</param>
         /// <param name="instance">Instance of RegisterImplementation to register</param>
         /// <param name="name">Name of registration</param>
         /// <returns>RegisterOptions for fluent API</returns>
@@ -1338,7 +1338,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a user specified factory
         /// </summary>
         /// <param name="registerType">Type to register</param>
-        /// <param name="factory">Factory/lambda that returns an instance of Register</param>
+        /// <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, Func<TinyIoCContainer, NamedParameterOverloads, object> factory)
         {
@@ -1349,7 +1349,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a user specified factory
         /// </summary>
         /// <param name="registerType">Type to register</param>
-        /// <param name="factory">Factory/lambda that returns an instance of Register</param>
+        /// <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
         /// <param name="name">Name of registation</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register(Type registerType, Func<TinyIoCContainer, NamedParameterOverloads, object> factory, string name)
@@ -1384,7 +1384,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a given implementation and default options.
         /// </summary>
         /// <typeparam name="RegisterType">Type to register</typeparam>
-        /// <typeparam name="RegisterImplementation">Type to instantiate that implements Register</typeparam>
+        /// <typeparam name="RegisterImplementation">Type to instantiate that implements RegisterType</typeparam>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType, RegisterImplementation>()
             where RegisterType : class
@@ -1397,7 +1397,7 @@ namespace TinyIoC
         /// Creates/replaces a named container class registration with a given implementation and default options.
         /// </summary>
         /// <typeparam name="RegisterType">Type to register</typeparam>
-        /// <typeparam name="RegisterImplementation">Type to instantiate that implements Register</typeparam>
+        /// <typeparam name="RegisterImplementation">Type to instantiate that implements RegisterType</typeparam>
         /// <param name="name">Name of registration</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType, RegisterImplementation>(string name)
@@ -1411,7 +1411,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a specific, strong referenced, instance.
         /// </summary>
         /// <typeparam name="RegisterType">Type to register</typeparam>
-        /// <param name="instance">Instance of Register to register</param>
+        /// <param name="instance">Instance of RegisterType to register</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType>(RegisterType instance)
            where RegisterType : class
@@ -1423,7 +1423,7 @@ namespace TinyIoC
         /// Creates/replaces a named container class registration with a specific, strong referenced, instance.
         /// </summary>
         /// <typeparam name="RegisterType">Type to register</typeparam>
-        /// <param name="instance">Instance of Register to register</param>
+        /// <param name="instance">Instance of RegisterType to register</param>
         /// <param name="name">Name of registration</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType>(RegisterType instance, string name)
@@ -1436,7 +1436,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a specific, strong referenced, instance.
         /// </summary>
         /// <typeparam name="RegisterType">Type to register</typeparam>
-        /// <typeparam name="RegisterImplementation">Type of instance to register that implements Register</typeparam>
+        /// <typeparam name="RegisterImplementation">Type of instance to register that implements RegisterType</typeparam>
         /// <param name="instance">Instance of RegisterImplementation to register</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType, RegisterImplementation>(RegisterImplementation instance)
@@ -1450,7 +1450,7 @@ namespace TinyIoC
         /// Creates/replaces a named container class registration with a specific, strong referenced, instance.
         /// </summary>
         /// <typeparam name="RegisterType">Type to register</typeparam>
-        /// <typeparam name="RegisterImplementation">Type of instance to register that implements Register</typeparam>
+        /// <typeparam name="RegisterImplementation">Type of instance to register that implements RegisterType</typeparam>
         /// <param name="instance">Instance of RegisterImplementation to register</param>
         /// <param name="name">Name of registration</param>
         /// <returns>RegisterOptions for fluent API</returns>
@@ -1465,7 +1465,7 @@ namespace TinyIoC
         /// Creates/replaces a container class registration with a user specified factory
         /// </summary>
         /// <typeparam name="RegisterType">Type to register</typeparam>
-        /// <param name="factory">Factory/lambda that returns an instance of Register</param>
+        /// <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType>(Func<TinyIoCContainer, NamedParameterOverloads, RegisterType> factory)
             where RegisterType : class
@@ -1482,7 +1482,7 @@ namespace TinyIoC
         /// Creates/replaces a named container class registration with a user specified factory
         /// </summary>
         /// <typeparam name="RegisterType">Type to register</typeparam>
-        /// <param name="factory">Factory/lambda that returns an instance of Register</param>
+        /// <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
         /// <param name="name">Name of registation</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType>(Func<TinyIoCContainer, NamedParameterOverloads, RegisterType> factory, string name)
@@ -1502,7 +1502,7 @@ namespace TinyIoC
         /// Internally this registers each implementation using the full name of the class as its registration name.
         /// </summary>
         /// <typeparam name="RegisterType">Type that each implementation implements</typeparam>
-        /// <param name="implementationTypes">Types that implement Register</param>
+        /// <param name="implementationTypes">Types that implement RegisterType</param>
         /// <returns>MultiRegisterOptions for the fluent API</returns>
         public MultiRegisterOptions RegisterMultiple<RegisterType>(IEnumerable<Type> implementationTypes)
         {
@@ -1515,7 +1515,7 @@ namespace TinyIoC
         /// Internally this registers each implementation using the full name of the class as its registration name.
         /// </summary>
         /// <param name="registrationType">Type that each implementation implements</param>
-        /// <param name="implementationTypes">Types that implement Register</param>
+        /// <param name="implementationTypes">Types that implement RegisterType</param>
         /// <returns>MultiRegisterOptions for the fluent API</returns>
         public MultiRegisterOptions RegisterMultiple(Type registrationType, IEnumerable<Type> implementationTypes)
         {
@@ -1582,7 +1582,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using default options and the supplied name.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
         /// <param name="name">Name of registration</param>
@@ -1597,7 +1597,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using supplied options and  name.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
         /// <param name="name">Name of registration</param>
@@ -1613,7 +1613,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using default options and the supplied constructor parameters.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
         /// <param name="parameters">User specified constructor parameters</param>
@@ -1628,7 +1628,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using specified options and the supplied constructor parameters.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
         /// <param name="parameters">User specified constructor parameters</param>
@@ -1644,7 +1644,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using default options and the supplied constructor parameters and name.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
         /// <param name="parameters">User specified constructor parameters</param>
@@ -1660,7 +1660,7 @@ namespace TinyIoC
         /// Attempts to resolve a named type using specified options and the supplied constructor parameters.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
         /// <param name="name">Name of registration</param>
@@ -1702,7 +1702,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using default options and the supplied name.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
         /// <param name="name">Name of registration</param>
@@ -1718,7 +1718,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using supplied options and  name.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
         /// <param name="name">Name of registration</param>
@@ -1735,7 +1735,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using default options and the supplied constructor parameters.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
         /// <param name="parameters">User specified constructor parameters</param>
@@ -1751,7 +1751,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using specified options and the supplied constructor parameters.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
         /// <param name="parameters">User specified constructor parameters</param>
@@ -1768,7 +1768,7 @@ namespace TinyIoC
         /// Attempts to resolve a type using default options and the supplied constructor parameters and name.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
         /// <param name="parameters">User specified constructor parameters</param>
@@ -1785,7 +1785,7 @@ namespace TinyIoC
         /// Attempts to resolve a named type using specified options and the supplied constructor parameters.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
         /// <param name="name">Name of registration</param>
@@ -1855,7 +1855,7 @@ namespace TinyIoC
         /// Attempts to predict whether a given type can be resolved with the supplied constructor parameters and default options.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// 
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
@@ -1871,7 +1871,7 @@ namespace TinyIoC
         /// Attempts to predict whether a given named type can be resolved with the supplied constructor parameters and default options.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// 
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
@@ -1888,7 +1888,7 @@ namespace TinyIoC
         /// Attempts to predict whether a given type can be resolved with the supplied constructor parameters options.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// 
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
@@ -1905,7 +1905,7 @@ namespace TinyIoC
         /// Attempts to predict whether a given named type can be resolved with the supplied constructor parameters options.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// 
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
@@ -1978,7 +1978,7 @@ namespace TinyIoC
         /// Attempts to predict whether a given type can be resolved with the supplied constructor parameters and default options.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// 
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
@@ -1995,7 +1995,7 @@ namespace TinyIoC
         /// Attempts to predict whether a given named type can be resolved with the supplied constructor parameters and default options.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// 
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
@@ -2013,7 +2013,7 @@ namespace TinyIoC
         /// Attempts to predict whether a given type can be resolved with the supplied constructor parameters options.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// 
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
@@ -2031,7 +2031,7 @@ namespace TinyIoC
         /// Attempts to predict whether a given named type can be resolved with the supplied constructor parameters options.
         ///
         /// Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
-        /// All user supplied parameters must exist in at least one resolvable constructor of Register or resolution will fail.
+        /// All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
         /// 
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>

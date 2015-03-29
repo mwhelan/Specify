@@ -54,7 +54,6 @@
     <Compile Include="Containers\DefaultContainer.cs" />
     <Compile Include="Containers\IContainer.cs" />
     <Compile Include="Containers\SpecificationContext.cs" />
-    <Compile Include="lib\TinyIoC.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="lib\AssemblyTypeResolver.cs" />
@@ -66,6 +65,7 @@
     <Compile Include="Stories\Story.cs" />
     <Compile Include="Stories\UserStory.cs" />
     <Compile Include="Stories\ValueStory.cs" />
+    <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -31,6 +31,30 @@ namespace Specify.Tests.Containers
             sut.Register<IDependency1, Dependency1>();
             sut.CanResolve<ConcreteObjectWithOneInterfaceConstructor>().ShouldBe(true);
         }
+
+        [Test]
+        public void TinyIoc_RegisterService_should_register_singleton_lifetime()
+        {
+            var sut = new TinyIoCContainer();
+            sut.Register<IDependency2, Dependency2>();
+            sut.Resolve<IDependency2>().ShouldBeSameAs(sut.Resolve<IDependency2>());
+        }
+
+        [Test]
+        public void Default_RegisterService_should_register_singleton_lifetime()
+        {
+            var sut = new DefaultContainer();
+            sut.Register<IDependency2, Dependency2>();
+            sut.Resolve<IDependency2>().ShouldBeSameAs(sut.Resolve<IDependency2>());
+        }
+
+        [Test]
+        public void RegisterService_should_register_singleton_lifetime()
+        {
+            var sut = new SpecificationContext<ConcreteObjectWithMultipleConstructors>(new DefaultContainer());
+            sut.Register<IDependency2, Dependency2>();
+            sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
+        }
     }
 
     

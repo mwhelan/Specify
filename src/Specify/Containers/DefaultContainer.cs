@@ -31,13 +31,27 @@ namespace Specify.Containers
 
         public T Register<T>(T valueToSet, string key = null) where T : class
         {
-            _container.Register<T>(valueToSet, key);
+            if (key == null)
+            {
+                _container.Register<T>(valueToSet);
+            }
+            else
+            {
+                _container.Register<T>(valueToSet, key);
+            }
             return valueToSet;
         }
 
         public T Resolve<T>(string key = null) where T : class
         {
-            return _container.Resolve<T>(key);
+            if (key == null)
+            {
+                return _container.Resolve<T>();
+            }
+            else
+            {
+                return _container.Resolve<T>(key);
+            }
         }
 
         public object Resolve(Type serviceType, string key = null)

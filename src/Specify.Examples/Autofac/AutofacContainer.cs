@@ -2,7 +2,6 @@
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using IContainer = Specify.Containers.IContainer;
 
 namespace Specify.Examples.Autofac
 {
@@ -36,23 +35,37 @@ namespace Specify.Examples.Autofac
             }
         }
 
-        public void Dispose()
-        {
-            Container.Dispose();
-        }
-
         public void Register<T>() where T : class
         {
-            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerLifetimeScope().CreateRegistration());
+            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerDependency().CreateRegistration());
         }
 
-        public void Register<TService, TImplementation>() 
-            where TService : class 
+        public void Register<TService, TImplementation>()
+            where TService : class
             where TImplementation : class, TService
         {
             Container
                 .ComponentRegistry
                 .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>().InstancePerLifetimeScope().CreateRegistration());
+        }
+
+        public T Register<T>(T valueToSet, string key = null) where T : class
+        {
+            if (key == null)
+            {
+                Container.ComponentRegistry
+                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
+                        .InstancePerLifetimeScope().CreateRegistration());
+
+            }
+            else
+            {
+                Container.ComponentRegistry
+                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
+                        .As(new KeyedService(key, typeof(T)))
+                        .InstancePerLifetimeScope().CreateRegistration());
+            }
+            return Resolve<T>();
         }
 
         public T Resolve<T>(string key = null) where T : class
@@ -79,25 +92,6 @@ namespace Specify.Examples.Autofac
             }
         }
 
-        public T Register<T>(T valueToSet, string key = null) where T : class
-        {
-            if (key == null)
-            {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .InstancePerLifetimeScope().CreateRegistration());
-
-            }
-            else
-            {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .As(new KeyedService(key, typeof(T)))
-                        .InstancePerLifetimeScope().CreateRegistration());
-            }
-            return Resolve<T>();
-        }
-
         public bool CanResolve<T>() where T : class
         {
             return CanResolve(typeof(T));
@@ -108,9 +102,14 @@ namespace Specify.Examples.Autofac
             return Container.IsRegistered(type);
         }
 
-        public IContainer CreateChildContainer()
+        public Containers.IContainer CreateChildContainer()
         {
             return new AutofacContainer(Container.BeginLifetimeScope());
+        }
+        
+        public void Dispose()
+        {
+            Container.Dispose();
         }
     }
 }

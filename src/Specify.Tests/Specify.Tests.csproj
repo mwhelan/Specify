@@ -34,6 +34,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute, Version=1.8.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
@@ -66,7 +70,7 @@
     <Compile Include="Configuration\TestRunnerTests.cs" />
     <Compile Include="Containers\DefaultContainerTests.cs" />
     <Compile Include="Containers\SpecificationContextIntegrationTests.cs" />
-    <Compile Include="Containers\SpecificationContextWithDefaultContainerTests.cs" />
+    <Compile Include="Containers\SpecificationContext_AutofacContainer_IntegrationTests.cs" />
     <Compile Include="Containers\SpecificationContextTests.cs" />
     <Compile Include="Containers\SpecificationContext_DefaultContainer_IntegrationTests.cs" />
     <Compile Include="SpecifyExtensionTests.cs" />
