@@ -65,7 +65,7 @@
     <Compile Include="Stories\Story.cs" />
     <Compile Include="Stories\UserStory.cs" />
     <Compile Include="Stories\ValueStory.cs" />
-    <Compile Include="TinyIoC.cs" />
+    <Compile Include="lib\TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

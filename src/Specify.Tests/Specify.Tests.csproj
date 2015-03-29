@@ -70,9 +70,12 @@
     <Compile Include="Configuration\TestRunnerTests.cs" />
     <Compile Include="Containers\DefaultContainerTests.cs" />
     <Compile Include="Containers\SpecificationContextIntegrationTests.cs" />
-    <Compile Include="Containers\SpecificationContext_AutofacContainer_IntegrationTests.cs" />
+    <Compile Include="Examples\SpecificationContext_AutofacContainer_IntegrationTests.cs" />
     <Compile Include="Containers\SpecificationContextTests.cs" />
     <Compile Include="Containers\SpecificationContext_DefaultContainer_IntegrationTests.cs" />
+    <Compile Include="Examples\SpecificationContext_AutofacFakeItEasyContainer_IntegrationTests.cs" />
+    <Compile Include="Examples\SpecificationContext_AutofacMoqContainer_IntegrationTests.cs" />
+    <Compile Include="Examples\SpecificationContext_AutofacNSubstituteContainer_IntegrationTests.cs" />
     <Compile Include="SpecifyExtensionTests.cs" />
     <Compile Include="Stories\UserStoryTests.cs" />
     <Compile Include="Stories\ValueStoryTests.cs" />
@@ -105,9 +108,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Examples\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

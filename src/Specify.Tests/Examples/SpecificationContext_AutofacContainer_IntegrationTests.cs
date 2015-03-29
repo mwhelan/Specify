@@ -2,8 +2,9 @@
 using Autofac.Features.ResolveAnything;
 using Specify.Containers;
 using Specify.Examples.Autofac;
+using Specify.Tests.Containers;
 
-namespace Specify.Tests.Containers
+namespace Specify.Tests.Examples
 {
     public class SpecificationContext_AutofacContainer_IntegrationTests : SpecificationContextIntegrationTests
     {
