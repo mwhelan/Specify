@@ -34,8 +34,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Fixie">
-      <HintPath>..\..\..\packages\Fixie.1.0.0.3\lib\net45\Fixie.dll</HintPath>
+    <Reference Include="Fixie, Version=1.0.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Fixie.1.0.0.15\lib\net45\Fixie.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions, Version=3.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

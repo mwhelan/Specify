@@ -1,5 +1,4 @@
-﻿using Specify;
-using Specify.Configuration;
+﻿using Specify.Configuration;
 using Specify.Containers;
 using Specify.Examples.Autofac;
 

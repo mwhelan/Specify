@@ -11,7 +11,7 @@ namespace ContosoUniversity.UnitTests
                 .Where(type => type.IsSpecificationFor() || type.IsScenarioFor());
 
             Methods
-                .Where(method => method.Name == "ExecuteTest");
+                .Where(method => method.Name == "Specify");
         }
     }
 }
