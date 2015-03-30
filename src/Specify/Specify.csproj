@@ -53,7 +53,7 @@
     <Compile Include="Containers\ContainerAdapter.cs" />
     <Compile Include="Containers\DefaultContainer.cs" />
     <Compile Include="Containers\IContainer.cs" />
-    <Compile Include="Containers\SpecificationContext.cs" />
+    <Compile Include="Containers\SutFactory.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="lib\AssemblyTypeResolver.cs" />

@@ -2,13 +2,13 @@ using System;
 
 namespace Specify.Containers
 {
-    public class SpecificationContext<TSut> : IDisposable 
+    public class SutFactory<TSut> : IDisposable 
         where TSut : class
     {
         private readonly IContainer _sourceContainer;
         private TSut _systemUnderTest;
 
-        public SpecificationContext(IContainer sourceContainer)
+        public SutFactory(IContainer sourceContainer)
         {
             _sourceContainer = sourceContainer;
         }

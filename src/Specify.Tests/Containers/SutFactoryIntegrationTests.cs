@@ -7,9 +7,9 @@ using Specify.Tests.Stubs;
 namespace Specify.Tests.Containers
 {
     [TestFixture]
-    public abstract class SpecificationContextIntegrationTests
+    public abstract class SutFactoryIntegrationTests
     {
-        protected abstract SpecificationContext<T> CreateSut<T>() where T : class;
+        protected abstract SutFactory<T> CreateSut<T>() where T : class;
 
         [Test]
         public void should_use_container_to_create_sut()

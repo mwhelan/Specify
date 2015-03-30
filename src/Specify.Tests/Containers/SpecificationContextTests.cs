@@ -135,9 +135,9 @@ namespace Specify.Tests.Containers
             sut.SourceContainer.Received().Dispose();
         }
 
-        private SpecificationContext<T> CreateSut<T>() where T : class
+        private SutFactory<T> CreateSut<T>() where T : class
         {
-            return new SpecificationContext<T>(Substitute.For<IContainer>());
+            return new SutFactory<T>(Substitute.For<IContainer>());
         }
     }
 }

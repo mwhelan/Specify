@@ -51,7 +51,7 @@ namespace Specify.Tests.Containers
         [Test]
         public void RegisterService_should_register_singleton_lifetime()
         {
-            var sut = new SpecificationContext<ConcreteObjectWithMultipleConstructors>(new DefaultContainer());
+            var sut = new SutFactory<ConcreteObjectWithMultipleConstructors>(new DefaultContainer());
             sut.Register<IDependency2, Dependency2>();
             sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
         }

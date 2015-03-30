@@ -7,17 +7,17 @@ using TestStack.BDDfy.Configuration;
 
 namespace Specify
 {
-    public abstract class SpecificationFor<TSubject> 
-        : SpecificationFor<TSubject, SpecificationStory> where TSubject : class { }
+    public abstract class SpecificationFor<TSut>
+        : SpecificationFor<TSut, SpecificationStory> where TSut : class { }
 
-    public abstract class SpecificationFor<TSubject, TStory> : ISpecification
-        where TSubject : class
+    public abstract class SpecificationFor<TSut, TStory> : ISpecification
+        where TSut : class
         where TStory : Stories.Story, new()
     {
-        public SpecificationContext<TSubject> Container { get; internal set; }
+        public SutFactory<TSut> Container { get; internal set; }
         public ExampleTable Examples { get; set; }
 
-        public TSubject SUT
+        public TSut SUT
         {
             get { return Container.SystemUnderTest; }
             set { Container.SystemUnderTest = value; }
@@ -34,7 +34,7 @@ namespace Specify
             {
                 if (Story.Name == "SpecificationStory")
                 {
-                    return typeof (TSubject).Name;
+                    return typeof(TSut).Name;
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace Specify
 
         public virtual void SetContainer(IContainer container)
         {
-            Container = new SpecificationContext<TSubject>(container);
+            Container = new SutFactory<TSut>(container);
         }
 
         public virtual void Specify()

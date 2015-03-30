@@ -8,7 +8,7 @@ namespace Specify.Tests.Stubs
 
         public TestableScenarioFor()
         {
-           // Context = new SpecificationContext<TSut>(Substitute.For<ITestLifetimeScope>());
+           // Context = new SutFactory<TSut>(Substitute.For<ITestLifetimeScope>());
         }
         public List<string> Steps
         {

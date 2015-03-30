@@ -115,20 +115,20 @@ namespace Specify.Tests
         [Test]
         public void scenario_title_should_be_class_name_only_if_scenario_is_zero()
         {
-            var container = new SpecificationContext<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
             var sut = new ScenarioWithAllSupportedStepsInRandomOrder {Container = container};
             sut.Title.ShouldBe("Scenario With All Supported Steps In Random Order");
         }
         [Test]
         public void scenario_title_should_be_number_and_class_name_if_number_greater_than_zero()
         {
-            var container = new SpecificationContext<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
             var sut = new ScenarioWithAllSupportedStepsInRandomOrder {Container = container, Number = 3};
             sut.Title.ShouldBe("Scenario 03: Scenario With All Supported Steps In Random Order");
         }
         private static SpecWithAllSupportedStepsInRandomOrder CreateSut()
         {
-            var container = new SpecificationContext<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
             var sut = new SpecWithAllSupportedStepsInRandomOrder { Container = container };
             return sut;
         }
@@ -151,9 +151,9 @@ namespace Specify.Tests
             sut.SourceContainer.Received().Dispose();
         }
 
-        private SpecificationContext<T> CreateSut<T>() where T : class
+        private SutFactory<T> CreateSut<T>() where T : class
         {
-            return new SpecificationContext<T>(Substitute.For<IContainer>());
+            return new SutFactory<T>(Substitute.For<IContainer>());
         }
     }
 

@@ -6,14 +6,14 @@ using Specify.Tests.Containers;
 
 namespace Specify.Tests.Examples
 {
-    public class SpecificationContext_AutofacContainer_IntegrationTests : SpecificationContextIntegrationTests
+    public class SutFactoryAutofacContainerIntegrationTests : SutFactoryIntegrationTests
     {
-        protected override SpecificationContext<T> CreateSut<T>()
+        protected override SutFactory<T> CreateSut<T>()
         {
             var builder = new ContainerBuilder();
             builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
             var container = new AutofacContainer(builder);
-            return new SpecificationContext<T>(container);
+            return new SutFactory<T>(container);
         }
     }
 }
