@@ -12,7 +12,7 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_call_per_test_actions_before_test()
         {
-            var spec = new ScenarioWithAllSupportedStepsInRandomOrder();
+            var spec = new UserStoryScenarioWithAllSupportedStepsInRandomOrder();
             var sut = CreateSut(spec);
 
             sut.Execute(spec);
@@ -25,7 +25,7 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_call_per_test_actions_after_test()
         {
-            var spec = new ScenarioWithAllSupportedStepsInRandomOrder();
+            var spec = new UserStoryScenarioWithAllSupportedStepsInRandomOrder();
             var sut = CreateSut(spec);
 
             sut.Execute(spec);
@@ -38,7 +38,7 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_create_and_dispose_child_container_per_test()
         {
-            var spec = new ScenarioWithAllSupportedStepsInRandomOrder();
+            var spec = new UserStoryScenarioWithAllSupportedStepsInRandomOrder();
             var sut = CreateSut(spec);
 
             sut.Execute(spec);
@@ -50,15 +50,15 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_resolve_specification_from_container()
         {
-            var spec = new ScenarioWithAllSupportedStepsInRandomOrder();
+            var spec = new UserStoryScenarioWithAllSupportedStepsInRandomOrder();
             var sut = CreateSut(spec);
 
             sut.Execute(spec);
 
-            sut.Container.Received(1).Resolve(typeof(ScenarioWithAllSupportedStepsInRandomOrder));
+            sut.Container.Received(1).Resolve(typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder));
         }
 
-        private static TestableTestRunner CreateSut(ISpecification spec)
+        private static TestableTestRunner CreateSut(IScenario spec)
         {
             return new TestableTestRunner(spec);
         }

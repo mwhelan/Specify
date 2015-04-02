@@ -8,98 +8,98 @@ namespace Specify.Tests
     public class SpecifyExtensionTests
     {
         [Test]
-        public void Specification_instance_should_return_true_if_SpecificationFor()
+        public void UnitScenario_instance_should_return_true_if_UnitScenario()
         {
-            new StubSpecificationFor()
-                .IsSpecificationFor()
+            new StubUnitScenario()
+                .IsUnitScenario()
                 .ShouldBe(true);
         }
 
         [Test]
-        public void Specification_type_should_return_true_if_SpecificationFor()
+        public void UnitScenario_type_should_return_true_if_UnitScenario()
         {
-            typeof(StubSpecificationFor)
-                .IsSpecificationFor()
+            typeof(StubUnitScenario)
+                .IsUnitScenario()
                 .ShouldBe(true);
         }
 
         [Test]
-        public void Scenario_instance_should_return_false_if_not_SpecificationFor()
+        public void StoryScenario_instance_should_return_false_if_not_UnitScenario()
         {
-            new StubScenarioFor()
-                .IsSpecificationFor()
+            new StubUserStoryScenario()
+                .IsUnitScenario()
                 .ShouldBe(false);;
         }
 
         [Test]
-        public void Scenario_type_should_return_false_if_not_SpecificationFor()
+        public void StoryScenario_type_should_return_false_if_not_UnitScenario()
         {
-            typeof (StubScenarioFor)
-                .IsSpecificationFor()
+            typeof (StubUserStoryScenario)
+                .IsUnitScenario()
                 .ShouldBe(false);
         }
 
         [Test]
-        public void NonSpecification_type_should_return_false_if_not_Specification()
+        public void NonScenario_type_should_return_false_if_not_UnitScenario()
         {
             typeof(Dependency1)
-                .IsSpecificationFor()
+                .IsUnitScenario()
                 .ShouldBe(false);
         }
 
         [Test]
-        public void Scenario_instance_should_return_true_if_ScenarioFor()
+        public void StoryScenario_instance_should_return_true_if_StoryScenario()
         {
-            new StubScenarioFor()
-                .IsScenarioFor()
+            new StubUserStoryScenario()
+                .IsStoryScenario()
                 .ShouldBe(true);
         }
 
         [Test]
-        public void Scenario_type_should_return_true_if_ScenarioFor()
+        public void StoryScenario_type_should_return_true_if_StoryScenario()
         {
-            new StubScenarioFor()
-                .IsScenarioFor()
+            new StubUserStoryScenario()
+                .IsStoryScenario()
                 .ShouldBe(true);
         }
 
         [Test]
-        public void Scenario_instance_should_return_false_if__not_ScenarioFor()
+        public void StoryScenario_instance_should_return_false_if_not_StoryScenario()
         {
-            new StubSpecificationFor()
-                .IsScenarioFor()
+            new StubUnitScenario()
+                .IsStoryScenario()
                 .ShouldBe(false);;
         }
 
         [Test]
-        public void Scenario_type_should_return_false_if__not_ScenarioFor()
+        public void StoryScenario_type_should_return_false_if__not_StoryScenario()
         {
-            typeof (StubSpecificationFor)
-                .IsScenarioFor()
+            typeof (StubUnitScenario)
+                .IsStoryScenario()
                 .ShouldBe(false);
         }
 
         [Test]
-        public void NonSpecification_type_should_return_false_if_not_Scenario()
+        public void NonScenario_type_should_return_false_if_not_StoryScenario()
         {
             typeof(Dependency1)
-                .IsScenarioFor()
+                .IsStoryScenario()
                 .ShouldBe(false);
         }
 
         [Test]
-        public void Nested_scenario_instance_should_return_false_if__not_ScenarioFor()
+        public void Nested_StoryScenario_instance_should_return_true_if_StoryScenario()
         {
-            new ScenarioWithAllSupportedStepsInRandomOrder()
-                .IsScenarioFor()
+            new UserStoryScenarioWithAllSupportedStepsInRandomOrder()
+                .IsStoryScenario()
                 .ShouldBe(true); ;
         }
 
         [Test]
-        public void Nested_scenario_type_should_return_false_if__not_ScenarioFor()
+        public void Nested_StoryScenario_type_should_return_true_if_StoryScenario()
         {
-            typeof(ScenarioWithAllSupportedStepsInRandomOrder)
-                .IsScenarioFor()
+            typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder)
+                .IsStoryScenario()
                 .ShouldBe(true); ;
         }
     }

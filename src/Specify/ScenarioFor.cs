@@ -7,10 +7,10 @@ using TestStack.BDDfy.Configuration;
 
 namespace Specify
 {
-    public abstract class SpecificationFor<TSut>
-        : SpecificationFor<TSut, SpecificationStory> where TSut : class { }
+    public abstract class ScenarioFor<TSut>
+        : ScenarioFor<TSut, SpecificationStory> where TSut : class { }
 
-    public abstract class SpecificationFor<TSut, TStory> : ISpecification
+    public abstract class ScenarioFor<TSut, TStory> : IScenario
         where TSut : class
         where TStory : Stories.Story, new()
     {

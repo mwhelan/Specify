@@ -8,7 +8,7 @@ namespace ContosoUniversity.UnitTests
         public FixieSpecifyConvention()
         {
             Classes
-                .Where(type => type.IsSpecificationFor() || type.IsScenarioFor());
+                .Where(type => type.IsUnitScenario() || type.IsStoryScenario());
 
             Methods
                 .Where(method => method.Name == "Specify");

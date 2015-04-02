@@ -9,7 +9,7 @@ using Specify;
 
 namespace ContosoUniversity.UnitTests.Controllers
 {
-    public class DetailsForExistingStudent : SpecificationFor<StudentController>
+    public class DetailsForExistingStudent : ScenarioFor<StudentController>
     {
         ViewResult _result;
         private Student _student = new Student {ID = 1};
@@ -36,7 +36,7 @@ namespace ContosoUniversity.UnitTests.Controllers
         }
     }
 
-    public class DetailsForNonExistentStudent : SpecificationFor<StudentController>
+    public class DetailsForNonExistentStudent : ScenarioFor<StudentController>
     {
         ActionResult _result;
 
@@ -58,7 +58,7 @@ namespace ContosoUniversity.UnitTests.Controllers
         }
     }
 
-    public class DetailsForNoId : SpecificationFor<StudentController>
+    public class DetailsForNoId : ScenarioFor<StudentController>
     {
         ActionResult _result;
 

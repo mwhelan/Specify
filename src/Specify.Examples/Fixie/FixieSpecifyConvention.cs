@@ -7,7 +7,7 @@ namespace Specify.Examples.Fixie
         public FixieSpecifyConvention()
         {
             Classes
-                .Where(type => type.IsSpecificationFor() || type.IsScenarioFor());
+                .Where(type => type.IsUnitScenario() || type.IsStoryScenario());
 
             Methods
                 .Where(method => method.Name == "ExecuteTest");

@@ -1,9 +1,9 @@
 namespace Specify.Tests.Stubs
 {
-    internal class SpecWithAllSupportedStepsInRandomOrder 
-        : TestableSpecification<ConcreteObjectWithNoConstructor>
+    internal class UnitScenarioWithAllSupportedStepsInRandomOrder 
+        : TestableUnitScenario<ConcreteObjectWithNoConstructor>
     {
-        public SpecWithAllSupportedStepsInRandomOrder()
+        public UnitScenarioWithAllSupportedStepsInRandomOrder()
         {
             Steps.Add("Constructor");
         }

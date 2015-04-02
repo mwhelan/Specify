@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Specify.Examples.Xunit
 {
-    public abstract class SpecificationFor<TSut, TStory> : Specify.SpecificationFor<TSut, TStory>
+    public abstract class ScenarioFor<TSut, TStory> : Specify.ScenarioFor<TSut, TStory>
         where TSut : class
         where TStory : Story, new()
     {
@@ -14,7 +14,7 @@ namespace Specify.Examples.Xunit
         }
     }
 
-    public abstract class SpecificationFor<TSut> : Specify.SpecificationFor<TSut>
+    public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut>
         where TSut : class
     {
         [Fact]

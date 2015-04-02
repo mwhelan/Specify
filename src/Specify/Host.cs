@@ -13,7 +13,7 @@ namespace Specify
         private static readonly IContainer _container;
         private static readonly TestRunner _testRunner;
 
-        public static void Specify(ISpecification testObject, string scenarioTitle = null)
+        public static void Specify(IScenario testObject, string scenarioTitle = null)
         {
             _testRunner.Execute(testObject, scenarioTitle);
         }

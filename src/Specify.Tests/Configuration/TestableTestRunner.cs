@@ -7,9 +7,9 @@ namespace Specify.Tests.Configuration
 {
     internal class TestableTestRunner : TestRunner
     {
-        private readonly ISpecification _specification;
+        private readonly IScenario _specification;
 
-        public TestableTestRunner(ISpecification specification)
+        public TestableTestRunner(IScenario specification)
             : base(new StubConfig(), Substitute.For<IContainer>(),
             Substitute.For<ITestEngine>())
         {

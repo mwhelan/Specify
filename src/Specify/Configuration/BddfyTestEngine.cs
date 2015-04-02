@@ -4,17 +4,17 @@ namespace Specify.Configuration
 {
     internal class BddfyTestEngine : ITestEngine
     {
-        public void Execute(ISpecification specification)
+        public void Execute(IScenario scenario)
         {
-            if (specification.Examples == null)
+            if (scenario.Examples == null)
             {
-                specification
+                scenario
                     .BDDfy();
             }
             else
             {
-                specification
-                    .WithExamples(specification.Examples)
+                scenario
+                    .WithExamples(scenario.Examples)
                     .BDDfy();
             }
         }

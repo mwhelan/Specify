@@ -12,7 +12,7 @@ namespace Specify.Tests.Configuration
         public void should_handle_specification_with_examples()
         {
             var examples = new ExampleTable();
-            var spec = Substitute.For<ISpecification>();
+            var spec = Substitute.For<IScenario>();
             spec.Examples.Returns(examples);
             var sut = new BddfyTestEngine();
 
@@ -24,7 +24,7 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_handle_specification_without_examples()
         {
-            var spec = Substitute.For<ISpecification>();
+            var spec = Substitute.For<IScenario>();
             var sut = new BddfyTestEngine();
 
             sut.Execute(spec);

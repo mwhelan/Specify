@@ -13,16 +13,16 @@ namespace Specify.Examples.Autofac
         {
             var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
             builder.RegisterAssemblyTypes(assemblies)
-                .AsClosedTypesOf(typeof(SpecificationFor<>));
+                .AsClosedTypesOf(typeof(ScenarioFor<>));
             builder.RegisterAssemblyTypes(assemblies)
-                .AsClosedTypesOf(typeof(SpecificationFor<,>));
+                .AsClosedTypesOf(typeof(ScenarioFor<,>));
         }
 
         public virtual IEnumerable<Type> ScanForSpecificationTypes()
         {
             return AssemblyTypeResolver
                 .GetAllTypesFromAppDomain()
-                .Where(t => typeof(ISpecification).IsAssignableFrom(t));
+                .Where(t => typeof(IScenario).IsAssignableFrom(t));
         }
 
     }

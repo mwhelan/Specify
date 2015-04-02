@@ -70,8 +70,8 @@
     <Compile Include="Configuration\TestRunnerTests.cs" />
     <Compile Include="Containers\DefaultContainerTests.cs" />
     <Compile Include="Containers\SutFactoryIntegrationTests.cs" />
+    <Compile Include="Containers\SutFactoryTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacContainerIntegrationTests.cs" />
-    <Compile Include="Containers\SpecificationContextTests.cs" />
     <Compile Include="Containers\SutFactoryDefaultContainerIntegrationTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacFakeItEasyContainerIntegrationTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacMoqContainerIntegrationTests.cs" />
@@ -80,13 +80,13 @@
     <Compile Include="Stories\UserStoryTests.cs" />
     <Compile Include="Stories\ValueStoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecificationForTests.cs" />
+    <Compile Include="ScenarioForTests.cs" />
     <Compile Include="Stubs\AutoMockingStubs.cs" />
-    <Compile Include="Stubs\ScenarioWithAllSupportedStepsInRandomOrder.cs" />
+    <Compile Include="Stubs\UserStoryScenarioWithAllSupportedStepsInRandomOrder.cs" />
     <Compile Include="Stubs\Specifications.cs" />
-    <Compile Include="Stubs\SpecWithAllSupportedStepsInRandomOrder.cs" />
-    <Compile Include="Stubs\TestableScenarioFor.cs" />
-    <Compile Include="Stubs\TestableSpecification.cs" />
+    <Compile Include="Stubs\UnitScenarioWithAllSupportedStepsInRandomOrder.cs" />
+    <Compile Include="Stubs\TestableUserStoryScenario.cs" />
+    <Compile Include="Stubs\TestableUnitScenario.cs" />
     <Compile Include="Stubs\UserStories.cs" />
   </ItemGroup>
   <ItemGroup>

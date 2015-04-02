@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Specify.Stories;
 
 namespace Specify
 {
     public static class SpecifyExtensions
     {
-        public static bool IsScenarioFor(this Type type)
+        public static bool IsStoryScenario(this Type type)
         {
-            if (!type.CanBeCastTo<ISpecification>())
+            if (!type.CanBeCastTo<IScenario>())
                 return false;
-            return !type.IsSpecificationFor();
+            return !type.IsUnitScenario();
         }
 
-        internal static bool IsScenarioFor(this ISpecification specification)
+        internal static bool IsStoryScenario(this IScenario specification)
         {
             return specification.Story.Name != "SpecificationStory";
         }
 
-        public static bool IsSpecificationFor(this Type type)
+        public static bool IsUnitScenario(this Type type)
         {
-            if (!type.CanBeCastTo<ISpecification>())
+            if (!type.CanBeCastTo<IScenario>())
                 return false;
             while (true)
             {
@@ -41,29 +40,10 @@ namespace Specify
             }
         }
 
-        internal static bool IsSpecificationFor(this ISpecification specification)
+        internal static bool IsUnitScenario(this IScenario specification)
         {
             return specification.Story.Name == "SpecificationStory";
         }
-
-        //private static bool IsAssignableToGenericType(this Type givenType, Type genericType)
-        //{
-        //    var interfaceTypes = givenType.GetInterfaces();
-
-        //    foreach (var type in interfaceTypes)
-        //    {
-        //        if (type.IsGenericType && type.GetGenericTypeDefinition() == genericType)
-        //            return true;
-        //    }
-
-        //    if (givenType.IsGenericType && givenType.GetGenericTypeDefinition() == genericType)
-        //        return true;
-
-        //    Type baseType = givenType.BaseType;
-        //    if (baseType == null) return false;
-
-        //    return IsAssignableToGenericType(baseType, genericType);
-        //}
 
         private static bool CanBeCastTo<T>(this Type type)
         {

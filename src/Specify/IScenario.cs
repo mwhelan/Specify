@@ -4,7 +4,7 @@ using TestStack.BDDfy;
 
 namespace Specify
 {
-    public interface ISpecification
+    public interface IScenario
     {
         void Specify();
         ExampleTable Examples { get; set; }

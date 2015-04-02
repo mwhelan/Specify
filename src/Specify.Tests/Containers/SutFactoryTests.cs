@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
@@ -8,7 +8,7 @@ using Specify.Tests.Stubs;
 namespace Specify.Tests.Containers
 {
     [TestFixture]
-    public class SpecificationContextTests
+    public class SutFactoryTests
     {
         [Test]
         public void should_use_container_to_create_sut()
@@ -63,7 +63,7 @@ namespace Specify.Tests.Containers
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Register<IDependency1, Dependency1>();
-            sut.SourceContainer.Received().Register<IDependency1,Dependency1>();
+            sut.SourceContainer.Received().Register<IDependency1, Dependency1>();
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace Specify.Tests.Containers
             var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
 
             sut.Register(instance);
-            
+
             sut.SourceContainer.Received().Register(instance);
         }
 

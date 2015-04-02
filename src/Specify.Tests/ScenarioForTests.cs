@@ -9,7 +9,7 @@ using TestStack.BDDfy;
 namespace Specify.Tests
 {
     [TestFixture]
-    public class SpecificationForTests
+    public class ScenarioForTests
     {
         [Test]
         public void specification_step_order_should_follow_standard_BDDfy_conventions()
@@ -116,45 +116,21 @@ namespace Specify.Tests
         public void scenario_title_should_be_class_name_only_if_scenario_is_zero()
         {
             var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
-            var sut = new ScenarioWithAllSupportedStepsInRandomOrder {Container = container};
-            sut.Title.ShouldBe("Scenario With All Supported Steps In Random Order");
+            var sut = new UserStoryScenarioWithAllSupportedStepsInRandomOrder {Container = container};
+            sut.Title.ShouldBe("User Story Scenario With All Supported Steps In Random Order");
         }
         [Test]
         public void scenario_title_should_be_number_and_class_name_if_number_greater_than_zero()
         {
             var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
-            var sut = new ScenarioWithAllSupportedStepsInRandomOrder {Container = container, Number = 3};
-            sut.Title.ShouldBe("Scenario 03: Scenario With All Supported Steps In Random Order");
+            var sut = new UserStoryScenarioWithAllSupportedStepsInRandomOrder {Container = container, Number = 3};
+            sut.Title.ShouldBe("Scenario 03: User Story Scenario With All Supported Steps In Random Order");
         }
-        private static SpecWithAllSupportedStepsInRandomOrder CreateSut()
+        private static UnitScenarioWithAllSupportedStepsInRandomOrder CreateSut()
         {
             var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
-            var sut = new SpecWithAllSupportedStepsInRandomOrder { Container = container };
+            var sut = new UnitScenarioWithAllSupportedStepsInRandomOrder { Container = container };
             return sut;
         }
     }
-    public class SutFactoryTests
-    {
-        [Test]
-        public void IsRegistered_should_call_container_IsRegistered()
-        {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
-            sut.SourceContainer.Received().CanResolve(typeof(ConcreteObjectWithNoConstructor));
-        }
-
-        [Test]
-        public void should_dispose_container_when_disposed()
-        {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.Dispose();
-            sut.SourceContainer.Received().Dispose();
-        }
-
-        private SutFactory<T> CreateSut<T>() where T : class
-        {
-            return new SutFactory<T>(Substitute.For<IContainer>());
-        }
-    }
-
 }

@@ -9,16 +9,16 @@ namespace Specify.Configuration
     {
         public virtual StoryMetadata Scan(object testObject, Type explicityStoryType = null)
         {
-            var specification = testObject as ISpecification;
-            if (specification == null)
+            var scenario = testObject as IScenario;
+            if (scenario == null)
                 return null;
 
-            return specification.IsScenarioFor() 
-                ? CreateScenarioMetadata(specification) 
-                : CreateSpecificationMetadata(specification);
+            return scenario.IsStoryScenario() 
+                ? CreateScenarioMetadata(scenario) 
+                : CreateSpecificationMetadata(scenario);
         }
 
-        private StoryMetadata CreateScenarioMetadata(ISpecification scenario)
+        private StoryMetadata CreateScenarioMetadata(IScenario scenario)
         {
             var storyAttribute = (StoryNarrativeAttribute)scenario.GetType()
                 .GetCustomAttributes(typeof(StoryNarrativeAttribute), true)
@@ -34,7 +34,7 @@ namespace Specify.Configuration
                 story.Narrative3, scenario.Title, story.TitlePrefix);
         }
 
-        private StoryMetadata CreateSpecificationMetadata(ISpecification specification)
+        private StoryMetadata CreateSpecificationMetadata(IScenario specification)
         {
             var story = (Story)Activator.CreateInstance(specification.Story);
             var storyAttribute = new StoryAttribute() { Title = specification.Title, TitlePrefix = story.TitlePrefix };

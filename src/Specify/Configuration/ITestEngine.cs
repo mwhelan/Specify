@@ -2,6 +2,6 @@ namespace Specify.Configuration
 {
     public interface ITestEngine
     {
-        void Execute(ISpecification specification);
+        void Execute(IScenario scenario);
     }
 }

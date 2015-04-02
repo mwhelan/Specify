@@ -17,7 +17,7 @@ namespace Specify.Configuration
             _testEngine = testEngine;
         }
 
-        public void Execute(ISpecification testObject, string scenarioTitle = null)
+        public void Execute(IScenario testObject, string scenarioTitle = null)
         {
             foreach (var action in _configuration.PerTestActions)
             {
@@ -26,9 +26,9 @@ namespace Specify.Configuration
 
             using (var lifetimeScope = _container.CreateChildContainer())
             {
-                var specification = (ISpecification)_container.Resolve(testObject.GetType());
-                specification.SetContainer(lifetimeScope);
-                _testEngine.Execute(specification);
+                var scenario = (IScenario)_container.Resolve(testObject.GetType());
+                scenario.SetContainer(lifetimeScope);
+                _testEngine.Execute(scenario);
             }
 
             foreach (var action in _configuration.PerTestActions.AsEnumerable().Reverse())
