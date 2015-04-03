@@ -43,6 +43,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\LoggingProcessor.cs" />
+    <Compile Include="lib\LibLog.cs" />
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\ITestRunnerAction.cs" />

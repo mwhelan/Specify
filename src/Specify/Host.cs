@@ -46,6 +46,10 @@ namespace Specify
                 : new SpecifyConfiguration();
 
             Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
+            if (config.LoggingEnabled)
+            {
+                Configurator.Processors.Add(() => new LoggingProcessor());
+            }
 
             return config;
         }

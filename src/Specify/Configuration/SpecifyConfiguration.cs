@@ -8,10 +8,13 @@ namespace Specify.Configuration
         public List<ITestRunnerAction> PerAppDomainActions { get; private set; }
         public List<ITestRunnerAction> PerTestActions { get; private set; }
 
+        public bool LoggingEnabled { get; set; }
+
         public SpecifyConfiguration()
         {
             PerAppDomainActions = new List<ITestRunnerAction>();
             PerTestActions = new List<ITestRunnerAction>();
+            LoggingEnabled = false;
         }
 
         public virtual IContainer GetSpecifyContainer()
