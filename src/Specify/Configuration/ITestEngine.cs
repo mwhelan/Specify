@@ -1,7 +1,9 @@
+using TestStack.BDDfy;
+
 namespace Specify.Configuration
 {
     public interface ITestEngine
     {
-        void Execute(IScenario scenario);
+        Story Execute(IScenario scenario);
     }
 }

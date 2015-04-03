@@ -1,7 +1,11 @@
-﻿using NSubstitute;
+﻿using ApprovalTests;
+using ApprovalTests.Reporters;
+using NSubstitute;
 using NUnit.Framework;
 using Specify.Configuration;
+using Specify.Tests.Stubs;
 using TestStack.BDDfy;
+using TestStack.BDDfy.Reporters;
 
 namespace Specify.Tests.Configuration
 {
@@ -30,6 +34,20 @@ namespace Specify.Tests.Configuration
             sut.Execute(spec);
 
             spec.Received().BDDfy();
+        }
+
+        [Test]
+        [UseReporter(typeof(DiffReporter))]
+        public void should_display_examples_on_reports()
+        {
+            var scenario = new StubUserStoryScenarioForWithExamples();
+            var sut = new BddfyTestEngine();
+
+            var story = sut.Execute(scenario);
+
+            var reporter = new TextReporter();
+            reporter.Process(story);
+            Approvals.Verify(reporter.ToString());
         }
     }
 }

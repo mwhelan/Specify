@@ -36,16 +36,13 @@ namespace Specify
                 {
                     return typeof(TSut).Name;
                 }
-                else
+                var title = Configurator.Scanners.Humanize(GetType().Name);
+                title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title);
+                if (Number != 0)
                 {
-                    var title = Configurator.Scanners.Humanize(GetType().Name);
-                    title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title);
-                    if (Number != 0)
-                    {
-                        title = string.Format("Scenario {0}: {1}", Number.ToString("00"), title);
-                    }
-                    return title;
+                    title = string.Format("Scenario {0}: {1}", Number.ToString("00"), title);
                 }
+                return title;
             }
         }
 

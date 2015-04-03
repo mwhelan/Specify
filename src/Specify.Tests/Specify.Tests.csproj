@@ -98,7 +98,7 @@
     <Compile Include="ScenarioForTests.cs" />
     <Compile Include="Stubs\AutoMockingStubs.cs" />
     <Compile Include="Stubs\UserStoryScenarioWithAllSupportedStepsInRandomOrder.cs" />
-    <Compile Include="Stubs\Specifications.cs" />
+    <Compile Include="Stubs\Scenarios.cs" />
     <Compile Include="Stubs\UnitScenarioWithAllSupportedStepsInRandomOrder.cs" />
     <Compile Include="Stubs\TestableUserStoryScenario.cs" />
     <Compile Include="Stubs\TestableUnitScenario.cs" />
