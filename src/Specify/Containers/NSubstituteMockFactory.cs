@@ -9,10 +9,10 @@ namespace Specify.Containers
 
         public NSubstituteMockFactory()
         {
-            var nsubAssembly = Assembly.Load("NSubstitute");
-            _mockOpenType = nsubAssembly.GetType("NSubstitute.Substitute");
+            var assembly = Assembly.Load("NSubstitute");
+            _mockOpenType = assembly.GetType("NSubstitute.Substitute");
             if (_mockOpenType == null)
-                throw new InvalidOperationException("Unable to find Type NSubstitute.Substitute in assembly " + nsubAssembly.Location);
+                throw new InvalidOperationException("Unable to find Type NSubstitute.Substitute in assembly " + assembly.Location);
         }
 
         public object CreateMock(Type type)
@@ -20,17 +20,18 @@ namespace Specify.Containers
             var methods = _mockOpenType.GetMethods();
             foreach (var method in methods)
             {
-                if (method.ContainsGenericParameters && method.GetGenericArguments().Length == 1)
+                if (IsGenericForMethod(method))
                 {
-                    var generic = method.MakeGenericMethod(type);
-                    if (generic == null)
-                        throw new InvalidOperationException(
-                            "Unable to find method For<>() on NSubstitute.Substitute.");
-                    return generic.Invoke(null, new object[1] { null });
+                    var closedGenericForMethod = method.MakeGenericMethod(type);
+                    return closedGenericForMethod.Invoke(null, new object[1] { null });
                 }
             }
             return null;
         }
 
+        private static bool IsGenericForMethod(MethodInfo method)
+        {
+            return method.ContainsGenericParameters && method.GetGenericArguments().Length == 1;
+        }
     }
 }

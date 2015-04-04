@@ -14,3 +14,7 @@
 //        }
 //    }
 //}
+
+namespace Specify.Tests.Containers.SutFactory
+{
+}

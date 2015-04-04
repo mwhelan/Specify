@@ -5,7 +5,7 @@ using Shouldly;
 using Specify.Containers;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Containers
+namespace Specify.Tests.Containers.SutFactory
 {
     [TestFixture]
     public class SutFactoryTests

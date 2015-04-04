@@ -50,6 +50,7 @@
     <Compile Include="Containers\AutofacContainer.cs" />
     <Compile Include="Containers\AutofacMockRegistrationHandler.cs" />
     <Compile Include="Containers\AutoMockingContainer.cs" />
+    <Compile Include="Containers\FakeItEasyMockFactory.cs" />
     <Compile Include="Containers\MoqMockFactory.cs" />
     <Compile Include="Containers\NSubstituteMockFactory.cs" />
     <Compile Include="Containers\IMockFactory.cs" />

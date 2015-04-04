@@ -1,6 +1,6 @@
 ﻿using Specify.Containers;
 
-namespace Specify.Tests.Containers
+namespace Specify.Tests.Containers.SutFactory
 {
     public class SutFactoryAutoMockingContainerIntegrationTests : SutFactoryIntegrationTests
     {

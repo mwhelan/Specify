@@ -1,5 +1,6 @@
 using Specify.Containers;
 using Specify.Tests.Containers;
+using Specify.Tests.Containers.SutFactory;
 
 namespace Specify.Tests.Examples
 {
