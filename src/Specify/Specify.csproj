@@ -34,6 +34,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\LoggingProcessor.cs" />
+    <Compile Include="Containers\AutofacContainer.cs" />
+    <Compile Include="Containers\AutofacMockRegistrationHandler.cs" />
+    <Compile Include="Containers\AutoMockingContainer.cs" />
+    <Compile Include="Containers\MoqMockFactory.cs" />
+    <Compile Include="Containers\NSubstituteMockFactory.cs" />
+    <Compile Include="Containers\IMockFactory.cs" />
     <Compile Include="lib\LibLog.cs" />
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
@@ -52,7 +61,6 @@
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\TestRunner.cs" />
     <Compile Include="Configuration\TestRunnerAction.cs" />
-    <Compile Include="Containers\DefaultContainer.cs" />
     <Compile Include="Containers\IContainer.cs" />
     <Compile Include="Containers\SutFactory.cs" />
     <Compile Include="Host.cs" />
@@ -65,10 +73,11 @@
     <Compile Include="Stories\Story.cs" />
     <Compile Include="Stories\UserStory.cs" />
     <Compile Include="Stories\ValueStory.cs" />
-    <Compile Include="lib\TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

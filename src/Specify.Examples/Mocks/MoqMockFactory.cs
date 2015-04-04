@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using Moq;
+using Specify.Containers;
 
 namespace Specify.Examples.Mocks
 {
@@ -19,6 +20,11 @@ namespace Specify.Examples.Mocks
             PropertyInfo objectProperty = closedType.GetProperty("Object", type);
             object instance = Activator.CreateInstance(closedType);
             return objectProperty.GetValue(instance, null);
+        }
+
+        public bool IsAvailable()
+        {
+            return true;
         }
     }
 }

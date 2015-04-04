@@ -1,15 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using Specify.Examples.Mocks;
 
-namespace Specify.Examples.Autofac
+namespace Specify.Containers
 {
 
-    /// <summary> Resolves unknown interfaces and Mocks using the <see cref="IMockFactory"/>. </summary>
+    /// <summary> Resolves unknown interfaces and Mocks using the <see cref="Specify.Containers.IMockFactory"/>. </summary>
     public class AutofacMockRegistrationHandler : IRegistrationSource
     {
         private readonly IMockFactory _mockFactory;
@@ -43,7 +42,7 @@ namespace Specify.Examples.Autofac
                 typeof(IStartable).IsAssignableFrom(typedService.ServiceType))
                 return Enumerable.Empty<IComponentRegistration>();
 
-            var rb = RegistrationBuilder.ForDelegate((c, p) => _mockFactory.CreateMock(typedService.ServiceType))
+            var rb = RegistrationBuilder.ForDelegate<object>((c, p) => _mockFactory.CreateMock(typedService.ServiceType))
                 .As(service)
                 .InstancePerLifetimeScope();
 

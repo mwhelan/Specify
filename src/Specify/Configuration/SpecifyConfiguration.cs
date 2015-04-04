@@ -19,7 +19,7 @@ namespace Specify.Configuration
 
         public virtual IContainer GetSpecifyContainer()
         {
-            return new DefaultContainer();
+            return new AutofacContainer();
         }
     }
 }

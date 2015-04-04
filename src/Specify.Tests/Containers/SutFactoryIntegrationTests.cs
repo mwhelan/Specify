@@ -42,6 +42,18 @@ namespace Specify.Tests.Containers
         }
 
         [Test]
+        public void should_provide_sut_dependencies()
+        {
+            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+
+            var result = sut.SystemUnderTest;
+
+            result.Dependency1.ShouldNotBe(null);
+            result.Dependency2.ShouldNotBe(null);
+        }
+
+
+        [Test]
         public void RegisterType_should_throw_if_SUT_is_set()
         {
             var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();

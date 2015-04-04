@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using FakeItEasy;
+using Specify.Containers;
 
 namespace Specify.Examples.Mocks
 {
@@ -12,6 +13,11 @@ namespace Specify.Examples.Mocks
             var genericMethod = method.MakeGenericMethod(type);
 
             return genericMethod.Invoke(this, new object[]{});
+        }
+
+        public bool IsAvailable()
+        {
+            return true;
         }
 
         public T CreateMock<T>() where T : class

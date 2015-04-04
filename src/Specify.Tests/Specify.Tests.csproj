@@ -83,6 +83,7 @@
     <Compile Include="Configuration\TemporaryNLogLogger.cs" />
     <Compile Include="Configuration\TestableTestRunner.cs" />
     <Compile Include="Configuration\TestRunnerTests.cs" />
+    <Compile Include="Containers\SutFactoryAutoMockingContainerIntegrationTests.cs" />
     <Compile Include="Containers\DefaultContainerTests.cs" />
     <Compile Include="Containers\SutFactoryIntegrationTests.cs" />
     <Compile Include="Containers\SutFactoryTests.cs" />

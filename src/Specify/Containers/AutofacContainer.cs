@@ -3,9 +3,9 @@ using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 
-namespace Specify.Examples.Autofac
+namespace Specify.Containers
 {
-    public class AutofacContainer : Containers.IContainer
+    public class AutofacContainer : IContainer
     {
         private ILifetimeScope _container;
         private ContainerBuilder _containerBuilder;
@@ -102,7 +102,7 @@ namespace Specify.Examples.Autofac
             return Container.IsRegistered(type);
         }
 
-        public Containers.IContainer CreateChildContainer()
+        public IContainer CreateChildContainer()
         {
             return new AutofacContainer(Container.BeginLifetimeScope());
         }

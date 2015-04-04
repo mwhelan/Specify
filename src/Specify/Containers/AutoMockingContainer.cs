@@ -1,24 +1,23 @@
 ﻿using Autofac;
 using Autofac.Features.ResolveAnything;
-using Specify.Examples.Mocks;
 
-namespace Specify.Examples.Autofac
+namespace Specify.Containers
 {
     /// <summary>
     /// Automocking container that uses NSubstitute to create mocks and Autofac as the container. 
     /// </summary>
-    public class AutofacNSubstituteContainer : AutofacContainer
+    public class AutoMockingContainer : AutofacContainer
     {
-        public AutofacNSubstituteContainer()
-            : base(CreateBuilder())
+        public AutoMockingContainer(IMockFactory mockFactory)
+            : base(CreateBuilder(mockFactory))
         {
         }
 
-        static ContainerBuilder CreateBuilder()
+        static ContainerBuilder CreateBuilder(IMockFactory mockFactory)
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
-            containerBuilder.RegisterSource(new AutofacMockRegistrationHandler(new NSubstituteMockFactory()));
+            containerBuilder.RegisterSource(new AutofacMockRegistrationHandler(mockFactory));
             return containerBuilder;
         }
     }

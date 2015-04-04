@@ -73,15 +73,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Autofac\AutofacContainer.cs" />
     <Compile Include="Autofac\AutofacFakeItEasyContainer.cs" />
-    <Compile Include="Autofac\AutofacMockRegistrationHandler.cs" />
     <Compile Include="Autofac\AutofacMoqContainer.cs" />
-    <Compile Include="Autofac\AutofacNSubstituteContainer.cs" />
     <Compile Include="Autofac\SpecifyModule.cs" />
     <Compile Include="Fixie\FixieSpecifyConvention.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactory.cs" />
-    <Compile Include="Mocks\IMockFactory.cs" />
     <Compile Include="Mocks\MoqMockFactory.cs" />
     <Compile Include="Mocks\NSubstituteMockFactory.cs" />
     <Compile Include="MsTest\ScenarioFor.cs" />

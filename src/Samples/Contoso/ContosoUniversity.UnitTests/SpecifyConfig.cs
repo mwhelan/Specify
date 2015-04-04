@@ -8,7 +8,7 @@ namespace ContosoUniversity.UnitTests
     {
         public override IContainer GetSpecifyContainer()
         {
-            return new AutofacNSubstituteContainer();
+            return new AutoMockingContainer(new NSubstituteMockFactory());
         }
     }
 }
