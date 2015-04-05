@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Specify.Containers
+namespace Specify.Containers.Mocking
 {
     public class MoqMockFactory : IMockFactory
     {

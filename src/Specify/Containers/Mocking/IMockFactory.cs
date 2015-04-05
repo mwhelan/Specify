@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Specify.Containers
+namespace Specify.Containers.Mocking
 {
     public interface IMockFactory
     {

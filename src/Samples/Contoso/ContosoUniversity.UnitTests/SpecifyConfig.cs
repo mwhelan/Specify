@@ -1,6 +1,6 @@
 ﻿using Specify.Configuration;
 using Specify.Containers;
-using Specify.Examples.Autofac;
+using Specify.Containers.Mocking;
 
 namespace ContosoUniversity.UnitTests
 {

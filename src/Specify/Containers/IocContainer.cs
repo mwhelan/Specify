@@ -1,28 +1,32 @@
 ﻿using System;
+using System.Linq;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+using Specify.lib;
 
 namespace Specify.Containers
 {
-    public class AutofacContainer : IContainer
+    public class IocContainer : IContainer
     {
         private ILifetimeScope _container;
         private ContainerBuilder _containerBuilder;
 
-        public AutofacContainer()
+        public IocContainer()
             : this(new ContainerBuilder())
         {
         }
 
-        public AutofacContainer(ILifetimeScope container)
+        public IocContainer(ILifetimeScope container)
         {
             _container = container;
         }
 
-        public AutofacContainer(ContainerBuilder containerBuilder)
+        public IocContainer(ContainerBuilder containerBuilder)
         {
             _containerBuilder = containerBuilder;
+            var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
+            _containerBuilder.RegisterAssemblyModules(assemblies);
         }
 
         protected ILifetimeScope Container
@@ -65,7 +69,7 @@ namespace Specify.Containers
                         .As(new KeyedService(key, typeof(T)))
                         .InstancePerLifetimeScope().CreateRegistration());
             }
-            return Resolve<T>();
+            return Resolve<T>(key);
         }
 
         public T Resolve<T>(string key = null) where T : class
@@ -104,7 +108,7 @@ namespace Specify.Containers
 
         public IContainer CreateChildContainer()
         {
-            return new AutofacContainer(Container.BeginLifetimeScope());
+            return new IocContainer(Container.BeginLifetimeScope());
         }
         
         public void Dispose()

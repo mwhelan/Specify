@@ -40,6 +40,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
     <Reference Include="TestStack.BDDfy, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TestStack.BDDfy.4.1.2\lib\NET40\TestStack.BDDfy.dll</HintPath>
@@ -47,13 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\LoggingProcessor.cs" />
-    <Compile Include="Containers\AutofacContainer.cs" />
+    <Compile Include="Containers\IocContainer.cs" />
     <Compile Include="Containers\AutofacMockRegistrationHandler.cs" />
     <Compile Include="Containers\AutoMockingContainer.cs" />
-    <Compile Include="Containers\FakeItEasyMockFactory.cs" />
-    <Compile Include="Containers\MoqMockFactory.cs" />
-    <Compile Include="Containers\NSubstituteMockFactory.cs" />
-    <Compile Include="Containers\IMockFactory.cs" />
+    <Compile Include="Containers\Mocking\FakeItEasyMockFactory.cs" />
+    <Compile Include="Containers\Mocking\IMockFactory.cs" />
+    <Compile Include="Containers\Mocking\MoqMockFactory.cs" />
+    <Compile Include="Containers\Mocking\NSubstituteMockFactory.cs" />
+    <Compile Include="Containers\SpecifyModule.cs" />
     <Compile Include="lib\LibLog.cs" />
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
@@ -81,6 +83,10 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "$(TargetDir)Combined"
+"$(ProjectDir)..\packages\ilmerge.2.14.1208\tools\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" /out:"$(TargetDir)Combined\Specify.dll"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

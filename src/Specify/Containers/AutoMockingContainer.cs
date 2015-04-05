@@ -1,12 +1,13 @@
 ﻿using Autofac;
 using Autofac.Features.ResolveAnything;
+using Specify.Containers.Mocking;
 
 namespace Specify.Containers
 {
     /// <summary>
-    /// Automocking container that uses NSubstitute to create mocks and Autofac as the container. 
+    /// Automocking container that uses mock factory to create mocks and Autofac as the container. 
     /// </summary>
-    public class AutoMockingContainer : AutofacContainer
+    public class AutoMockingContainer : IocContainer
     {
         public AutoMockingContainer(IMockFactory mockFactory)
             : base(CreateBuilder(mockFactory))

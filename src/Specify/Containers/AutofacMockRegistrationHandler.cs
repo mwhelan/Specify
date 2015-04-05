@@ -4,11 +4,11 @@ using System.Linq;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+using Specify.Containers.Mocking;
 
 namespace Specify.Containers
 {
-
-    /// <summary> Resolves unknown interfaces and Mocks using the <see cref="Specify.Containers.IMockFactory"/>. </summary>
+    /// <summary> Resolves unknown interfaces and Mocks using the <see cref="IMockFactory"/>. </summary>
     public class AutofacMockRegistrationHandler : IRegistrationSource
     {
         private readonly IMockFactory _mockFactory;

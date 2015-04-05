@@ -8,7 +8,7 @@ namespace ContosoUniversity.FunctionalTests
     {
         public override IContainer GetSpecifyContainer()
         {
-            return new AutofacContainer();
+            return new IocContainer();
         }
     }
 }

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Shouldly;
 using Specify.Containers;
+using Specify.Containers.Mocking;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests.Containers.MockFactory

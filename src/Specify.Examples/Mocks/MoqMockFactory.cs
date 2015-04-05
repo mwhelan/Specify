@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Moq;
 using Specify.Containers;
+using Specify.Containers.Mocking;
 
 namespace Specify.Examples.Mocks
 {

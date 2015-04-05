@@ -94,9 +94,9 @@
     <Compile Include="Containers\MockFactory\MockFactoryTests.cs" />
     <Compile Include="Containers\MockFactory\MoqMockFactoryTests.cs" />
     <Compile Include="Containers\MockFactory\NSubstituteMockFactoryTests.cs" />
-    <Compile Include="Containers\DefaultContainerTests.cs" />
+    <Compile Include="Containers\IocContainerTests.cs" />
     <Compile Include="Containers\SutFactory\SutFactoryAutoMockingContainerIntegrationTests.cs" />
-    <Compile Include="Containers\SutFactory\SutFactoryDefaultContainerIntegrationTests.cs" />
+    <Compile Include="Containers\SutFactory\SutFactoryIocContainerIntegrationTests.cs" />
     <Compile Include="Containers\SutFactory\SutFactoryIntegrationTests.cs" />
     <Compile Include="Containers\SutFactory\SutFactoryTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacContainerIntegrationTests.cs" />

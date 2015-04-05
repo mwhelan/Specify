@@ -75,7 +75,6 @@
   <ItemGroup>
     <Compile Include="Autofac\AutofacFakeItEasyContainer.cs" />
     <Compile Include="Autofac\AutofacMoqContainer.cs" />
-    <Compile Include="Autofac\SpecifyModule.cs" />
     <Compile Include="Fixie\FixieSpecifyConvention.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactory.cs" />
     <Compile Include="Mocks\MoqMockFactory.cs" />

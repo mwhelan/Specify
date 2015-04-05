@@ -112,28 +112,28 @@ namespace Specify.Tests.Containers.SutFactory
         public void RegisterInstance_named_should_register_separate_named_instances()
         {
             var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
-            var instance1 = new Dependency1();
-            var instance2 = new Dependency1();
+            var instance1 = new Dependency3();
+            var instance2 = new Dependency3();
 
-            sut.Register<Dependency1>(instance1, "instance1");
-            sut.Register<Dependency1>(instance2, "instance2");
+            sut.Register<Dependency3>(instance1, "instance1");
+            sut.Register<Dependency3>(instance2, "instance2");
 
-            sut.Get<Dependency1>("instance1").ShouldBeSameAs(instance1);
-            sut.Get<Dependency1>("instance2").ShouldBeSameAs(instance2);
+            sut.Get<Dependency3>("instance1").ShouldBeSameAs(instance1);
+            sut.Get<Dependency3>("instance2").ShouldBeSameAs(instance2);
         }
 
         [Test]
         public void RegisterInstance_unnamed_should_return_unnamed_when_multiple_registrations()
         {
             var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
-            var instance1 = new Dependency1();
-            var instance2 = new Dependency1();
+            var instance1 = new Dependency3();
+            var instance2 = new Dependency3();
 
-            sut.Register<Dependency1>(instance1, "instance1");
-            sut.Register<Dependency1>(instance2);
+            sut.Register<Dependency3>(instance1, "instance1");
+            sut.Register<Dependency3>(instance2);
 
-            sut.Get<Dependency1>("instance1").ShouldBeSameAs(instance1);
-            sut.Get<Dependency1>().ShouldBeSameAs(instance2);
+            sut.Get<Dependency3>("instance1").ShouldBeSameAs(instance1);
+            sut.Get<Dependency3>().ShouldBeSameAs(instance2);
         }
 
         [Test]
