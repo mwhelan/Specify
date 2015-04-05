@@ -17,9 +17,9 @@ namespace Specify.Configuration
             LoggingEnabled = false;
         }
 
-        public virtual IContainer GetSpecifyContainer()
+        public virtual IDependencyResolver GetSpecifyContainer()
         {
-            return new IocContainer();
+            return new AutofacDependencyResolver();
         }
     }
 }

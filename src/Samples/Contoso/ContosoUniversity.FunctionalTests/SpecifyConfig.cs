@@ -6,9 +6,9 @@ namespace ContosoUniversity.FunctionalTests
 {
     public class SpecifyConfig : SpecifyConfiguration
     {
-        public override IContainer GetSpecifyContainer()
-        {
-            return new IocContainer();
-        }
+        //public override IContainer GetSpecifyContainer()
+        //{
+        //    return new IocContainer();
+        //}
     }
 }

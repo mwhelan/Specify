@@ -52,6 +52,7 @@ namespace Specify.Containers
             {
                 throw new InvalidOperationException("Cannot register instance after SUT is created.");
             }
+            
             return _sourceContainer.Register(valueToSet, key);
         }
 

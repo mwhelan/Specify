@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Specify.Configuration;
-using Specify.Containers;
 
 namespace Specify.Tests.Configuration
 {
@@ -13,10 +12,6 @@ namespace Specify.Tests.Configuration
             PerAppDomainActions.Add(new StubAction { Name = "PerAppDomainAction 2" });
             PerTestActions.Add(new StubAction { Name = "PerTestAction 1" });
             PerTestActions.Add(new StubAction { Name = "PerTestAction 2" });
-        }
-        public override IContainer GetSpecifyContainer()
-        {
-            return base.GetSpecifyContainer();
         }
     }
     internal class StubAction : TestRunnerAction

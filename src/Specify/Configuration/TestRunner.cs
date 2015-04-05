@@ -6,14 +6,14 @@ namespace Specify.Configuration
     internal class TestRunner
     {
         private readonly SpecifyConfiguration _configuration;
-        private readonly IContainer _container;
+        private readonly IDependencyResolver _dependencyResolver;
         private readonly ITestEngine _testEngine;
 
-        public TestRunner(SpecifyConfiguration configuration, IContainer container,
+        public TestRunner(SpecifyConfiguration configuration, IDependencyResolver dependencyResolver,
             ITestEngine testEngine)
         {
             _configuration = configuration;
-            _container = container;
+            _dependencyResolver = dependencyResolver;
             _testEngine = testEngine;
         }
 
@@ -24,10 +24,11 @@ namespace Specify.Configuration
                 action.Before();
             }
 
-            using (var lifetimeScope = _container.CreateChildContainer())
+            using (var scenarioScope = _dependencyResolver.CreateChildContainer())
             {
-                var scenario = (IScenario)_container.Resolve(testObject.GetType());
-                scenario.SetContainer(lifetimeScope);
+                var scenario = (IScenario)scenarioScope.Resolve(testObject.GetType());
+                var container = scenarioScope.Resolve<IContainer>();
+                scenario.SetContainer(container);
                 _testEngine.Execute(scenario);
             }
 
@@ -37,6 +38,6 @@ namespace Specify.Configuration
             }
         }
 
-        internal IContainer Container { get { return _container; } }
+        internal IDependencyResolver DependencyResolver { get { return _dependencyResolver; } }
     }
 }

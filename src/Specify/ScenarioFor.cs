@@ -57,5 +57,10 @@ namespace Specify
         {
             Host.Specify(this);
         }
+
+        public void Dispose()
+        {
+            Container.Dispose();
+        }
     }
 }

@@ -9,16 +9,16 @@ namespace Specify.Tests.Configuration
     {
         private readonly IScenario _specification;
 
-        public TestableTestRunner(IScenario specification)
-            : base(new StubConfig(), Substitute.For<IContainer>(),
+        public  TestableTestRunner(IScenario specification)
+            : base(new StubConfig(), Substitute.For<IDependencyResolver>(),
             Substitute.For<ITestEngine>())
         {
             _specification = specification;
             ChildContainer = Substitute.For<IContainer>();
-            Container
+            DependencyResolver
                 .CreateChildContainer()
                 .Returns(ChildContainer);
-            Container
+            ChildContainer
                 .Resolve(Arg.Any<Type>())
                 .Returns(_specification);
         }

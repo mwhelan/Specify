@@ -56,7 +56,5 @@ namespace Specify.Containers
         /// <param name="type">The type.</param>
         /// <returns></returns>
         bool CanResolve(Type type);
-
-        IContainer CreateChildContainer();
     }
 }

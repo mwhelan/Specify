@@ -43,19 +43,19 @@ namespace Specify.Tests.Configuration
 
             sut.Execute(spec);
 
-            sut.Container.Received(1).CreateChildContainer();
+            sut.DependencyResolver.Received(1).CreateChildContainer();
             sut.ChildContainer.Received(1).Dispose();
         }
 
         [Test]
-        public void should_resolve_specification_from_container()
+        public void should_resolve_specification_from_child_container()
         {
             var spec = new UserStoryScenarioWithAllSupportedStepsInRandomOrder();
             var sut = CreateSut(spec);
 
             sut.Execute(spec);
 
-            sut.Container.Received(1).Resolve(typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder));
+            sut.ChildContainer.Received(1).Resolve(typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder));
         }
 
         private static TestableTestRunner CreateSut(IScenario spec)

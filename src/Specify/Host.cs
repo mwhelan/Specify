@@ -10,7 +10,7 @@ namespace Specify
     internal static class Host
     {
         private static readonly SpecifyConfiguration _configuration;
-        private static readonly IContainer _container;
+        private static readonly IDependencyResolver _dependencyResolver;
         private static readonly TestRunner _testRunner;
 
         public static void Specify(IScenario testObject, string scenarioTitle = null)
@@ -21,8 +21,8 @@ namespace Specify
         static Host()
         {
             _configuration = Configure();
-            _container = _configuration.GetSpecifyContainer();
-            _testRunner = new TestRunner(_configuration, _container,new BddfyTestEngine());
+            _dependencyResolver = _configuration.GetSpecifyContainer();
+            _testRunner = new TestRunner(_configuration, _dependencyResolver,new BddfyTestEngine());
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
             _configuration.PerAppDomainActions.ForEach(action => action.Before());
         }
@@ -33,7 +33,7 @@ namespace Specify
             {
                 action.After();
             }
-            _container.Dispose();
+            _dependencyResolver.Dispose();
         }
 
         static SpecifyConfiguration Configure()

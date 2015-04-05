@@ -6,9 +6,9 @@ namespace ContosoUniversity.UnitTests
 {
     public class SpecifyConfig : SpecifyConfiguration
     {
-        public override IContainer GetSpecifyContainer()
-        {
-            return new AutoMockingContainer(new NSubstituteMockFactory());
-        }
+        //public override IDependencyResolver GetSpecifyContainer()
+        //{
+        //    return new AutoMockingContainer(new NSubstituteMockFactory());
+        //}
     }
 }
