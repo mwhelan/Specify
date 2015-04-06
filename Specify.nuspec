@@ -2,17 +2,19 @@
 <package >
   <metadata>
     <id>Specify</id>
-    <version>0.0.1</version>
+    <version>0.6.29-beta02</version>
     <title>Specify</title>
     <authors>Michael Whelan</authors>
     <owners>Michael Whelan</owners>
-    <projectUrl>http://teststack.github.com/TestStack.Seleno/</projectUrl>
+    <projectUrl>https://github.com/mwhelan/Specify</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Seleno helps you write automated UI tests in the right way (using Selenium WebDriver)</description>
+    <description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</description>
     <releaseNotes>The baseline for Specify</releaseNotes>
-    <copyright>Copyright 2012 TestStack</copyright>
+    <copyright>Copyright 2015 Michael Whelan</copyright>
 	<dependencies> 
-	  <dependency id="TestStack.BDDfy" version="3.13" />
+	  <dependency id="TestStack.BDDfy" version="4.1.2" />
 	</dependencies>
+	<licenseUrl>https://github.com/mwhelan/Specify/blob/master/license.txt</licenseUrl>
+	<tags>TDD BDD Testing BDDfy</tags>
   </metadata>
 </package>
