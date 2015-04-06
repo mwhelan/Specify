@@ -1,15 +1,15 @@
 ﻿using NSubstitute;
 using Shouldly;
 
-namespace Specify.Samples.OrderProcessing
+namespace Specify.IntegrationTests.App.OrderProcessing
 {
     public class given
     {
-        public abstract class the_item_is_available : SpecificationFor<OrderProcessor>
+        public abstract class the_item_is_available : NScenarioFor<OrderProcessor>
         {
             protected void Given_the_item_is_available()
             {
-                DependencyFor<IInventory>().IsQuantityAvailable("TestPart", 10).Returns(true);
+                Container.Get<IInventory>().IsQuantityAvailable("TestPart", 10).Returns(true);
             }
         }
     }
@@ -30,12 +30,12 @@ namespace Specify.Samples.OrderProcessing
 
         public void AndThen_it_checks_the_inventory()
         {
-            DependencyFor<IInventory>().Received().IsQuantityAvailable("TestPart", 10);
+            Container.Get<IInventory>().Received().IsQuantityAvailable("TestPart", 10);
         }
 
         public void AndThen_it_raises_an_order_submitted_event()
         {
-            DependencyFor<IPublisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
+            Container.Get<IPublisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
         }
     }
     
@@ -55,12 +55,12 @@ namespace Specify.Samples.OrderProcessing
 
         public void AndThen_it_does_not_check_the_inventory()
         {
-            DependencyFor<IInventory>().DidNotReceive().IsQuantityAvailable("TestPart", -1);
+            Container.Get<IInventory>().DidNotReceive().IsQuantityAvailable("TestPart", -1);
         }
 
         public void AndThen_it_does_not_raise_an_order_submitted_event()
         {
-            DependencyFor<IPublisher>().DidNotReceive().Publish(Arg.Any<OrderSubmitted>());
+            Container.Get<IPublisher>().DidNotReceive().Publish(Arg.Any<OrderSubmitted>());
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Shouldly;
 
-namespace Specify.Samples.Katas.PrimeNumbers
+namespace Specify.IntegrationTests.App.Katas.PrimeNumbers
 {
     public class PrimeCalculator
     {
@@ -13,16 +13,15 @@ namespace Specify.Samples.Katas.PrimeNumbers
         }
     }
 
-    public abstract class PrimeCalculatorKata : SpecificationFor<PrimeCalculator>
+    public abstract class PrimeCalculatorKata : NScenarioFor<PrimeCalculator>
     {
         protected bool Result;
         
     }
 
-    public class when_calculating_prime_for_one : PrimeCalculatorKata
+    public class calculating_prime_for_one : PrimeCalculatorKata
     {
-
-        public when_calculating_prime_for_one()
+        public void when_calculating_prime_for_one()
         {
             Result = SUT.IsPrime(1);
         }

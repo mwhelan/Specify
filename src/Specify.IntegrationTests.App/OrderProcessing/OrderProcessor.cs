@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Specify.Samples.OrderProcessing
+namespace Specify.IntegrationTests.App.OrderProcessing
 {
     public class OrderProcessor
     {
