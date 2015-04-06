@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute, Version=1.8.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
@@ -75,11 +78,13 @@
   <ItemGroup>
     <Compile Include="Autofac\AutofacFakeItEasyContainer.cs" />
     <Compile Include="Autofac\AutofacMoqContainer.cs" />
+    <Compile Include="Autofac\AutofacNSubstituteContainer.cs" />
     <Compile Include="Fixie\FixieSpecifyConvention.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactory.cs" />
     <Compile Include="Mocks\MoqMockFactory.cs" />
     <Compile Include="Mocks\NSubstituteMockFactory.cs" />
     <Compile Include="MsTest\ScenarioFor.cs" />
+    <Compile Include="Ninject\NinjectContainer.cs" />
     <Compile Include="Nunit\ScenarioFor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Xunit\ScenarioFor.cs" />
@@ -93,6 +98,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

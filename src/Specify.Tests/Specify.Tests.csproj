@@ -54,6 +54,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -101,6 +104,7 @@
     <Compile Include="Containers\SutFactory\SutFactoryIocContainerIntegrationTests.cs" />
     <Compile Include="Containers\SutFactory\SutFactoryIntegrationTests.cs" />
     <Compile Include="Containers\SutFactory\SutFactoryTests.cs" />
+    <Compile Include="Examples\SutFactoryNinjectContainerIntegrationTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacContainerIntegrationTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacFakeItEasyContainerIntegrationTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacMoqContainerIntegrationTests.cs" />
@@ -125,6 +129,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Specify.Examples\Specify.Examples.csproj">
+      <Project>{B614EDD2-3B31-434B-AD77-576D9CBA0EC8}</Project>
+      <Name>Specify.Examples</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Specify\Specify.csproj">
       <Project>{e0041c2f-cc2e-4f2e-ad11-4c9ddb2fcd14}</Project>
       <Name>Specify</Name>

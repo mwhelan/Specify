@@ -100,12 +100,12 @@ namespace Specify.Tests.Containers.SutFactory
         public void RegisterInstance_should_register_instance_if_SUT_not_set()
         {
             var sut = CreateSut<ConcreteObjectWithNoConstructor>();
-            var instance = new Dependency1();
+            var instance = new Dependency3();
 
-            sut.Register<IDependency1>(instance);
+            sut.Register<IDependency3>(instance);
 
-            sut.Get<IDependency1>().ShouldNotBe(null);
-            sut.Get<IDependency1>().ShouldBeSameAs(instance);
+            sut.Get<IDependency3>().ShouldNotBe(null);
+            sut.Get<IDependency3>().ShouldBeSameAs(instance);
         }
 
         [Test]
