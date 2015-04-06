@@ -84,6 +84,8 @@
   <ItemGroup>
     <Compile Include="Configuration\BddfyTestEngineTests.cs" />
     <Compile Include="Configuration\LoggingProcessorTests.cs" />
+    <Compile Include="Configuration\Mocking\FileSystemTests.cs" />
+    <Compile Include="Configuration\Mocking\MockDetectorTests.cs" />
     <Compile Include="Configuration\ReportTestData.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScannerTests.cs" />
     <Compile Include="Configuration\StubAction.cs" />
@@ -135,6 +137,7 @@
     <Content Include="Configuration\BddfyTestEngineTests.should_display_examples_on_reports.approved.txt" />
     <Content Include="Configuration\LoggingProcessorTests.thetest.approved.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

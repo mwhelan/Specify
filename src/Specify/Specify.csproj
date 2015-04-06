@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\LoggingProcessor.cs" />
+    <Compile Include="Configuration\Mocking\FileSystem.cs" />
+    <Compile Include="Configuration\Mocking\IFileSystem.cs" />
+    <Compile Include="Configuration\Mocking\MockDetector.cs" />
+    <Compile Include="Containers\AutofacDependencyResolver.cs" />
     <Compile Include="Containers\IDependencyResolver.cs" />
     <Compile Include="Containers\IocContainer.cs" />
     <Compile Include="Containers\AutofacMockRegistrationHandler.cs" />

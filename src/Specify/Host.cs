@@ -21,7 +21,7 @@ namespace Specify
         static Host()
         {
             _configuration = Configure();
-            _dependencyResolver = _configuration.GetSpecifyContainer();
+            _dependencyResolver = _configuration.GetDependencyResolver();
             _testRunner = new TestRunner(_configuration, _dependencyResolver,new BddfyTestEngine());
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
             _configuration.PerAppDomainActions.ForEach(action => action.Before());

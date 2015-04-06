@@ -17,7 +17,7 @@ namespace Specify.Configuration
             LoggingEnabled = false;
         }
 
-        public virtual IDependencyResolver GetSpecifyContainer()
+        public virtual IDependencyResolver GetDependencyResolver()
         {
             return new AutofacDependencyResolver();
         }
