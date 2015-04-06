@@ -1,7 +1,7 @@
 # Specify
 
 ## What is it?
-Specify is a .Net context-specification testing library that builds on top of BDDfy from [TestStack](http://teststack.net/). While BDDfy is primarily intended for BDD testing, it is beautifully designed to be very easy to customize and extend.
+Specify is a .Net testing library that builds on top of BDDfy from [TestStack](http://teststack.net/). While BDDfy is primarily intended for BDD testing, it is beautifully designed to be very easy to customize and extend.
 
 When I first started using BDDfy for acceptance testing, I would use a different framework for unit testing, but I didn't like the context switching between different frameworks, syntaxes and testing styles. Specify provides a base fixture which gives a consistent experience for all types of tests (or specifications). Why not have the fantastic BDDfy reports for all of your different test types?
 
@@ -9,8 +9,8 @@ When I first started using BDDfy for acceptance testing, I would use a different
 
 ## Overview of Features
 * Tests use a context-specification style, with a class per scenario.
-* SUT factory with pluggable automocking or Ioc containers.
-* Tests can be resolved from your IoC container. Or use the built-in TinyIoc container.
+* SUT factory with pluggable automocking or Ioc containers. There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/).
+* Tests can be resolved from your IoC container. There is built-in support for the [Autofac](http://autofac.org/) container.
 * BDDfy Reports are produced for all of your test types
 
 ## Context-Specification Style
@@ -80,19 +80,35 @@ Specify uses BDDfy's Reflective API to scan its classes for methods. By default,
 * Starting with `TearDown` is considered as a finally method which is run after all the other steps (not reported).
  
 ### Auto Mocking and IoC Adapters
-To use a particular mocking framework or IoC container you just have to implement the Specify IContainer interface. I have created a number of adapters for some of the popular mocking frameworks and IoC containers in the [Specify.Examples project](https://github.com/mwhelan/Specify/tree/master/src/Specify.Examples). I'm not creating NuGet packages at this stage as it would be a bit of a maintenance headache, though this might change. 
+To use a particular mocking framework or IoC container in your tests you just have to implement the Specify `IContainer` interface. There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/) auto-mocking containers. Just add a reference to one of these projects and Specify will detect it and use the relevant adapter. 
 
-At the moment, I've written the following adapters:
-
-* Autofac
-* Autofac NSubstitute
-* Autofac FakeItEasy
-* Autofac Moq
+If no mocking framework is referenced then Specify will default to an Autofac-based IoC container. Just add an Autofac module, which Specify will automatically detect and register your dependencies.
 
 The containers are largely based on [Chill's containers](https://github.com/Erwinvandervalk/Chill), by [Erwin van der Valk](http://www.erwinvandervalk.net/). Chill is a great framework, which I recommend you check out.
 
+## Logging
+Specify uses [LibLog](https://github.com/damianh/LibLog) for logging. You can turn logging on by setting the `LoggingEnabled` property to true on your SpecifyConfig file (it's off by default). LibLog is a logging abstraction
+
+LibLog contains transparent built-in support for [NLog](http://nlog-project.org/), [Log4Net](https://logging.apache.org/log4net/), [EntLib Logging](http://msdn.microsoft.com/en-us/library/ff647183.aspx), [Serilog](http://serilog.net/) and [Loupe](http://www.gibraltarsoftware.com/Loupe), and allows your users to define a custom provider if necessary.
+
+Specify logs every method of the scenario and its duration, and every exception. You are also free to make your own logging calls.
+
+	public class MyClass
+	{
+	    private static readonly ILog Logger = LogProvider.For<MyClass>(); 
+	
+	    public MyClass()
+	    {
+	        using(LogProvider.OpenNestedContext("message"))
+	        using(LogProvider.OpenMappedContext("key", "value"))
+	        {
+	            Logger.Info(....);
+	        }
+	    }
+	}
+
 ## Running the tests
-One of the things I've always liked about this approach is not having test framework attributes, such as [Test] and [Fact] on all of my test methods. Once you put these attributes on the base class the inheriting classes don't need them - all the main test frameworks are clever enough to discover them on base classes. This poses a bit of a challenge with a library like this. Thankfully, newer frameworks, like Fixie, don't force you to use attributes for test discoverability. Just use this Fixie convention (available in the Specify.Examples project) to run Specify tests:
+One of the things I've always liked about this class per scenario approach is not having test framework attributes, such as [Test] and [Fact] on all of my test methods. Once you put these attributes on the base class the inheriting classes don't need them - all the main test frameworks are clever enough to discover them on base classes. This poses a bit of a challenge with a library like this. Thankfully, newer frameworks, like Fixie, don't force you to use attributes for test discoverability. Just use this Fixie convention (available in the Specify.Examples project) to run Specify tests:
 
 	public class FixieSpecifyConvention : Convention
     {
