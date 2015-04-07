@@ -15,7 +15,7 @@ namespace Specify
         {
             if (!type.CanBeCastTo<IScenario>())
                 return false;
-            return !type.IsUnitScenario();
+            return !GenericTypeIsSpecificationStory(type);
         }
 
         internal static bool IsStoryScenario(this IScenario specification)
@@ -27,22 +27,7 @@ namespace Specify
         {
             if (!type.CanBeCastTo<IScenario>())
                 return false;
-            while (true)
-            {
-                var genericArguments = type.GetGenericArguments();
-                if (genericArguments.Length > 0)
-                {
-                    if (genericArguments.Any(argument => argument == typeof(SpecificationStory)))
-                    {
-                        return true;
-                    }
-                }
-
-                Type baseType = type.BaseType;
-                if (baseType == null) return false;
-
-                type = baseType;
-            }
+            return GenericTypeIsSpecificationStory(type);
         }
 
         internal static bool IsUnitScenario(this IScenario specification)
@@ -64,6 +49,29 @@ namespace Specify
             if (type == destinationType) return true;
 
             return destinationType.IsAssignableFrom(type);
+        }
+
+        private static bool GenericTypeIsSpecificationStory(Type type)
+        {
+            while (true)
+            {
+                var genericArguments = type.GetGenericArguments();
+                if (genericArguments.Length > 0)
+                {
+                    if (genericArguments.Any(argument => argument == typeof(SpecificationStory)))
+                    {
+                        return true;
+                    }
+                }
+
+                Type baseType = type.BaseType;
+                if (baseType == null)
+                {
+                    return false;
+                }
+
+                type = baseType;
+            }
         }
     }
 }
