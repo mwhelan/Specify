@@ -20,7 +20,7 @@ namespace Specify
 
         internal static bool IsStoryScenario(this IScenario specification)
         {
-            return specification.Story.Name != "SpecificationStory";
+            return specification.Story != typeof(SpecificationStory);
         }
 
         public static bool IsUnitScenario(this Type type)
@@ -32,7 +32,7 @@ namespace Specify
 
         internal static bool IsUnitScenario(this IScenario specification)
         {
-            return specification.Story.Name == "SpecificationStory";
+            return specification.Story == typeof(SpecificationStory);
         }
 
         private static bool CanBeCastTo<T>(this Type type)
