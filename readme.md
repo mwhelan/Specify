@@ -9,28 +9,29 @@ When I first started using BDDfy for acceptance testing, I would use a different
 
 ## Overview of Features
 * Tests use a context-specification style, with a class per scenario.
-* SUT factory with pluggable automocking or Ioc containers. There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/).
+* SUT factory with pluggable auto-mocking or Ioc containers. There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/).
 * Tests can be resolved from your IoC container. There is built-in support for the [Autofac](http://autofac.org/) container.
 * BDDfy Reports are produced for all of your test types
+* Specify uses LibLog for logging, a logging abstraction which provides support for NLog, Log4Net, EntLib Logging, Serilog and Loupe, and allows your users to define a custom provider if necessary.
 
 ## Context-Specification Style
 With context-specification you have a class per scenario, with each step having its own method and state being shared between methods in fields. This means that the setup and execution only happen once (the context), and then each `Then` method is a specification that asserts against the result of the execution.
 
 Specify provides two generic base classes that your test class can inherit from:
  
-* `SpecificationFor<TSut>` is for unit and integration tests and would normally be used with an automocking container. Reports show *Specifications For: [SUT Name]* instead of a user story.
-* `SpecificationFor<TSut, TStory>` is for the typical BDDfy user story tests and would normally be used with an Inversion of Control container. Reports show the user story or business value story.
+* `ScenarioFor<TSut>` is for low level specifications, such as unit and integration tests, and would normally be used with an auto-mocking container. Reports show *Specifications For: [SUT Name]* instead of a user story.
+* `ScenarioFor<TSut, TStory>` is for higher level specifications, such as acceptance tests. These are the typical BDDfy user story tests and would use an IoC container for the SUT factory. Reports show the user story or business value story.
 
 These classes follow the `Given When Then` syntax (though there is nothing to stop you from [customizing BDDfy](http://www.michael-whelan.net/roll-your-own-testing-framework/) to use a different syntax if you want). 
  
-    public class DetailsForExistingStudent : SpecificationFor<StudentController>
+    public class DetailsForExistingStudent : ScenarioFor<StudentController>
     {
         ViewResult _result;
         private Student _student = new Student { ID = 1 };
 
         public void Given_an_existing_student()
         {
-            Get<ISchoolRepository>()
+            Container.Get<ISchoolRepository>()
                 .FindStudentById(_student.ID)
                 .Returns(_student);
         }
@@ -53,7 +54,7 @@ These classes follow the `Given When Then` syntax (though there is nothing to st
 
 
 ### System Under Test
-The `TSut` type parameter represents the [System Under Test](http://xunitpatterns.com/SUT.html), which is the class that is being tested. Each class has a `SUT` property, which is instantiated for you by the automocking or IoC container. You can override this too, if you want.
+The `TSut` type parameter represents the [System Under Test](http://xunitpatterns.com/SUT.html), which is the class that is being tested. Each class has a `SUT` property, which is instantiated for you by the auto-mocking or IoC container. You can override this too, if you want.
 
 ### User Story or Value Story
 The `TStory` type parameter represents the user story. Specify provides two Story classes, but BDDfy lets you create additional formats if you wish:
@@ -62,7 +63,7 @@ The `TStory` type parameter represents the user story. Specify provides two Stor
 * [Value Story](http://www.infoq.com/news/2008/06/new-user-story-format): The business value story, with the emphasis on the business value. `In order to <achieve some value>, as a <type of user>, I want <some functionality>`.
 
 ## SUT Factory
-Specify can create the SUT for you, using either an automocking container or an IoC container as a [SUT factory](http://blog.ploeh.dk/2009/02/13/SUTFactory/). This is configurable, on a per test assembly basis. A fresh new container is provided for each specification, so you can change the configuration for each test without impacting other tests. Most IoC containers provide this child container functionality (though they might call it by different names).
+Specify can create the SUT for you, using either an auto-mocking container or an IoC container as a [SUT factory](http://blog.ploeh.dk/2009/02/13/SUTFactory/). This is configurable, on a per test assembly basis. A fresh new container is provided for each specification, so you can change the configuration for each test without impacting other tests. Most IoC containers provide this child container functionality (though they might call it by different names).
 
 The Specification classes allow you to interact with the `SutFactory` via a `Container` property. The Get methods allow you to retrieve SUT dependencies. The Register methods allow you to provide implementations that will be used in the creation of the SUT. You can also set the SUT directly if you need to override the creation for a particular scenario. The SUT is lazily created the first time it is requested, so registering types and setting the SUT need to happen before the first request to the SUT property.
 
@@ -79,10 +80,12 @@ Specify uses BDDfy's Reflective API to scan its classes for methods. By default,
 * Starting with `And` is considered as an asserting method (reported).
 * Starting with `TearDown` is considered as a finally method which is run after all the other steps (not reported).
  
-### Auto Mocking and IoC Adapters
-To use a particular mocking framework or IoC container in your tests you just have to implement the Specify `IContainer` interface. There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/) auto-mocking containers. Just add a reference to one of these projects and Specify will detect it and use the relevant adapter. 
+### Auto-Mocking and IoC Adapters
+There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/) auto-mocking containers. Just add a reference to one of these projects and Specify will detect it and use the relevant adapter. 
 
 If no mocking framework is referenced then Specify will default to an Autofac-based IoC container. Just add an Autofac module, which Specify will automatically detect and register your dependencies.
+
+Alternatively, to use a particular mocking framework or IoC container in your tests you just have to implement the Specify `IContainer` interface. 
 
 The containers are largely based on [Chill's containers](https://github.com/Erwinvandervalk/Chill), by [Erwin van der Valk](http://www.erwinvandervalk.net/). Chill is a great framework, which I recommend you check out.
 
@@ -115,7 +118,7 @@ One of the things I've always liked about this class per scenario approach is no
         public FixieSpecifyConvention()
         {
             Classes
-                .Where(type => type.IsSpecificationFor() || type.IsScenarioFor());
+                .Where(type => type.IsUnitScenario() || type.IsStoryScenario());
 
             Methods
                 .Where(method => method.Name == "Specify");
@@ -124,8 +127,8 @@ One of the things I've always liked about this class per scenario approach is no
 
 Unfortunately, even the newer versions of xUnit and NUnit seem to still require attributes (please let me know if I'm wrong on this score). Again, I've gone for the copy/paste solution. Just create a base class to extend the two Specify classes. Here is an example with NUnit. I've adopted the convention of prefixing the class with the letter of the test framework so as to remove any ambiguity between the two:
 
- 	[TestFixture]
-    public abstract class NSpecificationFor<TSut, TStory> : Specify.SpecificationFor<TSut, TStory>
+	[TestFixture]
+    public abstract class ScenarioFor<TSut, TStory> : Specify.ScenarioFor<TSut, TStory>
         where TSut : class
         where TStory : Story, new()
     {
@@ -137,7 +140,7 @@ Unfortunately, even the newer versions of xUnit and NUnit seem to still require 
     }
 
     [TestFixture]
-    public abstract class NSpecificationFor<TSut> : Specify.SpecificationFor<TSut> 
+    public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut> 
         where TSut : class
     {
         [Test]

@@ -6,6 +6,11 @@ namespace Specify
 {
     public static class SpecifyExtensions
     {
+        public static bool IsScenario(this Type type)
+        {
+            return type.CanBeCastTo<IScenario>();
+        }
+
         public static bool IsStoryScenario(this Type type)
         {
             if (!type.CanBeCastTo<IScenario>())
