@@ -52,6 +52,9 @@ These classes follow the `Given When Then` syntax (though there is nothing to st
         }
     }
 
+Which will show the following report, customized to show Specifications For: StudentController
+
+![BDDfy report](bddfy-report.png?raw=true)
 
 ### System Under Test
 The `TSut` type parameter represents the [System Under Test](http://xunitpatterns.com/SUT.html), which is the class that is being tested. Each class has a `SUT` property, which is instantiated for you by the auto-mocking or IoC container. You can override this too, if you want.
