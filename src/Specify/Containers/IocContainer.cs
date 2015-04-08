@@ -37,7 +37,9 @@ namespace Specify.Containers
 
         public void Register<T>() where T : class
         {
-            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>().InstancePerDependency().CreateRegistration());
+            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
+                .InstancePerDependency()
+                .CreateRegistration());
         }
 
         public void Register<TService, TImplementation>()
@@ -46,7 +48,9 @@ namespace Specify.Containers
         {
             Container
                 .ComponentRegistry
-                .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>().InstancePerLifetimeScope().CreateRegistration());
+                .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>()
+                .InstancePerLifetimeScope()
+                .CreateRegistration());
         }
 
         public T Register<T>(T valueToSet, string key = null) where T : class
