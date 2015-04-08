@@ -12,12 +12,11 @@ namespace Specify.Tests.Examples
     {
         protected override SutFactory<T> CreateSut<T>()
         {
-            var kernel = new StandardKernel();
-            kernel.Bind<IDependency1>().To<Dependency1>();
-            kernel.Bind<IDependency2>().To<Dependency2>();
-            kernel.Bind<ConcreteObjectWithMultipleConstructors>().ToSelf();
-            kernel.Bind<ConcreteObjectWithNoConstructor>().ToSelf();
-            var container = new NinjectContainer(kernel);
+            var container = new NinjectContainer();
+            container.Register<IDependency1, Dependency1>();
+            container.Register<IDependency2, Dependency2>();
+            container.Register<ConcreteObjectWithMultipleConstructors>();
+            container.Register<ConcreteObjectWithNoConstructor>();
             return new SutFactory<T>(container);
         }
     }

@@ -31,7 +31,13 @@ namespace Specify.Examples.Ninject
 
         public void Register<T>() where T : class
         {
-            Container.Bind<T>().To<T>()
+            Container.GetBindings(typeof(T))
+                .Where(b => string.IsNullOrEmpty(b.Metadata.Name))
+                .ToList()
+                .ForEach(b => Container.RemoveBinding(b));
+
+            Container.Bind<T>()
+                .To<T>()
                 .InTransientScope()
                 .BindingConfiguration.IsImplicit = true;
         }
@@ -41,8 +47,13 @@ namespace Specify.Examples.Ninject
             where TService : class
             where TImplementation : class, TService
         {
-            Container.Bind<TService>().To<TImplementation>()
-                //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
+            Container.GetBindings(typeof(TService))
+                .Where(b => string.IsNullOrEmpty(b.Metadata.Name))
+                .ToList()
+                .ForEach(b => Container.RemoveBinding(b));
+
+            Container.Bind<TService>()
+                .To<TImplementation>()
                 .InSingletonScope()
                 .BindingConfiguration.IsImplicit = true;
         }
@@ -50,34 +61,35 @@ namespace Specify.Examples.Ninject
         // This needs to be lifetime scope per scenario
         public T Register<T>(T valueToSet, string key = null) where T : class
         {
+            Container.GetBindings(typeof(T))
+                .Where(b => key != null && b.Metadata.Name == key || string.IsNullOrEmpty(b.Metadata.Name))
+                .ToList()
+                .ForEach(b => Container.RemoveBinding(b));
+
             if (key == null)
             {
-                Container.Bind<T>().ToConstant(valueToSet)
+                Container.Bind<T>()
+                    .ToConstant(valueToSet)
                     //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
                     .InSingletonScope()
                     .BindingConfiguration.IsImplicit = true;
             }
             else
             {
-                Container.Bind<T>().ToConstant(valueToSet)
+                Container.Bind<T>()
+                    .ToConstant(valueToSet)
                     //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
                     .InSingletonScope()
                     .Named(key)
                     .BindingConfiguration.IsImplicit = true;
             }
+
             return valueToSet;
         }
 
         public T Resolve<T>(string key = null) where T : class
         {
-            if (key == null)
-            {
-                return Container.Get<T>();
-            }
-            else
-            {
-                return Container.Get<T>(key);
-            }
+            return Container.Get<T>(m => key == null && m.Name == null || m.Name == key);
         }
 
         public object Resolve(Type serviceType, string key = null)
