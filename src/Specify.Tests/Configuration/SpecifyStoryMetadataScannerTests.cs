@@ -12,7 +12,7 @@ namespace Specify.Tests.Configuration
         public void should_return_null_if_scanned_object_is_not_a_specification()
         {
             var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new ConcreteObjectWithMultipleConstructors());
+            var result = sut.Scan(new ConcreteObjectWithMultipleConstructors(new Dependency1()));
             result.ShouldBe(null);
         }
 

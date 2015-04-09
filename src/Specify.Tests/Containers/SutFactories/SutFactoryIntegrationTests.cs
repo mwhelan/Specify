@@ -137,11 +137,11 @@ namespace Specify.Tests.Containers.SutFactory
         }
 
         [Test]
-        public void RegisterType_should_register_transient_lifetime()
+        public void RegisterType_should_register_singleton_lifetime()
         {
             var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Register<Dependency1>();
-            sut.Get<Dependency1>().ShouldNotBeSameAs(sut.Get<Dependency1>());
+            sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
         }
 
         [Test]

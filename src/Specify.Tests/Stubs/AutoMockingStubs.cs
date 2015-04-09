@@ -26,8 +26,8 @@
     {
         public readonly IDependency1 Dependency1;
         public readonly IDependency2 Dependency2;
-        public ConcreteObjectWithMultipleConstructors() { }
 
+        public ConcreteObjectWithMultipleConstructors() { }
         public ConcreteObjectWithMultipleConstructors(IDependency1 dependency1)
         {
             Dependency1 = dependency1;
