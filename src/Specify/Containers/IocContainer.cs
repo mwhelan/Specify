@@ -38,7 +38,7 @@ namespace Specify.Containers
         public void Register<T>() where T : class
         {
             Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
-                .InstancePerDependency()
+                .InstancePerLifetimeScope()
                 .CreateRegistration());
         }
 
