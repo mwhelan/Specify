@@ -18,12 +18,23 @@ namespace Specify.Examples.Ninject
         private static IKernel CreateContainer()
         {
             var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
-            var modules = from assembly in assemblies
-                          from type in assembly.GetTypes()
-                          where type.CanBeCastTo<INinjectModule>()
-                          select (INinjectModule)Activator.CreateInstance(type);
+            //var modules = from assembly in assemblies
+            //              from type in assembly.GetTypes()
+            //              where type.CanBeCastTo<INinjectModule>()
+            //              select (INinjectModule)Activator.CreateInstance(type);
 
-            return new StandardKernel(modules.ToArray());
+            //var kernel = new StandardKernel();
+            //kernel.Load(assemblies);
+            //var ninjectModules = kernel.GetModules();
+
+            var modules = AssemblyTypeResolver
+                .GetAllTypesFromAppDomain()
+                .Where(x => x.CanBeCastTo<INinjectModule>())
+                .Distinct()
+                .Select (type => (NinjectModule)Activator.CreateInstance(type, assemblies))
+                .ToArray();
+            var kernel = new StandardKernel(modules);
+            return kernel;
         }
 
         public IContainer CreateChildContainer()
