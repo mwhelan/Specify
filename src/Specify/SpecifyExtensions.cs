@@ -35,7 +35,7 @@ namespace Specify
             return specification.Story == typeof(SpecificationStory);
         }
 
-        private static bool CanBeCastTo<T>(this Type type)
+        internal static bool CanBeCastTo<T>(this Type type)
         {
             if (type == null) return false;
             Type destinationType = typeof(T);
