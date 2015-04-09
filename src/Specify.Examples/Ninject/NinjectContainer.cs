@@ -32,7 +32,7 @@ namespace Specify.Examples.Ninject
                 .ForEach(b => Container.RemoveBinding(b));
 
             Container.Bind<T>().To<T>()
-                .InTransientScope()
+                .InSingletonScope()
                 .BindingConfiguration.IsImplicit = true;
         }
 
