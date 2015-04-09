@@ -100,7 +100,6 @@
     <Compile Include="Mocks\MoqMockFactory.cs" />
     <Compile Include="Mocks\NSubstituteMockFactory.cs" />
     <Compile Include="MsTest\ScenarioFor.cs" />
-    <Compile Include="Ninject\KernelExtensions.cs" />
     <Compile Include="Ninject\NinjectContainer.cs" />
     <Compile Include="Ninject\NinjectDependencyResolver.cs" />
     <Compile Include="Ninject\NinjectTestsModule.cs" />
