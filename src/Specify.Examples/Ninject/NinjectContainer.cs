@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Linq;
+
 using Ninject;
-using Ninject.Extensions.ChildKernel;
+
 using Specify.Containers;
-using Specify.lib;
 
 namespace Specify.Examples.Ninject
 {
-
     public class NinjectContainer : IContainer
     {
-        private IKernel _container;
+        protected IKernel _container;
 
-        public NinjectContainer() : this(new StandardKernel())
-        {
-            
-        }
         public NinjectContainer(IKernel container)
         {
             _container = container;
@@ -31,9 +25,16 @@ namespace Specify.Examples.Ninject
 
         public void Register<T>() where T : class
         {
-            Container.Bind<T>().To<T>()
-                .InTransientScope()
-                .BindingConfiguration.IsImplicit = true;
+            if (this.CanResolve<T>())
+            {
+                Container.Rebind<T>().To<T>()
+                    .InTransientScope();
+            }
+            else
+            {
+                Container.Bind<T>().To<T>()
+                    .InTransientScope();
+            }
         }
 
         // This needs to be lifetime scope per scenario
@@ -41,10 +42,17 @@ namespace Specify.Examples.Ninject
             where TService : class
             where TImplementation : class, TService
         {
-            Container.Bind<TService>().To<TImplementation>()
-                //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
-                .InSingletonScope()
-                .BindingConfiguration.IsImplicit = true;
+            if (this.CanResolve<TService>())
+            {
+                Container.Rebind<TService>().To<TImplementation>()
+                    .InSingletonScope();
+            }
+            else
+            {
+                Container.Bind<TService>().To<TImplementation>()
+                    //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
+                    .InSingletonScope();
+            }
         }
 
         // This needs to be lifetime scope per scenario
@@ -54,16 +62,14 @@ namespace Specify.Examples.Ninject
             {
                 Container.Bind<T>().ToConstant(valueToSet)
                     //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
-                    .InSingletonScope()
-                    .BindingConfiguration.IsImplicit = true;
+                    .InSingletonScope();
             }
             else
             {
                 Container.Bind<T>().ToConstant(valueToSet)
                     //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
                     .InSingletonScope()
-                    .Named(key)
-                    .BindingConfiguration.IsImplicit = true;
+                    .Named(key);
             }
             return valueToSet;
         }
@@ -72,11 +78,11 @@ namespace Specify.Examples.Ninject
         {
             if (key == null)
             {
-                return Container.Get<T>();
+                return Container.GetDefault<T>();
             }
             else
             {
-                return Container.Get<T>(key);
+                return Container.GetNamedOrDefault<T>(key);
             }
         }
 
@@ -84,11 +90,11 @@ namespace Specify.Examples.Ninject
         {
             if (key == null)
             {
-                return Container.Get(serviceType);
+                return Container.GetDefault(serviceType);
             }
             else
             {
-                return Container.Get(serviceType, key);
+                return Container.GetNamedOrDefault(serviceType, key);
             }
         }
 
@@ -107,22 +113,4 @@ namespace Specify.Examples.Ninject
             Container.Dispose();
         }
     }
-    public class NinjectDependencyResolver : NinjectContainer, IDependencyResolver
-    {
-        public const string ScenarioLifetimeScopeTag = "ScenarioLifetime";
-
-        public NinjectDependencyResolver()
-        {
-            var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
-            // how to register all modules in Ninject
-            //_containerBuilder.RegisterAssemblyModules(assemblies);
-
-        }
-        public IContainer CreateChildContainer()
-        {
-            var childContainer = new ChildKernel(Container);
-            return new NinjectContainer(childContainer);
-        }
-    }
-
 }
