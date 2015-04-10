@@ -1,7 +1,7 @@
 # Specify
 
 ## What is it?
-Specify is a .Net testing library that builds on top of BDDfy from [TestStack](http://teststack.net/). While BDDfy is primarily intended for BDD testing, it is beautifully designed to be very easy to customize and extend.
+Specify is a .Net testing library that builds on top of BDDfy from [TestStack](http://teststack.net/). While BDDfy is primarily intended for BDD testing, it is beautifully designed to be very easy to customize and extend. Specify 
 
 When I first started using BDDfy for acceptance testing, I would use a different framework for unit testing, but I didn't like the context switching between different frameworks, syntaxes and testing styles. Specify provides a base fixture which gives a consistent experience for all types of tests (or specifications). Why not have the fantastic BDDfy reports for all of your different test types?
 
@@ -70,6 +70,15 @@ Specify can create the SUT for you, using either an auto-mocking container or an
 
 The Specification classes allow you to interact with the `SutFactory` via a `Container` property. The Get methods allow you to retrieve SUT dependencies. The Register methods allow you to provide implementations that will be used in the creation of the SUT. You can also set the SUT directly if you need to override the creation for a particular scenario. The SUT is lazily created the first time it is requested, so registering types and setting the SUT need to happen before the first request to the SUT property.
 
+### Auto-Mocking and IoC Adapters
+There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/) auto-mocking containers. Just add a reference to one of these projects and Specify will detect it and use the relevant adapter. 
+
+If no mocking framework is referenced then Specify will default to an Autofac-based IoC container. Just add an Autofac module, which Specify will automatically detect and register your dependencies.
+
+Alternatively, to use a particular mocking framework or IoC container in your tests you just have to implement the Specify `IContainer` interface. 
+
+The containers are largely based on [Chill's containers](https://github.com/Erwinvandervalk/Chill), by [Erwin van der Valk](http://www.erwinvandervalk.net/). Chill is a great framework, which I recommend you check out.
+
 ## Test Lifecycle
 Specify uses BDDfy's Reflective API to scan its classes for methods. By default, BDDfy recognises the standard BDD methods, as well as Setup and TearDown. You can read more about them [here](http://www.mehdi-khalili.com/bddify-in-action/method-name-conventions) and you can always [customize them](http://www.michael-whelan.net/roll-your-own-testing-framework/) if you have your own preferences by creating a new BDDfy `MethodNameStepScanner`. The method name:
 
@@ -83,15 +92,6 @@ Specify uses BDDfy's Reflective API to scan its classes for methods. By default,
 * Starting with `And` is considered as an asserting method (reported).
 * Starting with `TearDown` is considered as a finally method which is run after all the other steps (not reported).
  
-### Auto-Mocking and IoC Adapters
-There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/) auto-mocking containers. Just add a reference to one of these projects and Specify will detect it and use the relevant adapter. 
-
-If no mocking framework is referenced then Specify will default to an Autofac-based IoC container. Just add an Autofac module, which Specify will automatically detect and register your dependencies.
-
-Alternatively, to use a particular mocking framework or IoC container in your tests you just have to implement the Specify `IContainer` interface. 
-
-The containers are largely based on [Chill's containers](https://github.com/Erwinvandervalk/Chill), by [Erwin van der Valk](http://www.erwinvandervalk.net/). Chill is a great framework, which I recommend you check out.
-
 ## Logging
 Specify uses [LibLog](https://github.com/damianh/LibLog) for logging. You can turn logging on by setting the `LoggingEnabled` property to true on your SpecifyConfig file (it's off by default). LibLog is a logging abstraction
 
