@@ -1,11 +1,12 @@
 ﻿using ContosoUniversity.Controllers;
 using ContosoUniversity.Models;
 using FluentAssertions;
+using NUnit.Framework;
 using Specify;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 
-namespace ContosoUniversity.FunctionalTests
+namespace ContosoUniversity.FunctionalTests.Specifications
 {
     public class ViewStudentDetailsScenario : ScenarioFor<BrowserHost, StudentDetailsStory>
     {
@@ -34,10 +35,16 @@ namespace ContosoUniversity.FunctionalTests
             student.LastName.Should().Be("Alexander");
         }
 
-        public void AndThen_the_enrollments_for_the_student_are_displayed()
+        //public void AndThen_the_enrollments_for_the_student_are_displayed()
+        //{
+        //    var enrollments = _page.Enrollments();
+        //    enrollments.NumberOfRows.Should().Be(3);
+        //}
+
+        [Test]
+        public override void Specify()
         {
-            //var enrollments = _page.Enrollments();
-            //enrollments.NumberOfRows.Should().Be(3);
+            base.Specify();
         }
     }
 

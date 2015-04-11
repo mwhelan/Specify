@@ -1,7 +1,6 @@
-﻿using Specify;
-using Specify.Stories;
+﻿using Specify.Stories;
 
-namespace ContosoUniversity.FunctionalTests
+namespace ContosoUniversity.FunctionalTests.Specifications
 {
     public class StudentDetailsStory : UserStory
     {

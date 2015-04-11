@@ -1,6 +1,8 @@
 ﻿using Specify.Configuration;
 using Specify.Containers;
 using Specify.Containers.Mocking;
+using TestStack.BDDfy.Configuration;
+using TestStack.BDDfy.Reporters.Html;
 
 namespace ContosoUniversity.UnitTests
 {
@@ -10,5 +12,10 @@ namespace ContosoUniversity.UnitTests
         //{
         //    return new AutoMockingContainer(new NSubstituteMockFactory());
         //}
+        public SpecifyConfig()
+        {
+            Configurator.BatchProcessors.HtmlReport.Disable();
+            Configurator.BatchProcessors.Add(new HtmlReporter(new ReportConfig()));
+        }
     }
 }
