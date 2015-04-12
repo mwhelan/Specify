@@ -7,18 +7,18 @@ namespace ContosoUniversity.AcceptanceTests.Infrastructure
         where TController : Controller
         where TActionResult : ActionResult
     {
-        public TController SUT { get; set; }
+        public TController Controller { get; set; }
         public TActionResult ActionResult { get; set; }
         public Exception Exception { get; set; }
         public TModel Model { get; set; }
 
         public virtual void ExecuteAction(Func<TController, TActionResult> func)
         {
-            //SUT.Url = new UrlHelper(new RequestContext(FakeHttpContext.Root(), new RouteData()), RouteTable.Routes);
+            //Controller.Url = new UrlHelper(new RequestContext(FakeHttpContext.Root(), new RouteData()), RouteTable.Routes);
 
             try
             {
-                ActionResult = func(SUT);
+                ActionResult = func(Controller);
             }
             catch (Exception ex)
             {
