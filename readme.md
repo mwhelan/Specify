@@ -1,7 +1,7 @@
 # Specify
 
 ## What is it?
-Specify is a .Net testing library that builds on top of BDDfy from [TestStack](http://teststack.net/). While BDDfy is primarily intended for BDD testing, it is beautifully designed to be very easy to customize and extend. Specify 
+Specify is a .Net testing library that builds on top of BDDfy from [TestStack](http://teststack.net/). While BDDfy is primarily intended for BDD testing, it is beautifully designed to be very easy to customize and extend. Specify provides a base test fixture that extends BDDfy with additional features, such as automatic creation of the SUT ([System Under Test](http://en.wikipedia.org/wiki/System_under_test)), using auto-mocking or your IoC container, and logging with your logging framework. 
 
 When I first started using BDDfy for acceptance testing, I would use a different framework for unit testing, but I didn't like the context switching between different frameworks, syntaxes and testing styles. Specify provides a base fixture which gives a consistent experience for all types of tests (or specifications). Why not have the fantastic BDDfy reports for all of your different test types?
 
