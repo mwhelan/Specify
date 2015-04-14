@@ -11,7 +11,7 @@ namespace ContosoUniversity.FunctionalTests.Specifications
     public class ViewStudentDetailsScenario : ScenarioFor<BrowserHost, StudentDetailsStory>
     {
         private Student _student = new Student { ID = 1 };
-        private ViewDetailsPage _page;
+        private StudentDetailsPage _page;
 
         public void Given_an_existing_student()
         {
@@ -19,7 +19,7 @@ namespace ContosoUniversity.FunctionalTests.Specifications
         }
         public void When_the_details_are_requested_for_that_Student()
         {
-            _page = SUT.Host.NavigateToInitialPage<StudentController, ViewDetailsPage>(c => c.Details(_student.ID));
+            _page = SUT.Host.NavigateToInitialPage<StudentController, StudentDetailsPage>(c => c.Details(_student.ID));
         }
 
         public void Then_the_details_view_is_displayed()
@@ -48,11 +48,16 @@ namespace ContosoUniversity.FunctionalTests.Specifications
         }
     }
 
-    public class ViewDetailsPage : Page<Student>
+    public class StudentDetailsPage : Page<Student>
     {
+        private Student _student;
         public Student ReadModelFromPage()
         {
-            return Read.ModelFromPage();
+            if (_student == null)
+            {
+                _student = Read.ModelFromPage();
+            }
+            return _student;
         }
 
         public TableReader<Enrollment> Enrollments()

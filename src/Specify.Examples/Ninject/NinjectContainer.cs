@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Ninject;
-using Ninject.Extensions.ChildKernel;
 using Specify.Containers;
-using Specify.lib;
 
 namespace Specify.Examples.Ninject
 {

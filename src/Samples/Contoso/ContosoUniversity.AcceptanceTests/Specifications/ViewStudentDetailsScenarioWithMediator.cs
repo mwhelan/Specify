@@ -1,6 +1,5 @@
 using System;
 using System.Web.Mvc;
-using System.Web.WebPages;
 using ContosoUniversity.AcceptanceTests.Infrastructure;
 using ContosoUniversity.Controllers;
 using ContosoUniversity.Models;
