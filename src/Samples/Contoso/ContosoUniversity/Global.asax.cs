@@ -18,7 +18,8 @@ namespace ContosoUniversity
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SchoolContext,Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<SchoolContext,Configuration>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<SchoolContext>());
             DbInterception.Add(new SchoolInterceptorTransientErrors());
             DbInterception.Add(new SchoolInterceptorLogging());
         }

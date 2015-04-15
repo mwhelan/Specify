@@ -1,16 +1,17 @@
 ﻿using ContosoUniversity.Controllers;
 using ContosoUniversity.Models;
 using FluentAssertions;
+using NUnit.Framework;
 using Specify;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 
-namespace ContosoUniversity.FunctionalTests
+namespace ContosoUniversity.FunctionalTests.Specifications
 {
     public class ViewStudentDetailsScenario : ScenarioFor<BrowserHost, StudentDetailsStory>
     {
         private Student _student = new Student { ID = 1 };
-        private ViewDetailsPage _page;
+        private StudentDetailsPage _page;
 
         public void Given_an_existing_student()
         {
@@ -18,7 +19,7 @@ namespace ContosoUniversity.FunctionalTests
         }
         public void When_the_details_are_requested_for_that_Student()
         {
-            _page = SUT.Host.NavigateToInitialPage<StudentController, ViewDetailsPage>(c => c.Details(_student.ID));
+            _page = SUT.Host.NavigateToInitialPage<StudentController, StudentDetailsPage>(c => c.Details(_student.ID));
         }
 
         public void Then_the_details_view_is_displayed()
@@ -28,24 +29,42 @@ namespace ContosoUniversity.FunctionalTests
 
         public void AndThen_the_details_are_of_the_requested_student()
         {
-            Student student = _page.ReadModelFromPage();
+            Student student = _page.GetModel();
             student.ID.Should().Be(1);
             student.FirstMidName.Should().Be("Carson");
             student.LastName.Should().Be("Alexander");
         }
 
-        public void AndThen_the_enrollments_for_the_student_are_displayed()
+        //public void AndThen_the_enrollments_for_the_student_are_displayed()
+        //{
+        //    var enrollments = _page.Enrollments();
+        //    enrollments.NumberOfRows.Should().Be(3);
+        //}
+
+        [Test]
+        public override void Specify()
         {
-            //var enrollments = _page.Enrollments();
-            //enrollments.NumberOfRows.Should().Be(3);
+            base.Specify();
         }
     }
 
-    public class ViewDetailsPage : Page<Student>
+    public interface IPage<out TModel>
     {
-        public Student ReadModelFromPage()
+        TModel GetModel();
+
+        string Title { get; }
+    }
+
+    public class StudentDetailsPage : Page<Student>, IPage<Student>
+    {
+        private Student _student;
+        public Student GetModel()
         {
-            return Read.ModelFromPage();
+            if (_student == null)
+            {
+                _student = Read.ModelFromPage();
+            }
+            return _student;
         }
 
         public TableReader<Enrollment> Enrollments()

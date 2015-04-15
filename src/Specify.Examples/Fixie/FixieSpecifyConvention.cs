@@ -7,10 +7,10 @@ namespace Specify.Examples.Fixie
         public FixieSpecifyConvention()
         {
             Classes
-                .Where(type => type.IsUnitScenario() || type.IsStoryScenario());
+                .Where(type => type.IsScenario());
 
             Methods
-                .Where(method => method.Name == "ExecuteTest");
+                .Where(method => method.Name == "Specify");
         }
     }
 }

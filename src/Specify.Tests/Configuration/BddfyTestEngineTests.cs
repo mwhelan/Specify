@@ -9,6 +9,8 @@ using TestStack.BDDfy.Reporters;
 
 namespace Specify.Tests.Configuration
 {
+    using System.Runtime.CompilerServices;
+
     [TestFixture]
     public class BddfyTestEngineTests
     {
@@ -38,6 +40,7 @@ namespace Specify.Tests.Configuration
 
         [Test]
         [UseReporter(typeof(DiffReporter))]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void should_display_examples_on_reports()
         {
             var scenario = new StubUserStoryScenarioForWithExamples();

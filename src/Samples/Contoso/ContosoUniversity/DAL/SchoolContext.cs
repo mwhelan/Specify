@@ -23,10 +23,12 @@ namespace ContosoUniversity.DAL
         private static string GetConnectionString()
         {
             var environmentVariable = Environment.GetEnvironmentVariable("FunctionalTests");
-            return environmentVariable == null 
+            var connectionString = environmentVariable == null 
                 ? ConfigurationManager.ConnectionStrings["SchoolContext"].ConnectionString 
                 : ConfigurationManager.ConnectionStrings["SchoolContext-FunctionalTests"].ConnectionString;
+            return connectionString;
         }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -5,6 +5,7 @@ namespace Specify.Tests.Stubs
 {
     class StubUnitScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors> { }
     class StubUserStoryScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
+    class StubValueStoryScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors, TicTacToeValueStory> { }
 
     class ConcreteObjectWithNoConstructorUnitScenario : ScenarioFor<ConcreteObjectWithNoConstructor> { }
 

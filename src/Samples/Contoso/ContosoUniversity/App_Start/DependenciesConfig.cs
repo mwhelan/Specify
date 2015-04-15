@@ -12,13 +12,19 @@ namespace ContosoUniversity
         {
             if(builder == null) 
                 builder = new ContainerBuilder();
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<SchoolContext>().AsSelf().InstancePerRequest();
-            builder.RegisterType<SchoolRepository>().As<ISchoolRepository>().InstancePerRequest();
+
+            ConfigureDependencies(builder);
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             return container;
+        }
+
+        public static void ConfigureDependencies(ContainerBuilder builder)
+        {
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterType<SchoolContext>().AsSelf();//.InstancePerRequest();
+            builder.RegisterType<SchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
         }
     }
 }
