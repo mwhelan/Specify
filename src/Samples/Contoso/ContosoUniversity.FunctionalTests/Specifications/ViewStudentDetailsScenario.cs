@@ -29,7 +29,7 @@ namespace ContosoUniversity.FunctionalTests.Specifications
 
         public void AndThen_the_details_are_of_the_requested_student()
         {
-            Student student = _page.ReadModelFromPage();
+            Student student = _page.GetModel();
             student.ID.Should().Be(1);
             student.FirstMidName.Should().Be("Carson");
             student.LastName.Should().Be("Alexander");
@@ -48,10 +48,17 @@ namespace ContosoUniversity.FunctionalTests.Specifications
         }
     }
 
-    public class StudentDetailsPage : Page<Student>
+    public interface IPage<out TModel>
+    {
+        TModel GetModel();
+
+        string Title { get; }
+    }
+
+    public class StudentDetailsPage : Page<Student>, IPage<Student>
     {
         private Student _student;
-        public Student ReadModelFromPage()
+        public Student GetModel()
         {
             if (_student == null)
             {

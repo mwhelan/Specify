@@ -31,7 +31,7 @@ namespace Specify.Configuration
 
             var story = (Story)Activator.CreateInstance(scenario.Story);
             return new StoryMetadata(scenario.Story, story.Narrative1, story.Narrative2,
-                story.Narrative3, scenario.Title, story.TitlePrefix);
+                story.Narrative3, story.Title, story.TitlePrefix);
         }
 
         private StoryMetadata CreateSpecificationMetadata(IScenario specification)

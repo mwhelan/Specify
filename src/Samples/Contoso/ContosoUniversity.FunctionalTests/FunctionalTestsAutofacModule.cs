@@ -11,6 +11,7 @@ namespace ContosoUniversity.FunctionalTests
 
     using ContosoUniversity.DAL;
     using ContosoUniversity.FunctionalTests.Specifications;
+    using ContosoUniversity.Models;
 
     using MediatR;
 
@@ -52,6 +53,8 @@ namespace ContosoUniversity.FunctionalTests
                 var c = ctx.Resolve<IComponentContext>();
                 return t => (IEnumerable<object>)c.Resolve(typeof(IEnumerable<>).MakeGenericType(t));
             });
+
+            builder.RegisterType<StudentDetailsPage>().As(typeof(IPage<Student>));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Specify.Tests.Configuration
         }
 
         [Test]
-        public void Specification_should_have_sut_for_title_and_custom_title_prefix()
+        public void Unit_Story_should_have_sut_for_title_and_custom_title_prefix()
         {
             var sut = new SpecifyStoryMetadataScanner();
             var result = sut.Scan(new StubUnitScenario());
@@ -26,15 +26,23 @@ namespace Specify.Tests.Configuration
         }
 
         [Test]
-        public void Scenario_should_have_Humanized_class_name_as_title()
+        public void User_Story_should_have_Humanized_story_class_name_as_title_if_no_title_specified()
         {
             var sut = new SpecifyStoryMetadataScanner();
             var result = sut.Scan(new StubUserStoryScenario());
-            result.Title.ShouldBe("Stub User Story Scenario");
+            result.Title.ShouldBe("Withdraw cash user story");
         }
 
         [Test]
-        public void Scenario_should_have_standard_title_prefix()
+        public void Value_Story_should_have_specified_story_title()
+        {
+            var sut = new SpecifyStoryMetadataScanner();
+            var result = sut.Scan(new StubValueStoryScenario());
+            result.Title.ShouldBe("Tic Tac Toe Story");
+        }
+
+        [Test]
+        public void User_Story_should_have_standard_title_prefix_if_none_specified()
         {
             var sut = new SpecifyStoryMetadataScanner();
             var result = sut.Scan(new StubUserStoryScenario());
@@ -42,13 +50,12 @@ namespace Specify.Tests.Configuration
         }
 
         [Test]
-        public void Scenario_title_should_include_number_if_it_has_been_set()
+        public void Value_Story_should_have_specified_title_prefix()
         {
             var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubUserStoryScenario {Number = 3});
-            result.Title.ShouldBe("Scenario 03: Stub User Story Scenario");
+            var result = sut.Scan(new StubValueStoryScenario());
+            result.TitlePrefix.ShouldBe("User Story 1:");
         }
-
         [Test]
         public void should_use_story_attribute_if_present()
         {

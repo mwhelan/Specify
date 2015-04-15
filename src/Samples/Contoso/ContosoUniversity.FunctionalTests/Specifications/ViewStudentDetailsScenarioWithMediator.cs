@@ -5,10 +5,11 @@ using Specify;
 namespace ContosoUniversity.FunctionalTests.Specifications
 {
     using ContosoUniversity.Controllers;
+    using ContosoUniversity.Models;
 
     using MediatR;
 
-    public class StudentDetailsRequestHandler : IRequestHandler<StudentDetailsRequest, StudentDetailsPage>
+    public class StudentDetailsRequestHandler : IRequestHandler<StudentDetailsRequest, IPage<Student>>
     {
         private readonly BrowserHost _browser;
 
@@ -17,7 +18,7 @@ namespace ContosoUniversity.FunctionalTests.Specifications
             _browser = browser;
         }
 
-        public StudentDetailsPage Handle(StudentDetailsRequest message)
+        public IPage<Student> Handle(StudentDetailsRequest message)
         {
             return _browser.Host.NavigateToInitialPage<StudentController, StudentDetailsPage>(
                 c => c.Details(message.Id));
@@ -49,7 +50,7 @@ namespace ContosoUniversity.FunctionalTests.Specifications
 
         public void AndThen_the_details_are_of_the_requested_student()
         {
-            var model = _response.ReadModelFromPage();
+            var model = _response.GetModel();
             model.ID.Should().Be(1);
             model.FirstMidName.Should().Be("Carson");
             model.LastName.Should().Be("Alexander");
@@ -57,7 +58,7 @@ namespace ContosoUniversity.FunctionalTests.Specifications
 
         public void AndThen_the_enrollments_for_the_student_are_displayed()
         {
-            var model = _response.ReadModelFromPage();
+            var model = _response.GetModel();
             model.Enrollments.Count.Should().Be(3);
         }
 
