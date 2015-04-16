@@ -32,7 +32,7 @@ namespace Specify
         {
             get
             {
-                if (Story.Name == "SpecificationStory")
+                if (this.IsUnitScenario())
                 {
                     return typeof(TSut).Name;
                 }

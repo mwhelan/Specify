@@ -8,12 +8,12 @@ namespace Specify.Configuration
         {
             if (scenario.Examples == null)
             {
-                return scenario.BDDfy();
+                return scenario.BDDfy(scenario.Title);
             }
-            
+
             return scenario
                     .WithExamples(scenario.Examples)
-                    .BDDfy();
+                    .BDDfy(scenario.Title);
         }
     }
 }
