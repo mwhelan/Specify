@@ -141,7 +141,7 @@
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\Repositories\ISchoolRepository.cs" />
-    <Compile Include="DAL\Repositories\SchoolRepository.cs" />
+    <Compile Include="DAL\Repositories\EfSchoolRepository.cs" />
     <Compile Include="DAL\SchoolConfiguration.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
     <Compile Include="DAL\SchoolInterceptorLogging.cs" />

@@ -24,7 +24,7 @@ namespace ContosoUniversity
         {
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<SchoolContext>().AsSelf();//.InstancePerRequest();
-            builder.RegisterType<SchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
+            builder.RegisterType<EfSchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
         }
     }
 }

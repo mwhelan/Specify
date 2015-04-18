@@ -20,6 +20,7 @@ namespace ContosoUniversity
 
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<SchoolContext,Configuration>());
             Database.SetInitializer(new DropCreateDatabaseAlways<SchoolContext>());
+            SeedData.Create(new SchoolContext());
             DbInterception.Add(new SchoolInterceptorTransientErrors());
             DbInterception.Add(new SchoolInterceptorLogging());
         }

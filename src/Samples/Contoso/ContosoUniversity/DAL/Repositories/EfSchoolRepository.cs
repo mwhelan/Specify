@@ -6,11 +6,11 @@ using PagedList;
 
 namespace ContosoUniversity.DAL.Repositories
 {
-    public class SchoolRepository : ISchoolRepository
+    public class EfSchoolRepository : ISchoolRepository
     {
         private SchoolContext _db;
 
-        public SchoolRepository(SchoolContext db)
+        public EfSchoolRepository(SchoolContext db)
         {
             _db = db;
         }
