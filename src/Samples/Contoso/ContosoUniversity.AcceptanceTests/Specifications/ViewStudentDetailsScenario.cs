@@ -1,10 +1,6 @@
-﻿using System;
-using System.Data.Entity;
-using System.IO;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ContosoUniversity.AcceptanceTests.Infrastructure;
 using ContosoUniversity.Controllers;
-using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using FluentAssertions;
 using NUnit.Framework;

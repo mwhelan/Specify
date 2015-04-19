@@ -25,14 +25,14 @@ namespace ContosoUniversity
         {
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-            var sessionFactory = DatabaseConfig.BuildSessionFactory();
-            builder.RegisterInstance(sessionFactory).SingleInstance();
-            builder.Register(c => c.Resolve<ISessionFactory>().OpenSession())
-                .As<ISession>()
-                .InstancePerRequest();
-            builder.RegisterType<SchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
-            //builder.RegisterType<SchoolContext>().AsSelf();//.InstancePerRequest();
-            //builder.RegisterType<EfSchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
+            //var sessionFactory = DatabaseConfig.BuildSessionFactory();
+            //builder.RegisterInstance(sessionFactory).SingleInstance();
+            //builder.Register(c => c.Resolve<ISessionFactory>().OpenSession())
+            //    .As<ISession>()
+            //    .InstancePerRequest();
+            //builder.RegisterType<SchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
+            builder.RegisterType<SchoolContext>().AsSelf();//.InstancePerRequest();
+            builder.RegisterType<EfSchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
         }
     }
 }
