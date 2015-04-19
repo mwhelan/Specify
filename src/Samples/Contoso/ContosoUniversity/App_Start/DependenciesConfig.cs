@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using ContosoUniversity.DAL;
 using ContosoUniversity.DAL.Repositories;
+using MicroLite;
 
 namespace ContosoUniversity
 {
@@ -23,8 +24,15 @@ namespace ContosoUniversity
         public static void ConfigureDependencies(ContainerBuilder builder)
         {
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<SchoolContext>().AsSelf();//.InstancePerRequest();
-            builder.RegisterType<EfSchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
+
+            var sessionFactory = DatabaseConfig.BuildSessionFactory();
+            builder.RegisterInstance(sessionFactory).SingleInstance();
+            builder.Register(c => c.Resolve<ISessionFactory>().OpenSession())
+                .As<ISession>()
+                .InstancePerRequest();
+            builder.RegisterType<SchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
+            //builder.RegisterType<SchoolContext>().AsSelf();//.InstancePerRequest();
+            //builder.RegisterType<EfSchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
         }
     }
 }

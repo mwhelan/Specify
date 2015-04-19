@@ -58,6 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MicroLite">
+      <HintPath>..\..\..\packages\MicroLite.6.2.0\lib\net45\MicroLite.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -132,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\DatabaseConfig.cs" />
     <Compile Include="App_Start\DependenciesConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -142,6 +146,7 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\Repositories\ISchoolRepository.cs" />
     <Compile Include="DAL\Repositories\EfSchoolRepository.cs" />
+    <Compile Include="DAL\Repositories\SchoolRepository.cs" />
     <Compile Include="DAL\SchoolConfiguration.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
     <Compile Include="DAL\SchoolInterceptorLogging.cs" />
@@ -179,6 +184,10 @@
     <Compile Include="Migrations\201402251853267_Inheritance.cs" />
     <Compile Include="Migrations\201402251853267_Inheritance.Designer.cs">
       <DependentUpon>201402251853267_Inheritance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504190527586_RemovePerson.cs" />
+    <Compile Include="Migrations\201504190527586_RemovePerson.Designer.cs">
+      <DependentUpon>201504190527586_RemovePerson.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -291,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201402251853267_Inheritance.resx">
       <DependentUpon>201402251853267_Inheritance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504190527586_RemovePerson.resx">
+      <DependentUpon>201504190527586_RemovePerson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
