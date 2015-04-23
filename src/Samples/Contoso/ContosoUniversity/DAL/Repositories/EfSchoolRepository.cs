@@ -1,23 +1,16 @@
 using System;
-using System.Data.Entity;
-using System.Linq;
 using ContosoUniversity.Models;
 using PagedList;
 
 namespace ContosoUniversity.DAL.Repositories
 {
+    using System.Linq;
+
     public class EfSchoolRepository : ISchoolRepository
     {
-        private SchoolContext _db;
-
-        public EfSchoolRepository(SchoolContext db)
-        {
-            _db = db;
-        }
-
         public IPagedList<Student> GetStudents(string sortOrder, string searchString, int pageNumber, int pageSize)
         {
-            var students = from s in _db.Students
+            var students = from s in Database.Students
                            select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -48,26 +41,27 @@ namespace ContosoUniversity.DAL.Repositories
 
         public Student FindStudentById(int id)
         {
-            return _db.Students.Find(id);
+            return Database.Students.Single(x => x.ID == id);
         }
 
         public void Create(Student student)
         {
-            _db.Students.Add(student);
-            _db.SaveChanges();
+            Database.Students.Add(student);
         }
 
-        public void Update(Student student)
-        {
-            _db.Entry(student).State = EntityState.Modified;
-            _db.SaveChanges();
-        }
+        //public void Update(Student student)
+        //{
+        //    var student = Database.Students.Single(x => x.ID == student.ID);
+        //    = student;
+        //    Database.Entry(student).State = EntityState.Modified;
+        //    Database.SaveChanges();
+        //}
 
-        public void Delete(int id)
-        {
-            Student student = _db.Students.Find(id);
-            _db.Students.Remove(student);
-            _db.SaveChanges();
-        }
+        //public void Delete(int id)
+        //{
+        //    Student student = Database.Students.Find(id);
+        //    Database.Students.Remove(student);
+        //    Database.SaveChanges();
+        //}
     }
 }

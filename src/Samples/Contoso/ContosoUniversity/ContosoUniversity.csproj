@@ -50,17 +50,6 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\..\..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="MicroLite">
-      <HintPath>..\..\..\packages\MicroLite.6.2.0\lib\net45\MicroLite.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -135,7 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\DatabaseConfig.cs" />
     <Compile Include="App_Start\DependenciesConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -147,49 +135,12 @@
     <Compile Include="DAL\Repositories\ISchoolRepository.cs" />
     <Compile Include="DAL\Repositories\EfSchoolRepository.cs" />
     <Compile Include="DAL\Repositories\SchoolRepository.cs" />
-    <Compile Include="DAL\SchoolConfiguration.cs" />
-    <Compile Include="DAL\SchoolContext.cs" />
-    <Compile Include="DAL\SchoolInterceptorLogging.cs" />
-    <Compile Include="DAL\SchoolInterceptorTransientErrors.cs" />
-    <Compile Include="DAL\SeedData.cs" />
+    <Compile Include="DAL\Database.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Migrations\201402242126344_InitialCreate.cs" />
-    <Compile Include="Migrations\201402242126344_InitialCreate.Designer.cs">
-      <DependentUpon>201402242126344_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201402242138028_MaxLengthOnNames.cs" />
-    <Compile Include="Migrations\201402242138028_MaxLengthOnNames.Designer.cs">
-      <DependentUpon>201402242138028_MaxLengthOnNames.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201402242139118_ColumnFirstName.cs" />
-    <Compile Include="Migrations\201402242139118_ColumnFirstName.Designer.cs">
-      <DependentUpon>201402242139118_ColumnFirstName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201402242150170_ComplexDataModel.cs" />
-    <Compile Include="Migrations\201402242150170_ComplexDataModel.Designer.cs">
-      <DependentUpon>201402242150170_ComplexDataModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201402251758056_DepartmentSP.cs" />
-    <Compile Include="Migrations\201402251758056_DepartmentSP.Designer.cs">
-      <DependentUpon>201402251758056_DepartmentSP.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201402251804219_RowVersion.cs" />
-    <Compile Include="Migrations\201402251804219_RowVersion.Designer.cs">
-      <DependentUpon>201402251804219_RowVersion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201402251853267_Inheritance.cs" />
-    <Compile Include="Migrations\201402251853267_Inheritance.Designer.cs">
-      <DependentUpon>201402251853267_Inheritance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504190527586_RemovePerson.cs" />
-    <Compile Include="Migrations\201504190527586_RemovePerson.Designer.cs">
-      <DependentUpon>201504190527586_RemovePerson.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Enrollments.cs" />
@@ -278,32 +229,6 @@
     <Content Include="Views\Shared\DisplayTemplates\String.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Text.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Url.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201402242126344_InitialCreate.resx">
-      <DependentUpon>201402242126344_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201402242138028_MaxLengthOnNames.resx">
-      <DependentUpon>201402242138028_MaxLengthOnNames.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201402242139118_ColumnFirstName.resx">
-      <DependentUpon>201402242139118_ColumnFirstName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201402242150170_ComplexDataModel.resx">
-      <DependentUpon>201402242150170_ComplexDataModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201402251758056_DepartmentSP.resx">
-      <DependentUpon>201402251758056_DepartmentSP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201402251804219_RowVersion.resx">
-      <DependentUpon>201402251804219_RowVersion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201402251853267_Inheritance.resx">
-      <DependentUpon>201402251853267_Inheritance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504190527586_RemovePerson.resx">
-      <DependentUpon>201504190527586_RemovePerson.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
