@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
 {
-    public class Course
+    public class Course : IEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public Course()
+        {
+            Enrollments = new List<Enrollment>();
+            Instructors = new List<Instructor>();
+        }
+
         [Display(Name = "Number")]
-        public int CourseID { get; set; }
+        public int Id { get; set; }
 
         [StringLength(50, MinimumLength = 3)]
         public string Title { get; set; }
@@ -16,7 +20,7 @@ namespace ContosoUniversity.Models
         [Range(0, 5)]
         public int Credits { get; set; }
 
-        public int DepartmentID { get; set; }
+        public int DepartmentId { get { return Department.Id; } }
 
         public virtual Department Department { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }

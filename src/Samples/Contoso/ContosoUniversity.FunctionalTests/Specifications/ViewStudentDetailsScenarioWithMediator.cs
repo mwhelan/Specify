@@ -51,7 +51,7 @@ namespace ContosoUniversity.FunctionalTests.Specifications
         public void AndThen_the_details_are_of_the_requested_student()
         {
             var model = _response.GetModel();
-            model.ID.Should().Be(1);
+            model.Id.Should().Be(1);
             model.FirstMidName.Should().Be("Carson");
             model.LastName.Should().Be("Alexander");
         }

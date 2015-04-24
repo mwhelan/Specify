@@ -15,15 +15,6 @@ namespace ContosoUniversity.AcceptanceTests
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var testPath = Path.GetDirectoryName(GetType().Assembly.CodeBase.Replace("file:///", ""));
-            AppDomain.CurrentDomain.SetData("DataDirectory", testPath);// For localdb connection string that uses |DataDirectory|        
-           // Database.SetInitializer(new DropCreateDatabaseAlways<SchoolContext>());
-            using (var context = new SchoolContext())
-            {
-                context.Database.Initialize(false);
-                SeedData.Create(context);
-            }
-            
             DependenciesConfig.ConfigureDependencies(builder);
             builder.RegisterGeneric(typeof (ViewControllerScenario<,>))
                 .AsSelf()

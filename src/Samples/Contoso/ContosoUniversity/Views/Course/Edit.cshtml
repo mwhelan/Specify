@@ -15,12 +15,12 @@
         <h4>Course</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.CourseID)
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CourseID, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Id, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.CourseID)
+                @Html.DisplayFor(model => model.Id)
             </div>
         </div>
 
@@ -41,10 +41,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DepartmentID, "DepartmentID", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DepartmentId, "DepartmentID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("DepartmentID", String.Empty)
-                @Html.ValidationMessageFor(model => model.DepartmentID)
+                @Html.ValidationMessageFor(model => model.DepartmentId)
             </div>
         </div>
 

@@ -10,7 +10,7 @@
     <h4>Student
 </h4>
     <hr />
-    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.Id)
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.LastName)
@@ -61,6 +61,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

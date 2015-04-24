@@ -1,67 +1,65 @@
-﻿using System;
-using System.Linq;
+using System;
 using ContosoUniversity.Models;
-using MicroLite;
 using PagedList;
 
 namespace ContosoUniversity.DAL.Repositories
 {
+    using System.Linq;
+
     public class SchoolRepository : ISchoolRepository
     {
-        private readonly ISession _session;
-
-        public SchoolRepository(ISession session)
-        {
-            _session = session;
-        }
-
         public IPagedList<Student> GetStudents(string sortOrder, string searchString, int pageNumber, int pageSize)
         {
-            PagedResult<Student> result;
+            var students = from s in Database.Students
+                           select s;
 
-            using (var transaction = _session.BeginTransaction())
+            if (!String.IsNullOrEmpty(searchString))
             {
-                var query = new SqlQuery(
-                    "SELECT [ID] ,[LastName] ,[FirstName] , [EnrollmentDate] " +
-                    "FROM [dbo].[Student] ");
-
-                result = _session.Paged<Student>(query, PagingOptions.ForPage(page: pageNumber, resultsPerPage: pageSize));
-
-                transaction.Commit();
+                students = students
+                    .Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())
+                                || s.FirstMidName.ToUpper().Contains(searchString.ToUpper()));
             }
-            return new PagedList<Student>(result.Results.AsEnumerable(), result.Page, result.ResultsPerPage);
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    students = students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                case "date_desc":
+                    students = students.OrderByDescending(s => s.EnrollmentDate);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return students.ToPagedList(pageNumber, pageSize);
         }
 
         public Student FindStudentById(int id)
         {
-            Student student;
-            using (var transaction = _session.BeginTransaction())
-            {
-                //var query = new SqlQuery(
-                //    "SELECT [ID] ,[LastName] ,[FirstName] ,[HireDate] ,[EnrollmentDate] " +
-                //    "FROM [dbo].[Person] " +
-                //    "WHERE [ID] = @id", id);
-
-                 student = _session.Single<Student>(id);
-
-                transaction.Commit();
-            }
-            return student;
+            return Database.Students.Single(x => x.Id == id);
         }
 
         public void Create(Student student)
         {
-            throw new NotImplementedException();
+            Database.Students.Add(student);
         }
 
         public void Update(Student student)
         {
-            throw new NotImplementedException();
+            var existingStudent = Database.Students.Find(x => x.Id == student.Id);
+            Database.Students.Remove(existingStudent);
+            Database.Students.Add(student);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var existingStudent = Database.Students.Find(x => x.Id == id);
+            Database.Students.Remove(existingStudent);
         }
     }
 }

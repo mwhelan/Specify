@@ -5,9 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
 {
-    public class Department
+    public class Department : IEntity
     {
-        public int DepartmentID { get; set; }
+        public Department()
+        {
+            Courses = new List<Course>();
+        }
+        public int Id { get; set; }
 
         [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
@@ -21,12 +25,12 @@ namespace ContosoUniversity.Models
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
-        public int? InstructorID { get; set; }
+        public int? InstructorID { get{return Instructor.Id;} }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
-        public virtual Instructor Administrator { get; set; }
+        public virtual Instructor Instructor { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
     }
 }

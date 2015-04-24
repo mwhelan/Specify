@@ -17,10 +17,10 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CourseID, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Id, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseID)
-                @Html.ValidationMessageFor(model => model.CourseID)
+                @Html.EditorFor(model => model.Id)
+                @Html.ValidationMessageFor(model => model.Id)
             </div>
         </div>
 
@@ -44,7 +44,7 @@
             <label class="control-label col-md-2" for="DepartmentID">Department</label>
             <div class="col-md-10">
                 @Html.DropDownList("DepartmentID", String.Empty)
-                @Html.ValidationMessageFor(model => model.DepartmentID)
+                @Html.ValidationMessageFor(model => model.DepartmentId)
             </div>
         </div>
 

@@ -78,7 +78,7 @@ namespace ContosoUniversity.AcceptanceTests.Specifications
 
         public void AndThen_the_details_are_of_the_requested_student()
         {
-            _response.Model.ID.Should().Be(1);
+            _response.Model.Id.Should().Be(1);
             _response.Model.FirstMidName.Should().Be("Carson");
             _response.Model.LastName.Should().Be("Alexander");
         }

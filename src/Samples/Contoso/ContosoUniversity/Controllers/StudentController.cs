@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
 using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.Models;
-using System.Data.Entity.Infrastructure;
 
 namespace ContosoUniversity.Controllers
 {
@@ -78,7 +76,7 @@ namespace ContosoUniversity.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (RetryLimitExceededException /* dex */)
+            catch (Exception /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
@@ -116,7 +114,7 @@ namespace ContosoUniversity.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (RetryLimitExceededException /* dex */)
+            catch (Exception /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
@@ -151,7 +149,7 @@ namespace ContosoUniversity.Controllers
             {
                 _repository.Delete(id);
             }
-            catch (RetryLimitExceededException/* dex */)
+            catch (Exception/* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });

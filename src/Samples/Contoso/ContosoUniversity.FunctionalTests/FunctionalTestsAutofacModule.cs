@@ -25,15 +25,6 @@ namespace ContosoUniversity.FunctionalTests
             builder.RegisterInstance(selenoHost).AsSelf().SingleInstance();
             builder.RegisterType<BrowserHost>().AsSelf();
 
-            var testPath = Path.GetDirectoryName(GetType().Assembly.CodeBase.Replace("file:///", ""));
-            AppDomain.CurrentDomain.SetData("DataDirectory", testPath);// For localdb connection string that uses |DataDirectory|        
-            // Database.SetInitializer(new DropCreateDatabaseAlways<SchoolContext>());
-            using (var context = new SchoolContext())
-            {
-                context.Database.Initialize(false);
-                SeedData.Create(context);
-            }
-
             DependenciesConfig.ConfigureDependencies(builder);
             //builder.RegisterGeneric(typeof(ViewStudentDetailsScenario))
             //    .AsSelf()

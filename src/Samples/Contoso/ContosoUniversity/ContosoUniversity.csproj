@@ -14,7 +14,7 @@
     <RootNamespace>ContosoUniversity</RootNamespace>
     <AssemblyName>ContosoUniversity</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -133,7 +133,6 @@
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\Repositories\ISchoolRepository.cs" />
-    <Compile Include="DAL\Repositories\EfSchoolRepository.cs" />
     <Compile Include="DAL\Repositories\SchoolRepository.cs" />
     <Compile Include="DAL\Database.cs" />
     <Compile Include="Global.asax.cs">
@@ -143,10 +142,11 @@
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\Enrollments.cs" />
+    <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\Grade.cs" />
+    <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\OfficeAssignment.cs" />
-    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AssignedCourseData.cs" />

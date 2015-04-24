@@ -1,32 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ContosoUniversity.Models;
 using ContosoUniversity.DAL;
-using System.Data.Entity.Infrastructure;
+using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Controllers
 {
     public class CourseController : Controller
     {
-        private SchoolContext db = new SchoolContext();
-
         // GET: /Course/
         public ActionResult Index(int? SelectedDepartment)
         {
-            var departments = db.Departments.OrderBy(q => q.Name).ToList();
+            var departments = Database.Departments.OrderBy(q => q.Name).ToList();
             ViewBag.SelectedDepartment = new SelectList(departments, "DepartmentID", "Name", SelectedDepartment);
             int departmentID = SelectedDepartment.GetValueOrDefault();
 
-            IQueryable<Course> courses = db.Courses
-                .Where(c => !SelectedDepartment.HasValue || c.DepartmentID == departmentID)
-                .OrderBy(d => d.CourseID)
-                .Include(d => d.Department);
+            var courses = Database.Courses
+                .Where(c => !SelectedDepartment.HasValue || c.DepartmentId == departmentID)
+                .OrderBy(d => d.Id);
             var sql = courses.ToString();
             return View(courses.ToList());
         }
@@ -38,7 +30,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            Course course = Database.Courses.Single(x => x.Id == id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -60,17 +52,16 @@ namespace ContosoUniversity.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Courses.Add(course);
-                    db.SaveChanges();
+                    Database.Courses.Add(course);
                     return RedirectToAction("Index");
                 }
             }
-            catch (RetryLimitExceededException /* dex */)
+            catch (Exception /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.)
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
+            PopulateDepartmentsDropDownList(course.DepartmentId);
             return View(course);
         }
 
@@ -80,12 +71,12 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            Course course = Database.Courses.SingleOrDefault(x => x.Id == id.Value);
             if (course == null)
             {
                 return HttpNotFound();
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
+            PopulateDepartmentsDropDownList(course.DepartmentId);
             return View(course);
         }
 
@@ -97,23 +88,23 @@ namespace ContosoUniversity.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(course).State = EntityState.Modified;
-                    db.SaveChanges();
+                    Database.Courses.RemoveAll(x => x.Id == course.Id);
+                    Database.Courses.Add(course);
                     return RedirectToAction("Index");
                 }
             }
-            catch (RetryLimitExceededException /* dex */)
+            catch (Exception /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.)
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
+            PopulateDepartmentsDropDownList(course.DepartmentId);
             return View(course);
         }
 
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
-            var departmentsQuery = from d in db.Departments
+            var departmentsQuery = from d in Database.Departments
                                    orderby d.Name
                                    select d;
             ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
@@ -126,7 +117,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            Course course = Database.Courses.SingleOrDefault(x => x.Id == id.Value);
             if (course == null)
             {
                 return HttpNotFound();
@@ -139,9 +130,8 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.Courses.Find(id);
-            db.Courses.Remove(course);
-            db.SaveChanges();
+            Course course = Database.Courses.SingleOrDefault(x => x.Id == id);
+            Database.Courses.Remove(course);
             return RedirectToAction("Index");
         }
 
@@ -155,18 +145,9 @@ namespace ContosoUniversity.Controllers
         {
             if (multiplier != null)
             {
-                ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("UPDATE Course SET Credits = Credits * {0}", multiplier);
+                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("UPDATE Course SET Credits = Credits * {0}", multiplier);
             }
             return View();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -35,12 +35,12 @@
                 @Html.DisplayFor(modelItem => item.StartDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Administrator.FullName)
+                @Html.DisplayFor(modelItem => item.Instructor.FullName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.DepartmentID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

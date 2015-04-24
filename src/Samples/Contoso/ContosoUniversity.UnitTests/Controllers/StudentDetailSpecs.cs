@@ -12,17 +12,17 @@ namespace ContosoUniversity.UnitTests.Controllers
     public class DetailsForExistingStudent : ScenarioFor<StudentController>
     {
         ViewResult _result;
-        private Student _student = new Student {ID = 1};
+        private Student _student = new Student {Id = 1};
 
         public void Given_an_existing_student()
         {
             Container.Get<ISchoolRepository>()
-                .FindStudentById(_student.ID)
+                .FindStudentById(_student.Id)
                 .Returns(_student);
         }
         public void When_the_details_are_requested_for_that_Student()
         {
-            _result = SUT.Details(_student.ID) as ViewResult;
+            _result = SUT.Details(_student.Id) as ViewResult;
         }
 
         public void Then_the_details_view_is_displayed()

@@ -5,9 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
 {
-    public class Instructor //: Person
+    public class Instructor : IEntity
     {
-        public int ID { get; set; }
+        public Instructor()
+        {
+            Courses = new List<Course>();
+        }
+
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]

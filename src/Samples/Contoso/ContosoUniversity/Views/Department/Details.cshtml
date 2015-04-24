@@ -15,7 +15,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Administrator.LastName)
+            @Html.DisplayFor(model => model.Instructor.LastName)
         </dd>
 
         <dt>
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.DepartmentID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
