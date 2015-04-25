@@ -1,19 +1,13 @@
 ﻿using Autofac;
+using Autofac.Features.Variance;
+using ContosoUniversity.FunctionalTests.Specifications;
+using ContosoUniversity.Models;
+using MediatR;
+using System.Collections.Generic;
 using TestStack.Seleno.Configuration;
 
 namespace ContosoUniversity.FunctionalTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-
-    using Autofac.Features.Variance;
-
-    using ContosoUniversity.DAL;
-    using ContosoUniversity.FunctionalTests.Specifications;
-    using ContosoUniversity.Models;
-
-    using MediatR;
 
     public class FunctionalTestsAutofacModule : Module
     {
@@ -23,7 +17,7 @@ namespace ContosoUniversity.FunctionalTests
             selenoHost.Run("ContosoUniversity", 12365, 
                 c => c.WithRouteConfig(RouteConfig.RegisterRoutes));
             builder.RegisterInstance(selenoHost).AsSelf().SingleInstance();
-            builder.RegisterType<BrowserHost>().AsSelf();
+            builder.RegisterType<WebUiDriver>().AsSelf();
 
             DependenciesConfig.ConfigureDependencies(builder);
             //builder.RegisterGeneric(typeof(ViewStudentDetailsScenario))

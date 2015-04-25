@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
-using System.Net.NetworkInformation;
+﻿using System.Collections.Generic;
 using Autofac;
 using Autofac.Features.Variance;
 using ContosoUniversity.AcceptanceTests.Infrastructure;
-using ContosoUniversity.DAL;
 using MediatR;
 
 namespace ContosoUniversity.AcceptanceTests

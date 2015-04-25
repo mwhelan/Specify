@@ -8,7 +8,7 @@ using TestStack.Seleno.PageObjects.Actions;
 
 namespace ContosoUniversity.FunctionalTests.Specifications
 {
-    public class ViewStudentDetailsScenario : ScenarioFor<BrowserHost, StudentDetailsStory>
+    public class ViewStudentDetailsScenario : ScenarioFor<WebUiDriver, StudentDetailsStory>
     {
         private Student _student = new Student { Id = 1 };
         private StudentDetailsPage _page;

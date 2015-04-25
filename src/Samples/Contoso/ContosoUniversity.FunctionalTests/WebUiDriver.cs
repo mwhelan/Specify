@@ -2,11 +2,11 @@ using TestStack.Seleno.Configuration;
 
 namespace ContosoUniversity.FunctionalTests
 {
-    public class BrowserHost
+    public class WebUiDriver
     {
         public SelenoHost Host { get; private set; }
 
-        public BrowserHost(SelenoHost host)
+        public WebUiDriver(SelenoHost host)
         {
             Host = host;
         }

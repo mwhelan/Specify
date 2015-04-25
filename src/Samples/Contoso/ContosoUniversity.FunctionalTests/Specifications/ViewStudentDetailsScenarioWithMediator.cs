@@ -11,9 +11,9 @@ namespace ContosoUniversity.FunctionalTests.Specifications
 
     public class StudentDetailsRequestHandler : IRequestHandler<StudentDetailsRequest, IPage<Student>>
     {
-        private readonly BrowserHost _browser;
+        private readonly WebUiDriver _browser;
 
-        public StudentDetailsRequestHandler(BrowserHost browser)
+        public StudentDetailsRequestHandler(WebUiDriver browser)
         {
             _browser = browser;
         }
