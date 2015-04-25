@@ -22,7 +22,10 @@ namespace ContosoUniversity
         public static void ConfigureDependencies(ContainerBuilder builder)
         {
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<SchoolRepository>().As<ISchoolRepository>();//.InstancePerRequest();
+            builder.RegisterType<CourseRepository>().As<ICourseRepository>();//.InstancePerRequest();
+            builder.RegisterType<DepartmentRepository>().As<IDepartmentRepository>();
+            builder.RegisterType<InstructorRepository>().As<IInstructorRepository>();
+            builder.RegisterType<StudentRepository>().As<IStudentRepository>();//.InstancePerRequest();
         }
     }
 }

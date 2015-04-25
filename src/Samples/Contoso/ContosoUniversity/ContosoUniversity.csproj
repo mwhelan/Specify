@@ -132,8 +132,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="DAL\Repositories\ISchoolRepository.cs" />
-    <Compile Include="DAL\Repositories\SchoolRepository.cs" />
+    <Compile Include="DAL\Repositories\DepartmentRepository.cs" />
+    <Compile Include="DAL\Repositories\CourseRepository.cs" />
+    <Compile Include="DAL\Repositories\ICourseRepository.cs" />
+    <Compile Include="DAL\Repositories\IDepartmentRepository.cs" />
+    <Compile Include="DAL\Repositories\IInstructorRepository.cs" />
+    <Compile Include="DAL\Repositories\InstructorRepository.cs" />
+    <Compile Include="DAL\Repositories\IStudentRepository.cs" />
+    <Compile Include="DAL\Repositories\StudentRepository.cs" />
     <Compile Include="DAL\Database.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

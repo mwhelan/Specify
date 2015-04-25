@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ContosoUniversity.DAL;
+using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;
 
@@ -11,25 +12,39 @@ namespace ContosoUniversity.Controllers
 {
     public class InstructorController : Controller
     {
+        private readonly IInstructorRepository _instructorRepository;
+        private readonly ICourseRepository _courseRepository;
+        private readonly IDepartmentRepository _departmentRepository;
+
+        public InstructorController(IInstructorRepository instructorRepository,
+            ICourseRepository courseRepository, IDepartmentRepository departmentRepository)
+        {
+            _instructorRepository = instructorRepository;
+            _courseRepository = courseRepository;
+            _departmentRepository = departmentRepository;
+        }
+
         // GET: /Instructor/
         public ActionResult Index(int? id, int? courseID)
         {
             var viewModel = new InstructorIndexData();
 
-            viewModel.Instructors = Database.Instructors
+            viewModel.Instructors = _instructorRepository.Get()
                 .OrderBy(i => i.LastName);
 
             if (id != null)
             {
                 ViewBag.InstructorID = id.Value;
-                viewModel.Courses = viewModel.Instructors.Where(
-                    i => i.Id == id.Value).Single().Courses;
+                viewModel.Courses = viewModel
+                    .Instructors
+                    .Single(i => i.Id == id.Value)
+                    .Courses;
             }
 
             if (courseID != null)
             {
                 ViewBag.CourseID = courseID.Value;
-                var selectedCourse = viewModel.Courses.Where(x => x.Id == courseID).Single();
+                var selectedCourse = viewModel.Courses.Single(x => x.Id == courseID);
                 viewModel.Enrollments = selectedCourse.Enrollments;
             }
 
@@ -43,7 +58,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instructor instructor = Database.Instructors.Single(x => x.Id == id.Value);
+            Instructor instructor = _instructorRepository.FindById(id.Value);
             if (instructor == null)
             {
                 return HttpNotFound();
@@ -68,13 +83,13 @@ namespace ContosoUniversity.Controllers
                 instructor.Courses = new List<Course>();
                 foreach (var course in selectedCourses)
                 {
-                    var courseToAdd = Database.Courses.Single(x => x.Id == int.Parse(course));
+                    var courseToAdd = _courseRepository.FindById(int.Parse(course));
                     instructor.Courses.Add(courseToAdd);
                 }
             }
             if (ModelState.IsValid)
             {
-                Database.Instructors.Add(instructor);
+                _instructorRepository.Update(instructor);
                 return RedirectToAction("Index");
             }
             PopulateAssignedCourseData(instructor);
@@ -88,9 +103,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instructor instructor = Database.Instructors
-                .Where(i => i.Id == id)
-                .Single();
+            Instructor instructor = _instructorRepository.FindById(id.Value);
             PopulateAssignedCourseData(instructor);
             if (instructor == null)
             {
@@ -101,7 +114,7 @@ namespace ContosoUniversity.Controllers
 
         private void PopulateAssignedCourseData(Instructor instructor)
         {
-            var allCourses = Database.Courses;
+            var allCourses = _courseRepository.Get();
             var instructorCourses = new HashSet<int>(instructor.Courses.Select(c => c.Id));
             var viewModel = new List<AssignedCourseData>();
             foreach (var course in allCourses)
@@ -127,9 +140,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var instructorToUpdate = Database.Instructors
-               .Where(i => i.Id == id)
-               .Single();
+            var instructorToUpdate = _instructorRepository.FindById(id.Value);
 
             if (TryUpdateModel(instructorToUpdate, "",
                new string[] { "LastName", "FirstMidName", "HireDate", "OfficeAssignment" }))
@@ -143,9 +154,7 @@ namespace ContosoUniversity.Controllers
 
                     UpdateInstructorCourses(selectedCourses, instructorToUpdate);
 
-                    var existingInstructor = Database.Instructors.Single(x => x.Id == id);
-                    Database.Instructors.Remove(existingInstructor);
-                    Database.Instructors.Add(instructorToUpdate);
+                    _instructorRepository.Update(instructorToUpdate);
 
                     return RedirectToAction("Index");
                 }
@@ -169,7 +178,7 @@ namespace ContosoUniversity.Controllers
             var selectedCoursesHS = new HashSet<string>(selectedCourses);
             var instructorCourses = new HashSet<int>
                 (instructorToUpdate.Courses.Select(c => c.Id));
-            foreach (var course in Database.Courses)
+            foreach (var course in _courseRepository.Get())
             {
                 if (selectedCoursesHS.Contains(course.Id.ToString()))
                 {
@@ -195,7 +204,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instructor instructor = Database.Instructors.Single(x => x.Id == id.Value);
+            Instructor instructor = _instructorRepository.FindById(id.Value);
             if (instructor == null)
             {
                 return HttpNotFound();
@@ -208,15 +217,16 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Instructor instructor = Database.Instructors.Single(i => i.Id == id);
+            Instructor instructor = _instructorRepository.FindById(id);
 
             instructor.OfficeAssignment = null;
-            Database.Instructors.Remove(instructor);
+            _instructorRepository.Delete(id);
 
-            var department = Database.Departments.SingleOrDefault(d => d.InstructorID == id);
+            var department = _departmentRepository.Get().SingleOrDefault(d => d.InstructorId == id);
             if (department != null)
             {
                 department.Instructor = null;
+                _departmentRepository.Update(department);
             }
 
             return RedirectToAction("Index");

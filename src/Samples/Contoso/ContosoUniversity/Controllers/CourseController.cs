@@ -3,23 +3,32 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ContosoUniversity.DAL;
+using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Controllers
 {
     public class CourseController : Controller
     {
-        // GET: /Course/
-        public ActionResult Index(int? SelectedDepartment)
-        {
-            var departments = Database.Departments.OrderBy(q => q.Name).ToList();
-            ViewBag.SelectedDepartment = new SelectList(departments, "DepartmentID", "Name", SelectedDepartment);
-            int departmentID = SelectedDepartment.GetValueOrDefault();
+        private readonly ICourseRepository _courseRepository;
+        private readonly IDepartmentRepository _departmentRepository;
 
-            var courses = Database.Courses
-                .Where(c => !SelectedDepartment.HasValue || c.DepartmentId == departmentID)
+        public CourseController(ICourseRepository courseRepository, IDepartmentRepository departmentRepository)
+        {
+            _courseRepository = courseRepository;
+            _departmentRepository = departmentRepository;
+        }
+
+        // GET: /Course/
+        public ActionResult Index(int? selectedDepartment)
+        {
+            PopulateDepartmentsDropDownList(selectedDepartment);
+            int departmentID = selectedDepartment.GetValueOrDefault();
+
+            var courses = _courseRepository.Get()
+                .Where(c => !selectedDepartment.HasValue || c.DepartmentId == departmentID)
                 .OrderBy(d => d.Id);
-            var sql = courses.ToString();
+
             return View(courses.ToList());
         }
 
@@ -30,7 +39,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = Database.Courses.Single(x => x.Id == id);
+            Course course = _courseRepository.FindById(id.Value);
             if (course == null)
             {
                 return HttpNotFound();
@@ -52,7 +61,7 @@ namespace ContosoUniversity.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Database.Courses.Add(course);
+                    _courseRepository.Create(course);
                     return RedirectToAction("Index");
                 }
             }
@@ -71,7 +80,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = Database.Courses.SingleOrDefault(x => x.Id == id.Value);
+            Course course = _courseRepository.FindById(id.Value);
             if (course == null)
             {
                 return HttpNotFound();
@@ -88,8 +97,7 @@ namespace ContosoUniversity.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Database.Courses.RemoveAll(x => x.Id == course.Id);
-                    Database.Courses.Add(course);
+                    _courseRepository.Update(course);
                     return RedirectToAction("Index");
                 }
             }
@@ -104,10 +112,10 @@ namespace ContosoUniversity.Controllers
 
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
-            var departmentsQuery = from d in Database.Departments
+            var departmentsQuery = from d in _departmentRepository.Get()
                                    orderby d.Name
                                    select d;
-            ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
+            ViewBag.DepartmentID = new SelectList(departmentsQuery, "ID", "Name", selectedDepartment);
         } 
 
         // GET: /Course/Delete/5
@@ -117,7 +125,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = Database.Courses.SingleOrDefault(x => x.Id == id.Value);
+            Course course = _courseRepository.FindById(id.Value);
             if (course == null)
             {
                 return HttpNotFound();
@@ -130,8 +138,7 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = Database.Courses.SingleOrDefault(x => x.Id == id);
-            Database.Courses.Remove(course);
+            _courseRepository.Delete(id);
             return RedirectToAction("Index");
         }
 

@@ -3,18 +3,30 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using ContosoUniversity.DAL;
+using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Controllers
 {
     public class DepartmentController : Controller
     {
+        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IInstructorRepository _instructorRepository;
+
+        public DepartmentController(IDepartmentRepository departmentRepository,
+            IInstructorRepository instructorRepository)
+        {
+            _departmentRepository = departmentRepository;
+            _instructorRepository = instructorRepository;
+        }
+
         // GET: /Department/
         public async Task<ActionResult> Index()
         {
-            var departments = Database.Departments;
+            var departments = _departmentRepository.Get();
             return View(departments);
         }
 
@@ -26,7 +38,7 @@ namespace ContosoUniversity.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Department department = Database.Departments.SingleOrDefault(x => x.Id == id.Value);
+            Department department = _departmentRepository.FindById(id.Value);
             
             if (department == null)
             {
@@ -38,7 +50,7 @@ namespace ContosoUniversity.Controllers
         // GET: /Department/Create
         public ActionResult Create()
         {
-            ViewBag.InstructorID = new SelectList(Database.Instructors, "ID", "FullName");
+            ViewBag.InstructorID = new SelectList(_instructorRepository.Get(), "Id", "FullName");
             return View();
         }
 
@@ -47,15 +59,15 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "DepartmentID,Name,Budget,StartDate,InstructorID")] Department department)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Budget,StartDate,InstructorID")] Department department)
         {
             if (ModelState.IsValid)
             {
-                Database.Departments.Add(department);
+                _departmentRepository.Create(department);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.InstructorID = new SelectList(Database.Instructors, "ID", "FullName", department.InstructorID);
+            PopulateInstructorDropDownList(department.InstructorId.Value);
             return View(department);
         }
 
@@ -66,12 +78,12 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = Database.Departments.SingleOrDefault(x => x.Id == id.Value);
+            Department department = _departmentRepository.FindById(id.Value);
             if (department == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.InstructorID = new SelectList(Database.Instructors, "ID", "FullName", department.InstructorID);
+            PopulateInstructorDropDownList(department.InstructorId.Value);
             return View(department);
         }
 
@@ -92,8 +104,7 @@ namespace ContosoUniversity.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    Database.Departments.RemoveAll(x => x.Id == department.Id);
-                    Database.Departments.Add(department);
+                    _departmentRepository.Update(department);
                     return RedirectToAction("Index");
                 }
             }
@@ -103,16 +114,16 @@ namespace ContosoUniversity.Controllers
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
             }
 
-            ViewBag.InstructorID = new SelectList(Database.Instructors, "ID", "FullName", department.InstructorID);
+            PopulateInstructorDropDownList(department.InstructorId.Value);
             return View(department);
         }
 
         private void ValidateOneAdministratorAssignmentPerInstructor(Department department)
         {
-            if (department.InstructorID != null)
+            if (department.InstructorId != null)
             {
-                Department duplicateDepartment = Database.Departments
-                    .FirstOrDefault(d => d.InstructorID == department.InstructorID);
+                Department duplicateDepartment = _departmentRepository.Get()
+                    .FirstOrDefault(d => d.InstructorId == department.InstructorId);
                 if (duplicateDepartment != null && duplicateDepartment.Id != department.Id)
                 {
                     string errorMessage = String.Format(
@@ -132,7 +143,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = Database.Departments.SingleOrDefault(x => x.Id == id.Value);
+            Department department = _departmentRepository.FindById(id.Value);
             if (department == null)
             {
                 if (concurrencyError == true)
@@ -171,7 +182,7 @@ namespace ContosoUniversity.Controllers
         {
             try
             {
-                Database.Departments.Remove(department);
+                _departmentRepository.Delete(department.Id);
                 return RedirectToAction("Index");
             }
             catch (DataException /* dex */)
@@ -180,6 +191,13 @@ namespace ContosoUniversity.Controllers
                 ModelState.AddModelError(string.Empty, "Unable to delete. Try again, and if the problem persists contact your system administrator.");
                 return View(department);
             }
+        }
+
+        private void PopulateInstructorDropDownList(int instructorId)
+        {
+            var instructors = _instructorRepository.Get();
+            var selectList = new SelectList(instructors, "Id", "FullName", instructorId);
+            ViewBag.InstructorID = selectList;
         }
     }
 }

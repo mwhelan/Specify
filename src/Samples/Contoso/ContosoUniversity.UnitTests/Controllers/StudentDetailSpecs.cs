@@ -16,8 +16,8 @@ namespace ContosoUniversity.UnitTests.Controllers
 
         public void Given_an_existing_student()
         {
-            Container.Get<ISchoolRepository>()
-                .FindStudentById(_student.Id)
+            Container.Get<IStudentRepository>()
+                .FindById(_student.Id)
                 .Returns(_student);
         }
         public void When_the_details_are_requested_for_that_Student()
@@ -42,8 +42,8 @@ namespace ContosoUniversity.UnitTests.Controllers
 
         public void Given_a_student_does_not_exist()
         {
-            Container.Get<ISchoolRepository>()
-                .FindStudentById(Arg.Any<int>())
+            Container.Get<IStudentRepository>()
+                .FindById(Arg.Any<int>())
                 .Returns((Student)null);
         }
 

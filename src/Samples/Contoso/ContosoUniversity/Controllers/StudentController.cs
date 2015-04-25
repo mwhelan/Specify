@@ -8,9 +8,9 @@ namespace ContosoUniversity.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly ISchoolRepository _repository;
+        private readonly IStudentRepository _repository;
 
-        public StudentController(ISchoolRepository repository)
+        public StudentController(IStudentRepository repository)
         {
             _repository = repository;
         }
@@ -36,7 +36,7 @@ namespace ContosoUniversity.Controllers
             int pageSize = 3;
             int pageNumber = (page ?? 1);
 
-            var students = _repository.GetStudents(sortOrder, searchString, pageNumber, pageSize);
+            var students = _repository.Get(sortOrder, searchString, pageNumber, pageSize);
             return View(students);
         }
 
@@ -47,7 +47,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = _repository.FindStudentById(id.Value);
+            Student student = _repository.FindById(id.Value);
             if (student == null)
             {
                 return HttpNotFound();
@@ -91,7 +91,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = _repository.FindStudentById(id.Value);
+            Student student = _repository.FindById(id.Value);
             if (student == null)
             {
                 return HttpNotFound();
@@ -132,7 +132,7 @@ namespace ContosoUniversity.Controllers
             {
                 ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
-            Student student = _repository.FindStudentById(id.Value);
+            Student student = _repository.FindById(id.Value);
             if (student == null)
             {
                 return HttpNotFound();

@@ -1,14 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using ContosoUniversity.Models;
 using PagedList;
 
 namespace ContosoUniversity.DAL.Repositories
 {
-    using System.Linq;
-
-    public class SchoolRepository : ISchoolRepository
+    public class StudentRepository : IStudentRepository
     {
-        public IPagedList<Student> GetStudents(string sortOrder, string searchString, int pageNumber, int pageSize)
+        public IPagedList<Student> Get(string sortOrder, string searchString, int pageNumber, int pageSize)
         {
             var students = from s in Database.Students
                            select s;
@@ -39,7 +39,12 @@ namespace ContosoUniversity.DAL.Repositories
             return students.ToPagedList(pageNumber, pageSize);
         }
 
-        public Student FindStudentById(int id)
+        public List<Student> Get()
+        {
+            return Database.Students;
+        } 
+
+        public Student FindById(int id)
         {
             return Database.Students.Single(x => x.Id == id);
         }

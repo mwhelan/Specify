@@ -2,12 +2,20 @@
 using System.Linq;
 using System.Web.Mvc;
 using ContosoUniversity.DAL;
+using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IStudentRepository _repository;
+
+        public HomeController(IStudentRepository repository)
+        {
+            _repository = repository;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -16,7 +24,8 @@ namespace ContosoUniversity.Controllers
         public ActionResult About()
         {
             IEnumerable<EnrollmentDateGroup> data =
-                Database.Students.GroupBy(student => student.EnrollmentDate)
+                _repository.Get()
+                    .GroupBy(student => student.EnrollmentDate)
                     .Select(dateGroup => new EnrollmentDateGroup()
                     {
                         EnrollmentDate = dateGroup.Key,
