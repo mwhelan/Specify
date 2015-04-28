@@ -4,14 +4,11 @@ using ContosoUniversity.DAL.Repositories;
 using ContosoUniversity.Models;
 using ContosoUniversity.SubcutaneousTests.Infrastructure;
 using FluentAssertions;
-using NUnit.Framework;
-using Specify;
 using TestStack.FluentMVCTesting;
 
-namespace ContosoUniversity.SubcutaneousTests.Specifications
+namespace ContosoUniversity.SubcutaneousTests.Specifications.Students
 {
-    public class ViewStudentDetailsScenario 
-        : ScenarioFor<MvcControllerDriver, StudentDetailsStory>
+    public class ViewStudentDetailsScenario : ScenarioFor<MvcControllerDriver, StudentDetailsStory>
     {
         private Student _student;
         private ControllerResultTest<StudentController> _result; 
@@ -20,7 +17,7 @@ namespace ContosoUniversity.SubcutaneousTests.Specifications
         {
             _student = Container.Get<IStudentRepository>().FindById(1);
         }
-        public void When_the_details_are_requested_for_that_Student()
+        public void When_the_details_are_requested_for_that_student()
         {
             _result = SUT.ExecuteActionFor<StudentController>(c => c.Details(_student.Id));
         }
@@ -39,12 +36,6 @@ namespace ContosoUniversity.SubcutaneousTests.Specifications
         {
             var model = (_result.ActionResult as ViewResult).Model as Student;
             model.Enrollments.Count.Should().Be(3);
-        }
-
-        [Test]
-        public override void Specify()
-        {
-            base.Specify();
         }
     }
 }

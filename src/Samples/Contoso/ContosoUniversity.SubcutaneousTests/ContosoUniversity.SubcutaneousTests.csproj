@@ -33,6 +33,9 @@
     <Reference Include="Autofac">
       <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions">
       <HintPath>..\..\..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
@@ -46,8 +49,14 @@
       <Private>True</Private>
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\..\..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\..\..\packages\AutoFixture.3.20.0\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -81,16 +90,25 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestStack.Dossier">
+      <HintPath>..\..\..\packages\TestStack.Dossier.2.1.0\lib\NET40\TestStack.Dossier.dll</HintPath>
+    </Reference>
     <Reference Include="TestStack.FluentMVCTesting">
       <HintPath>..\..\..\packages\TestStack.FluentMVCTesting.3.0.0\lib\NET45\TestStack.FluentMVCTesting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\StudentBuilder.cs" />
+    <Compile Include="ScenarioFor.cs" />
+    <Compile Include="Specifications\Students\InValidEditStudentDetailsScenario.cs" />
+    <Compile Include="Specifications\Students\StudentEditStory.cs" />
+    <Compile Include="Specifications\Students\ValidEditStudentDetailsScenario.cs" />
+    <Compile Include="Specifications\Students\ViewEditStudentDetailsScenario.cs" />
+    <Compile Include="Specifications\Students\StudentDetailsStory.cs" />
+    <Compile Include="Specifications\Students\ViewStudentDetailsScenario.cs" />
     <Compile Include="SubcutaneousTestsAutofacModule.cs" />
     <Compile Include="Infrastructure\MvcControllerDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Specifications\StudentDetailsStory.cs" />
-    <Compile Include="Specifications\ViewStudentDetailsScenario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

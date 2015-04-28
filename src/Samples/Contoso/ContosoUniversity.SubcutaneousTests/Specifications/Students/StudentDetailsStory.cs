@@ -1,6 +1,6 @@
 ﻿using Specify.Stories;
 
-namespace ContosoUniversity.SubcutaneousTests.Specifications
+namespace ContosoUniversity.SubcutaneousTests.Specifications.Students
 {
     public class StudentDetailsStory : ValueStory
     {
