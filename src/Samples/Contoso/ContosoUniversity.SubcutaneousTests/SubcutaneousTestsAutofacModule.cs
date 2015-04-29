@@ -1,6 +1,7 @@
 ﻿using System.Web.Routing;
 using Autofac;
 using ContosoUniversity.SubcutaneousTests.Infrastructure;
+using Specify.Containers;
 
 namespace ContosoUniversity.SubcutaneousTests
 {
@@ -16,6 +17,10 @@ namespace ContosoUniversity.SubcutaneousTests
 
             builder.Register(c => new MvcControllerDriver(routes) { Container = c.Resolve<Specify.Containers.IContainer>() })
                 .AsSelf()
+                .InstancePerLifetimeScope();
+
+            builder.Register(c => new IocContainer(c.Resolve<ILifetimeScope>()))
+                .As<Specify.Containers.IContainer>()
                 .InstancePerLifetimeScope();
         }
     }
