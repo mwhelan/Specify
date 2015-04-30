@@ -4,7 +4,7 @@ using System.Linq;
 using ContosoUniversity.Models;
 using PagedList;
 
-namespace ContosoUniversity.DAL.Repositories
+namespace ContosoUniversity.Infrastructure.DAL.Repositories
 {
     public class StudentRepository : IStudentRepository
     {

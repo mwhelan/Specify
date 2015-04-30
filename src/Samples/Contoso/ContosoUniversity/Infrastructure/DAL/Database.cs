@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using ContosoUniversity.Models;
 
-namespace ContosoUniversity.DAL
+namespace ContosoUniversity.Infrastructure.DAL
 {
     public static class Database 
     {

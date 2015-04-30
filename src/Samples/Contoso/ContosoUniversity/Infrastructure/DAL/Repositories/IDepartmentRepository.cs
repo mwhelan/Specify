@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ContosoUniversity.Models;
 
-namespace ContosoUniversity.DAL.Repositories
+namespace ContosoUniversity.Infrastructure.DAL.Repositories
 {
     public interface IDepartmentRepository
     {

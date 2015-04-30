@@ -1,6 +1,6 @@
 ﻿using System;
 using ContosoUniversity.Controllers;
-using ContosoUniversity.DAL.Repositories;
+using ContosoUniversity.Infrastructure.DAL.Repositories;
 using ContosoUniversity.Models;
 using ContosoUniversity.SubcutaneousTests.Infrastructure;
 using FluentAssertions;

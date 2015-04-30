@@ -5,8 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using ContosoUniversity.DAL;
-using ContosoUniversity.DAL.Repositories;
+using ContosoUniversity.Infrastructure.DAL.Repositories;
 using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Controllers

@@ -50,6 +50,12 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\..\..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -126,26 +132,29 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DependenciesConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MappingConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="DAL\Repositories\DepartmentRepository.cs" />
-    <Compile Include="DAL\Repositories\CourseRepository.cs" />
-    <Compile Include="DAL\Repositories\ICourseRepository.cs" />
-    <Compile Include="DAL\Repositories\IDepartmentRepository.cs" />
-    <Compile Include="DAL\Repositories\IInstructorRepository.cs" />
-    <Compile Include="DAL\Repositories\InstructorRepository.cs" />
-    <Compile Include="DAL\Repositories\IStudentRepository.cs" />
-    <Compile Include="DAL\Repositories\StudentRepository.cs" />
-    <Compile Include="DAL\Database.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Infrastructure\DAL\Database.cs" />
+    <Compile Include="Infrastructure\DAL\Repositories\CourseRepository.cs" />
+    <Compile Include="Infrastructure\DAL\Repositories\DepartmentRepository.cs" />
+    <Compile Include="Infrastructure\DAL\Repositories\ICourseRepository.cs" />
+    <Compile Include="Infrastructure\DAL\Repositories\IDepartmentRepository.cs" />
+    <Compile Include="Infrastructure\DAL\Repositories\IInstructorRepository.cs" />
+    <Compile Include="Infrastructure\DAL\Repositories\InstructorRepository.cs" />
+    <Compile Include="Infrastructure\DAL\Repositories\IStudentRepository.cs" />
+    <Compile Include="Infrastructure\DAL\Repositories\StudentRepository.cs" />
+    <Compile Include="Infrastructure\Logging\ILogger.cs" />
+    <Compile Include="Infrastructure\Logging\Logger.cs" />
+    <Compile Include="Infrastructure\Mapping\IMapper.cs" />
+    <Compile Include="Infrastructure\Mapping\Mapper.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Enrollment.cs" />
@@ -155,9 +164,16 @@
     <Compile Include="Models\OfficeAssignment.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AssignedCourseData.cs" />
+    <Compile Include="ViewModels\AssignedCourseDataViewModel.cs" />
+    <Compile Include="ViewModels\CourseViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentViewModel.cs" />
+    <Compile Include="ViewModels\EnrollmentViewModel.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
-    <Compile Include="ViewModels\InstructorIndexData.cs" />
+    <Compile Include="ViewModels\Grade.cs" />
+    <Compile Include="ViewModels\InstructorViewModel.cs" />
+    <Compile Include="ViewModels\InstructorIndexDataViewModel.cs" />
+    <Compile Include="ViewModels\OfficeAssignmentViewModel.cs" />
+    <Compile Include="ViewModels\StudentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -279,6 +295,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

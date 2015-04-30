@@ -1,7 +1,10 @@
 ﻿using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using ContosoUniversity.DAL.Repositories;
+using AutoMapper;
+using ContosoUniversity.Infrastructure.DAL.Repositories;
+using ContosoUniversity.Infrastructure.Mapping;
+using Mapper = ContosoUniversity.Infrastructure.Mapping.Mapper;
 
 namespace ContosoUniversity
 {
@@ -26,6 +29,9 @@ namespace ContosoUniversity
             builder.RegisterType<DepartmentRepository>().As<IDepartmentRepository>();
             builder.RegisterType<InstructorRepository>().As<IInstructorRepository>();
             builder.RegisterType<StudentRepository>().As<IStudentRepository>();//.InstancePerRequest();
+
+            builder.RegisterInstance(AutoMapper.Mapper.Engine).As<IMappingEngine>();
+            builder.RegisterType<Mapper>().As<IMapper>();
         }
     }
 }

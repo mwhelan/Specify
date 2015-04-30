@@ -1,4 +1,4 @@
-﻿@model ContosoUniversity.ViewModels.InstructorIndexData
+﻿@model ContosoUniversity.ViewModels.InstructorIndexDataViewModel
 
 @{
     ViewBag.Title = "Instructors";
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.HireDate)
             </td>
             <td>
-                @if (item.OfficeAssignment != null)
+                @if (item.OfficeAssignmentViewModel != null)
                 {
-                    @item.OfficeAssignment.Location
+                    @item.OfficeAssignmentViewModel.Location
                 }
             </td>
             <td>
@@ -91,7 +91,7 @@
                     @item.Title
                 </td>
                 <td>
-                    @item.Department.Name
+                    @item.DepartmentViewModel.Name
                 </td>
             </tr>
         }
@@ -113,7 +113,7 @@
         {
             <tr>
                 <td>
-                    @item.Student.FullName
+                    @item.StudentViewModel.FullName
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Grade)

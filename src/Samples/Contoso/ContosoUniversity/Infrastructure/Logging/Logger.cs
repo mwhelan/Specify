@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace ContosoUniversity.Logging
+namespace ContosoUniversity.Infrastructure.Logging
 {
     public class Logger : ILogger
     {

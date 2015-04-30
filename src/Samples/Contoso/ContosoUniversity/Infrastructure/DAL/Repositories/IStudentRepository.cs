@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using ContosoUniversity.Models;
 using PagedList;
 
-namespace ContosoUniversity.DAL.Repositories
+namespace ContosoUniversity.Infrastructure.DAL.Repositories
 {
     public interface IStudentRepository
     {

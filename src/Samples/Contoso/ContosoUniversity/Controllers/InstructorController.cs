@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using ContosoUniversity.DAL;
-using ContosoUniversity.DAL.Repositories;
+using ContosoUniversity.Infrastructure.DAL.Repositories;
 using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;
 
@@ -27,7 +26,7 @@ namespace ContosoUniversity.Controllers
         // GET: /Instructor/
         public ActionResult Index(int? id, int? courseID)
         {
-            var viewModel = new InstructorIndexData();
+            var viewModel = new InstructorIndexDataViewModel();
 
             viewModel.Instructors = _instructorRepository.Get()
                 .OrderBy(i => i.LastName);
@@ -116,10 +115,10 @@ namespace ContosoUniversity.Controllers
         {
             var allCourses = _courseRepository.Get();
             var instructorCourses = new HashSet<int>(instructor.Courses.Select(c => c.Id));
-            var viewModel = new List<AssignedCourseData>();
+            var viewModel = new List<AssignedCourseDataViewModel>();
             foreach (var course in allCourses)
             {
-                viewModel.Add(new AssignedCourseData
+                viewModel.Add(new AssignedCourseDataViewModel
                 {
                     CourseID = course.Id,
                     Title = course.Title,

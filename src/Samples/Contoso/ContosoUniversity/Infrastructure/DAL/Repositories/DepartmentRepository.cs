@@ -2,7 +2,7 @@
 using System.Linq;
 using ContosoUniversity.Models;
 
-namespace ContosoUniversity.DAL.Repositories
+namespace ContosoUniversity.Infrastructure.DAL.Repositories
 {
     public class DepartmentRepository : IDepartmentRepository
     {

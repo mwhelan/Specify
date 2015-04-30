@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using ContosoUniversity.DAL;
-using ContosoUniversity.DAL.Repositories;
+using ContosoUniversity.Infrastructure.DAL.Repositories;
 using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers

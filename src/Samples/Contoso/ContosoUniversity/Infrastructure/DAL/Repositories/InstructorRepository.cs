@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ContosoUniversity.Models;
 
-namespace ContosoUniversity.DAL.Repositories
+namespace ContosoUniversity.Infrastructure.DAL.Repositories
 {
     public class InstructorRepository : IInstructorRepository
     {
