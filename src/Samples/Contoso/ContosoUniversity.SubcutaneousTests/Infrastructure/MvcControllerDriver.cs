@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Specify.Containers;
 using Subtext.TestLibrary;
 using TestStack.FluentMVCTesting;
+using Xania.AspNet.Simulator;
 
 namespace ContosoUniversity.SubcutaneousTests.Infrastructure
 {
@@ -35,6 +36,13 @@ namespace ContosoUniversity.SubcutaneousTests.Infrastructure
         {
             var controller = ConstructController<TController>();
             return controller.WithCallTo(action);
+        }
+
+        public ControllerActionResult Execute<TController>(Expression<Func<TController, object>> actionExpression)
+            where TController : Controller
+        {
+            var controller = ConstructController<TController>();
+            return controller.Execute(actionExpression);
         }
 
         private TController ConstructController<TController>() where TController : Controller

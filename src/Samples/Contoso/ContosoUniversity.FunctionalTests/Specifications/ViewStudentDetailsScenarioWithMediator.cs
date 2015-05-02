@@ -1,12 +1,11 @@
-﻿using FluentAssertions;
+﻿using ContosoUniversity.Domain.Model;
+using FluentAssertions;
 using NUnit.Framework;
 using Specify;
 
 namespace ContosoUniversity.FunctionalTests.Specifications
 {
     using ContosoUniversity.Controllers;
-    using ContosoUniversity.Models;
-
     using MediatR;
 
     public class StudentDetailsRequestHandler : IRequestHandler<StudentDetailsRequest, IPage<Student>>

@@ -1,6 +1,5 @@
 using System;
 using ContosoUniversity.Controllers;
-using ContosoUniversity.Models;
 using ContosoUniversity.SubcutaneousTests.Builders;
 using ContosoUniversity.SubcutaneousTests.Infrastructure;
 using FluentAssertions;

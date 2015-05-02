@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ContosoUniversity.Models;
+using ContosoUniversity.Domain.Model;
 using PagedList;
 
 namespace ContosoUniversity.Infrastructure.DAL.Repositories

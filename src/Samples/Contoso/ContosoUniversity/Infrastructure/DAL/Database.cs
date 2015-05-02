@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using ContosoUniversity.Models;
+using ContosoUniversity.Domain.Model;
 
 namespace ContosoUniversity.Infrastructure.DAL
 {

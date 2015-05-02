@@ -41,16 +41,16 @@
 // If you copied this file manually, you need to change all "YourRootNameSpace" so not to clash with other libraries
 // that use LibLog
 #if LIBLOG_PROVIDERS_ONLY
-namespace Specify.LibLog
+namespace ContosoUniversity.LibLog
 #else
-namespace Specify.Logging
+namespace ContosoUniversity.Logging
 #endif
 {
     using System.Collections.Generic;
 #if LIBLOG_PROVIDERS_ONLY
-    using Specify.LibLog.LogProviders;
+    using ContosoUniversity.LibLog.LogProviders;
 #else
-    using Specify.Logging.LogProviders;
+    using ContosoUniversity.Logging.LogProviders;
 #endif
     using System;
 #if !LIBLOG_PROVIDERS_ONLY
@@ -417,7 +417,7 @@ namespace Specify.Logging
         /// The disable logging environment variable. If the environment variable is set to 'true', then logging
         /// will be disabled.
         /// </summary>
-        public const string DisableLoggingEnvironmentVariable = "Specify_LIBLOG_DISABLE";
+        public const string DisableLoggingEnvironmentVariable = "ContosoUniversity_LIBLOG_DISABLE";
         private const string NullLogProvider = "Current Log Provider is not set. Call SetCurrentLogProvider " +
                                                "with a non-null value first.";
         private static dynamic _currentLogProvider;
@@ -712,9 +712,9 @@ namespace Specify.Logging
 }
 
 #if LIBLOG_PROVIDERS_ONLY
-namespace Specify.LibLog.LogProviders
+namespace ContosoUniversity.LibLog.LogProviders
 #else
-namespace Specify.Logging.LogProviders
+namespace ContosoUniversity.Logging.LogProviders
 #endif
 {
     using System;

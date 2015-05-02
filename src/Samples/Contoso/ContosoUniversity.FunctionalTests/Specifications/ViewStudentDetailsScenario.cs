@@ -1,5 +1,5 @@
 ﻿using ContosoUniversity.Controllers;
-using ContosoUniversity.Models;
+using ContosoUniversity.Domain.Model;
 using FluentAssertions;
 using NUnit.Framework;
 using Specify;

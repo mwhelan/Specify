@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using ContosoUniversity.Controllers;
+using ContosoUniversity.Domain.Model;
 using ContosoUniversity.Infrastructure.DAL.Repositories;
-using ContosoUniversity.Models;
 using FluentAssertions;
 using NSubstitute;
 using Specify;

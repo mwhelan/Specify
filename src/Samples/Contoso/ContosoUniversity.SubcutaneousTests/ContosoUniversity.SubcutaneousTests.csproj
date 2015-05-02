@@ -96,6 +96,9 @@
     <Reference Include="TestStack.FluentMVCTesting">
       <HintPath>..\..\..\packages\TestStack.FluentMVCTesting.3.0.0\lib\NET45\TestStack.FluentMVCTesting.dll</HintPath>
     </Reference>
+    <Reference Include="Xania.AspNet.Simulator">
+      <HintPath>..\..\..\packages\Xania.AspNet.Simulator.1.2.10\lib\net45\Xania.AspNet.Simulator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\StudentBuilder.cs" />

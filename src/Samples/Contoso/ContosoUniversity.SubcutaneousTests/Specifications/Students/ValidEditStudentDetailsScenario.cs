@@ -1,7 +1,7 @@
 ﻿using System;
 using ContosoUniversity.Controllers;
+using ContosoUniversity.Domain.Model;
 using ContosoUniversity.Infrastructure.DAL.Repositories;
-using ContosoUniversity.Models;
 using ContosoUniversity.SubcutaneousTests.Infrastructure;
 using FluentAssertions;
 using TestStack.FluentMVCTesting;

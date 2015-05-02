@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ContosoUniversity.Models
+namespace ContosoUniversity.Domain.Model
 {
     public class Course : IEntity
     {

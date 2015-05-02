@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Web.Mvc;
+using ContosoUniversity.Domain.Model;
 using ContosoUniversity.Infrastructure.DAL.Repositories;
-using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Controllers
 {

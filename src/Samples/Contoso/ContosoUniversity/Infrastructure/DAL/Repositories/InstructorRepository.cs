@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using ContosoUniversity.Models;
+using ContosoUniversity.Domain.Model;
 
 namespace ContosoUniversity.Infrastructure.DAL.Repositories
 {

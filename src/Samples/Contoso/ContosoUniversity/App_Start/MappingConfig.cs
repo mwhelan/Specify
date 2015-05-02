@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ContosoUniversity.Models;
+using ContosoUniversity.Domain.Model;
 using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity

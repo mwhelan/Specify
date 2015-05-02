@@ -2,7 +2,7 @@ using System;
 using System.Web.Mvc;
 using ContosoUniversity.AcceptanceTests.Infrastructure;
 using ContosoUniversity.Controllers;
-using ContosoUniversity.Models;
+using ContosoUniversity.Domain.Model;
 using FluentAssertions;
 using MediatR;
 using NUnit.Framework;

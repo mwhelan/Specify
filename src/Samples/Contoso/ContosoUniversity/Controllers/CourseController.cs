@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using ContosoUniversity.Domain.Model;
 using ContosoUniversity.Infrastructure.DAL.Repositories;
-using ContosoUniversity.Models;
+using ContosoUniversity.Infrastructure.Mapping;
+using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
@@ -11,11 +15,14 @@ namespace ContosoUniversity.Controllers
     {
         private readonly ICourseRepository _courseRepository;
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly IMapper _mapper;
 
-        public CourseController(ICourseRepository courseRepository, IDepartmentRepository departmentRepository)
+        public CourseController(ICourseRepository courseRepository, IDepartmentRepository departmentRepository,
+            IMapper mapper)
         {
             _courseRepository = courseRepository;
             _departmentRepository = departmentRepository;
+            _mapper = mapper;
         }
 
         // GET: /Course/
@@ -28,7 +35,7 @@ namespace ContosoUniversity.Controllers
                 .Where(c => !selectedDepartment.HasValue || c.DepartmentId == departmentID)
                 .OrderBy(d => d.Id);
 
-            return View(courses.ToList());
+            return View(_mapper.Map<IEnumerable<Course>,IEnumerable<CourseViewModel>>(courses));
         }
 
         // GET: /Course/Details/5
@@ -43,7 +50,7 @@ namespace ContosoUniversity.Controllers
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(_mapper.Map<Course,CourseViewModel>(course));
         }
 
         public ActionResult Create()
@@ -54,13 +61,19 @@ namespace ContosoUniversity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")]Course course)
+        public ActionResult Create([Bind(Include = "Id,Title,Credits,DepartmentID")]CourseViewModel course)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _courseRepository.Create(course);
+                    var department = _departmentRepository.FindById(course.DepartmentId);
+                    var model = new Course();
+                    model.Credits = course.Credits;
+                    model.Department = department;
+                    model.Title = course.Title;
+
+                    _courseRepository.Create(model);
                     return RedirectToAction("Index");
                 }
             }
@@ -85,18 +98,25 @@ namespace ContosoUniversity.Controllers
                 return HttpNotFound();
             }
             PopulateDepartmentsDropDownList(course.DepartmentId);
-            return View(course);
+            return View(_mapper.Map<Course,CourseViewModel>(course));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CourseID,Title,Credits,DepartmentID")]Course course)
+        public ActionResult Edit([Bind(Include = "Id,Title,Credits,DepartmentID")]CourseViewModel course)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _courseRepository.Update(course);
+                    var department = _departmentRepository.FindById(course.DepartmentId);
+                    var model = _courseRepository.FindById(course.Id);
+                    model.Id = course.Id;
+                    model.Credits = course.Credits;
+                    model.Department = department;
+                    model.Title = course.Title;
+
+                    _courseRepository.Update(model);
                     return RedirectToAction("Index");
                 }
             }
@@ -129,7 +149,7 @@ namespace ContosoUniversity.Controllers
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(_mapper.Map<Course, CourseViewModel>(course));
         }
 
         // POST: /Course/Delete/5

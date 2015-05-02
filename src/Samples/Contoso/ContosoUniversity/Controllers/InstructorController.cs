@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using ContosoUniversity.Domain.Model;
 using ContosoUniversity.Infrastructure.DAL.Repositories;
-using ContosoUniversity.Models;
+using ContosoUniversity.Infrastructure.Mapping;
 using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
@@ -14,13 +15,15 @@ namespace ContosoUniversity.Controllers
         private readonly IInstructorRepository _instructorRepository;
         private readonly ICourseRepository _courseRepository;
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly IMapper _mapper;
 
         public InstructorController(IInstructorRepository instructorRepository,
-            ICourseRepository courseRepository, IDepartmentRepository departmentRepository)
+            ICourseRepository courseRepository, IDepartmentRepository departmentRepository, IMapper mapper)
         {
             _instructorRepository = instructorRepository;
             _courseRepository = courseRepository;
             _departmentRepository = departmentRepository;
+            _mapper = mapper;
         }
 
         // GET: /Instructor/
@@ -29,7 +32,8 @@ namespace ContosoUniversity.Controllers
             var viewModel = new InstructorIndexDataViewModel();
 
             viewModel.Instructors = _instructorRepository.Get()
-                .OrderBy(i => i.LastName);
+                .OrderBy(i => i.LastName)
+                .Select(x => _mapper.Map<Instructor,InstructorViewModel>(x));
 
             if (id != null)
             {

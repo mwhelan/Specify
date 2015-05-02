@@ -129,6 +129,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Logging\LibLog.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DependenciesConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -139,6 +140,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Domain\Model\Course.cs" />
+    <Compile Include="Domain\Model\Department.cs" />
+    <Compile Include="Domain\Model\Enrollment.cs" />
+    <Compile Include="Domain\Model\Grade.cs" />
+    <Compile Include="Domain\Model\IEntity.cs" />
+    <Compile Include="Domain\Model\Instructor.cs" />
+    <Compile Include="Domain\Model\OfficeAssignment.cs" />
+    <Compile Include="Domain\Model\Student.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -151,18 +160,9 @@
     <Compile Include="Infrastructure\DAL\Repositories\InstructorRepository.cs" />
     <Compile Include="Infrastructure\DAL\Repositories\IStudentRepository.cs" />
     <Compile Include="Infrastructure\DAL\Repositories\StudentRepository.cs" />
-    <Compile Include="Infrastructure\Logging\ILogger.cs" />
-    <Compile Include="Infrastructure\Logging\Logger.cs" />
+    <Compile Include="Infrastructure\Logging\LoggingFilter.cs" />
     <Compile Include="Infrastructure\Mapping\IMapper.cs" />
     <Compile Include="Infrastructure\Mapping\Mapper.cs" />
-    <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\Enrollment.cs" />
-    <Compile Include="Models\Grade.cs" />
-    <Compile Include="Models\IEntity.cs" />
-    <Compile Include="Models\Instructor.cs" />
-    <Compile Include="Models\OfficeAssignment.cs" />
-    <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AssignedCourseDataViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />

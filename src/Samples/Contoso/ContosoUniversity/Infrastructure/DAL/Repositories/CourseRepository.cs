@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using ContosoUniversity.Models;
+using ContosoUniversity.Domain.Model;
 
 namespace ContosoUniversity.Infrastructure.DAL.Repositories
 {
@@ -16,16 +16,17 @@ namespace ContosoUniversity.Infrastructure.DAL.Repositories
             return Database.Courses;
         }
 
-        public void Create(Course student)
+        public void Create(Course course)
         {
-            Database.Courses.Add(student);
+            course.Id = Database.Courses.Max(x => x.Id) + 1;
+            Database.Courses.Add(course);
         }
 
-        public void Update(Course student)
+        public void Update(Course course)
         {
-            var existingCourse = Database.Courses.Find(x => x.Id == student.Id);
+            var existingCourse = Database.Courses.Find(x => x.Id == course.Id);
             Database.Courses.Remove(existingCourse);
-            Database.Courses.Add(student);
+            Database.Courses.Add(course);
         }
 
         public void Delete(int id)

@@ -20,7 +20,7 @@ namespace ContosoUniversity.ViewModels
         [Range(0, 5)]
         public int Credits { get; set; }
 
-        public int DepartmentId { get { return DepartmentViewModel.Id; } }
+        public int DepartmentId { get; set; }
 
         public virtual DepartmentViewModel DepartmentViewModel { get; set; }
         public virtual ICollection<EnrollmentViewModel> Enrollments { get; set; }

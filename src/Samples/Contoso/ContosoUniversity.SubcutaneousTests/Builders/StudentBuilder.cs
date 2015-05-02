@@ -1,5 +1,5 @@
 ﻿using System;
-using ContosoUniversity.Models;
+using ContosoUniversity.Domain.Model;
 using TestStack.Dossier;
 
 namespace ContosoUniversity.SubcutaneousTests.Builders

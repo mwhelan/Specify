@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using Autofac.Features.Variance;
 using ContosoUniversity.FunctionalTests.Specifications;
-using ContosoUniversity.Models;
 using MediatR;
 using System.Collections.Generic;
+using ContosoUniversity.Domain.Model;
 using TestStack.Seleno.Configuration;
 
 namespace ContosoUniversity.FunctionalTests
