@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Autofac;
 using Specify.lib;
+using Autofac;
 
-namespace Specify.Containers
+namespace Specify.Autofac
 {
     public class AutofacDependencyResolver : IocContainer, IDependencyResolver
     {
@@ -12,7 +12,7 @@ namespace Specify.Containers
             _containerBuilder.RegisterAssemblyModules(assemblies);
 
         }
-        public IContainer CreateChildContainer()
+        public IScenarioContainer CreateChildContainer()
         {
             return new IocContainer(Container.BeginLifetimeScope());
         }

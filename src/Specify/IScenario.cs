@@ -1,5 +1,4 @@
 ﻿using System;
-using Specify.Containers;
 using TestStack.BDDfy;
 
 namespace Specify
@@ -11,6 +10,6 @@ namespace Specify
         Type Story { get; }
         string Title { get; }
         int Number { get; set; }
-        void SetContainer(IContainer container);
+        void SetContainer(IScenarioContainer container);
     }
 }

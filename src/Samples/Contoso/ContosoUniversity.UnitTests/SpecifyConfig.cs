@@ -1,6 +1,4 @@
 ﻿using Specify.Configuration;
-using Specify.Containers;
-using Specify.Containers.Mocking;
 using TestStack.BDDfy.Configuration;
 using TestStack.BDDfy.Reporters.Html;
 

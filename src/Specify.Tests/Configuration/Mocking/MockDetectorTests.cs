@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Shouldly;
 using Specify.Configuration.Mocking;
-using Specify.Containers.Mocking;
+using Specify.Mocks;
 
 namespace Specify.Tests.Configuration.Mocking
 {

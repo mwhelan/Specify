@@ -1,14 +1,14 @@
 using System;
 
-namespace Specify.Containers
+namespace Specify
 {
     public class SutFactory<TSut> : IDisposable 
         where TSut : class
     {
-        private readonly IContainer _sourceContainer;
+        private readonly IScenarioContainer _sourceContainer;
         private TSut _systemUnderTest;
 
-        public SutFactory(IContainer sourceContainer)
+        public SutFactory(IScenarioContainer sourceContainer)
         {
             _sourceContainer = sourceContainer;
         }
@@ -81,6 +81,6 @@ namespace Specify.Containers
             _sourceContainer.Dispose();
         }
 
-        internal IContainer SourceContainer { get { return _sourceContainer; } }
+        internal IScenarioContainer SourceContainer { get { return _sourceContainer; } }
     }
 }

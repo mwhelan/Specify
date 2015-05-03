@@ -1,7 +1,6 @@
 ﻿using Ninject;
-using Specify.Containers;
 using Specify.Examples.Ninject;
-using Specify.Tests.Containers.SutFactory;
+using Specify.Tests.Containers.SutFactories;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests.Examples

@@ -1,6 +1,5 @@
 using System;
 using System.Globalization;
-using Specify.Containers;
 using Specify.Stories;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
@@ -48,7 +47,7 @@ namespace Specify
 
         public int Number { get; set; }
 
-        public virtual void SetContainer(IContainer container)
+        public virtual void SetContainer(IScenarioContainer container)
         {
             Container = new SutFactory<TSut>(container);
         }

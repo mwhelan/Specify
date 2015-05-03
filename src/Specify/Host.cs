@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Specify.Configuration;
-using Specify.Containers;
 using Specify.lib;
 using TestStack.BDDfy.Configuration;
 

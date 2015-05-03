@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Features.ResolveAnything;
-using Specify.Containers;
-using Specify.Tests.Containers.SutFactory;
+using Specify.Autofac;
+using Specify.Tests.Containers.SutFactories;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests.Examples

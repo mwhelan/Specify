@@ -1,8 +1,7 @@
 using System;
 using System.Linq;
 using FakeItEasy;
-using Specify.Containers;
-using Specify.Containers.Mocking;
+using Specify.Mocks;
 
 namespace Specify.Examples.Mocks
 {

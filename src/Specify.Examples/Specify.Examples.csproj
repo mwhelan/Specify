@@ -108,6 +108,10 @@
     <Compile Include="Xunit\ScenarioFor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Specify.Autofac\Specify.Autofac.csproj">
+      <Project>{5f229982-04b4-4937-a0d9-344103589143}</Project>
+      <Name>Specify.Autofac</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Specify\Specify.csproj">
       <Project>{e0041c2f-cc2e-4f2e-ad11-4c9ddb2fcd14}</Project>
       <Name>Specify</Name>

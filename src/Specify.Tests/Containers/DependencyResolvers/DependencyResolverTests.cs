@@ -3,8 +3,6 @@ namespace Specify.Tests.Containers.DependencyResolvers
     using NUnit.Framework;
 
     using Shouldly;
-
-    using Specify.Containers;
     using Specify.Tests.Stubs;
 
     [TestFixture]

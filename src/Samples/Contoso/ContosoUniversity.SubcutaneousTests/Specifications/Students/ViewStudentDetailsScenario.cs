@@ -5,7 +5,6 @@ using ContosoUniversity.Infrastructure.DAL.Repositories;
 using ContosoUniversity.Infrastructure.Logging;
 using ContosoUniversity.SubcutaneousTests.Infrastructure;
 using FluentAssertions;
-using TestStack.FluentMVCTesting;
 using Xania.AspNet.Simulator;
 
 namespace ContosoUniversity.SubcutaneousTests.Specifications.Students

@@ -118,6 +118,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Specify.Autofac\Specify.Autofac.csproj">
+      <Project>{5f229982-04b4-4937-a0d9-344103589143}</Project>
+      <Name>Specify.Autofac</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Specify\Specify.csproj">
       <Project>{E0041C2F-CC2E-4F2E-AD11-4C9DDB2FCD14}</Project>
       <Name>Specify</Name>

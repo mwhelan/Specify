@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Specify.Containers
+namespace Specify
 {
     /// <summary>
     /// Represents a container that provides the SUT and its dependencies to specifications. The container might be
     /// a full IoC container or an automocking container.
     /// </summary>
-    public interface IContainer : IDisposable
+    public interface IScenarioContainer : IDisposable
     {
         /// <summary>
         /// Registers a type to the container. 

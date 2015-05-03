@@ -3,7 +3,7 @@ using Autofac;
 using Specify.Configuration.Mocking;
 using Specify.lib;
 
-namespace Specify.Containers
+namespace Specify.Autofac
 {
     public class SpecifyModule : Module
     {
@@ -22,13 +22,13 @@ namespace Specify.Containers
             if (mockFactory == null)
             {
                 builder.Register(c => new IocContainer(c.Resolve<ILifetimeScope>()))
-                    .As<IContainer>()
+                    .As<IScenarioContainer>()
                     .InstancePerLifetimeScope();
             }
             else
             {
                 builder.Register(c => new AutoMockingContainer(mockFactory()))
-                    .As<IContainer>()
+                    .As<IScenarioContainer>()
                     .InstancePerLifetimeScope();
             }
 

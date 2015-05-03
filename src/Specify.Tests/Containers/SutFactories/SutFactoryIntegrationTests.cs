@@ -1,10 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
 using Shouldly;
-using Specify.Containers;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Containers.SutFactory
+namespace Specify.Tests.Containers.SutFactories
 {
     [TestFixture]
     public abstract class SutFactoryIntegrationTests

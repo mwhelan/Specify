@@ -4,9 +4,9 @@ using System.Linq;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using Specify.Containers.Mocking;
+using Specify.Mocks;
 
-namespace Specify.Containers
+namespace Specify.Autofac
 {
     /// <summary> Resolves unknown interfaces and Mocks using the <see cref="IMockFactory"/>. </summary>
     public class AutofacMockRegistrationHandler : IRegistrationSource

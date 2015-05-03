@@ -3,9 +3,9 @@ using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 
-namespace Specify.Containers
+namespace Specify.Autofac
 {
-    public class IocContainer : IContainer
+    public class IocContainer : IScenarioContainer
     {
         private ILifetimeScope _container;
         protected ContainerBuilder _containerBuilder;

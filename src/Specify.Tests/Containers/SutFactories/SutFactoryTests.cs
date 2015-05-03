@@ -2,10 +2,9 @@ using System;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
-using Specify.Containers;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Containers.SutFactory
+namespace Specify.Tests.Containers.SutFactories
 {
     [TestFixture]
     public class SutFactoryTests
@@ -137,7 +136,7 @@ namespace Specify.Tests.Containers.SutFactory
 
         private SutFactory<T> CreateSut<T>() where T : class
         {
-            return new SutFactory<T>(Substitute.For<IContainer>());
+            return new SutFactory<T>(Substitute.For<IScenarioContainer>());
         }
     }
 }

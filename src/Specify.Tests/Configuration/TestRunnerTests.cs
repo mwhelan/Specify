@@ -1,7 +1,6 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
-using Specify.Containers;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests.Configuration

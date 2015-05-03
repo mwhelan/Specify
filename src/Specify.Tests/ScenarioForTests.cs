@@ -2,7 +2,6 @@ using System;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
-using Specify.Containers;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 
@@ -115,20 +114,20 @@ namespace Specify.Tests
         [Test]
         public void scenario_title_should_be_class_name_only_if_scenario_is_zero()
         {
-            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IScenarioContainer>());
             var sut = new UserStoryScenarioWithAllSupportedStepsInRandomOrder {Container = container};
             sut.Title.ShouldBe("User Story Scenario With All Supported Steps In Random Order");
         }
         [Test]
         public void scenario_title_should_be_number_and_class_name_if_number_greater_than_zero()
         {
-            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IScenarioContainer>());
             var sut = new UserStoryScenarioWithAllSupportedStepsInRandomOrder {Container = container, Number = 3};
             sut.Title.ShouldBe("Scenario 03: User Story Scenario With All Supported Steps In Random Order");
         }
         private static UnitScenarioWithAllSupportedStepsInRandomOrder CreateSut()
         {
-            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var container = new SutFactory<ConcreteObjectWithNoConstructor>(Substitute.For<IScenarioContainer>());
             var sut = new UnitScenarioWithAllSupportedStepsInRandomOrder { Container = container };
             return sut;
         }

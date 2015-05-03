@@ -1,6 +1,6 @@
 using Autofac;
 using Autofac.Features.ResolveAnything;
-using Specify.Containers;
+using Specify.Autofac;
 using Specify.Examples.Mocks;
 
 namespace Specify.Examples.Autofac

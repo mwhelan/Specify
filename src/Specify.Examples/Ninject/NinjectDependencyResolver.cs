@@ -1,6 +1,5 @@
 ﻿using Ninject;
 using Ninject.Extensions.ChildKernel;
-using Specify.Containers;
 using System.Reflection;
 
 namespace Specify.Examples.Ninject
@@ -19,7 +18,7 @@ namespace Specify.Examples.Ninject
             return kernel;
         }
 
-        public IContainer CreateChildContainer()
+        public IScenarioContainer CreateChildContainer()
         {
             var childContainer = new ChildKernel(this.Container);
             return new NinjectContainer(childContainer);

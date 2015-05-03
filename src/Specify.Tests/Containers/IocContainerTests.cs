@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using Shouldly;
-using Specify.Containers;
+using Specify.Autofac;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests.Containers

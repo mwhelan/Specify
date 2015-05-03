@@ -1,11 +1,10 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
-using Specify.Containers;
-using Specify.Containers.Mocking;
+using Specify.Mocks;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Containers.MockFactory
+namespace Specify.Tests.Containers.MockFactories
 {
     public class NSubstituteMockFactoryTests : MockFactoryTests<NSubstituteMockFactory>
     {

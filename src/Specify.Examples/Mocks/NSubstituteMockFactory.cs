@@ -1,7 +1,6 @@
 ﻿using System;
 using NSubstitute;
-using Specify.Containers;
-using Specify.Containers.Mocking;
+using Specify.Mocks;
 
 namespace Specify.Examples.Mocks
 {

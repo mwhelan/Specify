@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Specify.Containers;
+using Specify;
 using Subtext.TestLibrary;
 using TestStack.FluentMVCTesting;
 using Xania.AspNet.Simulator;
@@ -13,7 +13,7 @@ namespace ContosoUniversity.SubcutaneousTests.Infrastructure
 {
     public class MvcControllerDriver : IDisposable
     {
-        protected internal IContainer Container { get; set; }
+        protected internal IScenarioContainer Container { get; set; }
         private readonly RouteCollection _routes;
         private readonly HttpSimulator _httpRequest;
 

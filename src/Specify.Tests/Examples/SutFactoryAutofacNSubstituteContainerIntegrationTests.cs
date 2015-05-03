@@ -1,7 +1,7 @@
-using Specify.Containers;
-using Specify.Containers.Mocking;
+using Specify.Autofac;
+using Specify.Mocks;
 using Specify.Tests.Containers;
-using Specify.Tests.Containers.SutFactory;
+using Specify.Tests.Containers.SutFactories;
 
 namespace Specify.Tests.Examples
 {

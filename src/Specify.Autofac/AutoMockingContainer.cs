@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Autofac.Features.ResolveAnything;
-using Specify.Containers.Mocking;
+using Specify.Mocks;
 
-namespace Specify.Containers
+namespace Specify.Autofac
 {
     /// <summary>
     /// Automocking container that uses mock factory to create mocks and Autofac as the container. 

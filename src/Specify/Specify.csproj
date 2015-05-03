@@ -43,9 +43,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,21 +53,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IScenarioContainer.cs" />
+    <Compile Include="IDependencyResolver.cs" />
     <Compile Include="lib\LibLog.cs" />
     <Compile Include="Configuration\LoggingProcessor.cs" />
     <Compile Include="Configuration\Mocking\FileSystem.cs" />
     <Compile Include="Configuration\Mocking\IFileSystem.cs" />
     <Compile Include="Configuration\Mocking\MockDetector.cs" />
-    <Compile Include="Containers\AutofacDependencyResolver.cs" />
-    <Compile Include="Containers\IDependencyResolver.cs" />
-    <Compile Include="Containers\IocContainer.cs" />
-    <Compile Include="Containers\AutofacMockRegistrationHandler.cs" />
-    <Compile Include="Containers\AutoMockingContainer.cs" />
-    <Compile Include="Containers\Mocking\FakeItEasyMockFactory.cs" />
-    <Compile Include="Containers\Mocking\IMockFactory.cs" />
-    <Compile Include="Containers\Mocking\MoqMockFactory.cs" />
-    <Compile Include="Containers\Mocking\NSubstituteMockFactory.cs" />
-    <Compile Include="Containers\SpecifyModule.cs" />
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\ITestRunnerAction.cs" />
@@ -78,11 +67,13 @@
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\TestRunner.cs" />
     <Compile Include="Configuration\TestRunnerAction.cs" />
-    <Compile Include="Containers\IContainer.cs" />
-    <Compile Include="Containers\SutFactory.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IScenario.cs" />
     <Compile Include="lib\AssemblyTypeResolver.cs" />
+    <Compile Include="Mocks\FakeItEasyMockFactory.cs" />
+    <Compile Include="Mocks\IMockFactory.cs" />
+    <Compile Include="Mocks\MoqMockFactory.cs" />
+    <Compile Include="Mocks\NSubstituteMockFactory.cs" />
     <Compile Include="ScenarioFor.cs" />
     <Compile Include="SpecifyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +81,7 @@
     <Compile Include="Stories\Story.cs" />
     <Compile Include="Stories\UserStory.cs" />
     <Compile Include="Stories\ValueStory.cs" />
+    <Compile Include="SutFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -98,8 +90,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>mkdir "$(TargetDir)Combined"
-"$(ProjectDir)..\packages\ilmerge.2.14.1208\tools\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" /out:"$(TargetDir)Combined\Specify.dll"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

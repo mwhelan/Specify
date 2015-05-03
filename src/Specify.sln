@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specify.IntegrationTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.SubcutaneousTests", "Samples\Contoso\ContosoUniversity.SubcutaneousTests\ContosoUniversity.SubcutaneousTests.csproj", "{FC68A85A-EEDD-42DC-8476-D0F5F63AF8CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specify.Autofac", "Specify.Autofac\Specify.Autofac.csproj", "{5F229982-04B4-4937-A0D9-344103589143}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug without StyleCop|Any CPU = Debug without StyleCop|Any CPU
@@ -140,6 +142,16 @@ Global
 		{FC68A85A-EEDD-42DC-8476-D0F5F63AF8CD}.ReleaseNET35|Any CPU.Build.0 = Release|Any CPU
 		{FC68A85A-EEDD-42DC-8476-D0F5F63AF8CD}.ReleaseSL4|Any CPU.ActiveCfg = Release|Any CPU
 		{FC68A85A-EEDD-42DC-8476-D0F5F63AF8CD}.ReleaseSL4|Any CPU.Build.0 = Release|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.Debug without StyleCop|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.Debug without StyleCop|Any CPU.Build.0 = Debug|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.ReleaseNET35|Any CPU.ActiveCfg = Release|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.ReleaseNET35|Any CPU.Build.0 = Release|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.ReleaseSL4|Any CPU.ActiveCfg = Release|Any CPU
+		{5F229982-04B4-4937-A0D9-344103589143}.ReleaseSL4|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,5 +168,6 @@ Global
 		{939826B8-066C-4E42-8652-36A70715C69E} = {D7AB3141-7A17-4262-BD7B-75DCE79EFA22}
 		{56E928B9-A88E-40BE-8C42-B79B611F4ADD} = {D7AB3141-7A17-4262-BD7B-75DCE79EFA22}
 		{FC68A85A-EEDD-42DC-8476-D0F5F63AF8CD} = {999F7C7D-893A-4D16-9493-27792924D635}
+		{5F229982-04B4-4937-A0D9-344103589143} = {3129F9EC-95D9-4CA8-B889-80A907FAF055}
 	EndGlobalSection
 EndGlobal

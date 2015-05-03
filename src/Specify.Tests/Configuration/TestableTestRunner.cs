@@ -1,7 +1,6 @@
 using System;
 using NSubstitute;
 using Specify.Configuration;
-using Specify.Containers;
 
 namespace Specify.Tests.Configuration
 {
@@ -14,7 +13,7 @@ namespace Specify.Tests.Configuration
             Substitute.For<ITestEngine>())
         {
             _specification = specification;
-            ChildContainer = Substitute.For<IContainer>();
+            ChildContainer = Substitute.For<IScenarioContainer>();
             DependencyResolver
                 .CreateChildContainer()
                 .Returns(ChildContainer);
@@ -23,6 +22,6 @@ namespace Specify.Tests.Configuration
                 .Returns(_specification);
         }
 
-        public IContainer ChildContainer;
+        public IScenarioContainer ChildContainer;
     }
 }

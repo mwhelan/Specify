@@ -1,5 +1,4 @@
 using System.Linq;
-using Specify.Containers;
 
 namespace Specify.Configuration
 {
@@ -27,7 +26,7 @@ namespace Specify.Configuration
             using (var scenarioScope = _dependencyResolver.CreateChildContainer())
             {
                 var scenario = (IScenario)scenarioScope.Resolve(testObject.GetType());
-                var container = scenarioScope.Resolve<IContainer>();
+                var container = scenarioScope.Resolve<IScenarioContainer>();
                 scenario.SetContainer(container);
                 _testEngine.Execute(scenario);
             }

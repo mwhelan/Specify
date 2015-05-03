@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Ninject;
-using Specify.Containers;
 
 namespace Specify.Examples.Ninject
 {
-    public class NinjectContainer : IContainer
+    public class NinjectContainer : IScenarioContainer
     {
         protected IKernel _container;
 
