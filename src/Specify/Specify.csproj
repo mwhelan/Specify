@@ -53,7 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultContainer.cs" />
+    <Compile Include="LightInjectContainer.cs" />
+    <Compile Include="LightInjectDependencyResolver.cs" />
     <Compile Include="IScenarioContainer.cs" />
     <Compile Include="IDependencyResolver.cs" />
     <Compile Include="lib\LibLog.cs" />

@@ -105,6 +105,7 @@
     <Compile Include="Configuration\TestableTestRunner.cs" />
     <Compile Include="Configuration\TestRunnerTests.cs" />
     <Compile Include="Containers\DependencyResolvers\AutofacDependencyResolverTests.cs" />
+    <Compile Include="Containers\DependencyResolvers\LightInjectDependencyResolverTests.cs" />
     <Compile Include="Containers\DependencyResolvers\DependencyResolverTests.cs" />
     <Compile Include="Containers\DependencyResolvers\NinjectDependencyResolverTests.cs" />
     <Compile Include="Containers\MockFactories\FakeItEasyMockFactoryTests.cs" />

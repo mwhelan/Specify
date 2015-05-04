@@ -3,16 +3,16 @@ using Specify.LightInject;
 
 namespace Specify
 {
-    public class DefaultContainer : IScenarioContainer
+    public class LightInjectContainer : IScenarioContainer
     {
         private readonly IServiceContainer _container;
 
-        public DefaultContainer()
+        public LightInjectContainer()
         {
             _container = new ServiceContainer();
         }
 
-        internal DefaultContainer(IServiceContainer container)
+        internal LightInjectContainer(IServiceContainer container)
         {
             _container = container;
         }
@@ -76,10 +76,9 @@ namespace Specify
             return _container.CanGetInstance(type, string.Empty);
         }
 
-        public IScenarioContainer CreateChildContainer()
+        internal IServiceContainer Container
         {
-            _container.BeginScope();
-            return new DefaultContainer(_container);
+            get { return _container; }
         }
 
         public void Dispose()

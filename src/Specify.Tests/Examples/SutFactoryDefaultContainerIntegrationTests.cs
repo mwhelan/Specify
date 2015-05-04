@@ -7,7 +7,7 @@ namespace Specify.Tests.Examples
     {
         protected override SutFactory<T> CreateSut<T>()
         {
-            var container = new DefaultContainer();
+            var container = new LightInjectContainer();
             container.Register<IDependency1, Dependency1>();
             container.Register<IDependency2, Dependency2>();
             container.Register<ConcreteObjectWithNoConstructor>();
