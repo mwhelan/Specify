@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultContainer.cs" />
     <Compile Include="IScenarioContainer.cs" />
     <Compile Include="IDependencyResolver.cs" />
     <Compile Include="lib\LibLog.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Host.cs" />
     <Compile Include="IScenario.cs" />
     <Compile Include="lib\AssemblyTypeResolver.cs" />
+    <Compile Include="lib\LightInject.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactory.cs" />
     <Compile Include="Mocks\IMockFactory.cs" />
     <Compile Include="Mocks\MoqMockFactory.cs" />

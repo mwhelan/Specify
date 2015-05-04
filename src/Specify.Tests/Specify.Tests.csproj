@@ -116,6 +116,7 @@
     <Compile Include="Containers\SutFactories\SutFactoryIocContainerIntegrationTests.cs" />
     <Compile Include="Containers\SutFactories\SutFactoryIntegrationTests.cs" />
     <Compile Include="Containers\SutFactories\SutFactoryTests.cs" />
+    <Compile Include="Examples\SutFactoryDefaultContainerIntegrationTests.cs" />
     <Compile Include="Examples\SutFactoryNinjectContainerIntegrationTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacContainerIntegrationTests.cs" />
     <Compile Include="Examples\SutFactoryAutofacFakeItEasyContainerIntegrationTests.cs" />
