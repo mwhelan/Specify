@@ -8,7 +8,7 @@ namespace Specify.Examples.Autofac
     /// <summary>
     /// Automocking container that uses Moq to create mocks and Autofac as the container. 
     /// </summary>
-    public class AutofacMoqContainer : IocContainer
+    public class AutofacMoqContainer : AutofacContainer
     {
         public AutofacMoqContainer()
             : base(CreateBuilder())

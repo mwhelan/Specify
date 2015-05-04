@@ -45,7 +45,7 @@
     <Compile Include="AutofacDependencyResolver.cs" />
     <Compile Include="AutofacMockRegistrationHandler.cs" />
     <Compile Include="AutoMockingContainer.cs" />
-    <Compile Include="IocContainer.cs" />
+    <Compile Include="AutofacContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecifyModule.cs" />
   </ItemGroup>

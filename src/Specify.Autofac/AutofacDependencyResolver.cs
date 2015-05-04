@@ -4,7 +4,7 @@ using Autofac;
 
 namespace Specify.Autofac
 {
-    public class AutofacDependencyResolver : IocContainer, IDependencyResolver
+    public class AutofacDependencyResolver : AutofacContainer, IDependencyResolver
     {
         public AutofacDependencyResolver()
         {
@@ -14,7 +14,7 @@ namespace Specify.Autofac
         }
         public IScenarioContainer CreateChildContainer()
         {
-            return new IocContainer(Container.BeginLifetimeScope());
+            return new AutofacContainer(Container.BeginLifetimeScope());
         }
     }
 }

@@ -53,8 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LightInjectContainer.cs" />
-    <Compile Include="LightInjectDependencyResolver.cs" />
+    <Compile Include="DefaultContainer.cs" />
+    <Compile Include="DefaultAutoMockingContainer.cs" />
+    <Compile Include="DefaultDependencyResolver.cs" />
     <Compile Include="IScenarioContainer.cs" />
     <Compile Include="IDependencyResolver.cs" />
     <Compile Include="lib\LibLog.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Stories\UserStory.cs" />
     <Compile Include="Stories\ValueStory.cs" />
     <Compile Include="SutFactory.cs" />
+    <Compile Include="lib\TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

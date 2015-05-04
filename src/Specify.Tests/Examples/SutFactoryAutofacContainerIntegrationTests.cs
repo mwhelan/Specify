@@ -14,7 +14,7 @@ namespace Specify.Tests.Examples
             builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
             builder.RegisterType<Dependency1>().As<IDependency1>();
             builder.RegisterType<Dependency2>().As<IDependency2>();
-            var container = new IocContainer(builder);
+            var container = new AutofacContainer(builder);
             return new SutFactory<T>(container);
         }
     }

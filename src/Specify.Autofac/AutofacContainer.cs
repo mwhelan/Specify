@@ -5,22 +5,22 @@ using Autofac.Core;
 
 namespace Specify.Autofac
 {
-    public class IocContainer : IScenarioContainer
+    public class AutofacContainer : IScenarioContainer
     {
         private ILifetimeScope _container;
         protected ContainerBuilder _containerBuilder;
 
-        public IocContainer()
+        public AutofacContainer()
             : this(new ContainerBuilder())
         {
         }
 
-        public IocContainer(ILifetimeScope container)
+        public AutofacContainer(ILifetimeScope container)
         {
             _container = container;
         }
 
-        public IocContainer(ContainerBuilder containerBuilder)
+        public AutofacContainer(ContainerBuilder containerBuilder)
         {
             _containerBuilder = containerBuilder;
         }

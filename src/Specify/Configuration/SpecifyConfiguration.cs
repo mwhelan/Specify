@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Specify.Configuration
 {
@@ -20,7 +19,7 @@ namespace Specify.Configuration
         public virtual IDependencyResolver GetDependencyResolver()
         {
             // try to find class that implements IDependencyResolver?
-            throw new NotImplementedException();
+            return new DefaultDependencyResolver();
         }
     }
 }

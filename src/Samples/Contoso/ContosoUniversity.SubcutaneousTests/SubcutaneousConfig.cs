@@ -2,9 +2,9 @@
 using Specify.Autofac;
 using Specify.Configuration;
 
-namespace ContosoUniversity.FunctionalTests
+namespace ContosoUniversity.SubcutaneousTests
 {
-    public class SpecifyConfig : SpecifyConfiguration
+    public class SubcutaneousConfig : SpecifyConfiguration
     {
         public override IDependencyResolver GetDependencyResolver()
         {

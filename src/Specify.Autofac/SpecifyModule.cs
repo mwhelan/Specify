@@ -21,7 +21,7 @@ namespace Specify.Autofac
             var mockFactory = new MockDetector().FindAvailableMock() ;
             if (mockFactory == null)
             {
-                builder.Register(c => new IocContainer(c.Resolve<ILifetimeScope>()))
+                builder.Register(c => new AutofacContainer(c.Resolve<ILifetimeScope>()))
                     .As<IScenarioContainer>()
                     .InstancePerLifetimeScope();
             }

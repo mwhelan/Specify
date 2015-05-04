@@ -7,7 +7,7 @@ namespace Specify.Autofac
     /// <summary>
     /// Automocking container that uses mock factory to create mocks and Autofac as the container. 
     /// </summary>
-    public class AutoMockingContainer : IocContainer
+    public class AutoMockingContainer : AutofacContainer
     {
         public AutoMockingContainer(IMockFactory mockFactory)
             : base(CreateBuilder(mockFactory))
