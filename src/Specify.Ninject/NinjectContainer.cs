@@ -2,7 +2,7 @@
 using System.Linq;
 using Ninject;
 
-namespace Specify.Examples.Ninject
+namespace Specify.Ninject
 {
     public class NinjectContainer : IScenarioContainer
     {
@@ -10,64 +10,60 @@ namespace Specify.Examples.Ninject
 
         public NinjectContainer(IKernel container)
         {
-            _container = container;
+            this._container = container;
         }
 
-        protected IKernel Container
+        public IKernel Container
         {
             get
             {
-                return _container;
+                return this._container;
             }
         }
 
         public void Register<T>() where T : class
         {
-            Container.GetBindings(typeof(T))
+            this.Container.GetBindings(typeof(T))
                 .Where(b => string.IsNullOrEmpty(b.Metadata.Name))
                 .ToList()
-                .ForEach(b => Container.RemoveBinding(b));
+                .ForEach(b => this.Container.RemoveBinding(b));
 
-            Container.Bind<T>().To<T>()
-                .InSingletonScope()
+            this.Container.Bind<T>().To<T>()
+                .InstancePerScenario()
                 .BindingConfiguration.IsImplicit = true;
         }
 
-        // This needs to be lifetime scope per scenario
         public void Register<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
         {
-            Container.GetBindings(typeof(TService))
+            this.Container.GetBindings(typeof(TService))
                 .Where(b => string.IsNullOrEmpty(b.Metadata.Name))
                 .ToList()
-                .ForEach(b => Container.RemoveBinding(b));
+                .ForEach(b => this.Container.RemoveBinding(b));
 
-            Container.Bind<TService>().To<TImplementation>()
-                .InSingletonScope()
+            this.Container.Bind<TService>().To<TImplementation>()
+                .InstancePerScenario()
                 .BindingConfiguration.IsImplicit = true;
         }
 
-        // This needs to be lifetime scope per scenario
         public T Register<T>(T valueToSet, string key = null) where T : class
         {
-            Container.GetBindings(typeof(T))
+            this.Container.GetBindings(typeof(T))
                 .Where(b => key != null && b.Metadata.Name == key || string.IsNullOrEmpty(b.Metadata.Name))
                 .ToList()
-                .ForEach(b => Container.RemoveBinding(b));
+                .ForEach(b => this.Container.RemoveBinding(b));
 
             if (key == null)
             {
-                Container.Bind<T>().ToConstant(valueToSet)
-                    //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
-                    .InSingletonScope()
+                this.Container.Bind<T>().ToConstant(valueToSet)
+                    .InstancePerScenario()
                     .BindingConfiguration.IsImplicit = true;
             }
             else
             {
-                Container.Bind<T>().ToConstant(valueToSet)
-                    //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
-                    .InSingletonScope()
+                this.Container.Bind<T>().ToConstant(valueToSet)
+                    .InstancePerScenario()
                     .Named(key)
                     .BindingConfiguration.IsImplicit = true;
             }
@@ -76,34 +72,34 @@ namespace Specify.Examples.Ninject
 
         public T Resolve<T>(string key = null) where T : class
         {
-            return Container.Get<T>(m => key == null && m.Name == null || m.Name == key);
+            return this.Container.Get<T>(m => key == null && m.Name == null || m.Name == key);
         }
 
         public object Resolve(Type serviceType, string key = null)
         {
             if (key == null)
             {
-                return Container.Get(serviceType);
+                return this.Container.Get(serviceType);
             }
             else
             {
-                return Container.Get(serviceType, key);
+                return this.Container.Get(serviceType, key);
             }
         }
 
         public bool CanResolve<T>() where T : class
         {
-            return Container.CanResolve<T>();
+            return this.Container.CanResolve<T>();
         }
 
         public bool CanResolve(Type type)
         {
-            return Container.CanResolve(type) != null;
+            return this.Container.CanResolve(type) != null;
         }
 
         public void Dispose()
         {
-            Container.Dispose();
+            this.Container.Dispose();
         }
     }
 }

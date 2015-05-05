@@ -1,10 +1,8 @@
-using Specify.Autofac;
-using Specify.Mocks;
-using Specify.Tests.Containers;
-using Specify.Tests.Containers.SutFactories;
-
-namespace Specify.Tests.Examples
+namespace Specify.IntegrationTests.SutFactories
 {
+    using Specify.Autofac;
+    using Specify.Mocks;
+
     public class SutFactoryAutofacNSubstituteContainerIntegrationTests : SutFactoryIntegrationTests
     {
         protected override SutFactory<T> CreateSut<T>()

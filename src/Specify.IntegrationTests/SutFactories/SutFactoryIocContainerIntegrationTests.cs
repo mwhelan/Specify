@@ -1,7 +1,7 @@
 ﻿using Specify.Autofac;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Containers.SutFactories
+namespace Specify.IntegrationTests.SutFactories
 {
     public class SutFactoryIocContainerIntegrationTests : SutFactoryIntegrationTests
     {

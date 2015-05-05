@@ -1,8 +1,7 @@
-﻿using Specify.Tests.Containers.SutFactories;
-using Specify.Tests.Stubs;
+﻿namespace Specify.IntegrationTests.SutFactories
+{
+    using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Examples
-{            
     public class SutFactoryDefaultContainerIntegrationTests : SutFactoryIntegrationTests
     {
         protected override SutFactory<T> CreateSut<T>()

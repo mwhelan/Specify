@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 [assembly: InternalsVisibleTo("Specify.Tests")]
+[assembly: InternalsVisibleTo("Specify.IntegrationTests")]
 [assembly: InternalsVisibleTo("Specify.Examples")]
 [assembly: InternalsVisibleTo("Specify.Autofac")]
 

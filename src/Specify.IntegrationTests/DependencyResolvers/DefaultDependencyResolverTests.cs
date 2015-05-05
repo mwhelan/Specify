@@ -1,4 +1,4 @@
-﻿namespace Specify.Tests.Containers.DependencyResolvers
+﻿namespace Specify.IntegrationTests.DependencyResolvers
 {
     public class DefaultDependencyResolverTests : DependencyResolverTests<DefaultDependencyResolver>
     {

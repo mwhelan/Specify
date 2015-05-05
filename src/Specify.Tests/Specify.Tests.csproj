@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Specify.Tests</RootNamespace>
     <AssemblyName>Specify.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <TargetFrameworkProfile />
@@ -43,41 +43,44 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ApprovalTests">
+    <Reference Include="ApprovalTests, Version=3.0.0.0, Culture=neutral, PublicKeyToken=11bd7d124fc62e0f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ApprovalTests.3.0.8\lib\net40\ApprovalTests.dll</HintPath>
     </Reference>
-    <Reference Include="ApprovalUtilities">
-      <HintPath>..\packages\ApprovalUtilities.3.0.8\lib\net45\ApprovalUtilities.dll</HintPath>
-    </Reference>
-    <Reference Include="ApprovalUtilities.Net45">
-      <HintPath>..\packages\ApprovalUtilities.3.0.8\lib\net45\ApprovalUtilities.Net45.dll</HintPath>
+    <Reference Include="ApprovalUtilities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=11bd7d124fc62e0f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ApprovalUtilities.3.0.8\lib\net35\ApprovalUtilities.dll</HintPath>
     </Reference>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="FakeItEasy">
+    <Reference Include="FakeItEasy, Version=1.25.2.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FakeItEasy.1.25.2\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.2.1502.911, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="NSubstitute, Version=1.8.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
+      <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net40\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Shouldly">
+    <Reference Include="Shouldly, Version=2.4.0.0, Culture=neutral, PublicKeyToken=6042cbcb05cbc941, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Shouldly.2.4.0\lib\net40\Shouldly.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -104,25 +107,6 @@
     <Compile Include="Configuration\TemporaryNLogLogger.cs" />
     <Compile Include="Configuration\TestableTestRunner.cs" />
     <Compile Include="Configuration\TestRunnerTests.cs" />
-    <Compile Include="Containers\DependencyResolvers\AutofacDependencyResolverTests.cs" />
-    <Compile Include="Containers\DependencyResolvers\DefaultDependencyResolverTests.cs" />
-    <Compile Include="Containers\DependencyResolvers\DependencyResolverTests.cs" />
-    <Compile Include="Containers\DependencyResolvers\NinjectDependencyResolverTests.cs" />
-    <Compile Include="Containers\MockFactories\FakeItEasyMockFactoryTests.cs" />
-    <Compile Include="Containers\MockFactories\MockFactoryTests.cs" />
-    <Compile Include="Containers\MockFactories\MoqMockFactoryTests.cs" />
-    <Compile Include="Containers\MockFactories\NSubstituteMockFactoryTests.cs" />
-    <Compile Include="Containers\IocContainerTests.cs" />
-    <Compile Include="Containers\SutFactories\SutFactoryAutoMockingContainerIntegrationTests.cs" />
-    <Compile Include="Containers\SutFactories\SutFactoryIocContainerIntegrationTests.cs" />
-    <Compile Include="Containers\SutFactories\SutFactoryIntegrationTests.cs" />
-    <Compile Include="Containers\SutFactories\SutFactoryTests.cs" />
-    <Compile Include="Examples\SutFactoryDefaultContainerIntegrationTests.cs" />
-    <Compile Include="Examples\SutFactoryNinjectContainerIntegrationTests.cs" />
-    <Compile Include="Examples\SutFactoryAutofacContainerIntegrationTests.cs" />
-    <Compile Include="Examples\SutFactoryAutofacFakeItEasyContainerIntegrationTests.cs" />
-    <Compile Include="Examples\SutFactoryAutofacMoqContainerIntegrationTests.cs" />
-    <Compile Include="Examples\SutFactoryAutofacNSubstituteContainerIntegrationTests.cs" />
     <Compile Include="SpecifyExtensionTests.cs" />
     <Compile Include="Stories\UserStoryTests.cs" />
     <Compile Include="Stories\ValueStoryTests.cs" />
@@ -163,7 +147,10 @@
     <Content Include="Configuration\BddfyTestEngineTests.should_display_examples_on_reports.approved.txt" />
     <Content Include="Configuration\LoggingProcessorTests.thetest.approved.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Containers\" />
+    <Folder Include="Examples\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

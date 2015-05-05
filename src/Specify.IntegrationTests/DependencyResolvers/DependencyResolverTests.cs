@@ -1,10 +1,9 @@
-namespace Specify.Tests.Containers.DependencyResolvers
+using NUnit.Framework;
+using Shouldly;
+using Specify.Tests.Stubs;
+
+namespace Specify.IntegrationTests.DependencyResolvers
 {
-    using NUnit.Framework;
-
-    using Shouldly;
-    using Specify.Tests.Stubs;
-
     [TestFixture]
     public abstract class DependencyResolverTests<T> where T : IDependencyResolver, new()
     {

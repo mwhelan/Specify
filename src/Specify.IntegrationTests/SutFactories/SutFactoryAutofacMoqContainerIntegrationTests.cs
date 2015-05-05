@@ -4,11 +4,15 @@
 
 //namespace Specify.Tests.Examples
 //{
-//    public class SutFactoryAutofacFakeItEasyContainerIntegrationTests : SutFactoryIntegrationTests
+//    public class SutFactoryAutofacMoqContainerIntegrationTests : SutFactoryIntegrationTests
 //    {
 //        protected override SutFactory<T> CreateSut<T>()
 //        {
-//            return new SutFactory<T>(new AutofacFakeItEasyContainer());
+//            return new SutFactory<T>(new AutofacMoqContainer());
 //        }
 //    }
 //}
+
+namespace Specify.IntegrationTests.SutFactories
+{
+}

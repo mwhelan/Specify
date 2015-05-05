@@ -3,8 +3,9 @@ using Shouldly;
 using Specify.Autofac;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Containers
+namespace Specify.IntegrationTests
 {
+
     [TestFixture]
     public class IocContainerTests
     {

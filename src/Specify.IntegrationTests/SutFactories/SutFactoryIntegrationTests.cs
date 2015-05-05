@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Shouldly;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Containers.SutFactories
+namespace Specify.IntegrationTests.SutFactories
 {
     [TestFixture]
     public abstract class SutFactoryIntegrationTests

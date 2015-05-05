@@ -4,7 +4,7 @@ using System.Reflection;
 using Ninject.Extensions.NamedScope;
 using Ninject.Modules;
 
-namespace Specify.Examples.Ninject
+namespace Specify.Ninject
 {
 
     public class NinjectScenarioModule : NinjectModule
@@ -29,7 +29,7 @@ namespace Specify.Examples.Ninject
                 select type;
 
             foreach (var scenario in scenarios)
-                this.Bind(scenario).ToSelf().DefinesNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag);
+                Bind(scenario).ToSelf().DefinesNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag);
         }
     }
 }

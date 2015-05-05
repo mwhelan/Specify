@@ -1,12 +1,15 @@
-﻿using Ninject;
-using Ninject.Extensions.ChildKernel;
-using System.Reflection;
+﻿using System.Reflection;
+using Ninject;
+using Ninject.Extensions.NamedScope;
 
-namespace Specify.Examples.Ninject
+namespace Specify.Ninject
 {
     public class NinjectDependencyResolver : NinjectContainer, IDependencyResolver
     {
         public const string ScenarioLifetimeScopeTag = "ScenarioLifetime";
+
+        public NinjectDependencyResolver(IKernel kernel) 
+            : base(kernel) { }
 
         public NinjectDependencyResolver() 
             : base(CreateContainer()) { }
@@ -20,8 +23,8 @@ namespace Specify.Examples.Ninject
 
         public IScenarioContainer CreateChildContainer()
         {
-            var childContainer = new ChildKernel(this.Container);
-            return new NinjectContainer(childContainer);
+            Container.CreateNamedScope(ScenarioLifetimeScopeTag);
+            return this;
         }
     }
 }

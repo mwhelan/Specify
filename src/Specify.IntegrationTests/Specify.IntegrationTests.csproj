@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Specify.IntegrationTests</RootNamespace>
     <AssemblyName>Specify.IntegrationTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -31,6 +31,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="FakeItEasy, Version=1.25.2.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FakeItEasy.1.25.2\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.2.1502.911, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net40\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.NamedScope, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.Extensions.NamedScope.3.2.0.0\lib\net40\Ninject.Extensions.NamedScope.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute, Version=1.8.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net40\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Shouldly, Version=2.5.0.0, Culture=neutral, PublicKeyToken=6042cbcb05cbc941, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Shouldly.2.5.0\lib\net40\Shouldly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,13 +72,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyResolvers\AutofacDependencyResolverTests.cs" />
+    <Compile Include="DependencyResolvers\DefaultDependencyResolverTests.cs" />
+    <Compile Include="DependencyResolvers\DependencyResolverTests.cs" />
+    <Compile Include="DependencyResolvers\NinjectDependencyResolverTests.cs" />
+    <Compile Include="IocContainerTests.cs" />
+    <Compile Include="MockFactories\FakeItEasyMockFactoryTests.cs" />
+    <Compile Include="MockFactories\MockFactoryTests.cs" />
+    <Compile Include="MockFactories\MoqMockFactoryTests.cs" />
+    <Compile Include="MockFactories\NSubstituteMockFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SutFactories\SutFactoryAutofacContainerIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryAutofacFakeItEasyContainerIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryAutofacMoqContainerIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryAutofacNSubstituteContainerIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryAutoMockingContainerIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryDefaultContainerIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryIocContainerIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryNinjectContainerIntegrationTests.cs" />
+    <Compile Include="SutFactories\SutFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Specify.Autofac\Specify.Autofac.csproj">
+      <Project>{5f229982-04b4-4937-a0d9-344103589143}</Project>
+      <Name>Specify.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Specify.Examples\Specify.Examples.csproj">
+      <Project>{b614edd2-3b31-434b-ad77-576d9cba0ec8}</Project>
+      <Name>Specify.Examples</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Specify.IntegrationTests.App\Specify.IntegrationTests.App.csproj">
       <Project>{939826b8-066c-4e42-8652-36a70715c69e}</Project>
       <Name>Specify.IntegrationTests.App</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Specify.Ninject\Specify.Ninject.csproj">
+      <Project>{3E2E2D8A-41FF-4AC3-AC0F-6055E9F95022}</Project>
+      <Name>Specify.Ninject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Specify.Tests\Specify.Tests.csproj">
+      <Project>{bce11cb0-6046-4d00-a3f9-b629a5691276}</Project>
+      <Name>Specify.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Specify\Specify.csproj">
+      <Project>{e0041c2f-cc2e-4f2e-ad11-4c9ddb2fcd14}</Project>
+      <Name>Specify</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

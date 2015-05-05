@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using Autofac.Features.ResolveAnything;
 using Specify.Autofac;
-using Specify.Tests.Containers.SutFactories;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Examples
+namespace Specify.IntegrationTests.SutFactories
 {
+
     public class SutFactoryAutofacContainerIntegrationTests : SutFactoryIntegrationTests
     {
         protected override SutFactory<T> CreateSut<T>()

@@ -3,7 +3,7 @@ using Shouldly;
 using Specify.Mocks;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests.Containers.MockFactories
+namespace Specify.IntegrationTests.MockFactories
 {
     [TestFixture]
     public abstract class MockFactoryTests<T> where T : IMockFactory, new()
@@ -16,7 +16,7 @@ namespace Specify.Tests.Containers.MockFactories
         [Test]
         public void should_mock_interfaces()
         {
-            var sut = CreateSut();
+            var sut = this.CreateSut();
             var result = sut.CreateMock(typeof (IDependency1));
 
             result.ShouldNotBe(null);
@@ -26,7 +26,7 @@ namespace Specify.Tests.Containers.MockFactories
         [Test]
         public void should_mock_concrete()
         {
-            var sut = CreateSut();
+            var sut = this.CreateSut();
             var result = sut.CreateMock(typeof(Dependency1));
 
             result.ShouldNotBe(null);

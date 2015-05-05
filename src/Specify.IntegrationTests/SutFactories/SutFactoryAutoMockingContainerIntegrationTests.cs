@@ -1,7 +1,7 @@
 ﻿using Specify.Autofac;
 using Specify.Mocks;
 
-namespace Specify.Tests.Containers.SutFactories
+namespace Specify.IntegrationTests.SutFactories
 {
     public class SutFactoryAutoMockingContainerIntegrationTests : SutFactoryIntegrationTests
     {
