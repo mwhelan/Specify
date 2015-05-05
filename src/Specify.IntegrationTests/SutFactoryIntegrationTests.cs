@@ -1,9 +1,12 @@
 ﻿using System;
+
 using NUnit.Framework;
+
 using Shouldly;
+
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.SutFactories
+namespace Specify.IntegrationTests
 {
     [TestFixture]
     public abstract class SutFactoryIntegrationTests
@@ -13,7 +16,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void should_use_container_to_create_sut()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
             result.ShouldNotBe(null);
         }
@@ -21,7 +24,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void sut_should_be_singleton()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
 
             sut.SystemUnderTest.ShouldBeSameAs(result);
@@ -31,7 +34,7 @@ namespace Specify.IntegrationTests.SutFactories
         public void should_be_able_to_set_sut_independently()
         {
             var instance = new ConcreteObjectWithNoConstructor();
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var original = sut.SystemUnderTest;
 
             sut.SystemUnderTest = instance;
@@ -43,7 +46,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void should_provide_sut_dependencies()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
 
             var result = sut.SystemUnderTest;
 
@@ -55,7 +58,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterType_should_throw_if_SUT_is_set()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
             Should.Throw<InvalidOperationException>(() => sut.Register<ConcreteObjectWithNoConstructor>())
                 .Message.ShouldBe("Cannot register type after SUT is created.");
@@ -64,7 +67,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterService_should_register_service_if_SUT_not_set()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Register<IDependency2, Dependency2>();
             sut.Get<IDependency2>().ShouldNotBe(null);
         }
@@ -72,7 +75,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterService_should_throw_if_SUT_is_set()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
             Should.Throw<InvalidOperationException>(() => sut.Register<IDependency1,Dependency1>())
                 .Message.ShouldBe("Cannot register service after SUT is created.");
@@ -81,7 +84,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterType_should_register_type_if_SUT_not_set()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Register<Dependency1>();
             sut.Get<Dependency1>().ShouldNotBe(null);
         }
@@ -89,7 +92,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterInstance_should_throw_if_SUT_is_set()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
             Should.Throw<InvalidOperationException>(() => sut.Register(new ConcreteObjectWithNoConstructor()))
                 .Message.ShouldBe("Cannot register instance after SUT is created.");
@@ -98,7 +101,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterInstance_should_register_instance_if_SUT_not_set()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var instance = new Dependency3();
 
             sut.Register<IDependency3>(instance);
@@ -110,7 +113,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterInstance_named_should_register_separate_named_instances()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var instance1 = new Dependency3();
             var instance2 = new Dependency3();
 
@@ -124,7 +127,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterInstance_unnamed_should_return_unnamed_when_multiple_registrations()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var instance1 = new Dependency3();
             var instance2 = new Dependency3();
 
@@ -138,7 +141,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterType_should_register_singleton_lifetime()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Register<Dependency1>();
             sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
         }
@@ -146,7 +149,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterInstance_should_register_singleton_lifetime()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Register<Dependency1>(new Dependency1());
             sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
         }
@@ -154,7 +157,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterService_should_register_singleton_lifetime()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Register<IDependency2, Dependency2>();
             sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
         }
@@ -162,7 +165,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void Resolve_generic_should_call_container_resolve_generic()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.Get<ConcreteObjectWithNoConstructor>();
             result.ShouldNotBe(null);
         }
@@ -170,7 +173,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void Resolve_should_call_container_resolve()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.Get(typeof(ConcreteObjectWithNoConstructor));
             sut.ShouldNotBe(null);
         }
@@ -178,7 +181,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void IsRegistered_generic_should_call_container_IsRegistered_generic()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.IsRegistered<ConcreteObjectWithNoConstructor>();
             result.ShouldBe(true);
         }
@@ -186,7 +189,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void IsRegistered_should_call_container_IsRegistered()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
             result.ShouldBe(true);
         }

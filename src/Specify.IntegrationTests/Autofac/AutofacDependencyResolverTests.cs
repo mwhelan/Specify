@@ -1,6 +1,6 @@
 using Specify.Autofac;
 
-namespace Specify.IntegrationTests.DependencyResolvers
+namespace Specify.IntegrationTests.Autofac
 {
     public class AutofacDependencyResolverTests : DependencyResolverTests<AutofacDependencyResolver>
     {

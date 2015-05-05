@@ -1,9 +1,9 @@
-﻿using Specify.Autofac;
+using Specify.Autofac;
 using Specify.Mocks;
 
-namespace Specify.IntegrationTests.SutFactories
+namespace Specify.IntegrationTests.Autofac
 {
-    public class SutFactoryAutoMockingContainerIntegrationTests : SutFactoryIntegrationTests
+    public class SutFactoryAutofacNSubstituteContainerIntegrationTests : SutFactoryIntegrationTests
     {
         protected override SutFactory<T> CreateSut<T>()
         {

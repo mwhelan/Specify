@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Shouldly;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.SutFactories
+namespace Specify.Tests
 {
     [TestFixture]
     public class SutFactoryTests
@@ -12,7 +12,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void should_use_container_to_create_sut()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
             sut.SourceContainer.Received().Resolve<ConcreteObjectWithNoConstructor>();
         }
@@ -20,7 +20,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void sut_should_be_singleton()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
 
             sut.SystemUnderTest.ShouldBeSameAs(result);
@@ -31,7 +31,7 @@ namespace Specify.IntegrationTests.SutFactories
         public void should_be_able_to_set_sut_independently()
         {
             var instance = new ConcreteObjectWithNoConstructor();
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var original = sut.SystemUnderTest;
 
             sut.SystemUnderTest = instance;
@@ -43,7 +43,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterType_should_call_container_to_register_type_if_SUT_not_set()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Register<ConcreteObjectWithNoConstructor>();
             sut.SourceContainer.Received().Register<ConcreteObjectWithNoConstructor>();
         }
@@ -51,7 +51,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterType_should_throw_if_SUT_is_set()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
             Should.Throw<InvalidOperationException>(() => sut.Register<ConcreteObjectWithNoConstructor>())
                 .Message.ShouldBe("Cannot register type after SUT is created.");
@@ -60,7 +60,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterService_should_call_container_to_register_type_if_SUT_not_set()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Register<IDependency1, Dependency1>();
             sut.SourceContainer.Received().Register<IDependency1, Dependency1>();
         }
@@ -68,7 +68,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterService_should_throw_if_SUT_is_set()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
             Should.Throw<InvalidOperationException>(() => sut.Register<IDependency1, Dependency1>())
                 .Message.ShouldBe("Cannot register service after SUT is created.");
@@ -78,7 +78,7 @@ namespace Specify.IntegrationTests.SutFactories
         public void RegisterInstance_should_call_container_to_register_instance_if_SUT_not_set()
         {
             var instance = new ConcreteObjectWithNoConstructor();
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
 
             sut.Register(instance);
 
@@ -88,7 +88,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void RegisterInstance_should_throw_if_SUT_is_set()
         {
-            var sut = CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
             Should.Throw<InvalidOperationException>(() => sut.Register(new ConcreteObjectWithNoConstructor()))
                 .Message.ShouldBe("Cannot register instance after SUT is created.");
@@ -97,7 +97,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void Resolve_generic_should_call_container_resolve_generic()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get<ConcreteObjectWithNoConstructor>();
             sut.SourceContainer.Received().Resolve<ConcreteObjectWithNoConstructor>();
         }
@@ -105,7 +105,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void Resolve_should_call_container_resolve()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get(typeof(ConcreteObjectWithNoConstructor));
             sut.SourceContainer.Received().Resolve(typeof(ConcreteObjectWithNoConstructor));
         }
@@ -113,7 +113,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void IsRegistered_generic_should_call_container_IsRegistered_generic()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.IsRegistered<ConcreteObjectWithNoConstructor>();
             sut.SourceContainer.Received().CanResolve<ConcreteObjectWithNoConstructor>();
         }
@@ -121,7 +121,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void IsRegistered_should_call_container_IsRegistered()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
             sut.SourceContainer.Received().CanResolve(typeof(ConcreteObjectWithNoConstructor));
         }
@@ -129,7 +129,7 @@ namespace Specify.IntegrationTests.SutFactories
         [Test]
         public void should_dispose_container_when_disposed()
         {
-            var sut = CreateSut<ConcreteObjectWithNoConstructor>();
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Dispose();
             sut.SourceContainer.Received().Dispose();
         }

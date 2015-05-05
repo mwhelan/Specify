@@ -1,7 +1,6 @@
-using Ninject.Extensions.NamedScope;
 using Specify.Ninject;
 
-namespace Specify.IntegrationTests.DependencyResolvers
+namespace Specify.IntegrationTests.Ninject
 {
 
     public class NinjectDependencyResolverTests : DependencyResolverTests<NinjectDependencyResolver>

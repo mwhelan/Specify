@@ -1,4 +1,4 @@
-﻿namespace Specify.IntegrationTests.DependencyResolvers
+﻿namespace Specify.IntegrationTests.TinyIoc
 {
     public class DefaultDependencyResolverTests : DependencyResolverTests<DefaultDependencyResolver>
     {

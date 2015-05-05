@@ -1,7 +1,7 @@
-﻿namespace Specify.IntegrationTests.SutFactories
-{
-    using Specify.Tests.Stubs;
+﻿using Specify.Tests.Stubs;
 
+namespace Specify.IntegrationTests.TinyIoc
+{
     public class SutFactoryDefaultContainerIntegrationTests : SutFactoryIntegrationTests
     {
         protected override SutFactory<T> CreateSut<T>()

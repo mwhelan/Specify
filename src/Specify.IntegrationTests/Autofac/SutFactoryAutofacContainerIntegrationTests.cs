@@ -1,9 +1,9 @@
 ﻿using Specify.Autofac;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.SutFactories
+namespace Specify.IntegrationTests.Autofac
 {
-    public class SutFactoryIocContainerIntegrationTests : SutFactoryIntegrationTests
+    public class SutFactoryAutofacContainerIntegrationTests : SutFactoryIntegrationTests
     {
         protected override SutFactory<T> CreateSut<T>()
         {

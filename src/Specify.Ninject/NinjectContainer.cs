@@ -10,60 +10,64 @@ namespace Specify.Ninject
 
         public NinjectContainer(IKernel container)
         {
-            this._container = container;
+            _container = container;
         }
 
-        public IKernel Container
+        protected IKernel Container
         {
             get
             {
-                return this._container;
+                return _container;
             }
         }
 
         public void Register<T>() where T : class
         {
-            this.Container.GetBindings(typeof(T))
+            Container.GetBindings(typeof(T))
                 .Where(b => string.IsNullOrEmpty(b.Metadata.Name))
                 .ToList()
-                .ForEach(b => this.Container.RemoveBinding(b));
+                .ForEach(b => Container.RemoveBinding(b));
 
-            this.Container.Bind<T>().To<T>()
-                .InstancePerScenario()
+            Container.Bind<T>().To<T>()
+                .InSingletonScope()
                 .BindingConfiguration.IsImplicit = true;
         }
 
+        // This needs to be lifetime scope per scenario
         public void Register<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
         {
-            this.Container.GetBindings(typeof(TService))
+            Container.GetBindings(typeof(TService))
                 .Where(b => string.IsNullOrEmpty(b.Metadata.Name))
                 .ToList()
-                .ForEach(b => this.Container.RemoveBinding(b));
+                .ForEach(b => Container.RemoveBinding(b));
 
-            this.Container.Bind<TService>().To<TImplementation>()
-                .InstancePerScenario()
+            Container.Bind<TService>().To<TImplementation>()
+                .InSingletonScope()
                 .BindingConfiguration.IsImplicit = true;
         }
 
+        // This needs to be lifetime scope per scenario
         public T Register<T>(T valueToSet, string key = null) where T : class
         {
-            this.Container.GetBindings(typeof(T))
+            Container.GetBindings(typeof(T))
                 .Where(b => key != null && b.Metadata.Name == key || string.IsNullOrEmpty(b.Metadata.Name))
                 .ToList()
-                .ForEach(b => this.Container.RemoveBinding(b));
+                .ForEach(b => Container.RemoveBinding(b));
 
             if (key == null)
             {
-                this.Container.Bind<T>().ToConstant(valueToSet)
-                    .InstancePerScenario()
+                Container.Bind<T>().ToConstant(valueToSet)
+                    //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
+                    .InSingletonScope()
                     .BindingConfiguration.IsImplicit = true;
             }
             else
             {
-                this.Container.Bind<T>().ToConstant(valueToSet)
-                    .InstancePerScenario()
+                Container.Bind<T>().ToConstant(valueToSet)
+                    //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
+                    .InSingletonScope()
                     .Named(key)
                     .BindingConfiguration.IsImplicit = true;
             }
@@ -72,34 +76,34 @@ namespace Specify.Ninject
 
         public T Resolve<T>(string key = null) where T : class
         {
-            return this.Container.Get<T>(m => key == null && m.Name == null || m.Name == key);
+            return Container.Get<T>(m => key == null && m.Name == null || m.Name == key);
         }
 
         public object Resolve(Type serviceType, string key = null)
         {
             if (key == null)
             {
-                return this.Container.Get(serviceType);
+                return Container.Get(serviceType);
             }
             else
             {
-                return this.Container.Get(serviceType, key);
+                return Container.Get(serviceType, key);
             }
         }
 
         public bool CanResolve<T>() where T : class
         {
-            return this.Container.CanResolve<T>();
+            return Container.CanResolve<T>();
         }
 
         public bool CanResolve(Type type)
         {
-            return this.Container.CanResolve(type) != null;
+            return Container.CanResolve(type) != null;
         }
 
         public void Dispose()
         {
-            this.Container.Dispose();
+            Container.Dispose();
         }
     }
 }

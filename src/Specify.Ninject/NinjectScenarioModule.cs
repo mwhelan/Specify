@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Ninject.Extensions.NamedScope;
 using Ninject.Modules;
 
 namespace Specify.Ninject
@@ -23,13 +22,15 @@ namespace Specify.Ninject
 
         public override void Load()
         {
-            var scenarios = from assembly in _assemblies
-                from type in assembly.GetTypes()
-                where type.IsScenario()
-                select type;
+            var scenarios = from assembly in _assemblies 
+                            from type in assembly.GetTypes() 
+                            where type.IsScenario() 
+                            select type;
 
             foreach (var scenario in scenarios)
-                Bind(scenario).ToSelf().DefinesNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag);
+            {
+                Bind(scenario).ToSelf();
+            }
         }
     }
 }

@@ -1,8 +1,10 @@
 using NUnit.Framework;
+
 using Shouldly;
+
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.DependencyResolvers
+namespace Specify.IntegrationTests
 {
     [TestFixture]
     public abstract class DependencyResolverTests<T> where T : IDependencyResolver, new()
