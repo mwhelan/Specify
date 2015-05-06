@@ -8,7 +8,7 @@ namespace Specify.Examples.Autofac
     /// <summary>
     /// Automocking container that uses NSubstitute to create mocks and Autofac as the container. 
     /// </summary>
-    public class AutofacNSubstituteContainer : AutofacContainer
+    public class AutofacNSubstituteContainer : AutofacScenarioContainer
     {
         public AutofacNSubstituteContainer()
             : base(CreateBuilder())

@@ -16,10 +16,10 @@ namespace Specify.Configuration
             LoggingEnabled = false;
         }
 
-        public virtual IDependencyResolver GetDependencyResolver()
+        public virtual IApplicationContainer GetDependencyResolver()
         {
-            // try to find class that implements IDependencyResolver?
-            return new DefaultDependencyResolver();
+            // try to find class that implements IApplicationContainer?
+            return new DefaultApplicationContainer();
         }
     }
 }

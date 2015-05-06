@@ -5,7 +5,7 @@ using Specify.Mocks;
 
 namespace Specify
 {
-    public class DefaultAutoMockingContainer : DefaultContainer
+    public class DefaultAutoMockingContainer : DefaultScenarioContainer
     {
         private readonly IMockFactory _mockFactory;
 

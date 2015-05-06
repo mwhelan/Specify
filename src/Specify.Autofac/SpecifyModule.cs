@@ -21,13 +21,13 @@ namespace Specify.Autofac
             var mockFactory = new MockDetector().FindAvailableMock() ;
             if (mockFactory == null)
             {
-                builder.Register(c => new AutofacContainer(c.Resolve<ILifetimeScope>()))
+                builder.Register(c => new AutofacScenarioContainer(c.Resolve<ILifetimeScope>()))
                     .As<IScenarioContainer>()
                     .InstancePerLifetimeScope();
             }
             else
             {
-                builder.Register(c => new AutoMockingContainer(mockFactory()))
+                builder.Register(c => new AutofacAutoMockingContainer(mockFactory()))
                     .As<IScenarioContainer>()
                     .InstancePerLifetimeScope();
             }

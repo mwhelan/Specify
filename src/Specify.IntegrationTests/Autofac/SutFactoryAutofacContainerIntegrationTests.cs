@@ -7,7 +7,7 @@ namespace Specify.IntegrationTests.Autofac
     {
         protected override SutFactory<T> CreateSut<T>()
         {
-            var container = new AutofacContainer();
+            var container = new AutofacScenarioContainer();
             container.Register<IDependency1, Dependency1>();
             container.Register<IDependency2, Dependency2>();
             container.Register<ConcreteObjectWithMultipleConstructors>();

@@ -6,9 +6,9 @@ namespace ContosoUniversity.AcceptanceTests
 {
     public class SpecifyConfig : SpecifyConfiguration
     {
-        public override IDependencyResolver GetDependencyResolver()
+        public override IApplicationContainer GetDependencyResolver()
         {
-            return new AutofacDependencyResolver();
+            return new AutofacApplicationContainer();
         }
     }
 }

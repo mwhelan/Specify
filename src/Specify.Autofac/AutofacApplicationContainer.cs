@@ -4,9 +4,9 @@ using Autofac;
 
 namespace Specify.Autofac
 {
-    public class AutofacDependencyResolver : AutofacContainer, IDependencyResolver
+    public class AutofacApplicationContainer : AutofacScenarioContainer, IApplicationContainer
     {
-        public AutofacDependencyResolver()
+        public AutofacApplicationContainer()
         {
             var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
             _containerBuilder.RegisterAssemblyModules(assemblies);
@@ -14,7 +14,7 @@ namespace Specify.Autofac
         }
         public IScenarioContainer CreateChildContainer()
         {
-            return new AutofacContainer(Container.BeginLifetimeScope());
+            return new AutofacScenarioContainer(Container.BeginLifetimeScope());
         }
     }
 }

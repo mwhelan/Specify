@@ -1,19 +1,16 @@
+using Ninject;
+using NUnit.Framework;
+using Shouldly;
+using Specify.Ninject;
+using Specify.Tests.Stubs;
+
 namespace Specify.IntegrationTests.Ninject
 {
-    using global::Ninject;
-
-    using NUnit.Framework;
-
-    using Shouldly;
-
-    using Specify.Ninject;
-    using Specify.Tests.Stubs;
-
-    public class NinjectContainerTests : IocContainerTests<NinjectContainer>
+    public class NinjectContainerTests : IocContainerTests<NinjectScenarioContainer>
     {
-        protected override NinjectContainer CreateSut()
+        protected override NinjectScenarioContainer CreateSut()
         {
-            return new NinjectContainer(new StandardKernel());
+            return new NinjectScenarioContainer(new StandardKernel());
         }
 
         [Test]

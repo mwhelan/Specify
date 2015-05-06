@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacDependencyResolver.cs" />
+    <Compile Include="AutofacApplicationContainer.cs" />
     <Compile Include="AutofacMockRegistrationHandler.cs" />
-    <Compile Include="AutoMockingContainer.cs" />
-    <Compile Include="AutofacContainer.cs" />
+    <Compile Include="AutofacAutoMockingContainer.cs" />
+    <Compile Include="AutofacScenarioContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecifyModule.cs" />
   </ItemGroup>

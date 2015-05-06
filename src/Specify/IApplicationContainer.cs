@@ -1,6 +1,6 @@
 ﻿namespace Specify
 {
-    public interface IDependencyResolver : IScenarioContainer
+    public interface IApplicationContainer : IScenarioContainer
     {
         IScenarioContainer CreateChildContainer();
     }

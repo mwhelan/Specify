@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NinjectContainer.cs" />
-    <Compile Include="NinjectDependencyResolver.cs" />
+    <Compile Include="NinjectScenarioContainer.cs" />
+    <Compile Include="NinjectApplicationContainer.cs" />
     <Compile Include="NinjectScenarioModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

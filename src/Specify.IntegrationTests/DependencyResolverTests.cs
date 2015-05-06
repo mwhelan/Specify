@@ -5,7 +5,7 @@ using Specify.Tests.Stubs;
 namespace Specify.IntegrationTests
 {
     [TestFixture]
-    public abstract class DependencyResolverTests<T> where T : IDependencyResolver, new()
+    public abstract class DependencyResolverTests<T> where T : IApplicationContainer, new()
     {
         protected abstract T CreateSut();
 

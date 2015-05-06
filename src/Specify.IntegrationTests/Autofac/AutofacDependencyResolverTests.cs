@@ -2,11 +2,11 @@ using Specify.Autofac;
 
 namespace Specify.IntegrationTests.Autofac
 {
-    public class AutofacDependencyResolverTests : DependencyResolverTests<AutofacDependencyResolver>
+    public class AutofacDependencyResolverTests : DependencyResolverTests<AutofacApplicationContainer>
     {
-        protected override AutofacDependencyResolver CreateSut()
+        protected override AutofacApplicationContainer CreateSut()
         {
-            return new AutofacDependencyResolver();
+            return new AutofacApplicationContainer();
         }
     }
 }

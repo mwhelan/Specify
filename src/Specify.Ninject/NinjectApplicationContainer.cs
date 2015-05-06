@@ -4,9 +4,9 @@ using Ninject.Extensions.ChildKernel;
 
 namespace Specify.Ninject
 {
-    public class NinjectDependencyResolver : NinjectContainer, IDependencyResolver
+    public class NinjectApplicationContainer : NinjectScenarioContainer, IApplicationContainer
     {
-        public NinjectDependencyResolver()
+        public NinjectApplicationContainer()
             : base(CreateContainer()) { }
 
         private static IKernel CreateContainer()
@@ -19,7 +19,7 @@ namespace Specify.Ninject
         public IScenarioContainer CreateChildContainer()
         {
             var childContainer = new ChildKernel(this.Container);
-            return new NinjectContainer(childContainer);
+            return new NinjectScenarioContainer(childContainer);
         }
     }
 }

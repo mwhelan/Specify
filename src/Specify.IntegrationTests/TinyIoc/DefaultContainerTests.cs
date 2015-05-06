@@ -1,16 +1,14 @@
+using NUnit.Framework;
+using Shouldly;
+using Specify.Tests.Stubs;
+
 namespace Specify.IntegrationTests.TinyIoc
 {
-    using NUnit.Framework;
-
-    using Shouldly;
-
-    using Specify.Tests.Stubs;
-
-    public class DefaultContainerTests : IocContainerTests<DefaultContainer>
+    public class DefaultContainerTests : IocContainerTests<DefaultScenarioContainer>
     {
-        protected override DefaultContainer CreateSut()
+        protected override DefaultScenarioContainer CreateSut()
         {
-            return new DefaultContainer();
+            return new DefaultScenarioContainer();
         }
 
         [Test]

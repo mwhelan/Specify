@@ -1,61 +1,9 @@
 ﻿using NUnit.Framework;
 using Shouldly;
-using Specify.Autofac;
 using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests
 {
-    using global::Ninject;
-
-    using Specify.Ninject;
-
-    public class AutofacContainerTests : IocContainerTests<AutofacContainer>
-    {
-        protected override AutofacContainer CreateSut()
-        {
-            return new AutofacContainer();
-        }
-
-        [Test]
-        public void cannot_resolve_concrete_types_not_registered()
-        {
-            var sut = CreateSut();
-            sut.CanResolve<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(false);
-            sut.CanResolve<Dependency1>().ShouldBe(false);
-        }
-    }
-    public class NinjectContainerTests : IocContainerTests<NinjectContainer>
-    {
-        protected override NinjectContainer CreateSut()
-        {
-            return new NinjectContainer(new StandardKernel());
-        }
-
-        [Test]
-        public void cannot_resolve_concrete_types_not_registered()
-        {
-            var sut = CreateSut();
-            sut.CanResolve<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(false);
-            sut.CanResolve<Dependency1>().ShouldBe(false);
-        }
-    }
-    public class DefaultContainerTests : IocContainerTests<DefaultContainer>
-    {
-        protected override DefaultContainer CreateSut()
-        {
-            return new DefaultContainer();
-        }
-
-        [Test]
-        public void can_resolve_concrete_types_not_registered()
-        {
-            var sut = CreateSut();
-            sut.CanResolve<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(true);
-            sut.CanResolve<Dependency1>().ShouldBe(true);
-        }
-
-
-    }
     [TestFixture]
     public abstract class IocContainerTests<T> where T : IScenarioContainer
     {

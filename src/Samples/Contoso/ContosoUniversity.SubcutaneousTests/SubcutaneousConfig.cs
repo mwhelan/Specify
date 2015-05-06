@@ -6,9 +6,9 @@ namespace ContosoUniversity.SubcutaneousTests
 {
     public class SubcutaneousConfig : SpecifyConfiguration
     {
-        public override IDependencyResolver GetDependencyResolver()
+        public override IApplicationContainer GetDependencyResolver()
         {
-            return new AutofacDependencyResolver();
+            return new AutofacApplicationContainer();
         }
     }
 }

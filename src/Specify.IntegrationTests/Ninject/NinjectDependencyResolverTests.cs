@@ -3,11 +3,11 @@ using Specify.Ninject;
 namespace Specify.IntegrationTests.Ninject
 {
 
-    public class NinjectDependencyResolverTests : DependencyResolverTests<NinjectDependencyResolver>
+    public class NinjectDependencyResolverTests : DependencyResolverTests<NinjectApplicationContainer>
     {
-        protected override NinjectDependencyResolver CreateSut()
+        protected override NinjectApplicationContainer CreateSut()
         {
-            var resolver = new NinjectDependencyResolver();
+            var resolver = new NinjectApplicationContainer();
             return resolver;
         }
     }

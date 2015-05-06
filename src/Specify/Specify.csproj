@@ -53,11 +53,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultContainer.cs" />
+    <Compile Include="DefaultScenarioContainer.cs" />
     <Compile Include="DefaultAutoMockingContainer.cs" />
-    <Compile Include="DefaultDependencyResolver.cs" />
+    <Compile Include="DefaultApplicationContainer.cs" />
     <Compile Include="IScenarioContainer.cs" />
-    <Compile Include="IDependencyResolver.cs" />
+    <Compile Include="IApplicationContainer.cs" />
     <Compile Include="lib\LibLog.cs" />
     <Compile Include="Configuration\LoggingProcessor.cs" />
     <Compile Include="Configuration\Mocking\FileSystem.cs" />

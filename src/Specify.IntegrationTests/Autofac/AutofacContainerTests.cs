@@ -1,17 +1,15 @@
+using NUnit.Framework;
+using Shouldly;
+using Specify.Autofac;
+using Specify.Tests.Stubs;
+
 namespace Specify.IntegrationTests.Autofac
 {
-    using NUnit.Framework;
-
-    using Shouldly;
-
-    using Specify.Autofac;
-    using Specify.Tests.Stubs;
-
-    public class AutofacContainerTests : IocContainerTests<AutofacContainer>
+    public class AutofacContainerTests : IocContainerTests<AutofacScenarioContainer>
     {
-        protected override AutofacContainer CreateSut()
+        protected override AutofacScenarioContainer CreateSut()
         {
-            return new AutofacContainer();
+            return new AutofacScenarioContainer();
         }
 
         [Test]

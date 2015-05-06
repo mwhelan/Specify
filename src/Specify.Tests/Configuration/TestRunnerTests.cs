@@ -42,7 +42,7 @@ namespace Specify.Tests.Configuration
 
             sut.Execute(spec);
 
-            sut.DependencyResolver.Received(1).CreateChildContainer();
+            sut.ApplicationContainer.Received(1).CreateChildContainer();
             sut.ChildContainer.Received(1).Dispose();
         }
 

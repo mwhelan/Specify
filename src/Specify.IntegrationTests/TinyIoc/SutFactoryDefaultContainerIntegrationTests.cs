@@ -6,7 +6,7 @@ namespace Specify.IntegrationTests.TinyIoc
     {
         protected override SutFactory<T> CreateSut<T>()
         {
-            var container = new DefaultContainer();
+            var container = new DefaultScenarioContainer();
             container.Register<IDependency1, Dependency1>();
             container.Register<IDependency2, Dependency2>();
             container.Register<ConcreteObjectWithNoConstructor>();

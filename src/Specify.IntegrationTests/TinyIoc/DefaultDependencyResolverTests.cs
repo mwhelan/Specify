@@ -1,10 +1,10 @@
 ﻿namespace Specify.IntegrationTests.TinyIoc
 {
-    public class DefaultDependencyResolverTests : DependencyResolverTests<DefaultDependencyResolver>
+    public class DefaultDependencyResolverTests : DependencyResolverTests<DefaultApplicationContainer>
     {
-        protected override DefaultDependencyResolver CreateSut()
+        protected override DefaultApplicationContainer CreateSut()
         {
-            return new DefaultDependencyResolver();
+            return new DefaultApplicationContainer();
         }
     }
 }

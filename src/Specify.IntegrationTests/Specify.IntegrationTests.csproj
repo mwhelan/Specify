@@ -70,11 +70,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Autofac\AutofacContainerTests.cs" />
     <Compile Include="Autofac\SutFactoryAutofacFakeItEasyContainerIntegrationTests.cs" />
     <Compile Include="Autofac\SutFactoryAutofacMoqContainerIntegrationTests.cs" />
     <Compile Include="Autofac\SutFactoryAutofacNSubstituteContainerIntegrationTests.cs" />
     <Compile Include="Autofac\SutFactoryAutoMockingContainerIntegrationTests.cs" />
     <Compile Include="Autofac\AutofacDependencyResolverTests.cs" />
+    <Compile Include="Ninject\NinjectContainerTests.cs" />
+    <Compile Include="TinyIoc\DefaultContainerTests.cs" />
     <Compile Include="TinyIoc\DefaultDependencyResolverTests.cs" />
     <Compile Include="DependencyResolverTests.cs" />
     <Compile Include="Ninject\NinjectDependencyResolverTests.cs" />

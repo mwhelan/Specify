@@ -10,7 +10,7 @@ namespace Specify.IntegrationTests.Ninject
         protected override SutFactory<T> CreateSut<T>()
         {
             var kernel = new StandardKernel();
-            var container = new NinjectContainer(kernel);
+            var container = new NinjectScenarioContainer(kernel);
             container.Register<IDependency1, Dependency1>();
             container.Register<IDependency2, Dependency2>();
             container.Register(new ConcreteObjectWithMultipleConstructors(new Dependency1(), new Dependency2()));

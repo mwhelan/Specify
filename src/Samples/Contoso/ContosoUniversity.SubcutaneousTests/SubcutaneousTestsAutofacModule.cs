@@ -20,7 +20,7 @@ namespace ContosoUniversity.SubcutaneousTests
                 .AsSelf()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new AutofacContainer(c.Resolve<ILifetimeScope>()))
+            builder.Register(c => new AutofacScenarioContainer(c.Resolve<ILifetimeScope>()))
                 .As<IScenarioContainer>()
                 .InstancePerLifetimeScope();
         }

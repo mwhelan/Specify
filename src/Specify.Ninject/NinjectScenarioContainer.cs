@@ -4,11 +4,11 @@ using Ninject;
 
 namespace Specify.Ninject
 {
-    public class NinjectContainer : IScenarioContainer
+    public class NinjectScenarioContainer : IScenarioContainer
     {
         protected IKernel _container;
 
-        public NinjectContainer(IKernel container)
+        public NinjectScenarioContainer(IKernel container)
         {
             _container = container;
         }
@@ -59,14 +59,14 @@ namespace Specify.Ninject
             if (key == null)
             {
                 Container.Bind<T>().ToConstant(valueToSet)
-                    //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
+                    //.InNamedScope(NinjectApplicationContainer.ScenarioLifetimeScopeTag)
                     .InSingletonScope()
                     .BindingConfiguration.IsImplicit = true;
             }
             else
             {
                 Container.Bind<T>().ToConstant(valueToSet)
-                    //.InNamedScope(NinjectDependencyResolver.ScenarioLifetimeScopeTag)
+                    //.InNamedScope(NinjectApplicationContainer.ScenarioLifetimeScopeTag)
                     .InSingletonScope()
                     .Named(key)
                     .BindingConfiguration.IsImplicit = true;

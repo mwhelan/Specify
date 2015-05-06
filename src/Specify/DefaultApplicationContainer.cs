@@ -2,9 +2,9 @@ using Specify.Configuration.Mocking;
 
 namespace Specify
 {
-    public class DefaultDependencyResolver : DefaultContainer, IDependencyResolver
+    public class DefaultApplicationContainer : DefaultScenarioContainer, IApplicationContainer
     {
-        public DefaultDependencyResolver()
+        public DefaultApplicationContainer()
         {
             ConfigureContainer();
         }
@@ -15,7 +15,7 @@ namespace Specify
             var mockFactory = new MockDetector().FindAvailableMock();
             if (mockFactory == null)
             {
-                Container.Register((c, p) => new DefaultContainer(c));
+                Container.Register((c, p) => new DefaultScenarioContainer(c));
             }
             else
             {
@@ -25,7 +25,7 @@ namespace Specify
 
         public IScenarioContainer CreateChildContainer()
         {
-            return new DefaultContainer(Container.GetChildContainer());
+            return new DefaultScenarioContainer(Container.GetChildContainer());
         }
     }
 }
