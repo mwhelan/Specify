@@ -1,7 +1,5 @@
 using NUnit.Framework;
-
 using Shouldly;
-
 using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests
