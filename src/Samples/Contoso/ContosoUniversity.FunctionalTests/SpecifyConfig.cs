@@ -4,9 +4,9 @@ using Specify.Configuration;
 
 namespace ContosoUniversity.FunctionalTests
 {
-    public class SpecifyConfig : SpecifyConfiguration
+    public class SpecifyConfig : SpecifyBootstrapper
     {
-        public override IApplicationContainer GetDependencyResolver()
+        public override IApplicationContainer CreateApplicationContainer()
         {
             return new AutofacApplicationContainer();
         }

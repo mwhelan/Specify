@@ -3,7 +3,7 @@ using Specify.Configuration;
 
 namespace Specify.Tests.Configuration
 {
-    internal class StubConfig : SpecifyConfiguration
+    internal class StubConfig : SpecifyBootstrapper
     {
         public StubConfig()
         {

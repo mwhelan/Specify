@@ -8,7 +8,7 @@ namespace Specify
 {
     internal static class Host
     {
-        private static readonly SpecifyConfiguration _configuration;
+        private static readonly SpecifyBootstrapper _configuration;
         private static readonly IApplicationContainer applicationContainer;
         private static readonly TestRunner _testRunner;
 
@@ -20,7 +20,7 @@ namespace Specify
         static Host()
         {
             _configuration = Configure();
-            applicationContainer = _configuration.GetDependencyResolver();
+            applicationContainer = _configuration.CreateApplicationContainer();
             _testRunner = new TestRunner(_configuration, applicationContainer,new BddfyTestEngine());
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
             _configuration.PerAppDomainActions.ForEach(action => action.Before());
@@ -35,14 +35,14 @@ namespace Specify
             applicationContainer.Dispose();
         }
 
-        static SpecifyConfiguration Configure()
+        static SpecifyBootstrapper Configure()
         {
             var customConvention = AssemblyTypeResolver
                 .GetAllTypesFromAppDomain()
-                .FirstOrDefault(type => typeof(SpecifyConfiguration).IsAssignableFrom(type) && type.IsClass);
+                .FirstOrDefault(type => typeof(SpecifyBootstrapper).IsAssignableFrom(type) && type.IsClass);
             var config = customConvention != null
-                ? (SpecifyConfiguration)Activator.CreateInstance(customConvention)
-                : new SpecifyConfiguration();
+                ? (SpecifyBootstrapper)Activator.CreateInstance(customConvention)
+                : new SpecifyBootstrapper();
 
             Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
             if (config.LoggingEnabled)

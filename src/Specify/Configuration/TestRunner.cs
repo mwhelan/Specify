@@ -4,11 +4,11 @@ namespace Specify.Configuration
 {
     internal class TestRunner
     {
-        private readonly SpecifyConfiguration _configuration;
+        private readonly SpecifyBootstrapper _configuration;
         private readonly IApplicationContainer applicationContainer;
         private readonly ITestEngine _testEngine;
 
-        public TestRunner(SpecifyConfiguration configuration, IApplicationContainer applicationContainer,
+        public TestRunner(SpecifyBootstrapper configuration, IApplicationContainer applicationContainer,
             ITestEngine testEngine)
         {
             _configuration = configuration;

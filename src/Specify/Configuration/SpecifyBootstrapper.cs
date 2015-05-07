@@ -2,21 +2,21 @@
 
 namespace Specify.Configuration
 {
-    public class SpecifyConfiguration
+    public class SpecifyBootstrapper
     {
         public List<ITestRunnerAction> PerAppDomainActions { get; private set; }
         public List<ITestRunnerAction> PerTestActions { get; private set; }
 
         public bool LoggingEnabled { get; set; }
 
-        public SpecifyConfiguration()
+        public SpecifyBootstrapper()
         {
             PerAppDomainActions = new List<ITestRunnerAction>();
             PerTestActions = new List<ITestRunnerAction>();
             LoggingEnabled = false;
         }
 
-        public virtual IApplicationContainer GetDependencyResolver()
+        public virtual IApplicationContainer CreateApplicationContainer()
         {
             // try to find class that implements IApplicationContainer?
             return new DefaultApplicationContainer();

@@ -66,7 +66,7 @@
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\ITestRunnerAction.cs" />
-    <Compile Include="Configuration\SpecifyConfiguration.cs" />
+    <Compile Include="Configuration\SpecifyBootstrapper.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\TestRunner.cs" />
     <Compile Include="Configuration\TestRunnerAction.cs" />

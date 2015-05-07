@@ -4,9 +4,9 @@ using Specify.Configuration;
 
 namespace ContosoUniversity.SubcutaneousTests
 {
-    public class SubcutaneousConfig : SpecifyConfiguration
+    public class SubcutaneousConfig : SpecifyBootstrapper
     {
-        public override IApplicationContainer GetDependencyResolver()
+        public override IApplicationContainer CreateApplicationContainer()
         {
             return new AutofacApplicationContainer();
         }

@@ -8,15 +8,11 @@ namespace Specify.Configuration
     {
         public void Process(Story story)
         {
-            //    var logger = LogProvider.GetLogger(scenario.TestObject.GetType());
             var logger = LogProvider.GetLogger("Specify");
             var scenarios = story.Scenarios;
             foreach (var scenario in scenarios)
             {
-
                 var scenarioResult = Configurator.Scanners.Humanize(scenario.Result.ToString());
-                //logger.InfoFormat("Scenario: {0} Result: {1} Duration: {2} milliseconds.",
-                //    scenario.Title, scenarioResult, scenario.Duration.Milliseconds);
                 logger.Log(LogLevel.Info, () => "Scenario: {0} Result: {1} Duration: {2} milliseconds.", null,
                     scenario.Title, scenarioResult, scenario.Duration.Milliseconds);
 
@@ -34,9 +30,12 @@ namespace Specify.Configuration
             }
         }
 
-    public ProcessType ProcessType
+        public ProcessType ProcessType
         {
-            get { return ProcessType.Report; }
+            get
+            {
+                return ProcessType.Report;
+            }
         }
     }
 }
