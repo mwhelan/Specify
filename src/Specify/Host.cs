@@ -23,7 +23,7 @@ namespace Specify
             applicationContainer = _configuration.CreateApplicationContainer();
             _testRunner = new TestRunner(_configuration, applicationContainer,new BddfyTestEngine());
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
-            _configuration.PerAppDomainActions.ForEach(action => action.Before());
+            _configuration.PerAppDomainActions.ForEach(action => action.Before(applicationContainer));
         }
 
         static void CurrentDomain_DomainUnload(object sender, EventArgs e)

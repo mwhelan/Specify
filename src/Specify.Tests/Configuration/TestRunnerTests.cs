@@ -16,9 +16,9 @@ namespace Specify.Tests.Configuration
 
             sut.Execute(spec);
 
-            StubAction.BeforeActions.Count.ShouldBe(2);
-            StubAction.BeforeActions[0].ShouldBe("PerTestAction 1");
-            StubAction.BeforeActions[1].ShouldBe("PerTestAction 2");
+            StubPerScenarioAction.BeforeActions.Count.ShouldBe(2);
+            StubPerScenarioAction.BeforeActions[0].ShouldBe("PerTestAction 1");
+            StubPerScenarioAction.BeforeActions[1].ShouldBe("PerTestAction 2");
         }
 
         [Test]
@@ -29,9 +29,9 @@ namespace Specify.Tests.Configuration
 
             sut.Execute(spec);
 
-            StubAction.AfterActions.Count.ShouldBe(2);
-            StubAction.AfterActions[0].ShouldBe("PerTestAction 2");
-            StubAction.AfterActions[1].ShouldBe("PerTestAction 1");
+            StubPerScenarioAction.AfterActions.Count.ShouldBe(2);
+            StubPerScenarioAction.AfterActions[0].ShouldBe("PerTestAction 2");
+            StubPerScenarioAction.AfterActions[1].ShouldBe("PerTestAction 1");
         }
 
         [Test]

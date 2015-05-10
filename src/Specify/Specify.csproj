@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\IPerAppDomainActions.cs" />
     <Compile Include="DefaultScenarioContainer.cs" />
     <Compile Include="DefaultAutoMockingContainer.cs" />
     <Compile Include="DefaultApplicationContainer.cs" />
@@ -65,11 +66,10 @@
     <Compile Include="Configuration\Mocking\MockDetector.cs" />
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
-    <Compile Include="Configuration\ITestRunnerAction.cs" />
+    <Compile Include="Configuration\IPerScenarioActions.cs" />
     <Compile Include="Configuration\SpecifyBootstrapper.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\TestRunner.cs" />
-    <Compile Include="Configuration\TestRunnerAction.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IScenario.cs" />
     <Compile Include="lib\AssemblyTypeResolver.cs" />
