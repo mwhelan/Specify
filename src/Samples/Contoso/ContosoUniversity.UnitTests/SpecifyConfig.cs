@@ -6,10 +6,6 @@ namespace ContosoUniversity.UnitTests
 {
     public class SpecifyConfig : SpecifyBootstrapper
     {
-        //public override IApplicationContainer GetDependencyResolver()
-        //{
-        //    return new AutoMockingContainer(new NSubstituteMockFactory());
-        //}
         public SpecifyConfig()
         {
             Configurator.BatchProcessors.HtmlReport.Disable();

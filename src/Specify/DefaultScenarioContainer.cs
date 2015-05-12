@@ -12,7 +12,7 @@ namespace Specify
             Container = TinyIoCContainer.Current;
         }
 
-        internal DefaultScenarioContainer(TinyIoCContainer container)
+        public DefaultScenarioContainer(TinyIoCContainer container)
         {
             Container = container;
         }

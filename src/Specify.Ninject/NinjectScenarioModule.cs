@@ -5,6 +5,7 @@ using Ninject.Modules;
 
 namespace Specify.Ninject
 {
+    using Specify.lib;
 
     public class NinjectScenarioModule : NinjectModule
     {
@@ -22,10 +23,9 @@ namespace Specify.Ninject
 
         public override void Load()
         {
-            var scenarios = from assembly in _assemblies 
-                            from type in assembly.GetTypes() 
-                            where type.IsScenario() 
-                            select type;
+            var scenarios = AssemblyTypeResolver
+                .GetAllTypesFromAppDomain()
+                .Where(type => type.IsScenario() && !type.IsAbstract);
 
             foreach (var scenario in scenarios)
             {

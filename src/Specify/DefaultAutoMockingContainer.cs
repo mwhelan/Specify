@@ -2,14 +2,17 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Specify.Mocks;
+using TinyIoC;
 
 namespace Specify
 {
+
     public class DefaultAutoMockingContainer : DefaultScenarioContainer
     {
         private readonly IMockFactory _mockFactory;
 
         public DefaultAutoMockingContainer(IMockFactory mockFactory)
+            : base(new TinyIoCContainer())
         {
             _mockFactory = mockFactory;
         }
@@ -18,6 +21,7 @@ namespace Specify
         {
             return (T)Resolve(typeof(T), key);
         }
+
         public override object Resolve(Type serviceType, string key = null)
         {
             if (serviceType.IsInterface)
