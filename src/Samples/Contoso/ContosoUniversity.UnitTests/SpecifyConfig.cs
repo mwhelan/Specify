@@ -10,6 +10,7 @@ namespace ContosoUniversity.UnitTests
         {
             Configurator.BatchProcessors.HtmlReport.Disable();
             Configurator.BatchProcessors.Add(new HtmlReporter(new ReportConfig()));
+            LoggingEnabled = true;
         }
     }
 }

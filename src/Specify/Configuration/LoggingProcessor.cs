@@ -13,7 +13,7 @@ namespace Specify.Configuration
             foreach (var scenario in scenarios)
             {
                 var scenarioResult = Configurator.Scanners.Humanize(scenario.Result.ToString());
-                logger.Log(LogLevel.Info, () => "Scenario: {0} Result: {1} Duration: {2} milliseconds.", null,
+                logger.DebugFormat("Scenario: {0} Result: {1} Duration: {2} milliseconds.",
                     scenario.Title, scenarioResult, scenario.Duration.Milliseconds);
 
                 foreach (var step in scenario.Steps)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Specify.Logging;
 using Specify.Stories;
 
 namespace Specify
@@ -33,6 +34,11 @@ namespace Specify
         internal static bool IsUnitScenario(this IScenario specification)
         {
             return specification.Story == typeof(SpecificationStory);
+        }
+
+        internal static void Log(this ILog logger, string message, params object[] args)
+        {
+            logger.DebugFormat(message, args);
         }
 
         internal static bool CanBeCastTo<T>(this Type type)
