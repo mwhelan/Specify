@@ -12,7 +12,7 @@ namespace Specify.Tests.Configuration
     {
         [Test]
         [UseReporter(typeof(DiffReporter))]
-        public void thetest()
+        public void LoggingOutputTest()
         {
             string filePath = Path.Combine(Environment.CurrentDirectory, "nlog-sample.txt");
             using (new TemporaryNLogLogger(filePath))
