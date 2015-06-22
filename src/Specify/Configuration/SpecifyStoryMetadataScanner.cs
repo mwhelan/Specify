@@ -36,8 +36,9 @@ namespace Specify.Configuration
 
         private StoryMetadata CreateSpecificationMetadata(IScenario specification)
         {
+            var title = specification.GetType().GetProperty("SUT").PropertyType.Name;
             var story = (Story)Activator.CreateInstance(specification.Story);
-            var storyAttribute = new StoryAttribute() { Title = specification.Title, TitlePrefix = story.TitlePrefix };
+            var storyAttribute = new StoryAttribute() { Title = title, TitlePrefix = story.TitlePrefix };
             return new StoryMetadata(specification.Story, storyAttribute);
         }
     }

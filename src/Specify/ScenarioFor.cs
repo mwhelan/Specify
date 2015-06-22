@@ -31,10 +31,10 @@ namespace Specify
         {
             get
             {
-                if (this.IsUnitScenario())
-                {
-                    return typeof(TSut).Name;
-                }
+                //if (this.IsUnitScenario())
+                //{
+                //    return typeof(TSut).Name;
+                //}
                 var title = Configurator.Scanners.Humanize(GetType().Name);
                 title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title);
                 if (Number != 0)

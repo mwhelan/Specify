@@ -105,10 +105,10 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void specification_title_should_be_sut_name()
+        public void unit_specification_title_should_be_class_name()
         {
             var sut = CreateSut();
-            sut.Title.ShouldBe("ConcreteObjectWithNoConstructor");
+            sut.Title.ShouldBe("Unit Scenario With All Supported Steps In Random Order");
         }
 
         [Test]
