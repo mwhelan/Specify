@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Catch.cs" />
     <Compile Include="Configuration\IPerAppDomainActions.cs" />
     <Compile Include="DefaultScenarioContainer.cs" />
     <Compile Include="DefaultAutoMockingContainer.cs" />
