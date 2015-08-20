@@ -156,9 +156,9 @@ Unfortunately, even the newer versions of xUnit and NUnit seem to still require 
 ## Configuration
 Just create a class in your test assembly that inherits from the SpecifyConfiguration class. The main thing to configure is the container that the SUT factory will use:
 
-    public class SpecifyConfig : SpecifyConfiguration
+    public class SpecifyConfig : SpecifyBootstrapper
     {
-        public override IContainer GetSpecifyContainer()
+        public override IApplicationContainer CreateApplicationContainer()
         {
             return new AutofacNSubstituteContainer();
         }
