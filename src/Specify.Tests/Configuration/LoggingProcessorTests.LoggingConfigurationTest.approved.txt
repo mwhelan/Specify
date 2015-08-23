@@ -1,0 +1,9 @@
+﻿2014-03-25 11:30:05.0000|DEBUG|Specify.DefaultApplicationContainer|Registered 8 Scenarios
+2014-03-25 11:30:05.0000|DEBUG|Specify.DefaultApplicationContainer|Registered DefaultAutoMockingContainer for IScenarioContainer with mock factory NSubstituteMockFactory
+2014-03-25 11:30:05.0000|DEBUG|TestRunner|Bootstrapper: Specify.Configuration.SpecifyBootstrapper
+2014-03-25 11:30:05.0000|DEBUG|TestRunner|ApplicationContainer: Specify.DefaultApplicationContainer
+2014-03-25 11:30:05.0000|DEBUG|TestRunner|ScenarioContainer: Specify.DefaultScenarioContainer
+2014-03-25 11:30:05.0000|DEBUG|TestRunner|PerAppDomainActions: 0
+2014-03-25 11:30:05.0000|DEBUG|TestRunner|PerScenarioActions: 0
+2014-03-25 11:30:05.0000|DEBUG|TestRunner|Logging Enabled = False.
+ 

@@ -1,4 +1,5 @@
 using System;
+using Specify.Exceptions;
 
 namespace Specify
 {
@@ -19,7 +20,7 @@ namespace Specify
             {
                 if (_systemUnderTest == null)
                 {
-                    _systemUnderTest = _sourceContainer.Resolve<TSut>();
+                    _systemUnderTest = Get<TSut>();
                 }
                 return _systemUnderTest;
             }
@@ -30,7 +31,7 @@ namespace Specify
         {
             if (_systemUnderTest != null)
             {
-                throw new InvalidOperationException("Cannot register type after SUT is created.");
+                throw new InterfaceRegistrationException(typeof(T));
             }
             _sourceContainer.Register<T>();
         }
@@ -41,7 +42,7 @@ namespace Specify
         {
             if (_systemUnderTest != null)
             {
-                throw new InvalidOperationException("Cannot register service after SUT is created.");
+                throw new InterfaceRegistrationException(typeof(TImplementation));
             }
             _sourceContainer.Register<TService, TImplementation>();
         }
@@ -50,7 +51,7 @@ namespace Specify
         {
             if (_systemUnderTest != null)
             {
-                throw new InvalidOperationException("Cannot register instance after SUT is created.");
+                throw new InterfaceRegistrationException(typeof(T));
             }
             
             return _sourceContainer.Register(valueToSet, key);
@@ -58,12 +59,26 @@ namespace Specify
 
         public T Get<T>(string key = null) where T : class
         {
-            return _sourceContainer.Resolve<T>(key);
+            try
+            {
+                return _sourceContainer.Resolve<T>(key);
+            }
+            catch (Exception ex)
+            {
+                throw new InterfaceResolutionException(ex, typeof(T));
+            }
         }
 
         public object Get(Type serviceType, string key = null)
         {
-            return _sourceContainer.Resolve(serviceType, key);
+            try
+            {
+                return _sourceContainer.Resolve(serviceType, key);
+            }
+            catch (Exception ex)
+            {
+                throw new InterfaceResolutionException(ex, serviceType);
+            }
         }
 
         public bool IsRegistered<T>() where T : class

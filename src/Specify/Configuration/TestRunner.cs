@@ -22,7 +22,7 @@ namespace Specify.Configuration
             {
                 var container = scenarioScope.Resolve<IScenarioContainer>();
 
-                foreach (var action in _configuration.PerTestActions)
+                foreach (var action in _configuration.PerScenarioActions)
                 {
                     action.Before(container);
                 }
@@ -31,7 +31,7 @@ namespace Specify.Configuration
                 scenario.SetContainer(container);
                 _testEngine.Execute(scenario);
 
-                foreach (var action in _configuration.PerTestActions.AsEnumerable().Reverse())
+                foreach (var action in _configuration.PerScenarioActions.AsEnumerable().Reverse())
                 {
                     action.After();
                 }
@@ -39,5 +39,6 @@ namespace Specify.Configuration
         }
 
         internal IApplicationContainer ApplicationContainer { get { return _applicationContainer; } }
+        internal SpecifyBootstrapper Configuration { get { return _configuration; } }
     }
 }

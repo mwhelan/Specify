@@ -10,8 +10,8 @@ namespace Specify.Tests.Configuration
             StubPerScenarioAction.Reset();
             PerAppDomainActions.Add(new StubPerAppDomainAction { Name = "PerAppDomainAction 1" });
             PerAppDomainActions.Add(new StubPerAppDomainAction { Name = "PerAppDomainAction 2" });
-            PerTestActions.Add(new StubPerScenarioAction { Name = "PerTestAction 1" });
-            PerTestActions.Add(new StubPerScenarioAction { Name = "PerTestAction 2" });
+            PerScenarioActions.Add(new StubPerScenarioAction { Name = "PerTestAction 1" });
+            PerScenarioActions.Add(new StubPerScenarioAction { Name = "PerTestAction 2" });
         }
     }
     internal class StubPerAppDomainAction : IPerAppDomainActions

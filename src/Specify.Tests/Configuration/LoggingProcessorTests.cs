@@ -25,5 +25,18 @@ namespace Specify.Tests.Configuration
                 Approvals.VerifyFile(filePath);
             }
         }
+
+        //[Test]
+        //[UseReporter(typeof(DiffReporter))]
+        //public void LoggingConfigurationTest()
+        //{
+        //    string filePath = Path.Combine(Environment.CurrentDirectory, "nlog-sample-config.txt");
+        //    using (new TemporaryNLogLogger(filePath))
+        //    {
+        //        var runner = new TestRunner(new SpecifyBootstrapper(), new DefaultApplicationContainer(), new BddfyTestEngine());
+        //        runner.LogSpecifyConfiguration();
+        //        Approvals.VerifyFile(filePath);
+        //    }
+        //}
     }
 }

@@ -36,11 +36,6 @@ namespace Specify
             return specification.Story == typeof(SpecificationStory);
         }
 
-        internal static void Log(this ILog logger, string message, params object[] args)
-        {
-            logger.DebugFormat(message, args);
-        }
-
         internal static bool CanBeCastTo<T>(this Type type)
         {
             if (type == null) return false;

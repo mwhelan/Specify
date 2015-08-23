@@ -2,6 +2,7 @@ using System;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
+using Specify.Exceptions;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests
@@ -53,8 +54,8 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InvalidOperationException>(() => sut.Register<ConcreteObjectWithNoConstructor>())
-                .Message.ShouldBe("Cannot register type after SUT is created.");
+            Should.Throw<InterfaceRegistrationException>(() => sut.Register<ConcreteObjectWithNoConstructor>())
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }
 
         [Test]
@@ -70,8 +71,8 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InvalidOperationException>(() => sut.Register<IDependency1, Dependency1>())
-                .Message.ShouldBe("Cannot register service after SUT is created.");
+            Should.Throw<InterfaceRegistrationException>(() => sut.Register<IDependency1, Dependency1>())
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.Dependency1 after SUT is created");
         }
 
         [Test]
@@ -90,12 +91,12 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InvalidOperationException>(() => sut.Register(new ConcreteObjectWithNoConstructor()))
-                .Message.ShouldBe("Cannot register instance after SUT is created.");
+            Should.Throw<InterfaceRegistrationException>(() => sut.Register(new ConcreteObjectWithNoConstructor()))
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }
 
         [Test]
-        public void Resolve_generic_should_call_container_resolve_generic()
+        public void Get_generic_should_call_container_resolve_generic()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get<ConcreteObjectWithNoConstructor>();
@@ -103,11 +104,37 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void Resolve_should_call_container_resolve()
+        public void Get_generic_should_throw_InterfaceResolutionException_if_container_throws()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Resolve<ConcreteObjectWithNoConstructor>(null)
+                .Returns(x => { throw new Exception(); });
+
+            Action action = () => sut.Get<ConcreteObjectWithNoConstructor>();
+
+            Should.Throw<InterfaceResolutionException>(action)
+                .Message.ShouldBe("Failed to resolve an implementation of Specify.Tests.Stubs.ConcreteObjectWithNoConstructor.");
+        }
+
+        [Test]
+        public void Get_should_call_container_resolve()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get(typeof(ConcreteObjectWithNoConstructor));
             sut.SourceContainer.Received().Resolve(typeof(ConcreteObjectWithNoConstructor));
+        }
+
+        [Test]
+        public void Get_should_throw_InterfaceResolutionException_if_container_throws()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Resolve(typeof (ConcreteObjectWithNoConstructor), null)
+                .Returns(x => { throw new Exception(); });
+
+            Action action = () => sut.Get(typeof(ConcreteObjectWithNoConstructor));
+
+            Should.Throw<InterfaceResolutionException>(action)
+                .Message.ShouldBe("Failed to resolve an implementation of Specify.Tests.Stubs.ConcreteObjectWithNoConstructor.");
         }
 
         [Test]

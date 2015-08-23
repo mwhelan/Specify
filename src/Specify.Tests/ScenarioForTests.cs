@@ -2,6 +2,7 @@ using System;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
+using Specify.Exceptions;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 
@@ -72,8 +73,8 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            Should.Throw<InvalidOperationException>(() => sut.Container.Register<ConcreteObjectWithNoConstructor>())
-                .Message.ShouldBe("Cannot register type after SUT is created.");
+            Should.Throw<InterfaceRegistrationException>(() => sut.Container.Register<ConcreteObjectWithNoConstructor>())
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }
 
         [Test]
@@ -92,8 +93,8 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            Should.Throw<InvalidOperationException>(() => sut.Container.Register(new ConcreteObjectWithNoConstructor()))
-                .Message.ShouldBe("Cannot register instance after SUT is created.");
+            Should.Throw<InterfaceRegistrationException>(() => sut.Container.Register(new ConcreteObjectWithNoConstructor()))
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }    
     
         [Test]

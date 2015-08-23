@@ -58,6 +58,9 @@
     <Compile Include="DefaultScenarioContainer.cs" />
     <Compile Include="DefaultAutoMockingContainer.cs" />
     <Compile Include="DefaultApplicationContainer.cs" />
+    <Compile Include="Exceptions\InterfaceRegistrationException.cs" />
+    <Compile Include="Exceptions\InterfaceResolutionException.cs" />
+    <Compile Include="Exceptions\LoggingException.cs" />
     <Compile Include="IScenarioContainer.cs" />
     <Compile Include="IApplicationContainer.cs" />
     <Compile Include="lib\LibLog.cs" />
@@ -74,6 +77,8 @@
     <Compile Include="Host.cs" />
     <Compile Include="IScenario.cs" />
     <Compile Include="lib\AssemblyTypeResolver.cs" />
+    <Compile Include="LoggingGateway.cs" />
+    <Compile Include="LoggingExtensions.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactory.cs" />
     <Compile Include="Mocks\IMockFactory.cs" />
     <Compile Include="Mocks\MoqMockFactory.cs" />

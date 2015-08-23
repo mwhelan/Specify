@@ -3,7 +3,7 @@
 using NUnit.Framework;
 
 using Shouldly;
-
+using Specify.Exceptions;
 using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests
@@ -60,8 +60,8 @@ namespace Specify.IntegrationTests
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InvalidOperationException>(() => sut.Register<ConcreteObjectWithNoConstructor>())
-                .Message.ShouldBe("Cannot register type after SUT is created.");
+            Should.Throw<InterfaceRegistrationException>(() => sut.Register<ConcreteObjectWithNoConstructor>())
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }
 
         [Test]
@@ -77,8 +77,8 @@ namespace Specify.IntegrationTests
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InvalidOperationException>(() => sut.Register<IDependency1,Dependency1>())
-                .Message.ShouldBe("Cannot register service after SUT is created.");
+            Should.Throw<InterfaceRegistrationException>(() => sut.Register<IDependency1,Dependency1>())
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.Dependency1 after SUT is created");
         }
 
         [Test]
@@ -94,8 +94,8 @@ namespace Specify.IntegrationTests
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InvalidOperationException>(() => sut.Register(new ConcreteObjectWithNoConstructor()))
-                .Message.ShouldBe("Cannot register instance after SUT is created.");
+            Should.Throw<InterfaceRegistrationException>(() => sut.Register(new ConcreteObjectWithNoConstructor()))
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }
 
         [Test]
