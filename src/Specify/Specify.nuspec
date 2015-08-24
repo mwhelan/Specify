@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Specify</id>
-    <version>0.8.82</version>
+    <version>$version$</version>
     <title>Specify</title>
     <authors>Michael Whelan</authors>
     <owners>Michael Whelan</owners>
