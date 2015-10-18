@@ -8,7 +8,7 @@ namespace Specify
         internal static void LogSpecifyConfiguration(this TestRunner testRunner)
         {
             string containerName;
-            using (IScenarioContainer container = testRunner.ApplicationContainer.CreateChildContainer())
+            using (IScenarioContainer container = testRunner.ApplicationContainer.Resolve<IScenarioContainer>())
             {
                 containerName = container.GetType().FullName;
             }
