@@ -14,7 +14,7 @@ namespace Specify.IntegrationTests
         {
             var sut = this.CreateSut();
             sut.Register<IDependency1>(new Dependency1());
-            var childContainer = sut.Resolve<IScenarioContainer>();
+            var childContainer = sut.CreateChildContainer();
             sut.Resolve<IDependency1>()
                 .ShouldBeSameAs(childContainer.Resolve<IDependency1>());
         }
@@ -24,7 +24,7 @@ namespace Specify.IntegrationTests
         {
             var sut = this.CreateSut();
             sut.Register<IDependency1>(new Dependency1());
-            var childContainer = sut.Resolve<IScenarioContainer>();
+            var childContainer = sut.CreateChildContainer();
 
             childContainer.Register<IDependency1>(new Dependency1());
 
@@ -38,7 +38,7 @@ namespace Specify.IntegrationTests
             var instance = new Dependency1();
             var sut = this.CreateSut();
             sut.Register<IDependency1>(instance);
-            var childContainer = sut.Resolve<IScenarioContainer>();
+            var childContainer = sut.CreateChildContainer();
 
             childContainer.Register<IDependency1>(new Dependency1());
 

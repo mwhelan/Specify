@@ -2,6 +2,6 @@
 {
     public interface IApplicationContainer : IScenarioContainer
     {
-        //IScenarioContainer CreateChildContainer();
+        IScenarioContainer CreateChildContainer();
     }
 }
