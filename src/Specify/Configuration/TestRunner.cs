@@ -34,8 +34,8 @@ namespace Specify.Configuration
             }
         }
 
-        internal IApplicationContainer ApplicationContainer { get; }
+        internal IApplicationContainer ApplicationContainer { get; set; }
 
-        internal SpecifyBootstrapper Configuration { get; }
+        internal SpecifyBootstrapper Configuration { get; set; }
     }
 }
