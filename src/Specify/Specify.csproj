@@ -83,6 +83,7 @@
     <Compile Include="Mocks\IMockFactory.cs" />
     <Compile Include="Mocks\MoqMockFactory.cs" />
     <Compile Include="Mocks\NSubstituteMockFactory.cs" />
+    <Compile Include="ObjectExtensions.cs" />
     <Compile Include="ScenarioFor.cs" />
     <Compile Include="SpecifyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

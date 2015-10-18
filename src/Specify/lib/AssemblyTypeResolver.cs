@@ -12,7 +12,7 @@ namespace Specify.lib
     /// This class was adapted from the DefaultReflector from FluentAssertions by Dennis Doomen.
     /// https://github.com/dennisdoomen/fluentassertions/blob/develop/FluentAssertions.Net40/Common/DefaultReflectionProvider.cs
     /// </summary>
-    internal static class AssemblyTypeResolver
+    public static class AssemblyTypeResolver
     {
         public static IEnumerable<Type> GetAllTypesFromAppDomain()
         {
