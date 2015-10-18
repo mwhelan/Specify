@@ -15,7 +15,7 @@ namespace Specify.Tests.Configuration
             _specification = specification;
             ChildContainer = Substitute.For<IScenarioContainer>();
             this.ApplicationContainer
-                .CreateChildContainer()
+                .Resolve<IScenarioContainer>()
                 .Returns(ChildContainer);
             ChildContainer
                 .Resolve(Arg.Any<Type>())

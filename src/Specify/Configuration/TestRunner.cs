@@ -18,16 +18,16 @@ namespace Specify.Configuration
 
         public void Execute(IScenario testObject, string scenarioTitle = null)
         {
-            using (var scenarioScope = _applicationContainer.CreateChildContainer())
+            using (var container = _applicationContainer.Resolve<IScenarioContainer>())
             {
-                var container = scenarioScope.Resolve<IScenarioContainer>();
+                //var container = scenarioScope.Resolve<IScenarioContainer>();
 
                 foreach (var action in _configuration.PerScenarioActions)
                 {
                     action.Before(container);
                 }
 
-                var scenario = (IScenario)scenarioScope.Resolve(testObject.GetType());
+                var scenario = (IScenario)container.Resolve(testObject.GetType());
                 scenario.SetContainer(container);
                 _testEngine.Execute(scenario);
 
