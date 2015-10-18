@@ -23,14 +23,14 @@ namespace ContosoUniversity.Controllers
         }
 
         // GET: /Department/
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var departments = _departmentRepository.Get();
             return View(departments);
         }
 
         // GET: /Department/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -58,7 +58,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Budget,StartDate,InstructorID")] Department department)
+        public ActionResult Create([Bind(Include = "Id,Name,Budget,StartDate,InstructorID")] Department department)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace ContosoUniversity.Controllers
         }
 
         // GET: /Department/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -91,7 +91,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(
+        public ActionResult Edit(
            [Bind(Include = "DepartmentID, Name, Budget, StartDate, RowVersion, InstructorID")] 
        Department department)
         {
@@ -136,7 +136,7 @@ namespace ContosoUniversity.Controllers
         }
 
         // GET: /Department/Delete/5
-        public async Task<ActionResult> Delete(int? id, bool? concurrencyError)
+        public ActionResult Delete(int? id, bool? concurrencyError)
         {
             if (id == null)
             {
@@ -177,7 +177,7 @@ namespace ContosoUniversity.Controllers
         // POST: /Department/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(Department department)
+        public ActionResult Delete(Department department)
         {
             try
             {
