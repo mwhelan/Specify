@@ -46,10 +46,8 @@
   <ItemGroup>
     <Compile Include="AutofacApplicationContainer.cs" />
     <Compile Include="AutofacMockRegistrationHandler.cs" />
-    <Compile Include="AutofacAutoMockingContainer.cs" />
     <Compile Include="AutofacScenarioContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecifyModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Specify\Specify.csproj">

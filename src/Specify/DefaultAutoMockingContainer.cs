@@ -11,8 +11,8 @@ namespace Specify
     {
         private readonly IMockFactory _mockFactory;
 
-        public DefaultAutoMockingContainer(IMockFactory mockFactory)
-            : base(new TinyIoCContainer())
+        public DefaultAutoMockingContainer(IMockFactory mockFactory, TinyIoCContainer container)
+            : base(container)
         {
             _mockFactory = mockFactory;
         }

@@ -9,7 +9,7 @@ namespace Specify
 {
     internal static class Host
     {
-        private static readonly SpecifyBootstrapper _configuration;
+        public static readonly SpecifyBootstrapper Configuration;
         private static readonly IApplicationContainer applicationContainer;
         private static readonly TestRunner _testRunner;
 
@@ -20,19 +20,19 @@ namespace Specify
 
         static Host()
         {
-            _configuration = Configure();
-            applicationContainer = _configuration.CreateApplicationContainer();
+            Configuration = Configure();
+            applicationContainer = Configuration.CreateApplicationContainer();
        
-            _testRunner = new TestRunner(_configuration, applicationContainer,new BddfyTestEngine());
+            _testRunner = new TestRunner(Configuration, applicationContainer,new BddfyTestEngine());
             _testRunner.LogSpecifyConfiguration();
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
-            _configuration.PerAppDomainActions.ForEach(action => action.Before(applicationContainer));
+            Configuration.PerAppDomainActions.ForEach(action => action.Before(applicationContainer));
         }
 
         static void CurrentDomain_DomainUnload(object sender, EventArgs e)
         {
             "Host".Log().DebugFormat("Specify - DomainUnload");
-            foreach (var action in _configuration.PerAppDomainActions.AsEnumerable().Reverse())
+            foreach (var action in Configuration.PerAppDomainActions.AsEnumerable().Reverse())
             {
                 "Host".Log().DebugFormat("{0} After", action.GetType().Name);
                 action.After();

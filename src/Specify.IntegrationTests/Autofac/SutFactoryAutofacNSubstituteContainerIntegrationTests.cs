@@ -7,8 +7,8 @@ namespace Specify.IntegrationTests.Autofac
     {
         protected override SutFactory<T> CreateSut<T>()
         {
-            var container = new AutofacAutoMockingContainer(new NSubstituteMockFactory());
-            return new SutFactory<T>(container);
+            var container = new AutofacApplicationContainer { MockFactory = () => new NSubstituteMockFactory() };
+            return new SutFactory<T>(container.CreateChildContainer());
         }
     }
 }

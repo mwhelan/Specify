@@ -1,12 +1,16 @@
+using System;
 using System.Linq;
 using Specify.Configuration.Mocking;
 using Specify.lib;
 using Specify.Logging;
+using Specify.Mocks;
 
 namespace Specify
 {
     public class DefaultApplicationContainer : DefaultScenarioContainer, IApplicationContainer
     {
+        private Func<IMockFactory> _mockFactory;
+         
         public DefaultApplicationContainer()
         {
             ConfigureContainer();
@@ -14,7 +18,9 @@ namespace Specify
 
         public IScenarioContainer CreateChildContainer()
         {
-            return new DefaultScenarioContainer(Container.GetChildContainer());
+            return _mockFactory == null 
+                ? new DefaultScenarioContainer(Container.GetChildContainer()) 
+                : new DefaultAutoMockingContainer(_mockFactory(), Container.GetChildContainer());
         }
 
         private void ConfigureContainer()
@@ -35,16 +41,14 @@ namespace Specify
 
         private void RegisterScenarioContainer()
         {
-            var mockFactory = new MockDetector().FindAvailableMock();
-            if (mockFactory == null)
+            _mockFactory = new MockDetector().FindAvailableMock();
+            if (_mockFactory == null)
             {
-                Container.Register<IScenarioContainer>((c, p) => new DefaultScenarioContainer(c));
                 this.Log().DebugFormat("Registered {ScenarioContainer} for IScenarioContainer", "DefaultScenarioContainer");
             }
             else
             {
-                Container.Register<IScenarioContainer>((c, p) => new DefaultAutoMockingContainer(mockFactory()));
-                var mockFactoryName = mockFactory().GetType().Name;
+                var mockFactoryName = _mockFactory().GetType().Name;
                 this.Log().DebugFormat("Registered {ScenarioContainer} for IScenarioContainer with mock factory {MockFactory}", "DefaultAutoMockingContainer", mockFactoryName);
             }
         }
