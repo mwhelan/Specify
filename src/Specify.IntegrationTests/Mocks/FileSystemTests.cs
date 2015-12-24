@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using Shouldly;
-using Specify.Configuration.Mocking;
+using Specify.Mocks;
 
-namespace Specify.Tests.Configuration.Mocking
+namespace Specify.IntegrationTests.Mocks
 {
     [TestFixture]
     public class FileSystemTests

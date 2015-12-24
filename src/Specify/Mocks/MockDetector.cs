@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Specify.Mocks;
 
-namespace Specify.Configuration.Mocking
+namespace Specify.Mocks
 {
     public class MockDetector
     {

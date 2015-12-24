@@ -82,10 +82,11 @@
     <Compile Include="Containers\Ioc\Application\TinyApplicationContainerTests.cs" />
     <Compile Include="Containers\Ioc\Application\ApplicationContainerTestsFor.cs" />
     <Compile Include="Containers\Ioc\Application\NinjectApplicationContainerTests.cs" />
-    <Compile Include="MockFactories\FakeItEasyMockFactoryTests.cs" />
-    <Compile Include="MockFactories\MockFactoryTestsFor.cs" />
-    <Compile Include="MockFactories\MoqMockFactoryTests.cs" />
-    <Compile Include="MockFactories\NSubstituteMockFactoryTests.cs" />
+    <Compile Include="Mocks\FakeItEasyMockFactoryTests.cs" />
+    <Compile Include="Mocks\FileSystemTests.cs" />
+    <Compile Include="Mocks\MockFactoryTestsFor.cs" />
+    <Compile Include="Mocks\MoqMockFactoryTests.cs" />
+    <Compile Include="Mocks\NSubstituteMockFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SutFactories\AutoMocking\AutofacFakeItEasySutFactoryIntegrationTests.cs" />
     <Compile Include="SutFactories\AutoMocking\AutofacMoqSutFactoryIntegrationTests.cs" />

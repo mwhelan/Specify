@@ -3,7 +3,7 @@ using Shouldly;
 using Specify.Mocks;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.MockFactories
+namespace Specify.IntegrationTests.Mocks
 {
     [TestFixture]
     public abstract class MockFactoryTestsFor<T> where T : IMockFactory, new()

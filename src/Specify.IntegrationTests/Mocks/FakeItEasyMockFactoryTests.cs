@@ -1,10 +1,14 @@
+using System;
+using System.IO;
+using System.Reflection;
 using FakeItEasy;
+using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Mocks;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.MockFactories
+namespace Specify.IntegrationTests.Mocks
 {
     public class FakeItEasyMockFactoryTests : MockFactoryTestsFor<FakeItEasyMockFactory>
     {

@@ -7,12 +7,15 @@ namespace Specify.Mocks
     {
         private readonly Type _mockOpenType;
 
-        public MoqMockFactory()
+        public MoqMockFactory() 
+            : this(new FileSystem()) { }
+
+        public MoqMockFactory(IFileSystem fileSystem)
         {
-            var moqAssembly = Assembly.Load("Moq");
-            _mockOpenType = moqAssembly.GetType("Moq.Mock`1");
+            var assembly = fileSystem.Load("Moq");
+            _mockOpenType = fileSystem.GetTypeFrom(assembly, "Moq.Mock`1");
             if (_mockOpenType == null)
-                throw new InvalidOperationException("Unable to find Type Moq.Mock<T> in assembly " + moqAssembly.Location);
+                throw new InvalidOperationException("Unable to find Type Moq.Mock`1 in assembly " + assembly.Location);
         }
 
         public object CreateMock(Type type)

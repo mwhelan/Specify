@@ -7,10 +7,13 @@ namespace Specify.Mocks
     {
         private readonly Type _mockOpenType;
 
-        public NSubstituteMockFactory()
+        public NSubstituteMockFactory() 
+            : this(new FileSystem()) { }
+
+        public NSubstituteMockFactory(IFileSystem fileSystem)
         {
-            var assembly = Assembly.Load("NSubstitute");
-            _mockOpenType = assembly.GetType("NSubstitute.Substitute");
+            var assembly = fileSystem.Load("NSubstitute");
+            _mockOpenType = fileSystem.GetTypeFrom(assembly, "NSubstitute.Substitute");
             if (_mockOpenType == null)
                 throw new InvalidOperationException("Unable to find Type NSubstitute.Substitute in assembly " + assembly.Location);
         }

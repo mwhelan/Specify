@@ -104,14 +104,18 @@
     <Compile Include="CatchSpecs.cs" />
     <Compile Include="Configuration\BddfyTestEngineTests.cs" />
     <Compile Include="Configuration\LoggingProcessorTests.cs" />
-    <Compile Include="Configuration\Mocking\FileSystemTests.cs" />
-    <Compile Include="Configuration\Mocking\MockDetectorTests.cs" />
+    <Compile Include="Mocks\FakeItEasyMockFactoryTests.cs" />
+    <Compile Include="Mocks\MockFactoryTestsFor.cs" />
+    <Compile Include="Mocks\MockDetectorTests.cs" />
     <Compile Include="Configuration\ReportTestData.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScannerTests.cs" />
     <Compile Include="Configuration\StubPerScenarioAction.cs" />
     <Compile Include="Configuration\TemporaryNLogLogger.cs" />
     <Compile Include="Configuration\TestableTestRunner.cs" />
     <Compile Include="Configuration\TestRunnerTests.cs" />
+    <Compile Include="LoggingGatewayTests.cs" />
+    <Compile Include="Mocks\MoqMockFactoryTests.cs" />
+    <Compile Include="Mocks\NSubstituteMockFactoryTests.cs" />
     <Compile Include="SpecifyExtensionTests.cs" />
     <Compile Include="Stories\UserStoryTests.cs" />
     <Compile Include="Stories\ValueStoryTests.cs" />
@@ -155,7 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Containers\" />
-    <Folder Include="Examples\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Specify.Configuration.Mocking;
 using Specify.lib;
 using Specify.Logging;
 using Specify.Mocks;
@@ -31,11 +30,6 @@ namespace Specify.Configuration
 
         private void RegisterScenarioContainer(TinyIoCContainer container, Func<IMockFactory> mockFactory)
         {
-            if (mockFactory == null)
-            {
-                mockFactory = new MockDetector().FindAvailableMock();
-            }
-
             if (mockFactory == null)
             {
                 container.Register<IContainer>((c,p) => new TinyContainer(c.GetChildContainer()));

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Autofac;
 using Specify.Configuration;
-using Specify.Configuration.Mocking;
 using Specify.Mocks;
 
 namespace Specify.Autofac

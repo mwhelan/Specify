@@ -58,6 +58,9 @@
     <Compile Include="Configuration\IConfigureSpecify.cs" />
     <Compile Include="Configuration\IPerAppDomainActions.cs" />
     <Compile Include="Configuration\TinyContainerFactory.cs" />
+    <Compile Include="Mocks\FileSystem.cs" />
+    <Compile Include="Mocks\IFileSystem.cs" />
+    <Compile Include="Mocks\MockDetector.cs" />
     <Compile Include="TinyContainer.cs" />
     <Compile Include="TinyMockingContainer.cs" />
     <Compile Include="Exceptions\InterfaceRegistrationException.cs" />
@@ -66,9 +69,6 @@
     <Compile Include="IContainer.cs" />
     <Compile Include="lib\LibLog.cs" />
     <Compile Include="Configuration\LoggingProcessor.cs" />
-    <Compile Include="Configuration\Mocking\FileSystem.cs" />
-    <Compile Include="Configuration\Mocking\IFileSystem.cs" />
-    <Compile Include="Configuration\Mocking\MockDetector.cs" />
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\IPerScenarioActions.cs" />

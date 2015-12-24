@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 
 namespace Specify.Mocks
 {
@@ -7,10 +6,13 @@ namespace Specify.Mocks
     {
         private readonly Type _mockOpenType;
 
-        public FakeItEasyMockFactory()
+        public FakeItEasyMockFactory() 
+            : this(new FileSystem()) { }
+
+        public FakeItEasyMockFactory(IFileSystem fileSystem)
         {
-            var assembly = Assembly.Load("FakeItEasy");
-            _mockOpenType = assembly.GetType("FakeItEasy.A");
+            var assembly = fileSystem.Load("FakeItEasy");
+            _mockOpenType = fileSystem.GetTypeFrom(assembly, "FakeItEasy.A");
             if (_mockOpenType == null)
                 throw new InvalidOperationException("Unable to find Type FakeItEasy.A in assembly " + assembly.Location);
         }

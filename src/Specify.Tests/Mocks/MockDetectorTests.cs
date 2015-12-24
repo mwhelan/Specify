@@ -1,10 +1,9 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
-using Specify.Configuration.Mocking;
 using Specify.Mocks;
 
-namespace Specify.Tests.Configuration.Mocking
+namespace Specify.Tests.Mocks
 {
     [TestFixture]
     public class MockDetectorTests

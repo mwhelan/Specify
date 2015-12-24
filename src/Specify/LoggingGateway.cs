@@ -13,7 +13,7 @@ namespace Specify
         /// <summary>
         /// Concurrent dictionary that ensures only one instance of a logger for a type.
         /// </summary>
-        private static readonly ConcurrentDictionary<string, ILog> _dictionary = new ConcurrentDictionary<string, ILog>();
+        private static readonly ConcurrentDictionary<string, ILog> Dictionary = new ConcurrentDictionary<string, ILog>();
 
         /// <summary>
         /// Gets the logger for <see cref="T"/>.
@@ -36,7 +36,7 @@ namespace Specify
         {
             try
             {
-                return _dictionary.GetOrAdd(objectName, LogProvider.GetLogger);
+                return Dictionary.GetOrAdd(objectName, LogProvider.GetLogger);
             }
             catch (Exception ex)
             {

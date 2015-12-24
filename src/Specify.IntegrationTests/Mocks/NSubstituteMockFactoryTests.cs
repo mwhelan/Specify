@@ -4,7 +4,7 @@ using Shouldly;
 using Specify.Mocks;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.MockFactories
+namespace Specify.IntegrationTests.Mocks
 {
     public class NSubstituteMockFactoryTests : MockFactoryTestsFor<NSubstituteMockFactory>
     {
