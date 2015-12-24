@@ -3,16 +3,16 @@ using TinyIoC;
 
 namespace Specify
 {
-    public class DefaultScenarioContainer : IScenarioContainer
+    public class TinyContainer : IContainer
     {
-        protected readonly TinyIoCContainer Container;
+        public readonly TinyIoCContainer Container;
 
-        public DefaultScenarioContainer()
+        public TinyContainer()
         {
             Container = TinyIoCContainer.Current;
         }
 
-        public DefaultScenarioContainer(TinyIoCContainer container)
+        public TinyContainer(TinyIoCContainer container)
         {
             Container = container;
         }

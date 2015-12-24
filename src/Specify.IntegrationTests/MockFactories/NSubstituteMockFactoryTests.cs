@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.MockFactories
 {
-    public class NSubstituteMockFactoryTests : MockFactoryTests<NSubstituteMockFactory>
+    public class NSubstituteMockFactoryTests : MockFactoryTestsFor<NSubstituteMockFactory>
     {
         [Test]
         public void should_return_substitute()

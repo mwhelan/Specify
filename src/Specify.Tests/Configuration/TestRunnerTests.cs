@@ -14,6 +14,7 @@ namespace Specify.Tests.Configuration
             var spec = new UserStoryScenarioWithAllSupportedStepsInRandomOrder();
             var sut = CreateSut(spec);
 
+
             sut.Execute(spec);
 
             StubPerScenarioAction.BeforeActions.Count.ShouldBe(2);
@@ -42,7 +43,7 @@ namespace Specify.Tests.Configuration
 
             sut.Execute(spec);
 
-            sut.ApplicationContainer.Received(1).CreateChildContainer();
+            sut.Configuration.ApplicationContainer.Received(1).Resolve<IContainer>();
             sut.ChildContainer.Received(1).Dispose();
         }
 

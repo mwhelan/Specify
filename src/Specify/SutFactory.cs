@@ -6,10 +6,10 @@ namespace Specify
     public class SutFactory<TSut> : IDisposable 
         where TSut : class
     {
-        private readonly IScenarioContainer _sourceContainer;
+        private readonly IContainer _sourceContainer;
         private TSut _systemUnderTest;
 
-        public SutFactory(IScenarioContainer sourceContainer)
+        public SutFactory(IContainer sourceContainer)
         {
             _sourceContainer = sourceContainer;
         }
@@ -96,6 +96,6 @@ namespace Specify
             _sourceContainer.Dispose();
         }
 
-        internal IScenarioContainer SourceContainer { get { return _sourceContainer; } }
+        internal IContainer SourceContainer { get { return _sourceContainer; } }
     }
 }

@@ -43,7 +43,7 @@ namespace Specify
 
         public int Number { get; set; }
 
-        public virtual void SetContainer(IScenarioContainer container)
+        public virtual void SetContainer(IContainer container)
         {
             Container = new SutFactory<TSut>(container);
         }

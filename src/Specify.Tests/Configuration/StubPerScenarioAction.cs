@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NSubstitute;
 using Specify.Configuration;
 
 namespace Specify.Tests.Configuration
@@ -7,6 +8,7 @@ namespace Specify.Tests.Configuration
     {
         public StubConfig()
         {
+            ApplicationContainer = Substitute.For<IContainer>();
             StubPerScenarioAction.Reset();
             PerAppDomainActions.Add(new StubPerAppDomainAction { Name = "PerAppDomainAction 1" });
             PerAppDomainActions.Add(new StubPerAppDomainAction { Name = "PerAppDomainAction 2" });
@@ -27,7 +29,7 @@ namespace Specify.Tests.Configuration
             AfterActions.Clear();
         }
 
-        public void Before(IApplicationContainer container)
+        public void Before()
         {
             BeforeActions.Add(Name);
         }
@@ -51,7 +53,7 @@ namespace Specify.Tests.Configuration
             AfterActions.Clear();
         }
 
-        public void Before(IScenarioContainer container)
+        public void Before(IContainer container)
         {
             BeforeActions.Add(Name);
         }

@@ -8,14 +8,14 @@ namespace Specify
         internal static void LogSpecifyConfiguration(this TestRunner testRunner)
         {
             string containerName;
-            using (IScenarioContainer container = testRunner.ApplicationContainer.CreateChildContainer())
+            using (IContainer container = testRunner.Configuration.ApplicationContainer.Resolve<IContainer>())
             {
                 containerName = container.GetType().FullName;
             }
 
             var log = "TestRunner".Log();
             log.DebugFormat("Bootstrapper: {Bootstrapper}", testRunner.Configuration.GetType().FullName);
-            log.DebugFormat("ApplicationContainer: {ApplicationContainer}", testRunner.ApplicationContainer.GetType().FullName);
+            log.DebugFormat("ApplicationContainer: {ApplicationContainer}", testRunner.Configuration.ApplicationContainer.GetType().FullName);
             log.DebugFormat("ScenarioContainer: {ScenarioContainer}", containerName);
             log.DebugFormat("PerAppDomainActions: {PerAppDomainActionCount}", testRunner.Configuration.PerAppDomainActions.Count);
             foreach (var action in testRunner.Configuration.PerAppDomainActions)

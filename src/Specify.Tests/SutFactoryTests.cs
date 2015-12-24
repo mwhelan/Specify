@@ -163,7 +163,7 @@ namespace Specify.Tests
 
         private SutFactory<T> CreateSut<T>() where T : class
         {
-            return new SutFactory<T>(Substitute.For<IScenarioContainer>());
+            return new SutFactory<T>(Substitute.For<IContainer>());
         }
     }
 }

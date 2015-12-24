@@ -1,16 +1,15 @@
-using Ninject;
 using NUnit.Framework;
 using Shouldly;
-using Specify.Ninject;
+using Specify.Autofac;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.Ninject
+namespace Specify.IntegrationTests.Containers.Ioc
 {
-    public class NinjectContainerTests : IocContainerTests<NinjectScenarioContainer>
+    public class AutofacContainerTests : IocContainerTestsFor<AutofacContainer>
     {
-        protected override NinjectScenarioContainer CreateSut()
+        protected override AutofacContainer CreateSut()
         {
-            return new NinjectScenarioContainer(new StandardKernel());
+            return new AutofacContainer();
         }
 
         [Test]

@@ -9,19 +9,18 @@ namespace Specify.Tests.Configuration
         private readonly IScenario _specification;
 
         public  TestableTestRunner(IScenario specification)
-            : base(new StubConfig(), Substitute.For<IApplicationContainer>(),
-            Substitute.For<ITestEngine>())
+            : base(new StubConfig(), Substitute.For<ITestEngine>())
         {
             _specification = specification;
-            ChildContainer = Substitute.For<IScenarioContainer>();
-            this.ApplicationContainer
-                .CreateChildContainer()
+            ChildContainer = Substitute.For<IContainer>();
+            this.Configuration.ApplicationContainer
+                .Resolve<IContainer>()
                 .Returns(ChildContainer);
             ChildContainer
                 .Resolve(Arg.Any<Type>())
                 .Returns(_specification);
         }
 
-        public IScenarioContainer ChildContainer;
+        public IContainer ChildContainer;
     }
 }

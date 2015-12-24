@@ -13,7 +13,7 @@ namespace ContosoUniversity.SubcutaneousTests.Infrastructure
 {
     public class MvcControllerDriver : IDisposable
     {
-        protected internal IScenarioContainer Container { get; set; }
+        protected internal IContainer Container { get; set; }
         private readonly RouteCollection _routes;
         private readonly HttpSimulator _httpRequest;
 

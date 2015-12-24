@@ -2,10 +2,10 @@ using NUnit.Framework;
 using Shouldly;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests
+namespace Specify.IntegrationTests.Containers.Ioc.Application
 {
     [TestFixture]
-    public abstract class DependencyResolverTests<T> where T : IApplicationContainer, new()
+    public abstract class ApplicationContainerTestsFor<T> where T : IContainer, new()
     {
         protected abstract T CreateSut();
 
@@ -14,7 +14,7 @@ namespace Specify.IntegrationTests
         {
             var sut = this.CreateSut();
             sut.Register<IDependency1>(new Dependency1());
-            var childContainer = sut.CreateChildContainer();
+            var childContainer = sut.Resolve<IContainer>();
             sut.Resolve<IDependency1>()
                 .ShouldBeSameAs(childContainer.Resolve<IDependency1>());
         }
@@ -24,7 +24,7 @@ namespace Specify.IntegrationTests
         {
             var sut = this.CreateSut();
             sut.Register<IDependency1>(new Dependency1());
-            var childContainer = sut.CreateChildContainer();
+            var childContainer = sut.Resolve<IContainer>();
 
             childContainer.Register<IDependency1>(new Dependency1());
 
@@ -38,7 +38,7 @@ namespace Specify.IntegrationTests
             var instance = new Dependency1();
             var sut = this.CreateSut();
             sut.Register<IDependency1>(instance);
-            var childContainer = sut.CreateChildContainer();
+            var childContainer = sut.Resolve<IContainer>();
 
             childContainer.Register<IDependency1>(new Dependency1());
 

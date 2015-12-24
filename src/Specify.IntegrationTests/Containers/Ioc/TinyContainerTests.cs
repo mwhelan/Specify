@@ -1,15 +1,16 @@
 using NUnit.Framework;
 using Shouldly;
+using Specify.Configuration;
 using Specify.Tests.Stubs;
-using TinyIoC;
 
-namespace Specify.IntegrationTests.TinyIoc
+namespace Specify.IntegrationTests.Containers.Ioc
 {
-    public class DefaultScenarioContainerTests : IocContainerTests<DefaultScenarioContainer>
+    public class TinyContainerTests : IocContainerTestsFor<TinyContainer>
     {
-        protected override DefaultScenarioContainer CreateSut()
+        protected override TinyContainer CreateSut()
         {
-            return new DefaultScenarioContainer(new TinyIoCContainer());
+            var container = new TinyContainerFactory().Create(null);
+            return new TinyContainer(container);
         }
 
         [Test]
@@ -19,7 +20,5 @@ namespace Specify.IntegrationTests.TinyIoc
             sut.CanResolve<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(true);
             sut.CanResolve<Dependency1>().ShouldBe(true);
         }
-
-
     }
 }

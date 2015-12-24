@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.MockFactories
 {
-    public class MoqMockFactoryTests : MockFactoryTests<MoqMockFactory>
+    public class MoqMockFactoryTests : MockFactoryTestsFor<MoqMockFactory>
     {
         [Test]
         public void should_return_mock()

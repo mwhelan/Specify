@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 namespace Specify.IntegrationTests.MockFactories
 {
     [TestFixture]
-    public abstract class MockFactoryTests<T> where T : IMockFactory, new()
+    public abstract class MockFactoryTestsFor<T> where T : IMockFactory, new()
     {
         public IMockFactory CreateSut()
         {

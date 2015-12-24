@@ -2,7 +2,7 @@
 {
     public interface IPerScenarioActions
     {
-        void Before(IScenarioContainer container);
+        void Before(IContainer container);
         void After();
     }
 }

@@ -10,6 +10,6 @@ namespace Specify
         Type Story { get; }
         string Title { get; }
         int Number { get; set; }
-        void SetContainer(IScenarioContainer container);
+        void SetContainer(IContainer container);
     }
 }

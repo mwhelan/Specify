@@ -4,11 +4,11 @@ using Ninject;
 
 namespace Specify.Ninject
 {
-    public class NinjectScenarioContainer : IScenarioContainer
+    public class NinjectContainer : IContainer
     {
         protected IKernel _container;
 
-        public NinjectScenarioContainer(IKernel container)
+        public NinjectContainer(IKernel container)
         {
             _container = container;
         }

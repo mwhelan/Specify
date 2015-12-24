@@ -1,12 +1,12 @@
 ﻿using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.TinyIoc
+namespace Specify.IntegrationTests.SutFactories.Ioc
 {
-    public class SutFactoryDefaultContainerIntegrationTests : SutFactoryIntegrationTests
+    public class TinySutFactoryIntegrationTests : SutFactoryIntegrationTestsBase
     {
         protected override SutFactory<T> CreateSut<T>()
         {
-            var container = new DefaultScenarioContainer();
+            var container = new TinyContainer();
             container.Register<IDependency1, Dependency1>();
             container.Register<IDependency2, Dependency2>();
             container.Register<ConcreteObjectWithNoConstructor>();

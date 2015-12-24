@@ -7,11 +7,11 @@ using TinyIoC;
 namespace Specify
 {
 
-    public class DefaultAutoMockingContainer : DefaultScenarioContainer
+    public class TinyMockingContainer : TinyContainer
     {
         private readonly IMockFactory _mockFactory;
 
-        public DefaultAutoMockingContainer(IMockFactory mockFactory, TinyIoCContainer container)
+        public TinyMockingContainer(IMockFactory mockFactory, TinyIoCContainer container)
             : base(container)
         {
             _mockFactory = mockFactory;

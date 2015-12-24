@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using Autofac;
+using Specify.Configuration;
 using Specify.Configuration.Mocking;
 using Specify.Mocks;
-using TinyIoC;
 
-namespace Specify.Configuration
+namespace Specify.Autofac
 {
-    public class SpecifyBootstrapper : IConfigureSpecify
+    public class SpecifyAutofacBootstrapper : IConfigureSpecify
     {
-        public IContainer ApplicationContainer { get; set; }
-        public List<IPerAppDomainActions> PerAppDomainActions { get; private set; }
-        public List<IPerScenarioActions> PerScenarioActions { get; private set; }
-
+        public IContainer ApplicationContainer { get; }
+        public List<IPerAppDomainActions> PerAppDomainActions { get; }
+        public List<IPerScenarioActions> PerScenarioActions { get; }
         public bool LoggingEnabled { get; set; }
 
-        public SpecifyBootstrapper()
+        public SpecifyAutofacBootstrapper()
         {
             PerAppDomainActions = new List<IPerAppDomainActions>();
             PerScenarioActions = new List<IPerScenarioActions>();
@@ -22,22 +22,23 @@ namespace Specify.Configuration
             ApplicationContainer = BuildContainer();
         }
 
-        public virtual void ConfigureContainer(TinyIoCContainer container)
+        public virtual void ConfigureContainer(ContainerBuilder builder)
         {
-            
+
         }
 
         public virtual Func<IMockFactory> GetMockFactory()
         {
             return new MockDetector().FindAvailableMock();
-        }
+        } 
 
         private IContainer BuildContainer()
         {
             var mockFactory = GetMockFactory();
-            var container = new TinyContainerFactory().Create(mockFactory);
-            ConfigureContainer(container);
-            return new TinyContainer(container);
+            var builder = new AutofacContainerFactory().Create(mockFactory);
+            ConfigureContainer(builder);
+            var container = builder.Build();
+            return new AutofacContainer(container);
         }
     }
 }

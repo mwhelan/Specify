@@ -1,15 +1,12 @@
-﻿using System;
-
 using NUnit.Framework;
-
 using Shouldly;
 using Specify.Exceptions;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests
+namespace Specify.IntegrationTests.SutFactories
 {
     [TestFixture]
-    public abstract class SutFactoryIntegrationTests
+    public abstract class SutFactoryIntegrationTestsBase
     {
         protected abstract SutFactory<T> CreateSut<T>() where T : class;
 
@@ -53,7 +50,6 @@ namespace Specify.IntegrationTests
             result.Dependency1.ShouldNotBe(null);
             result.Dependency2.ShouldNotBe(null);
         }
-
 
         [Test]
         public void RegisterType_should_throw_if_SUT_is_set()

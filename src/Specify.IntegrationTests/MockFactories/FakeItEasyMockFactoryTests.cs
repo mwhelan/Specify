@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.MockFactories
 {
-    public class FakeItEasyMockFactoryTests : MockFactoryTests<FakeItEasyMockFactory>
+    public class FakeItEasyMockFactoryTests : MockFactoryTestsFor<FakeItEasyMockFactory>
     {
         [Test]
         public void should_return_fake()

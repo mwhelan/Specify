@@ -6,17 +6,15 @@ namespace Specify.Configuration
     {
         private readonly ITestEngine _testEngine;
 
-        public TestRunner(SpecifyBootstrapper configuration, IApplicationContainer applicationContainer,
-            ITestEngine testEngine)
+        public TestRunner(IConfigureSpecify configuration, ITestEngine testEngine)
         {
             Configuration = configuration;
-            ApplicationContainer = applicationContainer;
             _testEngine = testEngine;
         }
 
         public void Execute(IScenario testObject, string scenarioTitle = null)
         {
-            using (var container = ApplicationContainer.CreateChildContainer())
+            using (var container = Configuration.ApplicationContainer.Resolve<IContainer>())
             {
                 foreach (var action in Configuration.PerScenarioActions)
                 {
@@ -34,8 +32,6 @@ namespace Specify.Configuration
             }
         }
 
-        internal IApplicationContainer ApplicationContainer { get; set; }
-
-        internal SpecifyBootstrapper Configuration { get; set; }
+        internal IConfigureSpecify Configuration { get; set; }
     }
 }

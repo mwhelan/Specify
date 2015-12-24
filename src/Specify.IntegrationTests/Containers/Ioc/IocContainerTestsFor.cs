@@ -2,10 +2,10 @@
 using Shouldly;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests
+namespace Specify.IntegrationTests.Containers.Ioc
 {
     [TestFixture]
-    public abstract class IocContainerTests<T> where T : IScenarioContainer
+    public abstract class IocContainerTestsFor<T> where T : IContainer
     {
         protected abstract T CreateSut();
         [Test]

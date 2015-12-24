@@ -1,11 +1,10 @@
-﻿using Serilog;
-using Specify;
+﻿using Autofac;
+using Serilog;
 using Specify.Autofac;
-using Specify.Configuration;
 
 namespace ContosoUniversity.SubcutaneousTests
 {
-    public class SubcutaneousConfig : SpecifyBootstrapper
+    public class SubcutaneousConfig : SpecifyAutofacBootstrapper
     {
         public SubcutaneousConfig()
         {
@@ -18,9 +17,9 @@ namespace ContosoUniversity.SubcutaneousTests
             Log.Logger = log;
         }
 
-        public override IApplicationContainer CreateApplicationContainer()
+        public override void ConfigureContainer(ContainerBuilder builder)
         {
-            return new AutofacApplicationContainer();
+            builder.RegisterModule<SubcutaneousTestsAutofacModule>();
         }
     }
 }

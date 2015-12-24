@@ -9,8 +9,7 @@ namespace Specify
 {
     internal static class Host
     {
-        public static readonly SpecifyBootstrapper Configuration;
-        private static readonly IApplicationContainer applicationContainer;
+        public static readonly IConfigureSpecify Configuration;
         private static readonly TestRunner _testRunner;
 
         public static void Specify(IScenario testObject, string scenarioTitle = null)
@@ -21,12 +20,11 @@ namespace Specify
         static Host()
         {
             Configuration = Configure();
-            applicationContainer = Configuration.CreateApplicationContainer();
        
-            _testRunner = new TestRunner(Configuration, applicationContainer,new BddfyTestEngine());
+            _testRunner = new TestRunner(Configuration, new BddfyTestEngine());
             _testRunner.LogSpecifyConfiguration();
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
-            Configuration.PerAppDomainActions.ForEach(action => action.Before(applicationContainer));
+            Configuration.PerAppDomainActions.ForEach(action => action.Before());
         }
 
         static void CurrentDomain_DomainUnload(object sender, EventArgs e)
@@ -37,16 +35,16 @@ namespace Specify
                 "Host".Log().DebugFormat("{0} After", action.GetType().Name);
                 action.After();
             }
-            applicationContainer.Dispose();
+            Configuration.ApplicationContainer.Dispose();
         }
 
-        static SpecifyBootstrapper Configure()
+        static IConfigureSpecify Configure()
         {
             var customConvention = AssemblyTypeResolver
                 .GetAllTypesFromAppDomain()
-                .FirstOrDefault(type => typeof(SpecifyBootstrapper).IsAssignableFrom(type) && type.IsClass);
+                .FirstOrDefault(type => typeof(IConfigureSpecify).IsAssignableFrom(type) && type.IsClass);
             var config = customConvention != null
-                ? (SpecifyBootstrapper)Activator.CreateInstance(customConvention)
+                ? (IConfigureSpecify)Activator.CreateInstance(customConvention)
                 : new SpecifyBootstrapper();
 
             Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();

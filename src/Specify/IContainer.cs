@@ -6,12 +6,12 @@ namespace Specify
     /// Represents a container that provides the SUT and its dependencies to specifications. The container might be
     /// a full IoC container or an automocking container.
     /// </summary>
-    public interface IScenarioContainer : IDisposable
+    public interface IContainer : IDisposable
     {
         /// <summary>
         /// Registers a type to the container. 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The type of the component implementation.</typeparam>
         void Register<T>() where T : class;
 
        /// <summary>
@@ -40,9 +40,14 @@ namespace Specify
         /// <returns></returns>
         T Resolve<T>(string key = null) where T : class;
 
+        /// <summary>
+        /// Gets a value of the specified type from the container, optionally registered under a key.
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         object Resolve(Type serviceType, string key = null);
  
-
         /// <summary>
         /// Determines whether an instance of this type is registered.
         /// </summary>
