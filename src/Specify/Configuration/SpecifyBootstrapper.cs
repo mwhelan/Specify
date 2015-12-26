@@ -7,7 +7,7 @@ namespace Specify.Configuration
 {
     public class SpecifyBootstrapper : IConfigureSpecify
     {
-        public IContainer ApplicationContainer { get; }
+        public IContainer ApplicationContainer { get; internal set; }
         public List<IPerAppDomainActions> PerAppDomainActions { get; }
         public List<IPerScenarioActions> PerScenarioActions { get; }
 
