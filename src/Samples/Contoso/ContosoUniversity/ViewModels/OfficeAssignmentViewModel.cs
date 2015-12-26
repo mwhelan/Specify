@@ -7,7 +7,8 @@ namespace ContosoUniversity.ViewModels
     {
         [Key]
         [ForeignKey("Instructor")]
-        public int InstructorId { get { return InstructorViewModel.Id; } }
+        public int InstructorId => InstructorViewModel.Id;
+
         [StringLength(50)]
         [Display(Name = "Office Location")]
         public string Location { get; set; }

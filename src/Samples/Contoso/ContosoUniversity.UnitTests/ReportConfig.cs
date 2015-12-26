@@ -4,14 +4,8 @@ namespace ContosoUniversity.UnitTests
 {
     public class ReportConfig : DefaultHtmlReportConfiguration
     {
-        public override string ReportHeader
-        {
-            get { return "Contoso University"; }
-        }
+        public override string ReportHeader => "Contoso University";
 
-        public override string ReportDescription
-        {
-            get { return "Unit Specifications"; }
-        }
+        public override string ReportDescription => "Unit Specifications";
     }
 }

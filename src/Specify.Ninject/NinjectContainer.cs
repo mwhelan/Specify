@@ -13,13 +13,7 @@ namespace Specify.Ninject
             _container = container;
         }
 
-        protected IKernel Container
-        {
-            get
-            {
-                return _container;
-            }
-        }
+        protected IKernel Container => _container;
 
         public void Register<T>() where T : class
         {

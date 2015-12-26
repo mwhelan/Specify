@@ -22,10 +22,7 @@ namespace Specify
             set { Container.SystemUnderTest = value; }
         }
 
-        public virtual Type Story
-        {
-            get { return typeof(TStory); }
-        }
+        public virtual Type Story => typeof(TStory);
 
         public virtual string Title
         {

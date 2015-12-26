@@ -49,9 +49,6 @@ namespace Specify.Autofac
             return new[] { rb.CreateRegistration() };
         }
 
-        public bool IsAdapterForIndividualComponents
-        {
-            get { return false; }
-        }
+        public bool IsAdapterForIndividualComponents => false;
     }
 }

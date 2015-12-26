@@ -6,9 +6,6 @@ namespace Specify.Tests.Stubs
     {
         private List<string> _steps = new List<string>();
 
-        public List<string> Steps
-        {
-            get { return _steps; }
-        }
+        public List<string> Steps => _steps;
     }
 }

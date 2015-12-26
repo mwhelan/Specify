@@ -20,7 +20,7 @@ namespace ContosoUniversity.Domain.Model
         [Range(0, 5)]
         public int Credits { get; set; }
 
-        public int DepartmentId { get { return Department.Id; } }
+        public int DepartmentId => Department.Id;
 
         public virtual Department Department { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }

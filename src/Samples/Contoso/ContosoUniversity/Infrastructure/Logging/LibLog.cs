@@ -1,4 +1,4 @@
-//===============================================================================
+﻿//===============================================================================
 // LibLog
 //
 // https://github.com/damianh/LibLog
@@ -462,13 +462,7 @@ namespace ContosoUniversity.Logging
             }
         }
 
-        internal static ILogProvider CurrentLogProvider
-        {
-            get
-            {
-                return _currentLogProvider;
-            }
-        }
+        internal static ILogProvider CurrentLogProvider => _currentLogProvider;
 
         /// <summary>
         /// Gets a logger for the specified type.
@@ -667,10 +661,7 @@ namespace ContosoUniversity.Logging
             _getIsDisabled = getIsDisabled ?? (() => false);
         }
 
-        internal Logger WrappedLogger
-        {
-            get { return _logger; }
-        }
+        internal Logger WrappedLogger => _logger;
 
         public bool Log(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters)
         {

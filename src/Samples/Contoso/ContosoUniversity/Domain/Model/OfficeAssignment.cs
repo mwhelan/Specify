@@ -7,7 +7,8 @@ namespace ContosoUniversity.Domain.Model
     {
         [Key]
         [ForeignKey("Instructor")]
-        public int InstructorId { get { return Instructor.Id; } }
+        public int InstructorId => Instructor.Id;
+
         [StringLength(50)]
         [Display(Name = "Office Location")]
         public string Location { get; set; }

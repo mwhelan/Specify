@@ -5,8 +5,9 @@ namespace ContosoUniversity.Domain.Model
     public class Enrollment : IEntity
     {
         public int Id { get; set; }
-        public int CourseId { get { return Course.Id; } }
-        public int StudentId { get { return Student.Id; } }
+        public int CourseId => Course.Id;
+        public int StudentId => Student.Id;
+
         [DisplayFormat(NullDisplayText = "No grade")]
         public Grade? Grade { get; set; }
 

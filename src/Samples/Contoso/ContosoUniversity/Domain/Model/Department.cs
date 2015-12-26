@@ -25,7 +25,7 @@ namespace ContosoUniversity.Domain.Model
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
-        public int? InstructorId { get{return Instructor.Id;} }
+        public int? InstructorId => Instructor.Id;
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

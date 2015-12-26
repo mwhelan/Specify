@@ -96,6 +96,6 @@ namespace Specify
             _sourceContainer.Dispose();
         }
 
-        internal IContainer SourceContainer { get { return _sourceContainer; } }
+        internal IContainer SourceContainer => _sourceContainer;
     }
 }

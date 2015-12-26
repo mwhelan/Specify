@@ -25,7 +25,7 @@ namespace ContosoUniversity.ViewModels
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
-        public int? InstructorId { get{return InstructorViewModel.Id;} }
+        public int? InstructorId => InstructorViewModel.Id;
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

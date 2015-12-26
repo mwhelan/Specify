@@ -31,13 +31,7 @@ namespace Specify.Configuration
             }
         }
 
-        public ProcessType ProcessType
-        {
-            get
-            {
-                return ProcessType.Report;
-            }
-        }
+        public ProcessType ProcessType => ProcessType.Report;
     }
     //public class LoggingProcessor : IProcessor
     //{

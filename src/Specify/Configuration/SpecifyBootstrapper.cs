@@ -7,9 +7,9 @@ namespace Specify.Configuration
 {
     public class SpecifyBootstrapper : IConfigureSpecify
     {
-        public IContainer ApplicationContainer { get; set; }
-        public List<IPerAppDomainActions> PerAppDomainActions { get; private set; }
-        public List<IPerScenarioActions> PerScenarioActions { get; private set; }
+        public IContainer ApplicationContainer { get; }
+        public List<IPerAppDomainActions> PerAppDomainActions { get; }
+        public List<IPerScenarioActions> PerScenarioActions { get; }
 
         public bool LoggingEnabled { get; set; }
 

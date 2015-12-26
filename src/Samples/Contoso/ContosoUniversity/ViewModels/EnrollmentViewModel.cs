@@ -5,8 +5,9 @@ namespace ContosoUniversity.ViewModels
     public class EnrollmentViewModel
     {
         public int Id { get; set; }
-        public int CourseId { get { return CourseViewModel.Id; } }
-        public int StudentId { get { return StudentViewModel.Id; } }
+        public int CourseId => CourseViewModel.Id;
+        public int StudentId => StudentViewModel.Id;
+
         [DisplayFormat(NullDisplayText = "No grade")]
         public Grade? Grade { get; set; }
 
