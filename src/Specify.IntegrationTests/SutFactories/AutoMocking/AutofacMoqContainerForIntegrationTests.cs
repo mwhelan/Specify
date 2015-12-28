@@ -5,13 +5,13 @@ using Specify.Mocks;
 
 namespace Specify.IntegrationTests.SutFactories.AutoMocking
 {
-    public class AutofacMoqSutFactoryIntegrationTests : SutFactoryIntegrationTestsBase
+    public class AutofacMoqContainerForIntegrationTests : ContainerForIntegrationTestsBase
     {
-        protected override SutFactory<T> CreateSut<T>()
+        protected override ContainerFor<T> CreateSut<T>()
         {
             Func<IMockFactory> mockFactory = () => new MoqMockFactory();
             var container = new AutofacContainerFactory().Create(mockFactory).Build();
-            return new SutFactory<T>(new AutofacContainer(container));
+            return new ContainerFor<T>(new AutofacContainer(container));
         }
     }
 }

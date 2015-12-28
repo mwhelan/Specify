@@ -6,7 +6,7 @@ namespace Specify.Configuration
     /// <summary>
     /// Represents the class that exectues scenarios
     /// </summary>
-    internal interface ITestEngine
+    public interface ITestEngine
     {
         /// <summary>
         /// Executes the specified scenario.

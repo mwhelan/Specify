@@ -15,7 +15,7 @@ namespace Specify.Configuration
         /// <param name="story">The story.</param>
         public void Process(Story story)
         {
-            var logger = LogProvider.GetCurrentClassLogger();
+            var logger = LogProvider.GetLogger("Specify");
             var scenarios = story.Scenarios;
 
             foreach (var scenario in scenarios)

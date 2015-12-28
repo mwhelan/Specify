@@ -7,17 +7,17 @@ namespace Specify
     /// Wrapper for various IContainer implementations that provides container for Scenario classes and ensures consistent behaviour.
     /// </summary>
     /// <typeparam name="TSut">The type of the t sut.</typeparam>
-    public class SutFactory<TSut> : IDisposable 
+    public class ContainerFor<TSut> : IDisposable 
         where TSut : class
     {
         private readonly IContainer _sourceContainer;
         private TSut _systemUnderTest;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SutFactory{TSut}"/> class.
+        /// Initializes a new instance of the <see cref="ContainerFor{TSut}"/> class.
         /// </summary>
         /// <param name="sourceContainer">The source container.</param>
-        public SutFactory(IContainer sourceContainer)
+        public ContainerFor(IContainer sourceContainer)
         {
             _sourceContainer = sourceContainer;
         }

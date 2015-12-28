@@ -8,7 +8,7 @@ using Specify.Tests.Stubs;
 namespace Specify.Tests
 {
     [TestFixture]
-    public class SutFactoryTests
+    public class ContainerForTests
     {
         [Test]
         public void should_use_container_to_create_sut()
@@ -161,9 +161,9 @@ namespace Specify.Tests
             sut.SourceContainer.Received().Dispose();
         }
 
-        private SutFactory<T> CreateSut<T>() where T : class
+        private ContainerFor<T> CreateSut<T>() where T : class
         {
-            return new SutFactory<T>(Substitute.For<IContainer>());
+            return new ContainerFor<T>(Substitute.For<IContainer>());
         }
     }
 }

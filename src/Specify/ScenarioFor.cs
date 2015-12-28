@@ -26,7 +26,7 @@ namespace Specify
         /// Gets the container.
         /// </summary>
         /// <value>The container.</value>
-        public SutFactory<TSut> Container { get; internal set; }
+        public ContainerFor<TSut> Container { get; internal set; }
 
         /// <inheritdoc />
         public ExampleTable Examples { get; set; }
@@ -65,7 +65,7 @@ namespace Specify
         /// <inheritdoc />
         public virtual void SetContainer(IContainer container)
         {
-            Container = new SutFactory<TSut>(container);
+            Container = new ContainerFor<TSut>(container);
         }
 
         /// <inheritdoc />

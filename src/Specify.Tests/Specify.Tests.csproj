@@ -128,7 +128,7 @@
     <Compile Include="Stubs\TestableUserStoryScenario.cs" />
     <Compile Include="Stubs\TestableUnitScenario.cs" />
     <Compile Include="Stubs\UserStories.cs" />
-    <Compile Include="SutFactoryTests.cs" />
+    <Compile Include="ContainerForTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

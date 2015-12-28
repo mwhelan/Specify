@@ -88,13 +88,13 @@
     <Compile Include="Mocks\MoqMockFactoryTests.cs" />
     <Compile Include="Mocks\NSubstituteMockFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SutFactories\AutoMocking\AutofacFakeItEasySutFactoryIntegrationTests.cs" />
-    <Compile Include="SutFactories\AutoMocking\AutofacMoqSutFactoryIntegrationTests.cs" />
-    <Compile Include="SutFactories\AutoMocking\AutofacNSubstituteSutFactoryIntegrationTests.cs" />
-    <Compile Include="SutFactories\Ioc\AutofacSutFactoryIntegrationTests.cs" />
-    <Compile Include="SutFactories\Ioc\NinjectSutFactoryIntegrationTests.cs" />
-    <Compile Include="SutFactories\Ioc\TinySutFactoryIntegrationTests.cs" />
-    <Compile Include="SutFactories\SutFactoryIntegrationTestsBase.cs" />
+    <Compile Include="SutFactories\AutoMocking\AutofacFakeItEasyContainerForIntegrationTests.cs" />
+    <Compile Include="SutFactories\AutoMocking\AutofacMoqContainerForIntegrationTests.cs" />
+    <Compile Include="SutFactories\AutoMocking\AutofacNSubstituteContainerForIntegrationTests.cs" />
+    <Compile Include="SutFactories\Ioc\AutofacContainerForIntegrationTests.cs" />
+    <Compile Include="SutFactories\Ioc\NinjectContainerForIntegrationTests.cs" />
+    <Compile Include="SutFactories\Ioc\TinyContainerForIntegrationTests.cs" />
+    <Compile Include="SutFactories\ContainerForIntegrationTestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Specify.Autofac\Specify.Autofac.csproj">

@@ -4,9 +4,9 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.SutFactories.Ioc
 {
-    public class NinjectSutFactoryIntegrationTests : SutFactoryIntegrationTestsBase
+    public class NinjectContainerForIntegrationTests : ContainerForIntegrationTestsBase
     {
-        protected override SutFactory<T> CreateSut<T>()
+        protected override ContainerFor<T> CreateSut<T>()
         {
             var kernel = new StandardKernel();
             var container = new NinjectContainer(kernel);
@@ -14,7 +14,7 @@ namespace Specify.IntegrationTests.SutFactories.Ioc
             container.Register<IDependency2, Dependency2>();
             container.Register(new ConcreteObjectWithMultipleConstructors(new Dependency1(), new Dependency2()));
             container.Register<ConcreteObjectWithNoConstructor>();
-            return new SutFactory<T>(container);
+            return new ContainerFor<T>(container);
         }
     }
 }
