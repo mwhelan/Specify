@@ -64,7 +64,7 @@ namespace Specify.Tests
         public void Container_RegisterType_should_call_container_to_register_type_if_SUT_not_set()
         {
             var sut = CreateSut();
-            sut.Container.Register<ConcreteObjectWithNoConstructor>();
+            sut.Container.Set<ConcreteObjectWithNoConstructor>();
             sut.Container.SourceContainer.Received().Register<ConcreteObjectWithNoConstructor>();
         }
 
@@ -73,7 +73,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Container.Register<ConcreteObjectWithNoConstructor>())
+            Should.Throw<InterfaceRegistrationException>(() => sut.Container.Set<ConcreteObjectWithNoConstructor>())
                 .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }
 
@@ -83,7 +83,7 @@ namespace Specify.Tests
             var instance = new ConcreteObjectWithNoConstructor();
             var sut = CreateSut();
 
-            sut.Container.Register(instance);
+            sut.Container.Set(instance);
 
             sut.Container.SourceContainer.Received().Register(instance);
         }
@@ -93,7 +93,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Container.Register(new ConcreteObjectWithNoConstructor()))
+            Should.Throw<InterfaceRegistrationException>(() => sut.Container.Set(new ConcreteObjectWithNoConstructor()))
                 .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }    
     

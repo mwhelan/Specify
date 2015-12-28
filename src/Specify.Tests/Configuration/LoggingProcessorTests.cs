@@ -19,7 +19,7 @@ namespace Specify.Tests.Configuration
             {
                 var story = new ReportTestData()
                     .CreateOneStoryWithOneFailingScenarioAndOnePassingScenarioWithThreeStepsOfFiveMillisecondsAndEachHasTwoExamples();
-                var sut = new LoggingProcessor();
+                var sut = new ScenarioLoggingProcessor();
                 sut.Process(story);
 
                 Approvals.VerifyFile(filePath);

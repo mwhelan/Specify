@@ -52,7 +52,7 @@ namespace Specify
             
             if (config.LoggingEnabled)
             {
-                Configurator.Processors.Add(() => new LoggingProcessor());
+                Configurator.Processors.Add(() => new ScenarioLoggingProcessor());
             }
 
             return config;

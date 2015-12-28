@@ -24,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Specify.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,6 +34,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\Specify.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug without StyleCop|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -68,7 +71,7 @@
     <Compile Include="Exceptions\LoggingException.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="lib\LibLog.cs" />
-    <Compile Include="Configuration\LoggingProcessor.cs" />
+    <Compile Include="Configuration\ScenarioLoggingProcessor.cs" />
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\IPerScenarioActions.cs" />
@@ -86,7 +89,7 @@
     <Compile Include="Mocks\NSubstituteMockFactory.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="ScenarioFor.cs" />
-    <Compile Include="SpecifyExtensions.cs" />
+    <Compile Include="TypeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stories\SpecificationStory.cs" />
     <Compile Include="Stories\Story.cs" />

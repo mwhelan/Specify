@@ -5,8 +5,17 @@ using Story = Specify.Stories.Story;
 
 namespace Specify.Configuration
 {
+    /// <summary>
+    /// BDDfy story metadata scanner.
+    /// </summary>
     public class SpecifyStoryMetadataScanner : IStoryMetadataScanner
     {
+        /// <summary>
+        /// Scans the specified test object.
+        /// </summary>
+        /// <param name="testObject">The test object.</param>
+        /// <param name="explicityStoryType">Type of the explicity story.</param>
+        /// <returns>StoryMetadata.</returns>
         public virtual StoryMetadata Scan(object testObject, Type explicityStoryType = null)
         {
             var scenario = testObject as IScenario;

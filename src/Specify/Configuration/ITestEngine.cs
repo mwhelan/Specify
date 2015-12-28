@@ -2,8 +2,17 @@ using TestStack.BDDfy;
 
 namespace Specify.Configuration
 {
-    public interface ITestEngine
+
+    /// <summary>
+    /// Represents the class that exectues scenarios
+    /// </summary>
+    internal interface ITestEngine
     {
+        /// <summary>
+        /// Executes the specified scenario.
+        /// </summary>
+        /// <param name="scenario">The scenario.</param>
+        /// <returns>Story.</returns>
         Story Execute(IScenario scenario);
     }
 }

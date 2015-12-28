@@ -6,22 +6,31 @@ using TinyIoC;
 
 namespace Specify
 {
-
+    /// <summary>
+    /// Adapter for the TinyIoc container with automocking using the specified mocking provider.
+    /// </summary>
     public class TinyMockingContainer : TinyContainer
     {
         private readonly IMockFactory _mockFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TinyMockingContainer"/> class.
+        /// </summary>
+        /// <param name="mockFactory">The mock factory.</param>
+        /// <param name="container">The container.</param>
         public TinyMockingContainer(IMockFactory mockFactory, TinyIoCContainer container)
             : base(container)
         {
             _mockFactory = mockFactory;
         }
 
+        /// <inheritdoc />
         public override T Resolve<T>(string key = null)
         {
             return (T)Resolve(typeof(T), key);
         }
 
+        /// <inheritdoc />
         public override object Resolve(Type serviceType, string key = null)
         {
             if (serviceType.IsInterface)

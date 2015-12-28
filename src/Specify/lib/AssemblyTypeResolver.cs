@@ -14,6 +14,10 @@ namespace Specify.lib
     /// </summary>
     public static class AssemblyTypeResolver
     {
+        /// <summary>
+        /// Gets all types from the AppDomain.
+        /// </summary>
+        /// <returns>IEnumerable&lt;Type&gt;.</returns>
         public static IEnumerable<Type> GetAllTypesFromAppDomain()
         {
             return AppDomain.CurrentDomain
@@ -22,6 +26,10 @@ namespace Specify.lib
                 .SelectMany(GetExportedTypes).ToArray();
         }
 
+        /// <summary>
+        /// Gets all assemblies from the AppDomain.
+        /// </summary>
+        /// <returns>IEnumerable&lt;Assembly&gt;.</returns>
         public static IEnumerable<Assembly> GetAllAssembliesFromAppDomain()
         {
             return AppDomain.CurrentDomain

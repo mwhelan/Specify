@@ -56,7 +56,7 @@ namespace Specify.IntegrationTests.SutFactories
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Register<ConcreteObjectWithNoConstructor>())
+            Should.Throw<InterfaceRegistrationException>(() => sut.Set<ConcreteObjectWithNoConstructor>())
                 .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }
 
@@ -64,7 +64,7 @@ namespace Specify.IntegrationTests.SutFactories
         public void RegisterService_should_register_service_if_SUT_not_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Register<IDependency2, Dependency2>();
+            sut.Set<IDependency2, Dependency2>();
             sut.Get<IDependency2>().ShouldNotBe(null);
         }
 
@@ -73,7 +73,7 @@ namespace Specify.IntegrationTests.SutFactories
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Register<IDependency1,Dependency1>())
+            Should.Throw<InterfaceRegistrationException>(() => sut.Set<IDependency1,Dependency1>())
                 .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.Dependency1 after SUT is created");
         }
 
@@ -81,7 +81,7 @@ namespace Specify.IntegrationTests.SutFactories
         public void RegisterType_should_register_type_if_SUT_not_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Register<Dependency1>();
+            sut.Set<Dependency1>();
             sut.Get<Dependency1>().ShouldNotBe(null);
         }
 
@@ -90,7 +90,7 @@ namespace Specify.IntegrationTests.SutFactories
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Register(new ConcreteObjectWithNoConstructor()))
+            Should.Throw<InterfaceRegistrationException>(() => sut.Set(new ConcreteObjectWithNoConstructor()))
                 .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
         }
 
@@ -100,7 +100,7 @@ namespace Specify.IntegrationTests.SutFactories
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var instance = new Dependency3();
 
-            sut.Register<IDependency3>(instance);
+            sut.Set<IDependency3>(instance);
 
             sut.Get<IDependency3>().ShouldNotBe(null);
             sut.Get<IDependency3>().ShouldBeSameAs(instance);
@@ -113,8 +113,8 @@ namespace Specify.IntegrationTests.SutFactories
             var instance1 = new Dependency3();
             var instance2 = new Dependency3();
 
-            sut.Register<Dependency3>(instance1, "instance1");
-            sut.Register<Dependency3>(instance2, "instance2");
+            sut.Set<Dependency3>(instance1, "instance1");
+            sut.Set<Dependency3>(instance2, "instance2");
 
             sut.Get<Dependency3>("instance1").ShouldBeSameAs(instance1);
             sut.Get<Dependency3>("instance2").ShouldBeSameAs(instance2);
@@ -127,8 +127,8 @@ namespace Specify.IntegrationTests.SutFactories
             var instance1 = new Dependency3();
             var instance2 = new Dependency3();
 
-            sut.Register<Dependency3>(instance1, "instance1");
-            sut.Register<Dependency3>(instance2);
+            sut.Set<Dependency3>(instance1, "instance1");
+            sut.Set<Dependency3>(instance2);
 
             sut.Get<Dependency3>("instance1").ShouldBeSameAs(instance1);
             sut.Get<Dependency3>().ShouldBeSameAs(instance2);
@@ -138,7 +138,7 @@ namespace Specify.IntegrationTests.SutFactories
         public void RegisterType_should_register_singleton_lifetime()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Register<Dependency1>();
+            sut.Set<Dependency1>();
             sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
         }
 
@@ -146,7 +146,7 @@ namespace Specify.IntegrationTests.SutFactories
         public void RegisterInstance_should_register_singleton_lifetime()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Register<Dependency1>(new Dependency1());
+            sut.Set<Dependency1>(new Dependency1());
             sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
         }
 
@@ -154,7 +154,7 @@ namespace Specify.IntegrationTests.SutFactories
         public void RegisterService_should_register_singleton_lifetime()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Register<IDependency2, Dependency2>();
+            sut.Set<IDependency2, Dependency2>();
             sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
         }
 

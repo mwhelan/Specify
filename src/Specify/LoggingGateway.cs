@@ -16,7 +16,7 @@ namespace Specify
         private static readonly ConcurrentDictionary<string, ILog> Dictionary = new ConcurrentDictionary<string, ILog>();
 
         /// <summary>
-        /// Gets the logger for <see cref="T"/>.
+        /// Gets the logger for "T{}"/>.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="type">The type to get the logger for.</param>
