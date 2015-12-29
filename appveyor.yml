@@ -1,0 +1,32 @@
+version: 0.9.{build}
+os: Visual Studio 2015
+configuration: Release
+
+init:
+- cmd: set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+  
+install:
+- cmd: choco install gitlink
+
+before_build:
+- cmd: nuget restore src\Specify.sln
+
+build:
+  project: src\Specify.sln
+  publish_nuget: true
+  verbosity: minimal
+  
+after_build:
+- cmd: GitLink.exe c:\projects\specify
+
+test:
+  assemblies:
+  - Specify.Tests.dll
+  - Specify.IntegrationTests.dll
