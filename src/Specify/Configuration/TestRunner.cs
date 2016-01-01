@@ -32,6 +32,16 @@ namespace Specify.Configuration
             }
         }
 
+        public void BeforeAllScenarios()
+        {
+            
+        }
+
+        public void AfterAllScenarios()
+        {
+            
+        }
+
         internal IConfigureSpecify Configuration { get; set; }
     }
 }

@@ -60,6 +60,8 @@
     <Compile Include="Catch.cs" />
     <Compile Include="Configuration\IConfigureSpecify.cs" />
     <Compile Include="Configuration\IPerAppDomainActions.cs" />
+    <Compile Include="Configuration\ReportConfiguration.cs" />
+    <Compile Include="Configuration\SpecifyBootstrapperBase.cs" />
     <Compile Include="Configuration\TinyContainerFactory.cs" />
     <Compile Include="Mocks\FileSystem.cs" />
     <Compile Include="Mocks\IFileSystem.cs" />

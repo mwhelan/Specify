@@ -8,9 +8,11 @@ namespace ContosoUniversity.UnitTests
     {
         public SpecifyConfig()
         {
-            Configurator.BatchProcessors.HtmlReport.Disable();
-            Configurator.BatchProcessors.Add(new HtmlReporter(new ReportConfig()));
             LoggingEnabled = true;
+            HtmlReport.ReportHeader = "Contoso University";
+            HtmlReport.ReportDescription = "Unit Specifications";
+            HtmlReport.ReportType = HtmlReportConfiguration.HtmlReportType.Metro;
+            HtmlReport.OutputFileName = "metro.html";
         }
     }
 }

@@ -106,7 +106,6 @@
     <Compile Include="Controllers\DetailsForNonExistentStudent.cs" />
     <Compile Include="ScenarioFor.cs" />
     <Compile Include="Controllers\StudentDetailSpecs.cs" />
-    <Compile Include="ReportConfig.cs" />
     <Compile Include="SpecifyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

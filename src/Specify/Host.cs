@@ -19,8 +19,9 @@ namespace Specify
 
         static Host()
         {
-            Configuration = Configure();
-       
+            Configuration = GetConfiguration();
+            Configuration.Configure();
+
             _testRunner = new TestRunner(Configuration, new BddfyTestEngine());
             _testRunner.LogSpecifyConfiguration();
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
@@ -38,11 +39,11 @@ namespace Specify
             Configuration.ApplicationContainer.Dispose();
         }
 
-        static IConfigureSpecify Configure()
+        static IConfigureSpecify GetConfiguration()
         {
             var customConvention = AssemblyTypeResolver
                 .GetAllTypesFromAppDomain()
-                .FirstOrDefault(type => typeof(IConfigureSpecify).IsAssignableFrom(type) && type.IsClass);
+                .FirstOrDefault(type => typeof(IConfigureSpecify).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
             var config = customConvention != null
                 ? (IConfigureSpecify)Activator.CreateInstance(customConvention)
                 : new SpecifyBootstrapper();

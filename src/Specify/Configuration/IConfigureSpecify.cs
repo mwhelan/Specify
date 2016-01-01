@@ -30,5 +30,16 @@ namespace Specify.Configuration
         /// </summary>
         /// <value><c>true</c> if logging is enabled otherwise <c>false</c>.</value>
         bool LoggingEnabled { get; set; }
+
+        /// <summary>
+        /// The configuration values for the BDDfy HTML report.
+        /// </summary>
+        /// <value>The report header.</value>
+        HtmlReportConfiguration HtmlReport { get; }
+
+        /// <summary>
+        /// Performs configuration tasks.
+        /// </summary>
+        void Configure();
     }
 }
