@@ -4,49 +4,67 @@ using Specify.Mocks;
 
 namespace Specify.Configuration
 {
-    /// <summary>
-    /// Initializes the Specify configuration.
-    /// </summary>
-    public class ConfigurationScanner
+    /// <inheritdoc />
+    public abstract class ConfigurationScanner : IConfigurationScanner
     {
         private readonly IFileSystem _fileSystem;
+        /// <summary>
+        /// Gets the default type of the bootstrapper.
+        /// </summary>
+        /// <value>The default type of the bootstrapper.</value>
+        protected abstract Type DefaultBootstrapperType { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationScanner"/> class.
         /// </summary>
-        public ConfigurationScanner() 
+        protected ConfigurationScanner() 
             : this(new FileSystem()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationScanner"/> class.
         /// </summary>
-        public ConfigurationScanner(IFileSystem fileSystem)
+        protected ConfigurationScanner(IFileSystem fileSystem)
         {
             _fileSystem = fileSystem;
         }
 
-        /// <summary>
-        /// Scans the test assembly to find the appropriate bootstrapper class.
-        /// </summary>
-        /// <returns>IConfigureSpecify.</returns>
+        /// <inheritdoc />
         public IConfigureSpecify GetConfiguration()
         {
             var bootstrapper = _fileSystem
                 .GetAllTypesFromAppDomain()
                 .FirstOrDefault(IsSpecifyConfigurationImplementation());
             var config = bootstrapper != null
-                ? (IConfigureSpecify)Activator.CreateInstance(bootstrapper)
-                : new SpecifyBootstrapper();
+                ? bootstrapper.Create<IConfigureSpecify>()
+                : DefaultBootstrapperType.Create<IConfigureSpecify>();
 
             return config;
         }
 
-        private static Func<Type, bool> IsSpecifyConfigurationImplementation()
+        private Func<Type, bool> IsSpecifyConfigurationImplementation()
         {
-            return type => typeof(IConfigureSpecify).IsAssignableFrom(type) 
-            && type.IsClass && 
-            !type.IsAbstract
-            && type != typeof(SpecifyBootstrapper);
+            return type => type.IsConcreteTypeOf<IConfigureSpecify>()
+                           && type != DefaultBootstrapperType;
+        }
+
+        /// <summary>
+        /// Chooses the configuration scanner. Each Specify assembly has one configuration scanner.
+        /// </summary>
+        /// <returns>IConfigurationScanner.</returns>
+        public static IConfigurationScanner FindScanner(IFileSystem fileSystem = null)
+        {
+            fileSystem = fileSystem ?? new FileSystem();
+            var scanners = fileSystem
+                .GetAllTypesFromAppDomain()
+                .Where(type => type.IsConcreteTypeOf<IConfigurationScanner>())
+                .ToList();
+
+            return scanners.Count() == 1
+                ? scanners.First().Create<IConfigurationScanner>()
+                : scanners
+                    .Except(new[] {typeof (SpecifyConfigurationScanner)})
+                    .First()
+                    .Create<IConfigurationScanner>();
         }
     }
 }

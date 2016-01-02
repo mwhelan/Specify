@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 namespace Specify
 {
     /// <summary>
-    /// Extensions that will help to make the Chill syntax a bit more fluent. 
     /// Convenience extensions from Chill BDD framework, by Erwin Van Der Valk:
     /// https://github.com/Erwinvandervalk/Chill
     /// http://www.erwinvandervalk.net/2014/10/object-mother-vs-test-data-builders-and.html

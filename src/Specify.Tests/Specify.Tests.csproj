@@ -103,7 +103,7 @@
   <ItemGroup>
     <Compile Include="CatchSpecs.cs" />
     <Compile Include="Configuration\BddfyTestEngineTests.cs" />
-    <Compile Include="Configuration\ConfigurationScannerTests.cs" />
+    <Compile Include="Configuration\SpecifyConfigurationScannerTests.cs" />
     <Compile Include="Configuration\LoggingProcessorTests.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactoryTests.cs" />
     <Compile Include="Mocks\MockFactoryTestsFor.cs" />

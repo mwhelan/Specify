@@ -64,6 +64,52 @@ namespace Specify
         }
 
         /// <summary>
+        /// Creates the specified type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type">The type.</param>
+        /// <returns>T.</returns>
+        public static T Create<T>(this Type type)
+        {
+            return (T)type.Create();
+        }
+
+        /// <summary>
+        /// Creates the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>System.Object.</returns>
+        public static object Create(this Type type)
+        {
+            return Activator.CreateInstance(type);
+        }
+
+        /// <summary>
+        /// Determines whether a type is the concrete type of the specified type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if type is the concrete type of the specified type; otherwise, <c>false</c>.</returns>
+        public static bool IsConcreteTypeOf<T>(this Type type)
+        {
+            if (type == null) return false;
+
+            return type.IsConcrete() && typeof(T).IsAssignableFrom(type);
+        }
+
+        /// <summary>
+        /// Determines whether the specified type is concrete.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if the specified type is concrete; otherwise, <c>false</c>.</returns>
+        public static bool IsConcrete(this Type type)
+        {
+            if (type == null) return false;
+
+            return !type.IsAbstract && !type.IsInterface;
+        }
+
+        /// <summary>
         /// Determines whether this instance [can be cast to] the specified type.
         /// </summary>
         /// <typeparam name="T"></typeparam>

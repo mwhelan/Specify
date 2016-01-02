@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
@@ -10,53 +11,32 @@ namespace Specify.Tests.Configuration
 {
     public class ConfigurationScannerTests
     {
-        [Test]
-        public void should_return_SpecifyBootstrapper_if_no_implementations()
+        private readonly Type[] _scannerTypes = new []
         {
-            var sut = CreateSut(new Type[] {});
-            var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
+            typeof(SpecifyConfigurationScanner),
+            typeof(SpecifyAutofacConfigurationScanner)
+        };
+
+        [Test]
+        public void specify_alone_should_return_SpecifyConfigurationScanner()
+        {
+            var result = FindScanner(_scannerTypes.Take(1).ToArray());
+            result.ShouldBeOfType<SpecifyConfigurationScanner>();
         }
 
         [Test]
-        public void should_not_return_abstract_class()
+        public void specify_with_plugin_should_return_plugin_ConfigurationScanner()
         {
-            var sut = CreateSut(new[] { typeof(SpecifyConfiguration) });
-            var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
+            var result = FindScanner(_scannerTypes);
+            result.ShouldBeOfType<SpecifyAutofacConfigurationScanner>();
         }
 
-        [Test]
-        public void should_not_return_interface()
-        {
-            var sut = CreateSut(new[] { typeof(IConfigureSpecify) });
-            var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
-        }
-
-        [Test]
-        public void should_return_implementation_if_there_is_one()
-        {
-            var sut = CreateSut(new [] { typeof (SpecifyBootstrapper), typeof(TestBootstrapper) });
-            var result = sut.GetConfiguration();
-            result.ShouldBeOfType<TestBootstrapper>();
-        }
-
-        //[Test]
-        //public void should_return_SpecifyAutofacBootstrapper_if_there_is_one()
-        //{
-        //    var sut = CreateSut(new[] { typeof(SpecifyBootstrapper), typeof(TestBootstrapper), typeof(SpecifyAutofacBootstrapper) });
-        //    var result = sut.GetConfiguration();
-        //    result.ShouldBeOfType<SpecifyAutofacBootstrapper>();
-        //}
-
-        public ConfigurationScanner CreateSut(Type[] types)
+        public IConfigurationScanner FindScanner(Type[] types)
         {
             var fileSystem = Substitute.For<IFileSystem>();
             fileSystem.GetAllTypesFromAppDomain().Returns(types);
-            return new ConfigurationScanner(fileSystem);
+            return ConfigurationScanner.FindScanner(fileSystem);
         }
 
-        private class TestBootstrapper : SpecifyBootstrapper{}
     }
 }

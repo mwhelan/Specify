@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Linq;
 using Specify.Configuration;
-using Specify.lib;
-using Specify.Logging;
-using TestStack.BDDfy.Configuration;
 
 namespace Specify
 {
@@ -19,12 +15,14 @@ namespace Specify
 
         static Host()
         {
-            Configuration = new ConfigurationScanner().GetConfiguration();
+            AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
+
+            Configuration = ConfigurationScanner
+                .FindScanner()
+                .GetConfiguration();
 
             _scenarioRunner = new ScenarioRunner(Configuration, new BddfyTestEngine());
             _scenarioRunner.BeforeAllScenarios();
-
-            AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
         }
 
         static void CurrentDomain_DomainUnload(object sender, EventArgs e)
