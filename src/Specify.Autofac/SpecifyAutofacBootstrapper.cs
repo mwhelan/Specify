@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Autofac;
+﻿using Autofac;
 using Specify.Configuration;
-using Specify.Mocks;
-using TestStack.BDDfy.Configuration;
-using TestStack.BDDfy.Reporters.Html;
 
 namespace Specify.Autofac
 {
-    public class SpecifyAutofacBootstrapper : SpecifyBootstrapperBase
+    public class SpecifyAutofacBootstrapper : SpecifyConfiguration
     {
         protected override IContainer BuildApplicationContainer()
         {

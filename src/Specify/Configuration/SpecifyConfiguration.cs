@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Specify.Logging;
 using Specify.Mocks;
 using TestStack.BDDfy.Configuration;
 using TestStack.BDDfy.Reporters.Html;
@@ -9,7 +10,7 @@ namespace Specify.Configuration
     /// <summary>
     /// The base configuration class providing common functionality to bootstrap Specify.
     /// </summary>
-    public abstract class SpecifyBootstrapperBase : IConfigureSpecify
+    public abstract class SpecifyConfiguration : IConfigureSpecify
     {
         /// <summary>
         /// Builds the application container.
@@ -32,13 +33,12 @@ namespace Specify.Configuration
         /// <inheritdoc />
         public HtmlReportConfiguration HtmlReport { get; } = new HtmlReportConfiguration();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SpecifyBootstrapperBase"/> class.
-        /// </summary>
-        public void Configure()
+        /// <inheritdoc />
+        public void InitializeSpecify()
         {
-            ConfigureReport();
+            ConfigureBddfy();
             ApplicationContainer = BuildApplicationContainer();
+            LogSpecifyConfiguration();
         }
 
         /// <summary>
@@ -60,11 +60,53 @@ namespace Specify.Configuration
             if (HtmlReport.ReportType == HtmlReportConfiguration.HtmlReportType.Classic)
             {
                 Configurator.BatchProcessors.Add(new HtmlReporter(HtmlReport));
+                this.Log().Debug("Classic HTML report selected.");
             }
             else
             {
                 Configurator.BatchProcessors.Add(new HtmlReporter(HtmlReport, new MetroReportBuilder()));
+                this.Log().Debug("Metro HTML report selected.");
             }
+        }
+
+        private void ConfigureBddfy()
+        {
+            Configurator.Scanners.StoryMetadataScanner = () => new SpecifyStoryMetadataScanner();
+            this.Log().Debug("Added SpecifyStoryMetadataScanner to BDDfy pipeline.");
+
+            if (LoggingEnabled)
+            {
+                Configurator.Processors.Add(() => new ScenarioLoggingProcessor());
+            }
+
+            ConfigureReport();
+        }
+
+        private void LogSpecifyConfiguration()
+        {
+            string containerName;
+            using (IContainer container = ApplicationContainer.Resolve<IContainer>())
+            {
+                containerName = container.GetType().FullName;
+            }
+
+            this.Log().DebugFormat("Bootstrapper: {Bootstrapper}", GetType().FullName);
+            this.Log().DebugFormat("ApplicationContainer: {ApplicationContainer}", ApplicationContainer.GetType().FullName);
+            this.Log().DebugFormat("ScenarioContainer: {ScenarioContainer}", containerName);
+            this.Log().DebugFormat("PerAppDomainActions: {PerAppDomainActionCount}", PerAppDomainActions.Count);
+
+            foreach (var action in PerAppDomainActions)
+            {
+                this.Log().DebugFormat("- Action: {PerAppDomainAction}", action.GetType().Name);
+            }
+
+            this.Log().DebugFormat("PerScenarioActions: {PerScenarioActionCount}", PerScenarioActions.Count);
+            foreach (var action in PerScenarioActions)
+            {
+                this.Log().DebugFormat("- Action: {PerScenarioAction}", action.GetType().Name);
+            }
+
+            this.Log().DebugFormat("Logging Enabled = {LoggingEnabled}.", LoggingEnabled);
         }
     }
 }

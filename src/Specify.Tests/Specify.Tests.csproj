@@ -103,6 +103,7 @@
   <ItemGroup>
     <Compile Include="CatchSpecs.cs" />
     <Compile Include="Configuration\BddfyTestEngineTests.cs" />
+    <Compile Include="Configuration\ConfigurationScannerTests.cs" />
     <Compile Include="Configuration\LoggingProcessorTests.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactoryTests.cs" />
     <Compile Include="Mocks\MockFactoryTestsFor.cs" />
@@ -111,7 +112,7 @@
     <Compile Include="Configuration\SpecifyStoryMetadataScannerTests.cs" />
     <Compile Include="Configuration\StubPerScenarioAction.cs" />
     <Compile Include="Configuration\TemporaryNLogLogger.cs" />
-    <Compile Include="Configuration\TestableTestRunner.cs" />
+    <Compile Include="Configuration\TestableScenarioRunner.cs" />
     <Compile Include="Configuration\TestRunnerTests.cs" />
     <Compile Include="LoggingGatewayTests.cs" />
     <Compile Include="Mocks\MoqMockFactoryTests.cs" />

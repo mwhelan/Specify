@@ -58,9 +58,9 @@ namespace Specify.Tests.Configuration
             sut.ChildContainer.Received(1).Resolve(typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder));
         }
 
-        private static TestableTestRunner CreateSut(IScenario spec)
+        private static TestableScenarioRunner CreateSut(IScenario spec)
         {
-            return new TestableTestRunner(spec);
+            return new TestableScenarioRunner(spec);
         }
     }
 }

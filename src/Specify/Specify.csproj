@@ -58,10 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Catch.cs" />
+    <Compile Include="Configuration\ConfigurationScanner.cs" />
     <Compile Include="Configuration\IConfigureSpecify.cs" />
     <Compile Include="Configuration\IPerAppDomainActions.cs" />
     <Compile Include="Configuration\ReportConfiguration.cs" />
-    <Compile Include="Configuration\SpecifyBootstrapperBase.cs" />
+    <Compile Include="Configuration\SpecifyConfiguration.cs" />
     <Compile Include="Configuration\TinyContainerFactory.cs" />
     <Compile Include="Mocks\FileSystem.cs" />
     <Compile Include="Mocks\IFileSystem.cs" />
@@ -79,12 +80,11 @@
     <Compile Include="Configuration\IPerScenarioActions.cs" />
     <Compile Include="Configuration\SpecifyBootstrapper.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
-    <Compile Include="Configuration\TestRunner.cs" />
+    <Compile Include="Configuration\ScenarioRunner.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IScenario.cs" />
     <Compile Include="lib\AssemblyTypeResolver.cs" />
     <Compile Include="LoggingGateway.cs" />
-    <Compile Include="LoggingExtensions.cs" />
     <Compile Include="Mocks\FakeItEasyMockFactory.cs" />
     <Compile Include="Mocks\IMockFactory.cs" />
     <Compile Include="Mocks\MoqMockFactory.cs" />

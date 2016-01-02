@@ -4,11 +4,11 @@ using Specify.Configuration;
 
 namespace Specify.Tests.Configuration
 {
-    internal class TestableTestRunner : TestRunner
+    internal class TestableScenarioRunner : ScenarioRunner
     {
         private readonly IScenario _specification;
 
-        public  TestableTestRunner(IScenario specification)
+        public  TestableScenarioRunner(IScenario specification)
             : base(new StubConfig(), Substitute.For<ITestEngine>())
         {
             _specification = specification;

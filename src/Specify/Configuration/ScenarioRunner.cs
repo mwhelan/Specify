@@ -1,12 +1,15 @@
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Specify.Logging;
+using TestStack.BDDfy.Configuration;
 
 namespace Specify.Configuration
 {
-    internal class TestRunner
+    internal class ScenarioRunner
     {
         private readonly ITestEngine _testEngine;
 
-        public TestRunner(IConfigureSpecify configuration, ITestEngine testEngine)
+        public ScenarioRunner(IConfigureSpecify configuration, ITestEngine testEngine)
         {
             Configuration = configuration;
             _testEngine = testEngine;
@@ -34,12 +37,28 @@ namespace Specify.Configuration
 
         public void BeforeAllScenarios()
         {
-            
+            this.Log().DebugFormat("BeforeAllScenarios");
+
+            Configuration.InitializeSpecify();
+
+            foreach (var action in Configuration.PerAppDomainActions)
+            {
+                this.Log().DebugFormat("Executing {0} PerAppDomain Before action", action.GetType().Name);
+                action.Before();
+            }
         }
 
         public void AfterAllScenarios()
         {
-            
+            this.Log().DebugFormat("AfterAllScenarios");
+
+            foreach (var action in Configuration.PerAppDomainActions.AsEnumerable().Reverse())
+            {
+                this.Log().DebugFormat("Executing {0} PerAppDomain After action", action.GetType().Name);
+                action.After();
+            }
+
+            Configuration.ApplicationContainer.Dispose();
         }
 
         internal IConfigureSpecify Configuration { get; set; }

@@ -38,8 +38,8 @@ namespace Specify.Configuration
         HtmlReportConfiguration HtmlReport { get; }
 
         /// <summary>
-        /// Performs configuration tasks.
+        /// Initializes Specify before any scenarios are run.
         /// </summary>
-        void Configure();
+        void InitializeSpecify();
     }
 }

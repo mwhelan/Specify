@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Specify.Mocks
@@ -29,5 +30,11 @@ namespace Specify.Mocks
         /// <param name="typeName">Name of the type.</param>
         /// <returns>Type.</returns>
         Type GetTypeFrom(Assembly assembly, string typeName);
+
+        /// <summary>
+        /// Gets all types from the AppDomain.
+        /// </summary>
+        /// <returns>IEnumerable&lt;Type&gt;.</returns>
+        IEnumerable<Type> GetAllTypesFromAppDomain();
     }
 }
