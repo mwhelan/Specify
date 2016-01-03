@@ -113,8 +113,7 @@
     <Compile Include="Configuration\SpecifyStoryMetadataScannerTests.cs" />
     <Compile Include="Configuration\StubPerScenarioAction.cs" />
     <Compile Include="Configuration\TemporaryNLogLogger.cs" />
-    <Compile Include="Configuration\TestableScenarioRunner.cs" />
-    <Compile Include="Configuration\TestRunnerTests.cs" />
+    <Compile Include="Configuration\ScenarioRunnerTests.cs" />
     <Compile Include="LoggingGatewayTests.cs" />
     <Compile Include="Mocks\MoqMockFactoryTests.cs" />
     <Compile Include="Mocks\NSubstituteMockFactoryTests.cs" />
@@ -131,6 +130,7 @@
     <Compile Include="Stubs\TestableUnitScenario.cs" />
     <Compile Include="Stubs\UserStories.cs" />
     <Compile Include="ContainerForTests.cs" />
+    <Compile Include="TestsFor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

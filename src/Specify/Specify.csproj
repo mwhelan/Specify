@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Catch.cs" />
+    <Compile Include="TestsFor.cs" />
     <Compile Include="Configuration\IConfigureSpecify.cs" />
     <Compile Include="Configuration\IPerAppDomainActions.cs" />
     <Compile Include="Configuration\ReportConfiguration.cs" />
