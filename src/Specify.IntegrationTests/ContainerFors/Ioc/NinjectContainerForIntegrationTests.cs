@@ -2,7 +2,7 @@
 using Specify.Ninject;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.SutFactories.Ioc
+namespace Specify.IntegrationTests.ContainerFors.Ioc
 {
     public class NinjectContainerForIntegrationTests : ContainerForIntegrationTestsBase
     {

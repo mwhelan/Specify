@@ -1,9 +1,9 @@
-namespace Specify.Configuration
+namespace Specify.Configuration.Scanners
 {
     /// <summary>
     /// Scans the AppDomain to find the appropriate bootstrapper class.
     /// </summary>
-    public interface IConfigurationScanner
+    public interface IConfigScanner
     {
         /// <summary>
         /// Scans the AppDomain to find the appropriate bootstrapper class.

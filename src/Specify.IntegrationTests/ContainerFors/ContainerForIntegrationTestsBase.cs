@@ -3,7 +3,7 @@ using Shouldly;
 using Specify.Exceptions;
 using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.SutFactories
+namespace Specify.IntegrationTests.ContainerFors
 {
     [TestFixture]
     public abstract class ContainerForIntegrationTestsBase

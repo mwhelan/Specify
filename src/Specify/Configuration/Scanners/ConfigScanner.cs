@@ -2,10 +2,10 @@ using System;
 using System.Linq;
 using Specify.Mocks;
 
-namespace Specify.Configuration
+namespace Specify.Configuration.Scanners
 {
     /// <inheritdoc />
-    public abstract class ConfigurationScanner : IConfigurationScanner
+    public abstract class ConfigScanner : IConfigScanner
     {
         private readonly IFileSystem _fileSystem;
         /// <summary>
@@ -15,15 +15,15 @@ namespace Specify.Configuration
         protected abstract Type DefaultBootstrapperType { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConfigurationScanner"/> class.
+        /// Initializes a new instance of the <see cref="ConfigScanner"/> class.
         /// </summary>
-        protected ConfigurationScanner() 
+        protected ConfigScanner() 
             : this(new FileSystem()) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConfigurationScanner"/> class.
+        /// Initializes a new instance of the <see cref="ConfigScanner"/> class.
         /// </summary>
-        protected ConfigurationScanner(IFileSystem fileSystem)
+        protected ConfigScanner(IFileSystem fileSystem)
         {
             _fileSystem = fileSystem;
         }
@@ -45,26 +45,6 @@ namespace Specify.Configuration
         {
             return type => type.IsConcreteTypeOf<IConfigureSpecify>()
                            && type != DefaultBootstrapperType;
-        }
-
-        /// <summary>
-        /// Chooses the configuration scanner. Each Specify assembly has one configuration scanner.
-        /// </summary>
-        /// <returns>IConfigurationScanner.</returns>
-        public static IConfigurationScanner FindScanner(IFileSystem fileSystem = null)
-        {
-            fileSystem = fileSystem ?? new FileSystem();
-            var scanners = fileSystem
-                .GetAllTypesFromAppDomain()
-                .Where(type => type.IsConcreteTypeOf<IConfigurationScanner>())
-                .ToList();
-
-            return scanners.Count() == 1
-                ? scanners.First().Create<IConfigurationScanner>()
-                : scanners
-                    .Except(new[] {typeof (SpecifyConfigurationScanner)})
-                    .First()
-                    .Create<IConfigurationScanner>();
         }
     }
 }

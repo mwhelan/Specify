@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Linq;
 using Specify.Configuration;
+using Specify.Configuration.Scanners;
 using Specify.Mocks;
 
 namespace Specify.Autofac
 {
     /// <inheritdoc />
-    public class SpecifyAutofacConfigurationScanner : ConfigurationScanner
+    public class SpecifyAutofacConfigScanner : ConfigScanner
     {
         /// <inheritdoc />
         protected override Type DefaultBootstrapperType => typeof(SpecifyAutofacBootstrapper);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpecifyAutofacConfigurationScanner"/> class.
+        /// Initializes a new instance of the <see cref="SpecifyAutofacConfigScanner"/> class.
         /// </summary>
         /// <param name="fileSystem">The file system.</param>
-        public SpecifyAutofacConfigurationScanner(IFileSystem fileSystem)
+        public SpecifyAutofacConfigScanner(IFileSystem fileSystem)
             : base(fileSystem) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpecifyAutofacConfigurationScanner"/> class.
+        /// Initializes a new instance of the <see cref="SpecifyAutofacConfigScanner"/> class.
         /// </summary>
-        public SpecifyAutofacConfigurationScanner() 
+        public SpecifyAutofacConfigScanner() 
             : this(new FileSystem()) { }
     }
 }

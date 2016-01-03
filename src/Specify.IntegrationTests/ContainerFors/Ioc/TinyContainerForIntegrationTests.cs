@@ -1,6 +1,6 @@
 ﻿using Specify.Tests.Stubs;
 
-namespace Specify.IntegrationTests.SutFactories.Ioc
+namespace Specify.IntegrationTests.ContainerFors.Ioc
 {
     public class TinyContainerForIntegrationTests : ContainerForIntegrationTestsBase
     {

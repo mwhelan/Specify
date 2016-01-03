@@ -3,11 +3,12 @@ using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Configuration;
+using Specify.Configuration.Scanners;
 using Specify.Mocks;
 
-namespace Specify.Tests.Configuration
+namespace Specify.Tests.Configuration.Scanners
 {
-    public class SpecifyConfigurationScannerTests
+    public class SpecifyConfigScannerTests
     {
         [Test]
         public void should_return_SpecifyBootstrapper_if_no_implementations()
@@ -41,11 +42,11 @@ namespace Specify.Tests.Configuration
             result.ShouldBeOfType<TestBootstrapper>();
         }
 
-        public ConfigurationScanner CreateSut(Type[] types)
+        public ConfigScanner CreateSut(Type[] types)
         {
             var fileSystem = Substitute.For<IFileSystem>();
             fileSystem.GetAllTypesFromAppDomain().Returns(types);
-            return new SpecifyConfigurationScanner(fileSystem);
+            return new SpecifyConfigScanner(fileSystem);
         }
 
         private class TestBootstrapper : SpecifyBootstrapper{}

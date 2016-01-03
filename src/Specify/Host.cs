@@ -1,5 +1,6 @@
 ﻿using System;
 using Specify.Configuration;
+using Specify.Configuration.Scanners;
 
 namespace Specify
 {
@@ -17,8 +18,8 @@ namespace Specify
         {
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
 
-            Configuration = ConfigurationScanner
-                .FindScanner()
+            Configuration = ConfigScannerFactory
+                .SelectScanner()
                 .GetConfiguration();
 
             _scenarioRunner = new ScenarioRunner(Configuration, new BddfyTestEngine());

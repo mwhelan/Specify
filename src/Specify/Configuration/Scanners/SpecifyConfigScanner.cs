@@ -1,25 +1,25 @@
 using System;
 using Specify.Mocks;
 
-namespace Specify.Configuration
+namespace Specify.Configuration.Scanners
 {
     /// <inheritdoc />
-    public class SpecifyConfigurationScanner : ConfigurationScanner
+    public class SpecifyConfigScanner : ConfigScanner
     {
         /// <inheritdoc />
         protected override Type DefaultBootstrapperType => typeof (SpecifyBootstrapper);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpecifyConfigurationScanner"/> class.
+        /// Initializes a new instance of the <see cref="SpecifyConfigScanner"/> class.
         /// </summary>
         /// <param name="fileSystem">The file system.</param>
-        public SpecifyConfigurationScanner(IFileSystem fileSystem)
+        public SpecifyConfigScanner(IFileSystem fileSystem)
             : base(fileSystem) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpecifyConfigurationScanner"/> class.
+        /// Initializes a new instance of the <see cref="SpecifyConfigScanner"/> class.
         /// </summary>
-        public SpecifyConfigurationScanner() 
+        public SpecifyConfigScanner() 
             : this(new FileSystem()) { }
     }
 }
