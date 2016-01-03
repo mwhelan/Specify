@@ -3,7 +3,7 @@
 namespace Specify
 {
     /// <summary>
-    /// Class Catch.
+    /// Helper class for testing methods that will throw exceptions.
     /// </summary>
     public static class Catch
     {
