@@ -47,10 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NinjectContainerFactory.cs" />
+    <Compile Include="SpecifyNinjectBootstrapper.cs" />
     <Compile Include="NinjectContainer.cs" />
     <Compile Include="NinjectApplicationContainer.cs" />
     <Compile Include="NinjectScenarioModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpecifyNinjectConfigScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Specify\Specify.csproj">

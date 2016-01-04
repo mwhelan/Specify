@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Specify.Ninject</id>
+    <version>$version$</version>
+    <title>Specify.Ninject</title>
+    <authors>Michael Whelan</authors>
+    <owners>Michael Whelan</owners>
+    <projectUrl>http://specify.readme.io/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Specify is a .Net testing library that builds on top of BDDfy from TestStack. Specify.Ninject provides Ninject adapters for IoC and automocking.</description>
+    <releaseNotes>The baseline for Specify</releaseNotes>
+    <copyright>Copyright 2015 Michael Whelan</copyright>
+	<dependencies> 
+	  <dependency id="Specify" version="0.8.96" />
+	  <dependency id="Ninject" version="3.2.0.0" />
+	</dependencies>
+	<licenseUrl>https://github.com/mwhelan/Specify/blob/master/license.txt</licenseUrl>
+	<tags>TDD BDD Testing BDDfy Ninject</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\Specify.Ninject.*" target="lib\net40" /> 
+  </files>
+</package>
