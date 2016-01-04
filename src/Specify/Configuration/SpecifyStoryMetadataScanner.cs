@@ -38,7 +38,7 @@ namespace Specify.Configuration
                 return new StoryMetadata(scenario.Story, storyAttribute);
             }
 
-            var story = (Story)Activator.CreateInstance(scenario.Story);
+            var story = scenario.Story.Create<Story>(); 
             return new StoryMetadata(scenario.Story, story.Narrative1, story.Narrative2,
                 story.Narrative3, story.Title, story.TitlePrefix);
         }
@@ -46,7 +46,7 @@ namespace Specify.Configuration
         private StoryMetadata CreateSpecificationMetadata(IScenario specification)
         {
             var title = specification.GetType().GetProperty("SUT").PropertyType.Name;
-            var story = (Story)Activator.CreateInstance(specification.Story);
+            var story = specification.Story.Create<Story>();
             var storyAttribute = new StoryAttribute() { Title = title, TitlePrefix = story.TitlePrefix };
             return new StoryMetadata(specification.Story, storyAttribute);
         }

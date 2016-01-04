@@ -25,7 +25,7 @@ namespace Specify.Configuration
                 .ToList();
 
             container.RegisterMultiple<IScenario>(scenarios);
-            "TinyContainerFactory".Log().DebugFormat("Registered {RegisteredScenarioCount} Scenarios", scenarios.Count);
+            this.Log().DebugFormat("Registered {RegisteredScenarioCount} Scenarios", scenarios.Count);
         }
 
         private void RegisterScenarioContainer(TinyIoCContainer container, Func<IMockFactory> mockFactory)
@@ -33,14 +33,15 @@ namespace Specify.Configuration
             if (mockFactory == null)
             {
                 container.Register<IContainer>((c,p) => new TinyContainer(c.GetChildContainer()));
-                "TinyContainerFactory".Log()
+                this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
             }
             else
             {
-                container.Register<IContainer>((c, p) => new TinyMockingContainer(mockFactory(), container.GetChildContainer()));
+                var mockFactoryInstance = mockFactory.Invoke();
+                container.Register<IContainer>((c, p) => new TinyMockingContainer(mockFactoryInstance, c.GetChildContainer()));
                 var mockFactoryName = mockFactory().GetType().Name;
-                "TinyContainerFactory".Log()
+                this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactoryName);
             }
         }

@@ -33,16 +33,17 @@ namespace Specify.Autofac
             if (mockFactory == null)
             {
                 builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
-                "AutofacContainerFactory".Log().DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
+                this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
             }
             else
             {
+                var mockFactoryInstance = mockFactory.Invoke();
                 builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
-                builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactory()));
+                builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactoryInstance));
                 builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
 
-                var mockFactoryName = mockFactory().GetType().Name;
-                "AutofacContainerFactory".Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactoryName);
+                var mockFactoryName = mockFactoryInstance.GetType().Name;
+                this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactoryName);
             }
         }
     }

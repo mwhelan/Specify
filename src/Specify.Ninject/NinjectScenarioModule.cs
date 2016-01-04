@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Ninject.Modules;
+using Specify.lib;
 
 namespace Specify.Ninject
 {
-    using Specify.lib;
-
     public class NinjectScenarioModule : NinjectModule
     {
         private readonly IEnumerable<Assembly> _assemblies;

@@ -22,6 +22,7 @@ namespace Specify.Tests
         public void sut_should_be_singleton()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
+
             var result = sut.SystemUnderTest;
 
             sut.SystemUnderTest.ShouldBeSameAs(result);

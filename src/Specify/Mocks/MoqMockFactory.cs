@@ -34,7 +34,7 @@ namespace Specify.Mocks
         {
             Type closedType = _mockOpenType.MakeGenericType(new[] {type});
             PropertyInfo objectProperty = closedType.GetProperty("Object", type);
-            object instance = Activator.CreateInstance(closedType);
+            object instance = closedType.Create();
 
             return objectProperty.GetValue(instance, null);
         }

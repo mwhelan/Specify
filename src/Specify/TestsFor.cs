@@ -1,4 +1,6 @@
-﻿namespace Specify
+﻿using Specify.Mocks;
+
+namespace Specify
 {
     /// <summary>
     /// A base fixture for unit testing which creates the System Under Test (SUT) and provides mocks with an auto mocking container.
@@ -12,8 +14,7 @@
         /// </summary>
         public void BaseSetup()
         {
-            var container = Host.Configuration.ApplicationContainer.Resolve<IContainer>();
-            Container = new ContainerFor<TSut>(container);
+            Container = new AutoMockerFor<TSut>();
         }
 
         /// <summary>
