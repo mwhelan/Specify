@@ -1,32 +1,40 @@
-version: 0.9.{build}
-os: Visual Studio 2015
-configuration: Release
-
-init:
-- cmd: set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+install:
+  - choco install gitversion.portable -y
+  - choco install gitlink -pre -y
 
 assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
+  patch: false
+
+platform:
+  - Any CPU
+
+configuration:
+  - Release
+
+os: 
+- Visual Studio 2015
+
+build_script:
+  - cmd: set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+  - cmd: nuget restore src\Specify.sln
+  - cmd: gitversion /l console /output buildserver /updateAssemblyInfo
   
-install:
-- cmd: choco install gitlink
+  - cmd: msbuild src\Specify.sln "/p:Configuration=%CONFIGURATION%;Platform=%PLATFORM%"
 
-before_build:
-- cmd: nuget restore src\Specify.sln
+  - cmd: GitLink c:\projects\specify -u https://github.com/mwhelan -c %CONFIGURATION% -include Specify,Specify.Autofac,Specify.Ninject
 
-build:
-  project: src\Specify.sln
-  publish_nuget: true
-  verbosity: minimal
+  - cmd: ECHO nuget pack src\Specify\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack src\Specify\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: appveyor PushArtifact "Specify.%GitVersion_NuGetVersion%.nupkg"
+
+  - cmd: ECHO nuget pack src\Specify\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack src\Specify.Autofac\Specify.Autofac.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: appveyor PushArtifact "Specify.Autofac.%GitVersion_NuGetVersion%.nupkg"
+
+cache:
+  - src\packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
   
-after_build:
-- cmd: GitLink.exe c:\projects\specify
-
 test:
   assemblies:
   - Specify.Tests.dll
-  - Specify.IntegrationTests.dll
+  - Specify.IntegrationTests.dll  
