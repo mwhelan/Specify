@@ -1,6 +1,6 @@
 install:
   - choco install gitversion.portable -y
-  - choco install gitlink -y
+  - choco install gitlink -pre -y
 
 assembly_info:
   patch: false
