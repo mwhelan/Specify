@@ -21,14 +21,11 @@ build_script:
   
   - cmd: msbuild src\Specify.sln "/p:Configuration=%CONFIGURATION%;Platform=%PLATFORM%"
 
-  - cmd: ECHO GitLink . -u https://github.com/mwhelan -c %CONFIGURATION% -ignore Specify.Examples,Specify.IntegrationTests,Specify.IntegrationTests.App,Specify.Tests,ContosoUniversity,ContosoUniversity.AcceptanceTests,ContosoUniversity.FunctionalTests,ContosoUniversity.SubcutaneousTests,ContosoUniversity.UnitTests
-  - cmd: GitLink . -u https://github.com/mwhelan -c %CONFIGURATION% -ignore Specify.Examples,Specify.IntegrationTests,Specify.IntegrationTests.App,Specify.Tests,ContosoUniversity,ContosoUniversity.AcceptanceTests,ContosoUniversity.FunctionalTests,ContosoUniversity.SubcutaneousTests,ContosoUniversity.UnitTests
+  - cmd: GitLink c:\projects\specify -u https://github.com/mwhelan -c %CONFIGURATION% -include Specify,Specify.Autofac,Specify.Ninject
 
-  - cmd: ECHO nuget pack nuget\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "configuration=%CONFIGURATION%"
   - cmd: nuget pack nuget\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "configuration=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "Specify.%GitVersion_NuGetVersion%.nupkg"
 
-  - cmd: ECHO nuget pack nuget\Specify.Autofac.nuspec -version "%GitVersion_NuGetVersion%" -prop "configuration=%CONFIGURATION%"
   - cmd: nuget pack nuget\Specify.Autofac.nuspec -version "%GitVersion_NuGetVersion%" -prop "configuration=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "Specify.Autofac.%GitVersion_NuGetVersion%.nupkg"
 
