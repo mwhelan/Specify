@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Exceptions;
@@ -188,6 +189,14 @@ namespace Specify.IntegrationTests.ContainerFors
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
             result.ShouldBe(true);
+        }
+
+        [Test]
+        public void SystemUnderTest_should_resolve_collection_in_constructor()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithOneInterfaceCollectionConstructor>();
+            var result = sut.SystemUnderTest;
+            result.Collection.ToList().Count.ShouldBe(2);
         }
     }
 }
