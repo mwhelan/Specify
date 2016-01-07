@@ -60,6 +60,46 @@ namespace Specify
             return valueToSet;
         }
 
+        /// <summary>
+        /// Register multiple implementations of a type.
+        /// </summary>
+        /// <param name="baseType">The type that each implementation implements.</param>
+        /// <param name="implementationTypes">Types that implement T.</param>
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            Container.RegisterMultiple(baseType, implementationTypes);
+        }
+
+        /// <summary>
+        /// Register multiple implementations of a type.
+        /// </summary>
+        /// <typeparam name="T">The type that each implementation implements.</typeparam>
+        /// <param name="implementationTypes">Types that implement T.</param>
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            SetMultiple(typeof(T), implementationTypes);
+        }
+
+        /// <summary>
+        /// Gets all implementations of a type.
+        /// </summary>
+        /// <param name="baseType">The type that each implementation implements.</param>
+        /// <returns>IEnumerable&lt;TInterface&gt;.</returns>
+        public IEnumerable<object> GetMultiple(Type baseType)
+        {
+            return Container.ResolveAll(baseType, true);
+        }
+
+        /// <summary>
+        /// Gets all implementations of a type.
+        /// </summary>
+        /// <typeparam name="T">The type that each implementation implements.</typeparam>
+        /// <returns>IEnumerable&lt;TInterface&gt;.</returns>
+        public IEnumerable<T> GetMultiple<T>() where T : class
+        {
+            return GetMultiple(typeof(T)).Cast<T>();
+        }
+
         /// <inheritdoc />
         public virtual T Get<T>(string key = null) where T : class
         {
