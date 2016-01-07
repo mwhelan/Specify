@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TinyIoC;
 
 namespace Specify
@@ -31,13 +33,13 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public void Register<T>() where T : class
+        public void Set<T>() where T : class
         {
             Container.Register<T>().AsSingleton();
         }
 
         /// <inheritdoc />
-        public void Register<TService, TImplementation>()
+        public void Set<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
         {
@@ -45,7 +47,7 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public T Register<T>(T valueToSet, string key = null) where T : class
+        public T Set<T>(T valueToSet, string key = null) where T : class
         {
             if (key == null)
             {
@@ -59,7 +61,7 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public virtual T Resolve<T>(string key = null) where T : class
+        public virtual T Get<T>(string key = null) where T : class
         {
             if (key == null)
             {
@@ -72,7 +74,7 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public virtual object Resolve(Type serviceType, string key = null)
+        public virtual object Get(Type serviceType, string key = null)
         {
             if (key == null)
             {
@@ -85,13 +87,13 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public bool CanResolve<T>() where T : class
+        public bool CanGet<T>() where T : class
         {
             return Container.CanResolve<T>();
         }
 
         /// <inheritdoc />
-        public bool CanResolve(Type type)
+        public bool CanGet(Type type)
         {
             return Container.CanResolve(type);
         }

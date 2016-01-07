@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Tests.Stubs;
@@ -5,7 +7,7 @@ using Specify.Tests.Stubs;
 namespace Specify.Tests
 {
     [TestFixture]
-    public class SpecifyExtensionTests
+    public class TypeExtensionTests
     {
         [Test]
         public void UnitScenario_instance_should_return_true_if_UnitScenario()

@@ -4,10 +4,10 @@ using Specify.Exceptions;
 namespace Specify
 {
     /// <summary>
-    /// Wrapper for various IContainer implementations that provides container for Scenario classes and ensures consistent behaviour.
+    /// Wrapper for various IContainer implementations that provides container for ScenarioFor/TestsFor classes and ensures consistent behaviour.
     /// </summary>
     /// <typeparam name="TSut">The type of the t sut.</typeparam>
-    public class ContainerFor<TSut> : IDisposable 
+    public class ContainerFor<TSut> : IContainer 
         where TSut : class
     {
         private readonly IContainer _sourceContainer;
@@ -50,7 +50,7 @@ namespace Specify
             {
                 throw new InterfaceRegistrationException(typeof(T));
             }
-            _sourceContainer.Register<T>();
+            _sourceContainer.Set<T>();
         }
 
         /// <summary>
@@ -58,6 +58,7 @@ namespace Specify
         /// </summary>
         /// <typeparam name="TService">The interface type</typeparam>
         /// <typeparam name="TImplementation">The type that implements the service interface</typeparam>
+        /// <exception cref="InterfaceRegistrationException"></exception>
         public void Set<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
@@ -66,7 +67,7 @@ namespace Specify
             {
                 throw new InterfaceRegistrationException(typeof(TImplementation));
             }
-            _sourceContainer.Register<TService, TImplementation>();
+            _sourceContainer.Set<TService, TImplementation>();
         }
 
         /// <summary>
@@ -76,6 +77,7 @@ namespace Specify
         /// <param name="valueToSet">The value to set.</param>
         /// <param name="key">The key.</param>
         /// <returns>T.</returns>
+        /// <exception cref="InterfaceRegistrationException"></exception>
         public T Set<T>(T valueToSet, string key = null) where T : class
         {
             if (_systemUnderTest != null)
@@ -83,7 +85,7 @@ namespace Specify
                 throw new InterfaceRegistrationException(typeof(T));
             }
             
-            return _sourceContainer.Register(valueToSet, key);
+            return _sourceContainer.Set(valueToSet, key);
         }
 
         /// <summary>
@@ -92,11 +94,12 @@ namespace Specify
         /// <typeparam name="T"></typeparam>
         /// <param name="key">The key.</param>
         /// <returns>T.</returns>
+        /// <exception cref="InterfaceResolutionException"></exception>
         public T Get<T>(string key = null) where T : class
         {
             try
             {
-                return _sourceContainer.Resolve<T>(key);
+                return _sourceContainer.Get<T>(key);
             }
             catch (Exception ex)
             {
@@ -110,11 +113,12 @@ namespace Specify
         /// <param name="serviceType">Type of the service.</param>
         /// <param name="key">The key.</param>
         /// <returns>System.Object.</returns>
+        /// <exception cref="InterfaceResolutionException"></exception>
         public object Get(Type serviceType, string key = null)
         {
             try
             {
-                return _sourceContainer.Resolve(serviceType, key);
+                return _sourceContainer.Get(serviceType, key);
             }
             catch (Exception ex)
             {
@@ -127,9 +131,9 @@ namespace Specify
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns><c>true</c> if this instance can resolve; otherwise, <c>false</c>.</returns>
-        public bool IsRegistered<T>() where T : class
+        public bool CanGet<T>() where T : class
         {
-            return _sourceContainer.CanResolve<T>();
+            return _sourceContainer.CanGet<T>();
         }
 
         /// <summary>
@@ -137,9 +141,9 @@ namespace Specify
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if this instance can resolve the specified type; otherwise, <c>false</c>.</returns>
-        public bool IsRegistered(Type type)
+        public bool CanGet(Type type)
         {
-            return _sourceContainer.CanResolve(type);
+            return _sourceContainer.CanGet(type);
         }
 
         /// <inheritdoc />

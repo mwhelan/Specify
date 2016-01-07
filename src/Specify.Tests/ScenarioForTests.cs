@@ -35,7 +35,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            sut.Container.SourceContainer.Received().Resolve<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Specify.Tests
             var result = sut.SUT;
 
             sut.SUT.ShouldBeSameAs(result);
-            sut.Container.SourceContainer.Received(1).Resolve<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
         }
         [Test]
         public void should_be_able_to_set_sut_independently()
@@ -65,7 +65,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             sut.Container.Set<ConcreteObjectWithNoConstructor>();
-            sut.Container.SourceContainer.Received().Register<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().Set<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Specify.Tests
 
             sut.Container.Set(instance);
 
-            sut.Container.SourceContainer.Received().Register(instance);
+            sut.Container.SourceContainer.Received().Set(instance);
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             sut.Container.Get<ConcreteObjectWithNoConstructor>();
-            sut.Container.SourceContainer.Received().Resolve<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]

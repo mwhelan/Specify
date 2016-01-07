@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContainerFors\AutoMocking\AutoMockerForContainerForIntegrationTests.cs" />
+    <Compile Include="ContainerFors\AutoMocking\TinyMockingContainerForIntegrationTests.cs" />
     <Compile Include="Containers\Ioc\AutofacContainerTests.cs" />
     <Compile Include="Containers\Ioc\Application\AutofacApplicationContainerTests.cs" />
     <Compile Include="Containers\Ioc\IocContainerTestsFor.cs" />

@@ -7,7 +7,7 @@ using TinyIoC;
 namespace Specify
 {
     /// <summary>
-    /// Adapter for the TinyIoc container with automocking using the specified mocking provider.
+    /// Adapter for the TinyIoc container with auto mocking using the specified mocking provider.
     /// </summary>
     public class TinyMockingContainer : TinyContainer
     {
@@ -25,17 +25,17 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public override T Resolve<T>(string key = null)
+        public override T Get<T>(string key = null)
         {
-            return (T)Resolve(typeof(T), key);
+            return (T)Get(typeof(T), key);
         }
 
         /// <inheritdoc />
-        public override object Resolve(Type serviceType, string key = null)
+        public override object Get(Type serviceType, string key = null)
         {
             if (serviceType.IsInterface)
             {
-                if (!CanResolve(serviceType))
+                if (!CanGet(serviceType))
                 {
                     RegisterMock(serviceType);
                 }
@@ -46,13 +46,13 @@ namespace Specify
 
                 foreach (var parameterInfo in constructor.GetParameters())
                 {
-                    if (!CanResolve(parameterInfo.ParameterType))
+                    if (!CanGet(parameterInfo.ParameterType))
                     {
                         RegisterMock(parameterInfo.ParameterType);
                     }
                 }
             }
-            return base.Resolve(serviceType, key);
+            return base.Get(serviceType, key);
         }
 
         private void RegisterMock(Type serviceType)

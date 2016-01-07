@@ -15,7 +15,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
-            sut.SourceContainer.Received().Resolve<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace Specify.Tests
             var result = sut.SystemUnderTest;
 
             sut.SystemUnderTest.ShouldBeSameAs(result);
-            sut.SourceContainer.Received(1).Resolve<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Set<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Received().Register<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().Set<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Set<IDependency1, Dependency1>();
-            sut.SourceContainer.Received().Register<IDependency1, Dependency1>();
+            sut.SourceContainer.Received().Set<IDependency1, Dependency1>();
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace Specify.Tests
 
             sut.Set(instance);
 
-            sut.SourceContainer.Received().Register(instance);
+            sut.SourceContainer.Received().Set(instance);
         }
 
         [Test]
@@ -101,14 +101,14 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Received().Resolve<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
         public void Get_generic_should_throw_InterfaceResolutionException_if_container_throws()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Resolve<ConcreteObjectWithNoConstructor>(null)
+            sut.SourceContainer.Get<ConcreteObjectWithNoConstructor>(null)
                 .Returns(x => { throw new Exception(); });
 
             Action action = () => sut.Get<ConcreteObjectWithNoConstructor>();
@@ -122,14 +122,14 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get(typeof(ConcreteObjectWithNoConstructor));
-            sut.SourceContainer.Received().Resolve(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received().Get(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]
         public void Get_should_throw_InterfaceResolutionException_if_container_throws()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Resolve(typeof (ConcreteObjectWithNoConstructor), null)
+            sut.SourceContainer.Get(typeof (ConcreteObjectWithNoConstructor), null)
                 .Returns(x => { throw new Exception(); });
 
             Action action = () => sut.Get(typeof(ConcreteObjectWithNoConstructor));
@@ -142,16 +142,16 @@ namespace Specify.Tests
         public void IsRegistered_generic_should_call_container_IsRegistered_generic()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.IsRegistered<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Received().CanResolve<ConcreteObjectWithNoConstructor>();
+            sut.CanGet<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().CanGet<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
         public void IsRegistered_should_call_container_IsRegistered()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
-            sut.SourceContainer.Received().CanResolve(typeof(ConcreteObjectWithNoConstructor));
+            sut.CanGet(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received().CanGet(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]

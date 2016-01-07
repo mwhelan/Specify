@@ -15,7 +15,7 @@ namespace Specify.Ninject
 
         protected IKernel Container => _container;
 
-        public void Register<T>() where T : class
+        public void Set<T>() where T : class
         {
             Container.GetBindings(typeof(T))
                 .Where(b => string.IsNullOrEmpty(b.Metadata.Name))
@@ -28,7 +28,7 @@ namespace Specify.Ninject
         }
 
         // This needs to be lifetime scope per scenario
-        public void Register<TService, TImplementation>()
+        public void Set<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
         {
@@ -43,7 +43,7 @@ namespace Specify.Ninject
         }
 
         // This needs to be lifetime scope per scenario
-        public T Register<T>(T valueToSet, string key = null) where T : class
+        public T Set<T>(T valueToSet, string key = null) where T : class
         {
             Container.GetBindings(typeof(T))
                 .Where(b => key != null && b.Metadata.Name == key || string.IsNullOrEmpty(b.Metadata.Name))
@@ -68,12 +68,12 @@ namespace Specify.Ninject
             return valueToSet;
         }
 
-        public T Resolve<T>(string key = null) where T : class
+        public T Get<T>(string key = null) where T : class
         {
             return Container.Get<T>(m => key == null && m.Name == null || m.Name == key);
         }
 
-        public object Resolve(Type serviceType, string key = null)
+        public object Get(Type serviceType, string key = null)
         {
             if (key == null)
             {
@@ -85,12 +85,12 @@ namespace Specify.Ninject
             }
         }
 
-        public bool CanResolve<T>() where T : class
+        public bool CanGet<T>() where T : class
         {
             return Container.CanResolve<T>();
         }
 
-        public bool CanResolve(Type type)
+        public bool CanGet(Type type)
         {
             return Container.CanResolve(type) != null;
         }

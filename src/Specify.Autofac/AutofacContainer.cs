@@ -37,14 +37,14 @@ namespace Specify.Autofac
             }
         }
 
-        public void Register<T>() where T : class
+        public void Set<T>() where T : class
         {
             Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
                 .InstancePerLifetimeScope()
                 .CreateRegistration());
         }
 
-        public void Register<TService, TImplementation>()
+        public void Set<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
         {
@@ -55,7 +55,7 @@ namespace Specify.Autofac
                 .CreateRegistration());
         }
 
-        public T Register<T>(T valueToSet, string key = null) where T : class
+        public T Set<T>(T valueToSet, string key = null) where T : class
         {
             if (key == null)
             {
@@ -71,10 +71,10 @@ namespace Specify.Autofac
                         .As(new KeyedService(key, typeof(T)))
                         .InstancePerLifetimeScope().CreateRegistration());
             }
-            return Resolve<T>(key);
+            return Get<T>(key);
         }
 
-        public T Resolve<T>(string key = null) where T : class
+        public T Get<T>(string key = null) where T : class
         {
             if (key == null)
             {
@@ -86,7 +86,7 @@ namespace Specify.Autofac
             }
         }
 
-        public object Resolve(Type serviceType, string key = null)
+        public object Get(Type serviceType, string key = null)
         {
             if (key == null)
             {
@@ -98,12 +98,12 @@ namespace Specify.Autofac
             }
         }
 
-        public bool CanResolve<T>() where T : class
+        public bool CanGet<T>() where T : class
         {
-            return CanResolve(typeof(T));
+            return CanGet(typeof(T));
         }
 
-        public bool CanResolve(Type type)
+        public bool CanGet(Type type)
         {
             return Container.IsRegistered(type);
         }

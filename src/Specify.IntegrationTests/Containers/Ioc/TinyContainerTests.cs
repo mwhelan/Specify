@@ -17,8 +17,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
         public void can_resolve_concrete_types_not_registered()
         {
             var sut = this.CreateSut();
-            sut.CanResolve<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(true);
-            sut.CanResolve<Dependency1>().ShouldBe(true);
+            sut.CanGet<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(true);
+            sut.CanGet<Dependency1>().ShouldBe(true);
         }
     }
 }

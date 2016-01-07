@@ -179,7 +179,7 @@ namespace Specify.IntegrationTests.ContainerFors
         public void IsRegistered_generic_should_call_container_IsRegistered_generic()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            var result = sut.IsRegistered<ConcreteObjectWithNoConstructor>();
+            var result = sut.CanGet<ConcreteObjectWithNoConstructor>();
             result.ShouldBe(true);
         }
 
@@ -187,16 +187,8 @@ namespace Specify.IntegrationTests.ContainerFors
         public void IsRegistered_should_call_container_IsRegistered()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            var result = sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
+            var result = sut.CanGet(typeof(ConcreteObjectWithNoConstructor));
             result.ShouldBe(true);
-        }
-
-        [Test]
-        public void SystemUnderTest_should_resolve_collection_in_constructor()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithOneInterfaceCollectionConstructor>();
-            var result = sut.SystemUnderTest;
-            result.Collection.ToList().Count.ShouldBe(2);
         }
     }
 }
