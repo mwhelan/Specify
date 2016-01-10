@@ -40,9 +40,10 @@ namespace Specify
         }
 
         /// <summary>
-        /// Registers a type to the container. 
+        /// Registers a type to the container.
         /// </summary>
         /// <typeparam name="T">The type of the component implementation.</typeparam>
+        /// <exception cref="InterfaceRegistrationException"></exception>
         public void Set<T>() where T : class
         {
             if (_systemUnderTest != null)
@@ -125,21 +126,13 @@ namespace Specify
             }
         }
 
-        /// <summary>
-        /// Determines whether an instance of this type is registered.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns><c>true</c> if this instance can resolve; otherwise, <c>false</c>.</returns>
+        /// <inheritdoc />
         public bool CanResolve<T>() where T : class
         {
             return _sourceContainer.CanResolve<T>();
         }
 
-        /// <summary>
-        /// Determines whether an instance of this type is registered.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if this instance can resolve the specified type; otherwise, <c>false</c>.</returns>
+        /// <inheritdoc />
         public bool CanResolve(Type type)
         {
             return _sourceContainer.CanResolve(type);

@@ -1,15 +1,14 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Shouldly;
+using Specify.IntegrationTests.Containers.AutoMocking;
 using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
     [TestFixture]
-    public abstract class IocContainerTestsFor<T> where T : IContainer
+    public abstract class IocContainerTestsFor<T> : ContainerSpecsFor<T> 
+        where T : IContainer
     {
-        protected abstract T CreateSut();
-
         [Test]
         public void CanResolve_should_return_false_if_service_not_registered()
         {
@@ -23,9 +22,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
         public void CanResolve_should_return_true_if_service_is_registered()
         {
             var sut = CreateSut();
-
             sut.Set<ConcreteObjectWithNoConstructor>();
-
             sut.CanResolve<ConcreteObjectWithNoConstructor>().ShouldBe(true);
         }
 

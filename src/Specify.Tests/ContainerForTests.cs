@@ -43,7 +43,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void RegisterType_should_call_container_to_register_type_if_SUT_not_set()
+        public void SetType_should_register_type_if_SUT_not_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Set<ConcreteObjectWithNoConstructor>();
@@ -51,7 +51,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void RegisterType_should_throw_if_SUT_is_set()
+        public void SetType_should_throw_if_SUT_is_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
@@ -60,7 +60,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void RegisterService_should_call_container_to_register_type_if_SUT_not_set()
+        public void SetService_should_register_service_if_SUT_not_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Set<IDependency1, Dependency1>();
@@ -68,7 +68,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void RegisterService_should_throw_if_SUT_is_set()
+        public void SetService_should_throw_if_SUT_is_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
@@ -77,7 +77,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void RegisterInstance_should_call_container_to_register_instance_if_SUT_not_set()
+        public void SetInstance_should_register_instance_if_SUT_not_set()
         {
             var instance = new ConcreteObjectWithNoConstructor();
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
@@ -88,7 +88,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void RegisterInstance_should_throw_if_SUT_is_set()
+        public void SetInstance_should_throw_if_SUT_is_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
@@ -97,7 +97,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void Get_generic_should_call_container_resolve_generic()
+        public void Get_generic_should_resolve_service()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get<ConcreteObjectWithNoConstructor>();
@@ -118,7 +118,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void Get_should_call_container_resolve()
+        public void Get_should_resolve_service()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get(typeof(ConcreteObjectWithNoConstructor));
@@ -139,7 +139,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void IsRegistered_generic_should_call_container_IsRegistered_generic()
+        public void CanResolve_generic_should_call_container_CanResolve_generic()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.CanResolve<ConcreteObjectWithNoConstructor>();
@@ -147,7 +147,7 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void IsRegistered_should_call_container_IsRegistered()
+        public void CanResolve_should_call_container_CanResolve()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.CanResolve(typeof(ConcreteObjectWithNoConstructor));

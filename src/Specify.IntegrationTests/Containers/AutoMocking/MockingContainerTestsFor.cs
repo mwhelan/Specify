@@ -4,10 +4,14 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.AutoMocking
 {
-    public abstract class MockingContainerTestsFor<T> where T : IContainer
+    public abstract class ContainerSpecsFor<T> where T : IContainer
     {
         protected abstract T CreateSut();
+    }
 
+    public abstract class MockingContainerTestsFor<T> : ContainerSpecsFor<T> 
+        where T : IContainer
+    {
         [Test]
         public void CanResolve_should_return_true_if_service_not_registered()
         {
