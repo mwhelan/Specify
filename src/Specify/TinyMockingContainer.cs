@@ -26,9 +26,9 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public override T Get<T>(string key = null)
+        public override bool CanResolve(Type type)
         {
-            return (T)Get(typeof(T), key);
+            return true;
         }
 
         /// <inheritdoc />
@@ -40,7 +40,7 @@ namespace Specify
             }
             if (serviceType.IsInterface)
             {
-                if (!CanResolve(serviceType))
+                if (!Container.CanResolve(serviceType))
                 {
                     RegisterMock(serviceType);
                 }
@@ -51,7 +51,7 @@ namespace Specify
 
                 foreach (var parameterInfo in constructor.GetParameters())
                 {
-                    if (!CanResolve(parameterInfo.ParameterType))
+                    if (!Container.CanResolve(parameterInfo.ParameterType))
                     {
                         RegisterMock(parameterInfo.ParameterType);
                     }

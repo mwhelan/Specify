@@ -93,16 +93,9 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public virtual T Get<T>(string key = null) where T : class
+        public T Get<T>(string key = null) where T : class
         {
-            if (key == null)
-            {
-                return Container.Resolve<T>();
-            }
-            else
-            {
-                return Container.Resolve<T>(key);
-            }
+            return (T)Get(typeof(T), key);
         }
 
         /// <inheritdoc />
@@ -125,7 +118,7 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public bool CanResolve(Type type)
+        public virtual bool CanResolve(Type type)
         {
             return Container.CanResolve(type, ResolveOptions.FailUnregisteredAndNameNotFound);
         }

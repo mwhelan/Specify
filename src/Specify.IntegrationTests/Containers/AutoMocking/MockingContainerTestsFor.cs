@@ -8,12 +8,12 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
     {
         protected abstract T CreateSut();
 
-        //[Test]
-        //public void CanResolve_should_return_true_if_service_not_registered()
-        //{
-        //    var sut = CreateSut();
-        //    sut.CanResolve<ConcreteObjectWithOneInterfaceConstructor>().ShouldBe(false);
-        //}
+        [Test]
+        public void CanResolve_should_return_true_if_service_not_registered()
+        {
+            var sut = CreateSut();
+            sut.CanResolve<ConcreteObjectWithOneInterfaceConstructor>().ShouldBe(true);
+        }
 
         [Test]
         public void Set_should_register_service_by_type()

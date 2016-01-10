@@ -38,7 +38,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
         }
 
         [Test]
-        public void CanResolve_should_return_true_if_class_and_dependency_both_registered()
+        public void CanResolve_should_return_true_if_class_and_all_dependencies_registered()
         {
             var sut = CreateSut();
 
