@@ -1,4 +1,6 @@
-﻿namespace Specify.Tests.Stubs
+﻿using System.Collections.Generic;
+
+namespace Specify.Tests.Stubs
 {
     class ConcreteObjectWithNoConstructor
     {
@@ -10,6 +12,15 @@
         public ConcreteObjectWithOneInterfaceConstructor(IDependency1 dependency1)
         {
             Dependency1 = dependency1;
+        }
+    }
+    class ConcreteObjectWithOneInterfaceCollectionConstructor
+    {
+        public readonly IEnumerable<IDependency3> Collection;
+
+        public ConcreteObjectWithOneInterfaceCollectionConstructor(IEnumerable<IDependency3> collection)
+        {
+            Collection = collection;
         }
     }
     class ConcreteObjectWithOneConcreteConstructor
@@ -58,11 +69,11 @@
         public void Run(){}
     }
     class Dependency3 : IDependency3 {}
+    class Dependency4 : IDependency3 {}
 
     public interface IDependency2
     {
         void Run();
     }
     public interface IDependency3 { }
-
 }

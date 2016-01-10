@@ -21,9 +21,9 @@ namespace Specify.Tests.Configuration
 
             _spec = new UserStoryScenarioWithAllSupportedStepsInRandomOrder();
             _childContainer = Substitute.For<IContainer>();
-            _childContainer.Resolve(Arg.Any<Type>()).Returns(_spec);
+            _childContainer.Get(Arg.Any<Type>()).Returns(_spec);
 
-            SUT.Configuration.ApplicationContainer.Resolve<IContainer>().Returns(_childContainer);
+            SUT.Configuration.ApplicationContainer.Get<IContainer>().Returns(_childContainer);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace Specify.Tests.Configuration
         {
             SUT.Execute(_spec);
 
-            SUT.Configuration.ApplicationContainer.Received(1).Resolve<IContainer>();
+            SUT.Configuration.ApplicationContainer.Received(1).Get<IContainer>();
             _childContainer.Received(1).Dispose();
         }
 
@@ -60,7 +60,7 @@ namespace Specify.Tests.Configuration
         {
             SUT.Execute(_spec);
 
-            _childContainer.Received(1).Resolve(typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder));
+            _childContainer.Received(1).Get(typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder));
         }
     }
 }

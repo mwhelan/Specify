@@ -52,7 +52,15 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void RegisterType_should_throw_if_SUT_is_set()
+        public void SetType_should_register_type_if_SUT_not_set()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
+            sut.Set<Dependency1>();
+            sut.Get<Dependency1>().ShouldNotBe(null);
+        }
+
+        [Test]
+        public void SetType_should_throw_if_SUT_is_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
@@ -61,7 +69,7 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void RegisterService_should_register_service_if_SUT_not_set()
+        public void SetService_should_register_service_if_SUT_not_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Set<IDependency2, Dependency2>();
@@ -69,7 +77,7 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void RegisterService_should_throw_if_SUT_is_set()
+        public void SetService_should_throw_if_SUT_is_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var result = sut.SystemUnderTest;
@@ -78,24 +86,7 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void RegisterType_should_register_type_if_SUT_not_set()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Set<Dependency1>();
-            sut.Get<Dependency1>().ShouldNotBe(null);
-        }
-
-        [Test]
-        public void RegisterInstance_should_throw_if_SUT_is_set()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            var result = sut.SystemUnderTest;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Set(new ConcreteObjectWithNoConstructor()))
-                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
-        }
-
-        [Test]
-        public void RegisterInstance_should_register_instance_if_SUT_not_set()
+        public void SetInstance_should_register_instance_if_SUT_not_set()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var instance = new Dependency3();
@@ -107,7 +98,16 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void RegisterInstance_named_should_register_separate_named_instances()
+        public void SetInstance_should_throw_if_SUT_is_set()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
+            var result = sut.SystemUnderTest;
+            Should.Throw<InterfaceRegistrationException>(() => sut.Set(new ConcreteObjectWithNoConstructor()))
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
+        }
+
+        [Test]
+        public void SetInstance_named_should_register_separate_named_instances()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var instance1 = new Dependency3();
@@ -121,7 +121,7 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void RegisterInstance_unnamed_should_return_unnamed_when_multiple_registrations()
+        public void SetInstance_unnamed_should_return_unnamed_when_multiple_registrations()
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var instance1 = new Dependency3();
@@ -135,31 +135,7 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void RegisterType_should_register_singleton_lifetime()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Set<Dependency1>();
-            sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
-        }
-
-        [Test]
-        public void RegisterInstance_should_register_singleton_lifetime()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Set<Dependency1>(new Dependency1());
-            sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
-        }
-
-        [Test]
-        public void RegisterService_should_register_singleton_lifetime()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            sut.Set<IDependency2, Dependency2>();
-            sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
-        }
-
-        [Test]
-        public void Resolve_generic_should_call_container_resolve_generic()
+        public void Get_generic_should_resolve_service()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.Get<ConcreteObjectWithNoConstructor>();
@@ -167,7 +143,7 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void Resolve_should_call_container_resolve()
+        public void Get_should_resolve_service()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.Get(typeof(ConcreteObjectWithNoConstructor));
@@ -175,19 +151,55 @@ namespace Specify.IntegrationTests.ContainerFors
         }
 
         [Test]
-        public void IsRegistered_generic_should_call_container_IsRegistered_generic()
+        public void CanResolve_generic_should_return_true_if_service_is_registered()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            var result = sut.IsRegistered<ConcreteObjectWithNoConstructor>();
+            var result = sut.CanResolve<ConcreteObjectWithNoConstructor>();
             result.ShouldBe(true);
         }
 
         [Test]
-        public void IsRegistered_should_call_container_IsRegistered()
+        public void CanResolve_should_return_true_if_service_is_registered()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            var result = sut.IsRegistered(typeof(ConcreteObjectWithNoConstructor));
+            var result = sut.CanResolve(typeof(ConcreteObjectWithNoConstructor));
             result.ShouldBe(true);
         }
+
+        [Test]
+        public void SetType_should_register_singleton_lifetime()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
+            sut.Set<Dependency1>();
+            sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
+        }
+
+        [Test]
+        public void SetService_should_register_singleton_lifetime()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
+            sut.Set<IDependency2, Dependency2>();
+            sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
+        }
+
+        [Test]
+        public void SetInstance_should_register_singleton_lifetime()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
+            sut.Set<Dependency1>(new Dependency1());
+            sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
+        }
+
+        /// <summary>
+        /// Temporarily here while I build out this feature for all containers.
+        /// Will live in ContainerForIntegrationTestsBase once all Containers have this feature.
+        /// </summary>
+        //[Test]
+        //public virtual void SystemUnderTest_should_resolve_collection_in_constructor()
+        //{
+        //    var sut = this.CreateSut<ConcreteObjectWithOneInterfaceCollectionConstructor>();
+        //    var result = sut.SystemUnderTest;
+        //    result.Collection.ToList().Count.ShouldBe(2);
+        //}
     }
 }

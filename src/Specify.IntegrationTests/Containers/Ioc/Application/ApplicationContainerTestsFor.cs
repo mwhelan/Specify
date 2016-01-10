@@ -5,7 +5,7 @@ using Specify.Tests.Stubs;
 namespace Specify.IntegrationTests.Containers.Ioc.Application
 {
     [TestFixture]
-    public abstract class ApplicationContainerTestsFor<T> where T : IContainer, new()
+    public abstract class ApplicationContainerTestsFor<T> where T : IContainer
     {
         protected abstract T CreateSut();
 
@@ -13,23 +13,23 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
         public void child_should_resolve_same_instance_as_parent()
         {
             var sut = this.CreateSut();
-            sut.Register<IDependency1>(new Dependency1());
-            var childContainer = sut.Resolve<IContainer>();
-            sut.Resolve<IDependency1>()
-                .ShouldBeSameAs(childContainer.Resolve<IDependency1>());
+            sut.Set<IDependency1>(new Dependency1());
+            var childContainer = sut.Get<IContainer>();
+            sut.Get<IDependency1>()
+                .ShouldBeSameAs(childContainer.Get<IDependency1>());
         }
 
         [Test]
         public void child_can_change_service_implementation_from_parent()
         {
             var sut = this.CreateSut();
-            sut.Register<IDependency1>(new Dependency1());
-            var childContainer = sut.Resolve<IContainer>();
+            sut.Set<IDependency1>(new Dependency1());
+            var childContainer = sut.Get<IContainer>();
 
-            childContainer.Register<IDependency1>(new Dependency1());
+            childContainer.Set<IDependency1>(new Dependency1());
 
-            sut.Resolve<IDependency1>()
-                .ShouldNotBeSameAs(childContainer.Resolve<IDependency1>());
+            sut.Get<IDependency1>()
+                .ShouldNotBeSameAs(childContainer.Get<IDependency1>());
         }
 
         [Test]
@@ -37,12 +37,12 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
         {
             var instance = new Dependency1();
             var sut = this.CreateSut();
-            sut.Register<IDependency1>(instance);
-            var childContainer = sut.Resolve<IContainer>();
+            sut.Set<IDependency1>(instance);
+            var childContainer = sut.Get<IContainer>();
 
-            childContainer.Register<IDependency1>(new Dependency1());
+            childContainer.Set<IDependency1>(new Dependency1());
 
-            sut.Resolve<IDependency1>().ShouldBeSameAs(instance);
+            sut.Get<IDependency1>().ShouldBeSameAs(instance);
         }
     }
 }

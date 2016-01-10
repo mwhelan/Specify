@@ -37,14 +37,14 @@ namespace Specify.Autofac
             }
         }
 
-        public void Register<T>() where T : class
+        public void Set<T>() where T : class
         {
             Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
                 .InstancePerLifetimeScope()
                 .CreateRegistration());
         }
 
-        public void Register<TService, TImplementation>()
+        public void Set<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
         {
@@ -55,7 +55,7 @@ namespace Specify.Autofac
                 .CreateRegistration());
         }
 
-        public T Register<T>(T valueToSet, string key = null) where T : class
+        public T Set<T>(T valueToSet, string key = null) where T : class
         {
             if (key == null)
             {
@@ -71,10 +71,10 @@ namespace Specify.Autofac
                         .As(new KeyedService(key, typeof(T)))
                         .InstancePerLifetimeScope().CreateRegistration());
             }
-            return Resolve<T>(key);
+            return Get<T>(key);
         }
 
-        public T Resolve<T>(string key = null) where T : class
+        public T Get<T>(string key = null) where T : class
         {
             if (key == null)
             {
@@ -86,7 +86,7 @@ namespace Specify.Autofac
             }
         }
 
-        public object Resolve(Type serviceType, string key = null)
+        public object Get(Type serviceType, string key = null)
         {
             if (key == null)
             {
@@ -103,9 +103,30 @@ namespace Specify.Autofac
             return CanResolve(typeof(T));
         }
 
-        public bool CanResolve(Type type)
+        /// <summary>
+        /// Determines whether this instance can resolve the specified service type.
+        /// The Autofac IsRegistered method can return true if a class is registered but still throw a DependencyResolutionException
+        /// when that class is Resolved if a dependency of that class is not registered. By contrast, TinyIoc actually checks that the
+        /// class can be resolved successfully. This behaviour is applied to Autofac to ensure consistency of behaviour across containers.
+        /// </summary>
+        /// <param name="serviceType">Type of the service.</param>
+        /// <returns><c>true</c> if this instance can resolve the specified service type; otherwise, <c>false</c>.</returns>
+        public bool CanResolve(Type serviceType)
         {
-            return Container.IsRegistered(type);
+            if (serviceType.IsClass)
+            {
+                var constructor = serviceType.GreediestConstructor();
+
+                foreach (var parameterInfo in constructor.GetParameters())
+                {
+                    if (!Container.IsRegistered(parameterInfo.ParameterType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return Container.IsRegistered(serviceType);
         }
 
         public void Dispose()

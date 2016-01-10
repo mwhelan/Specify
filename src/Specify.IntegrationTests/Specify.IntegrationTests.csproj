@@ -74,7 +74,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContainerFors\AutoMocking\AutoMockerForContainerForIntegrationTests.cs" />
+    <Compile Include="ContainerFors\AutoMocking\AutoMockerContainerForIntegrationTests.cs" />
+    <Compile Include="ContainerFors\AutoMocking\TinyMockingContainerForIntegrationTests.cs" />
+    <Compile Include="Containers\AutoMocking\AutofacMockingContainerTests.cs" />
+    <Compile Include="Containers\AutoMocking\TinyMockingContainerTests.cs" />
+    <Compile Include="Containers\AutoMocking\MockingContainerTestsFor.cs" />
     <Compile Include="Containers\Ioc\AutofacContainerTests.cs" />
     <Compile Include="Containers\Ioc\Application\AutofacApplicationContainerTests.cs" />
     <Compile Include="Containers\Ioc\IocContainerTestsFor.cs" />
@@ -89,14 +93,12 @@
     <Compile Include="Mocks\MoqMockFactoryTests.cs" />
     <Compile Include="Mocks\NSubstituteMockFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ContainerFors\AutoMocking\AutofacFakeItEasyContainerForIntegrationTests.cs" />
-    <Compile Include="ContainerFors\AutoMocking\AutofacMoqContainerForIntegrationTests.cs" />
-    <Compile Include="ContainerFors\AutoMocking\AutofacNSubstituteContainerForIntegrationTests.cs" />
+    <Compile Include="ContainerFors\AutoMocking\AutofacMockingContainerForIntegrationTests.cs" />
     <Compile Include="ContainerFors\Ioc\AutofacContainerForIntegrationTests.cs" />
     <Compile Include="ContainerFors\Ioc\NinjectContainerForIntegrationTests.cs" />
     <Compile Include="ContainerFors\Ioc\TinyContainerForIntegrationTests.cs" />
     <Compile Include="ContainerFors\ContainerForIntegrationTestsBase.cs" />
-    <Compile Include="Scanners\SpecifyAutofacConfigScannerTests.cs" />
+    <Compile Include="ConfigScanners\SpecifyAutofacConfigScannerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Specify.Autofac\Specify.Autofac.csproj">
@@ -132,9 +134,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Containers\AutoMocking\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

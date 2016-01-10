@@ -47,7 +47,7 @@ namespace ContosoUniversity.SubcutaneousTests.Infrastructure
 
         private TController ConstructController<TController>() where TController : Controller
         {
-            var controller = Container.Resolve<TController>();
+            var controller = Container.Get<TController>();
             controller.ControllerContext = new ControllerContext(new HttpContextWrapper(HttpContext.Current),
                 new RouteData(), controller);
             controller.Url = new UrlHelper(controller.Request.RequestContext, _routes);

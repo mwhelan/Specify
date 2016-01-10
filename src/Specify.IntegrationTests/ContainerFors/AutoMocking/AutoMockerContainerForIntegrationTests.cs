@@ -2,7 +2,7 @@ using Specify.Mocks;
 
 namespace Specify.IntegrationTests.ContainerFors.AutoMocking
 {
-    public class AutoMockerForContainerForIntegrationTests : ContainerForIntegrationTestsBase
+    public class AutoMockerContainerForIntegrationTests : ContainerForIntegrationTestsBase
     {
         protected override ContainerFor<T> CreateSut<T>()
         {
