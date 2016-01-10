@@ -1,4 +1,3 @@
-using System.Linq;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Exceptions;
@@ -175,20 +174,32 @@ namespace Specify.IntegrationTests.ContainerFors
             sut.ShouldNotBe(null);
         }
 
-        [Test]
-        public void IsRegistered_generic_should_call_container_IsRegistered_generic()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            var result = sut.CanGet<ConcreteObjectWithNoConstructor>();
-            result.ShouldBe(true);
-        }
+        //[Test]
+        //public void IsRegistered_generic_should_call_container_IsRegistered_generic()
+        //{
+        //    var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
+        //    var result = sut.CanResolve<ConcreteObjectWithNoConstructor>();
+        //    result.ShouldBe(true);
+        //}
 
-        [Test]
-        public void IsRegistered_should_call_container_IsRegistered()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            var result = sut.CanGet(typeof(ConcreteObjectWithNoConstructor));
-            result.ShouldBe(true);
-        }
+        //[Test]
+        //public void IsRegistered_should_call_container_IsRegistered()
+        //{
+        //    var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
+        //    var result = sut.CanResolve(typeof(ConcreteObjectWithNoConstructor));
+        //    result.ShouldBe(true);
+        //}
+
+        /// <summary>
+        /// Temporarily here while I build out this feature for all containers.
+        /// Will live in ContainerForIntegrationTestsBase once all Containers have this feature.
+        /// </summary>
+        //[Test]
+        //public virtual void SystemUnderTest_should_resolve_collection_in_constructor()
+        //{
+        //    var sut = this.CreateSut<ConcreteObjectWithOneInterfaceCollectionConstructor>();
+        //    var result = sut.SystemUnderTest;
+        //    result.Collection.ToList().Count.ShouldBe(2);
+        //}
     }
 }

@@ -32,7 +32,6 @@ namespace Specify
             {
                 if (_systemUnderTest == null)
                 {
-
                     _systemUnderTest = Get<TSut>();
                 }
                 return _systemUnderTest;
@@ -131,9 +130,9 @@ namespace Specify
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns><c>true</c> if this instance can resolve; otherwise, <c>false</c>.</returns>
-        public bool CanGet<T>() where T : class
+        public bool CanResolve<T>() where T : class
         {
-            return _sourceContainer.CanGet<T>();
+            return _sourceContainer.CanResolve<T>();
         }
 
         /// <summary>
@@ -141,9 +140,9 @@ namespace Specify
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if this instance can resolve the specified type; otherwise, <c>false</c>.</returns>
-        public bool CanGet(Type type)
+        public bool CanResolve(Type type)
         {
-            return _sourceContainer.CanGet(type);
+            return _sourceContainer.CanResolve(type);
         }
 
         /// <inheritdoc />

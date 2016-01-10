@@ -1,34 +1,25 @@
-﻿using System;
-using Specify.Configuration;
-using Specify.Mocks;
+﻿using Specify.Mocks;
 using TinyIoC;
 
 namespace Specify.IntegrationTests.ContainerFors.AutoMocking
 {
-    public class TinyNSubstituteContainerForIntegrationTests : ContainerForIntegrationTestsBase
+    public abstract class TinyMockingContainerForIntegrationTests<TMockFactory> : ContainerForIntegrationTestsBase
+        where TMockFactory : IMockFactory
     {
         protected override ContainerFor<T> CreateSut<T>()
         {
-            var container = new TinyMockingContainer(new NSubstituteMockFactory(), new TinyIoCContainer());
+            var mockFactoryInstance = typeof (TMockFactory).Create<IMockFactory>();
+            var container = new TinyMockingContainer(mockFactoryInstance, new TinyIoCContainer());
             return new ContainerFor<T>(container);
         }
     }
 
-    public class TinyMoqContainerForIntegrationTests : ContainerForIntegrationTestsBase
-    {
-        protected override ContainerFor<T> CreateSut<T>()
-        {
-            var container = new TinyMockingContainer(new MoqMockFactory(), new TinyIoCContainer());
-            return new ContainerFor<T>(container);
-        }
-    }
+    public class TinyNSubstituteContainerForIntegrationTests
+        : TinyMockingContainerForIntegrationTests<NSubstituteMockFactory> { }
 
-    public class TinyFakeItEasyContainerForIntegrationTests : ContainerForIntegrationTestsBase
-    {
-        protected override ContainerFor<T> CreateSut<T>()
-        {
-            var container = new TinyMockingContainer(new FakeItEasyMockFactory(), new TinyIoCContainer());
-            return new ContainerFor<T>(container);
-        }
-    }
+    public class TinyMoqContainerForIntegrationTests 
+        : TinyMockingContainerForIntegrationTests<MoqMockFactory> { }
+
+    public class TinyFakeItEasyContainerForIntegrationTests
+        : TinyMockingContainerForIntegrationTests<FakeItEasyMockFactory> { }
 }

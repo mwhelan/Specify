@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Catch.cs" />
+    <Compile Include="EnumerableTypes.cs" />
     <Compile Include="Mocks\AutoMockerFor.cs" />
     <Compile Include="TestsFor.cs" />
     <Compile Include="Configuration\IConfigureSpecify.cs" />

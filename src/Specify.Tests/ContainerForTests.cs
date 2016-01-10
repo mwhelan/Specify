@@ -142,16 +142,16 @@ namespace Specify.Tests
         public void IsRegistered_generic_should_call_container_IsRegistered_generic()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.CanGet<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Received().CanGet<ConcreteObjectWithNoConstructor>();
+            sut.CanResolve<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received().CanResolve<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
         public void IsRegistered_should_call_container_IsRegistered()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.CanGet(typeof(ConcreteObjectWithNoConstructor));
-            sut.SourceContainer.Received().CanGet(typeof(ConcreteObjectWithNoConstructor));
+            sut.CanResolve(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received().CanResolve(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]

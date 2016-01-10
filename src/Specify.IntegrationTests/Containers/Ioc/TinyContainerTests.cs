@@ -15,14 +15,6 @@ namespace Specify.IntegrationTests.Containers.Ioc
         }
 
         [Test]
-        public void should_resolve_concrete_types_not_registered()
-        {
-            var sut = this.CreateSut();
-            sut.CanGet<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(true);
-            sut.CanGet<Dependency1>().ShouldBe(true);
-        }
-
-        [Test]
         public void should_set_multiple_implementations_for_a_type_generic()
         {
             var sut = this.CreateSut();
@@ -67,6 +59,5 @@ namespace Specify.IntegrationTests.Containers.Ioc
             result.Count.ShouldBe(2);
             result.ForEach(x => x.ShouldBeAssignableTo<IDependency3>());
         }
-
     }
 }

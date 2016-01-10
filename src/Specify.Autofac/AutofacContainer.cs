@@ -98,14 +98,35 @@ namespace Specify.Autofac
             }
         }
 
-        public bool CanGet<T>() where T : class
+        public bool CanResolve<T>() where T : class
         {
-            return CanGet(typeof(T));
+            return CanResolve(typeof(T));
         }
 
-        public bool CanGet(Type type)
+        /// <summary>
+        /// Determines whether this instance can resolve the specified service type.
+        /// The Autofac IsRegistered method can return true if a class is registered but still throw a DependencyResolutionException
+        /// when that class is Resolved if a dependency of that class is not registered. By contrast, TinyIoc actually checks that the
+        /// class can be resolved successfully. This behaviour is applied to Autofac to ensure consistency of behaviour across containers.
+        /// </summary>
+        /// <param name="serviceType">Type of the service.</param>
+        /// <returns><c>true</c> if this instance can resolve the specified service type; otherwise, <c>false</c>.</returns>
+        public bool CanResolve(Type serviceType)
         {
-            return Container.IsRegistered(type);
+            if (serviceType.IsClass)
+            {
+                var constructor = serviceType.GreediestConstructor();
+
+                foreach (var parameterInfo in constructor.GetParameters())
+                {
+                    if (!Container.IsRegistered(parameterInfo.ParameterType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return Container.IsRegistered(serviceType);
         }
 
         public void Dispose()

@@ -5,7 +5,7 @@ using Specify.Tests.Stubs;
 namespace Specify.IntegrationTests.Containers.Ioc.Application
 {
     [TestFixture]
-    public abstract class ApplicationContainerTestsFor<T> where T : IContainer, new()
+    public abstract class ApplicationContainerTestsFor<T> where T : IContainer
     {
         protected abstract T CreateSut();
 

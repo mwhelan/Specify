@@ -7,7 +7,7 @@ using Specify.Configuration;
 using Specify.Configuration.Scanners;
 using Specify.Mocks;
 
-namespace Specify.IntegrationTests.Scanners
+namespace Specify.IntegrationTests.ConfigScanners
 {
     public class SpecifyAutofacConfigScannerTests
     {

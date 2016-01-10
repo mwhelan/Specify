@@ -104,5 +104,34 @@ namespace Specify.Tests
                 .IsStoryScenario()
                 .ShouldBe(true); ;
         }
+
+        [Test]
+        public void IsEnumerable_should_return_true_if_type_is_enumerable()
+        {
+            var array = new[] { "apples", "oranges", "pears" };
+            var list = new List<int> { 1, 2, 3 };
+            IList<string> ilist = new List<string> { "apples", "oranges", "pears" };
+            IEnumerable<string> enumerable = Enumerable.Empty<string>();
+
+            array.GetType().IsEnumerable().ShouldBe(true);
+            list.GetType().IsEnumerable().ShouldBe(true);
+            ilist.GetType().IsEnumerable().ShouldBe(true);
+            enumerable.GetType().IsEnumerable().ShouldBe(true);
+        }
+
+        //[Test]
+        //public void GetTypeFromEnumerable_should_return_inner_type()
+        //{
+        //    var array = new[] { "apples", "oranges", "pears" };
+        //    var list = new List<int> { 1, 2, 3 };
+        //    IList<string> ilist = new List<string> { "apples", "oranges", "pears" };
+        //    IEnumerable<string> enumerable = Enumerable.Empty<string>();
+
+        //   // array.GetType().GetTypeFromEnumerable().ShouldBe(typeof(string));
+        //    list.GetType().GetTypeFromEnumerable().ShouldBe(typeof(int));
+        //    //ilist.GetType().GetTypeFromEnumerable().ShouldBe(typeof(string));
+        //    //enumerable.GetType().GetTypeFromEnumerable().ShouldBe(typeof(string));
+        //}
+
     }
 }

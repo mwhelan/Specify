@@ -49,17 +49,17 @@ namespace Specify
         object Get(Type serviceType, string key = null);
 
         /// <summary>
-        /// Determines whether an instance of this type is registered.
+        /// Determines whether an instance of this type can be resolved from container. 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <returns><c>true</c> if this instance can resolve; otherwise, <c>false</c>.</returns>
-        bool CanGet<T>() where T : class;
+        /// <returns><c>true</c> if this type is registered with the container; otherwise, <c>false</c>.</returns>
+        bool CanResolve<T>() where T : class;
 
         /// <summary>
-        /// Determines whether an instance of this type is registered.
+        /// Determines whether an instance of this type can be resolved from container. 
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if this instance can resolve the specified type; otherwise, <c>false</c>.</returns>
-        bool CanGet(Type type);
+        /// <returns><c>true</c> if this type is registered with the container; otherwise, <c>false</c>.</returns>
+        bool CanResolve(Type type);
     }
 }

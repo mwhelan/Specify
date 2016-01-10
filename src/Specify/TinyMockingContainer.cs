@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Specify.Mocks;
@@ -33,20 +34,24 @@ namespace Specify
         /// <inheritdoc />
         public override object Get(Type serviceType, string key = null)
         {
+            if (serviceType.IsEnumerable())
+            {
+                return GetMultiple(serviceType);
+            }
             if (serviceType.IsInterface)
             {
-                if (!CanGet(serviceType))
+                if (!CanResolve(serviceType))
                 {
                     RegisterMock(serviceType);
                 }
             }
             if (serviceType.IsClass)
             {
-                var constructor = GreediestConstructor(serviceType);
+                var constructor = serviceType.GreediestConstructor();
 
                 foreach (var parameterInfo in constructor.GetParameters())
                 {
-                    if (!CanGet(parameterInfo.ParameterType))
+                    if (!CanResolve(parameterInfo.ParameterType))
                     {
                         RegisterMock(parameterInfo.ParameterType);
                     }
@@ -55,17 +60,21 @@ namespace Specify
             return base.Get(serviceType, key);
         }
 
+        /// <inheritdoc />
+        public override IEnumerable<object> GetMultiple(Type baseType)
+        {
+            if (!baseType.IsEnumerable())
+            {
+                throw new ArgumentException(
+                    $"Only IEnumerable<T> types can be passed to the GetMultiple method.  {baseType.AssemblyQualifiedName} is invalid");
+            }
+            return base.GetMultiple(baseType);
+        }
+
         private void RegisterMock(Type serviceType)
         {
             var mockInstance = _mockFactory.CreateMock(serviceType);
             Container.Register(serviceType, mockInstance);
-        }
-
-        private static ConstructorInfo GreediestConstructor(Type type)
-        {
-            return type.GetConstructors()
-                .OrderByDescending(x => x.GetParameters().Length)
-                .First();
         }
     }
 }

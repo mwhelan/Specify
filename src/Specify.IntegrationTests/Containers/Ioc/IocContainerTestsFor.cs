@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Shouldly;
 using Specify.Tests.Stubs;
 
@@ -8,11 +9,43 @@ namespace Specify.IntegrationTests.Containers.Ioc
     public abstract class IocContainerTestsFor<T> where T : IContainer
     {
         protected abstract T CreateSut();
+
         [Test]
-        public void cannot_resolve_service_implementations_that_are_not_registered()
+        public void CanResolve_should_return_false_if_service_not_registered()
         {
             var sut = CreateSut();
-            sut.CanGet<ConcreteObjectWithOneInterfaceConstructor>().ShouldBe(false);
+
+            sut.CanResolve<ConcreteObjectWithNoConstructor>().ShouldBe(false);
+            sut.CanResolve<IDependency1>().ShouldBe(false);
+        }
+
+        [Test]
+        public void CanResolve_should_return_true_if_service_is_registered()
+        {
+            var sut = CreateSut();
+
+            sut.Set<ConcreteObjectWithNoConstructor>();
+
+            sut.CanResolve<ConcreteObjectWithNoConstructor>().ShouldBe(true);
+        }
+
+        [Test]
+        public void CanResolve_should_return_false_if_class_is_registered_but_dependency_is_not()
+        {
+            var sut = CreateSut();
+            sut.Set<ConcreteObjectWithOneInterfaceConstructor>();
+            sut.CanResolve<ConcreteObjectWithOneInterfaceConstructor>().ShouldBe(false);
+        }
+
+        [Test]
+        public void CanResolve_should_return_true_if_class_and_dependency_both_registered()
+        {
+            var sut = CreateSut();
+
+            sut.Set<ConcreteObjectWithOneInterfaceConstructor>();
+            sut.Set<IDependency1, Dependency1>();
+
+            sut.CanResolve<ConcreteObjectWithOneInterfaceConstructor>().ShouldBe(true);
         }
 
         [Test]
@@ -20,7 +53,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
         {
             var sut = CreateSut();
             sut.Set<IDependency1, Dependency1>();
-            sut.CanGet<IDependency1>().ShouldBe(true);
+            sut.CanResolve<IDependency1>().ShouldBe(true);
         }
 
         [Test]

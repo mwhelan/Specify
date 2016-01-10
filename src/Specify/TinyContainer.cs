@@ -18,14 +18,6 @@ namespace Specify
         /// <summary>
         /// Initializes a new instance of the <see cref="TinyContainer"/> class.
         /// </summary>
-        public TinyContainer()
-        {
-            Container = TinyIoCContainer.Current;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TinyContainer"/> class.
-        /// </summary>
         /// <param name="container">The container.</param>
         public TinyContainer(TinyIoCContainer container)
         {
@@ -85,7 +77,7 @@ namespace Specify
         /// </summary>
         /// <param name="baseType">The type that each implementation implements.</param>
         /// <returns>IEnumerable&lt;TInterface&gt;.</returns>
-        public IEnumerable<object> GetMultiple(Type baseType)
+        public virtual IEnumerable<object> GetMultiple(Type baseType)
         {
             return Container.ResolveAll(baseType, true);
         }
@@ -127,15 +119,15 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public bool CanGet<T>() where T : class
+        public bool CanResolve<T>() where T : class
         {
-            return Container.CanResolve<T>();
+            return CanResolve(typeof(T));
         }
 
         /// <inheritdoc />
-        public bool CanGet(Type type)
+        public bool CanResolve(Type type)
         {
-            return Container.CanResolve(type);
+            return Container.CanResolve(type, ResolveOptions.FailUnregisteredAndNameNotFound);
         }
 
         /// <inheritdoc />

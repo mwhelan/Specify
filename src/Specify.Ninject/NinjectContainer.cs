@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Ninject;
+using Ninject.Activation;
+using Ninject.Parameters;
 
 namespace Specify.Ninject
 {
@@ -85,14 +87,28 @@ namespace Specify.Ninject
             }
         }
 
-        public bool CanGet<T>() where T : class
+        public bool CanResolve<T>() where T : class
         {
-            return Container.CanResolve<T>();
+            return CanResolve(typeof(T));
         }
 
-        public bool CanGet(Type type)
+        public bool CanResolve(Type serviceType)
         {
-            return Container.CanResolve(type) != null;
+            if (serviceType.IsClass)
+            {
+                var constructor = serviceType.GreediestConstructor();
+
+                foreach (var parameterInfo in constructor.GetParameters())
+                {
+                    var canResolve = (bool)Container.CanResolve(parameterInfo.ParameterType);
+                    if (!canResolve)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return (bool)Container.CanResolve(serviceType);
         }
 
         public void Dispose()
