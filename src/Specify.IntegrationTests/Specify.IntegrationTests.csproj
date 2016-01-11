@@ -75,12 +75,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContainerFors\AutoMocking\AutoMockerContainerForIntegrationTests.cs" />
+    <Compile Include="ContainerFors\AutoMocking\LightMockingContainerForIntegrationTests.cs" />
     <Compile Include="ContainerFors\AutoMocking\TinyMockingContainerForIntegrationTests.cs" />
+    <Compile Include="ContainerFors\Ioc\LightContainerForIntegrationTests.cs" />
     <Compile Include="Containers\AutoMocking\AutofacMockingContainerTests.cs" />
+    <Compile Include="Containers\AutoMocking\LightMockingContainerTests.cs" />
     <Compile Include="Containers\AutoMocking\TinyMockingContainerTests.cs" />
     <Compile Include="Containers\AutoMocking\MockingContainerTestsFor.cs" />
+    <Compile Include="Containers\Ioc\Application\LightApplicationContainerTests.cs" />
     <Compile Include="Containers\Ioc\AutofacContainerTests.cs" />
     <Compile Include="Containers\Ioc\Application\AutofacApplicationContainerTests.cs" />
+    <Compile Include="Containers\Ioc\LightContainerTests.cs" />
     <Compile Include="Containers\Ioc\IocContainerTestsFor.cs" />
     <Compile Include="Containers\Ioc\NinjectContainerTests.cs" />
     <Compile Include="Containers\Ioc\TinyContainerTests.cs" />

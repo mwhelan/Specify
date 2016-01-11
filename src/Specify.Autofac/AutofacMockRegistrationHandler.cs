@@ -15,7 +15,6 @@ namespace Specify.Autofac
 
         public AutofacMockRegistrationHandler(IMockFactory mockFactory)
         {
-
             _mockFactory = mockFactory;
         }
 

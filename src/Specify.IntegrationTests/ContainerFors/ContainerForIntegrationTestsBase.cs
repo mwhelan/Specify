@@ -23,7 +23,6 @@ namespace Specify.IntegrationTests.ContainerFors
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
-
             sut.SystemUnderTest.ShouldBeSameAs(result);
         }
 
@@ -88,6 +87,13 @@ namespace Specify.IntegrationTests.ContainerFors
         [Test]
         public void SetInstance_should_register_instance_if_SUT_not_set()
         {
+            //var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
+            //var instance = new Dependency1 {Value = 5};
+
+            //sut.Set<IDependency1>(instance);
+
+            //sut.Get<IDependency1>().Value.ShouldBe(5);
+
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var instance = new Dependency3();
 

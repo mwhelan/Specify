@@ -58,7 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Catch.cs" />
+    <Compile Include="Configuration\LightContainerFactory.cs" />
+    <Compile Include="LightContainer.cs" />
     <Compile Include="EnumerableTypes.cs" />
+    <Compile Include="lib\LightInject.cs" />
     <Compile Include="Mocks\AutoMockerFor.cs" />
     <Compile Include="TestsFor.cs" />
     <Compile Include="Configuration\IConfigureSpecify.cs" />
