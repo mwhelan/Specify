@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using Specify.Configuration;
 using Specify.Configuration.Scanners;
 using Specify.Mocks;
 

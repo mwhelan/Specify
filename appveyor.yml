@@ -24,11 +24,11 @@ build_script:
   - cmd: GitLink c:\projects\specify -u https://github.com/mwhelan -c %CONFIGURATION% -include Specify,Specify.Autofac,Specify.Ninject
 
   - cmd: ECHO nuget pack src\Specify\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: nuget pack src\Specify\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack nuget\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "Specify.%GitVersion_NuGetVersion%.nupkg"
 
   - cmd: ECHO nuget pack src\Specify\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: nuget pack src\Specify.Autofac\Specify.Autofac.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack nuget\Specify.Autofac.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "Specify.Autofac.%GitVersion_NuGetVersion%.nupkg"
 
 cache:

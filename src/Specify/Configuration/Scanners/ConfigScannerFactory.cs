@@ -18,7 +18,7 @@ namespace Specify.Configuration.Scanners
             fileSystem = fileSystem ?? new FileSystem();
             var scanners = fileSystem
                 .GetAllTypesFromAppDomain()
-                .Where(type => TypeExtensions.IsConcreteTypeOf<IConfigScanner>(type))
+                .Where(type => type.IsConcreteTypeOf<IConfigScanner>())
                 .ToList();
 
             return scanners.Count() == 1
