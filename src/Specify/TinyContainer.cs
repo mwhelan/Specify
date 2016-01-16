@@ -11,11 +11,6 @@ namespace Specify
     public class TinyContainer : IContainer
     {
         /// <summary>
-        /// The TinyIoc container.
-        /// </summary>
-        public readonly TinyIoCContainer Container;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TinyContainer"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
@@ -23,6 +18,11 @@ namespace Specify
         {
             Container = container;
         }
+
+        /// <summary>
+        /// The TinyIoc container.
+        /// </summary>
+        public TinyIoCContainer Container { get; }
 
         /// <inheritdoc />
         public void Set<T>() where T : class

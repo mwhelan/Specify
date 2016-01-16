@@ -25,7 +25,7 @@ namespace Specify.Autofac
             _containerBuilder = containerBuilder;
         }
 
-        protected ILifetimeScope Container
+        public ILifetimeScope Container
         {
             get
             {

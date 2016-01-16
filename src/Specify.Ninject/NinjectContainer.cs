@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Ninject;
-using Ninject.Activation;
-using Ninject.Parameters;
 
 namespace Specify.Ninject
 {
@@ -15,7 +13,7 @@ namespace Specify.Ninject
             _container = container;
         }
 
-        protected IKernel Container => _container;
+        public IKernel Container => _container;
 
         public void Set<T>() where T : class
         {
