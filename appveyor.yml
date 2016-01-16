@@ -19,9 +19,9 @@ build_script:
   - cmd: nuget restore src\Specify.sln
   - cmd: gitversion /l console /output buildserver /updateAssemblyInfo
   
-  - cmd: msbuild src\Specify.sln "/p:Configuration=%CONFIGURATION%;Platform=%PLATFORM%"
+  - cmd: msbuild src\Specify.sln /verbosity:minimal "/p:Configuration=%CONFIGURATION%;Platform=%PLATFORM%"
 
-  - cmd: GitLink c:\projects\specify -u https://github.com/mwhelan -c %CONFIGURATION% -include Specify,Specify.Autofac,Specify.Ninject
+  - cmd: GitLink.exe . -u https://github.com/mwhelan/Specify -c %CONFIGURATION% -include Specify,Specify.Autofac,Specify.Ninject
 
   - cmd: nuget pack nuget\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "Specify.%GitVersion_NuGetVersion%.nupkg"
