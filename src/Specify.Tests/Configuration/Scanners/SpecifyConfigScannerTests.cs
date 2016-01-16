@@ -15,7 +15,7 @@ namespace Specify.Tests.Configuration.Scanners
         {
             var sut = CreateSut(new Type[] {});
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
+            result.ShouldBeOfType<SpecifyTinyBootstrapper>();
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace Specify.Tests.Configuration.Scanners
         {
             var sut = CreateSut(new[] { typeof(SpecifyConfiguration) });
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
+            result.ShouldBeOfType<SpecifyTinyBootstrapper>();
         }
 
         [Test]
@@ -31,13 +31,13 @@ namespace Specify.Tests.Configuration.Scanners
         {
             var sut = CreateSut(new[] { typeof(IConfigureSpecify) });
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
+            result.ShouldBeOfType<SpecifyTinyBootstrapper>();
         }
 
         [Test]
         public void should_return_implementation_if_there_is_one()
         {
-            var sut = CreateSut(new [] { typeof (SpecifyBootstrapper), typeof(TestBootstrapper) });
+            var sut = CreateSut(new [] { typeof (SpecifyTinyBootstrapper), typeof(TestBootstrapper) });
             var result = sut.GetConfiguration();
             result.ShouldBeOfType<TestBootstrapper>();
         }
@@ -49,6 +49,6 @@ namespace Specify.Tests.Configuration.Scanners
             return new SpecifyConfigScanner(fileSystem);
         }
 
-        private class TestBootstrapper : SpecifyBootstrapper{}
+        private class TestBootstrapper : SpecifyTinyBootstrapper{}
     }
 }

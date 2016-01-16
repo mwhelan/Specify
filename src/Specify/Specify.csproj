@@ -84,7 +84,7 @@
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\IPerScenarioActions.cs" />
-    <Compile Include="Configuration\SpecifyBootstrapper.cs" />
+    <Compile Include="Configuration\SpecifyTinyBootstrapper.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\ScenarioRunner.cs" />
     <Compile Include="Host.cs" />

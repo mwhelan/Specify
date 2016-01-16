@@ -19,5 +19,7 @@
   </metadata>
   <files>
     <file src="..\src\Specify\bin\Release\Specify.*" target="lib\net40" /> 
+    <file src="ScenarioFor.cs.pp" target="content\Specify\ScenarioFor.cs.pp" />
+    <file src="SpecifyBootstrapper.cs.pp" target="content\Specify\SpecifyBootstrapper.cs.pp" />
   </files>
 </package>

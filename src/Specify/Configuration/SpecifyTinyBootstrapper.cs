@@ -6,7 +6,7 @@ namespace Specify.Configuration
     /// The startup class to configure Specify with the default TinyIoc container. 
     /// Inherit from this class to change any of the default configuration settings.
     /// </summary>
-    public class SpecifyBootstrapper : SpecifyConfiguration
+    public class SpecifyTinyBootstrapper : SpecifyConfiguration
     {
         /// <inheritdoc />
         protected override IContainer BuildApplicationContainer()

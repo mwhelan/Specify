@@ -4,7 +4,7 @@ using TestStack.BDDfy.Reporters.Html;
 
 namespace ContosoUniversity.UnitTests
 {
-    public class SpecifyConfig : SpecifyBootstrapper
+    public class SpecifyConfig : SpecifyTinyBootstrapper
     {
         public SpecifyConfig()
         {

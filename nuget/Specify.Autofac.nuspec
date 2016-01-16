@@ -20,5 +20,7 @@
   </metadata>
   <files>
     <file src="..\src\Specify.Autofac\bin\Release\Specify.Autofac.*" target="lib\net40" /> 
+    <file src="ScenarioFor.cs.pp" target="content\Specify\ScenarioFor.cs.pp" />
+    <file src="SpecifyBootstrapper-Autofac.cs.pp" target="content\Specify\SpecifyBootstrapper.cs.pp" />    
   </files>
 </package>
