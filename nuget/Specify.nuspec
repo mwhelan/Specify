@@ -18,6 +18,6 @@
 	<tags>TDD BDD Testing BDDfy</tags>
   </metadata>
   <files>
-    <file src="bin\Release\Specify.*" target="lib\net40" /> 
+    <file src="..\src\Specify\bin\Release\Specify.*" target="lib\net40" /> 
   </files>
 </package>
