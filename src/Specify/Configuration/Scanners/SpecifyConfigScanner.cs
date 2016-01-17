@@ -7,7 +7,7 @@ namespace Specify.Configuration.Scanners
     public class SpecifyConfigScanner : ConfigScanner
     {
         /// <inheritdoc />
-        protected override Type DefaultBootstrapperType => typeof (SpecifyTinyBootstrapper);
+        protected override Type DefaultBootstrapperType => typeof (DefaultBootstrapper);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpecifyConfigScanner"/> class.

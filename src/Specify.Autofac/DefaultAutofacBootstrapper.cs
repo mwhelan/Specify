@@ -3,7 +3,7 @@ using Specify.Configuration;
 
 namespace Specify.Autofac
 {
-    public class SpecifyAutofacBootstrapper : SpecifyConfiguration
+    public class DefaultAutofacBootstrapper : BootstrapperBase
     {
         protected override IContainer BuildApplicationContainer()
         {

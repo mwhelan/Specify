@@ -8,7 +8,7 @@ namespace Specify.Autofac
     public class SpecifyAutofacConfigScanner : ConfigScanner
     {
         /// <inheritdoc />
-        protected override Type DefaultBootstrapperType => typeof(SpecifyAutofacBootstrapper);
+        protected override Type DefaultBootstrapperType => typeof(DefaultAutofacBootstrapper);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpecifyAutofacConfigScanner"/> class.

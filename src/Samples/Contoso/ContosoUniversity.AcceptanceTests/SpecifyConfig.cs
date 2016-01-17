@@ -5,7 +5,7 @@ using Specify.Configuration;
 
 namespace ContosoUniversity.AcceptanceTests
 {
-    public class SpecifyConfig : SpecifyAutofacBootstrapper
+    public class SpecifyConfig : DefaultAutofacBootstrapper
     {
         public override void ConfigureContainer(ContainerBuilder builder)
         {

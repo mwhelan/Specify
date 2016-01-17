@@ -17,7 +17,7 @@ namespace Specify.Tests.Configuration
         {
             base.SetUp();
 
-            Container.Set<IConfigureSpecify>(new StubConfig());
+            Container.Set<IBootstrapSpecify>(new StubConfig());
 
             _spec = new UserStoryScenarioWithAllSupportedStepsInRandomOrder();
             _childContainer = Substitute.For<IContainer>();

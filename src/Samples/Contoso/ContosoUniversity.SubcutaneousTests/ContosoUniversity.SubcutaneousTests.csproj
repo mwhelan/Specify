@@ -120,7 +120,7 @@
     <Compile Include="Specifications\Students\ViewEditStudentDetailsScenario.cs" />
     <Compile Include="Specifications\Students\StudentDetailsStory.cs" />
     <Compile Include="Specifications\Students\ViewStudentDetailsScenario.cs" />
-    <Compile Include="SubcutaneousConfig.cs" />
+    <Compile Include="SpecifyAutofacBootstrapper.cs" />
     <Compile Include="SubcutaneousTestsAutofacModule.cs" />
     <Compile Include="Infrastructure\MvcControllerDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

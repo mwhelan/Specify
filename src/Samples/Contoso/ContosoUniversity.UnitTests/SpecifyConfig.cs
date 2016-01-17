@@ -1,18 +1,30 @@
 ﻿using Specify.Configuration;
-using TestStack.BDDfy.Configuration;
-using TestStack.BDDfy.Reporters.Html;
+using TinyIoC;
 
 namespace ContosoUniversity.UnitTests
 {
-    public class SpecifyConfig : SpecifyTinyBootstrapper
+    /// <summary>
+    /// The startup class to configure Specify with the default TinyIoc container. 
+    /// Make any changes to the default configuration settings in this file.
+    /// </summary>
+    public class SpecifyBootstrapper : DefaultBootstrapper
     {
-        public SpecifyConfig()
+        public SpecifyBootstrapper()
         {
             LoggingEnabled = true;
             HtmlReport.ReportHeader = "Contoso University";
             HtmlReport.ReportDescription = "Unit Specifications";
             HtmlReport.ReportType = HtmlReportConfiguration.HtmlReportType.Metro;
             HtmlReport.OutputFileName = "metro.html";
+        }
+
+        /// <summary>
+        /// Register any additional items into the TinyIoc container or leave it as it is. 
+        /// </summary>
+        /// <param name="container">The <see cref="TinyIoCContainer"/> container.</param>
+        public virtual void ConfigureContainer(TinyIoCContainer container)
+        {
+
         }
     }
 }

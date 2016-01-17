@@ -61,14 +61,14 @@
     <Compile Include="EnumerableTypes.cs" />
     <Compile Include="Mocks\AutoMockerFor.cs" />
     <Compile Include="TestsFor.cs" />
-    <Compile Include="Configuration\IConfigureSpecify.cs" />
+    <Compile Include="Configuration\IBootstrapSpecify.cs" />
     <Compile Include="Configuration\IPerAppDomainActions.cs" />
     <Compile Include="Configuration\ReportConfiguration.cs" />
     <Compile Include="Configuration\Scanners\ConfigScanner.cs" />
     <Compile Include="Configuration\Scanners\ConfigScannerFactory.cs" />
     <Compile Include="Configuration\Scanners\IConfigScanner.cs" />
     <Compile Include="Configuration\Scanners\SpecifyConfigScanner.cs" />
-    <Compile Include="Configuration\SpecifyConfiguration.cs" />
+    <Compile Include="Configuration\BootstrapperBase.cs" />
     <Compile Include="Configuration\TinyContainerFactory.cs" />
     <Compile Include="Mocks\FileSystem.cs" />
     <Compile Include="Mocks\IFileSystem.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="Configuration\BddfyTestEngine.cs" />
     <Compile Include="Configuration\ITestEngine.cs" />
     <Compile Include="Configuration\IPerScenarioActions.cs" />
-    <Compile Include="Configuration\SpecifyTinyBootstrapper.cs" />
+    <Compile Include="Configuration\DefaultBootstrapper.cs" />
     <Compile Include="Configuration\SpecifyStoryMetadataScanner.cs" />
     <Compile Include="Configuration\ScenarioRunner.cs" />
     <Compile Include="Host.cs" />
