@@ -29,21 +29,21 @@ namespace Specify.Configuration.Scanners
         }
 
         /// <inheritdoc />
-        public IConfigureSpecify GetConfiguration()
+        public IBootstrapSpecify GetConfiguration()
         {
             var bootstrapper = _fileSystem
                 .GetAllTypesFromAppDomain()
                 .FirstOrDefault(IsSpecifyConfigurationImplementation());
             var config = bootstrapper != null
-                ? bootstrapper.Create<IConfigureSpecify>()
-                : DefaultBootstrapperType.Create<IConfigureSpecify>();
+                ? bootstrapper.Create<IBootstrapSpecify>()
+                : DefaultBootstrapperType.Create<IBootstrapSpecify>();
 
             return config;
         }
 
         private Func<Type, bool> IsSpecifyConfigurationImplementation()
         {
-            return type => type.IsConcreteTypeOf<IConfigureSpecify>()
+            return type => type.IsConcreteTypeOf<IBootstrapSpecify>()
                            && type != DefaultBootstrapperType;
         }
     }

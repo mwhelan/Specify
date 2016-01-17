@@ -4,7 +4,7 @@ using Specify.Configuration;
 
 namespace Specify.Tests.Configuration
 {
-    internal class StubConfig : SpecifyBootstrapper
+    internal class StubConfig : DefaultBootstrapper
     {
         public StubConfig()
         {

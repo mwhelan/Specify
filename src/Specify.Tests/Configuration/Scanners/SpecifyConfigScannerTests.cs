@@ -15,29 +15,29 @@ namespace Specify.Tests.Configuration.Scanners
         {
             var sut = CreateSut(new Type[] {});
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
+            result.ShouldBeOfType<DefaultBootstrapper>();
         }
 
         [Test]
         public void should_not_return_abstract_class()
         {
-            var sut = CreateSut(new[] { typeof(SpecifyConfiguration) });
+            var sut = CreateSut(new[] { typeof(BootstrapperBase) });
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
+            result.ShouldBeOfType<DefaultBootstrapper>();
         }
 
         [Test]
         public void should_not_return_interface()
         {
-            var sut = CreateSut(new[] { typeof(IConfigureSpecify) });
+            var sut = CreateSut(new[] { typeof(IBootstrapSpecify) });
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyBootstrapper>();
+            result.ShouldBeOfType<DefaultBootstrapper>();
         }
 
         [Test]
         public void should_return_implementation_if_there_is_one()
         {
-            var sut = CreateSut(new [] { typeof (SpecifyBootstrapper), typeof(TestBootstrapper) });
+            var sut = CreateSut(new [] { typeof (DefaultBootstrapper), typeof(TestBootstrapper) });
             var result = sut.GetConfiguration();
             result.ShouldBeOfType<TestBootstrapper>();
         }
@@ -49,6 +49,6 @@ namespace Specify.Tests.Configuration.Scanners
             return new SpecifyConfigScanner(fileSystem);
         }
 
-        private class TestBootstrapper : SpecifyBootstrapper{}
+        private class TestBootstrapper : DefaultBootstrapper{}
     }
 }

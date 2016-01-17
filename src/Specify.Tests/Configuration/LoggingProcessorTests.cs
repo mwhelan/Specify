@@ -33,7 +33,7 @@ namespace Specify.Tests.Configuration
         //    string filePath = Path.Combine(Environment.CurrentDirectory, "nlog-sample-config.txt");
         //    using (new TemporaryNLogLogger(filePath))
         //    {
-        //        var runner = new ScenarioRunner(new SpecifyBootstrapper(), new DefaultApplicationContainer(), new BddfyTestEngine());
+        //        var runner = new ScenarioRunner(new DefaultBootstrapper(), new DefaultApplicationContainer(), new BddfyTestEngine());
         //        runner.LogSpecifyConfiguration();
         //        Approvals.VerifyFile(filePath);
         //    }

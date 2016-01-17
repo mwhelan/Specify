@@ -6,7 +6,7 @@ namespace Specify
 {
     internal static class Host
     {
-        public static readonly IConfigureSpecify Configuration;
+        public static readonly IBootstrapSpecify Configuration;
         private static readonly ScenarioRunner _scenarioRunner;
 
         public static void Specify(IScenario testObject, string scenarioTitle = null)

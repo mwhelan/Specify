@@ -16,29 +16,29 @@ namespace Specify.IntegrationTests.ConfigScanners
         {
             var sut = CreateSut(new Type[] { });
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyAutofacBootstrapper>();
+            result.ShouldBeOfType<DefaultAutofacBootstrapper>();
         }
 
         [Test]
         public void should_not_return_abstract_class()
         {
-            var sut = CreateSut(new[] { typeof(SpecifyConfiguration) });
+            var sut = CreateSut(new[] { typeof(BootstrapperBase) });
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyAutofacBootstrapper>();
+            result.ShouldBeOfType<DefaultAutofacBootstrapper>();
         }
 
         [Test]
         public void should_not_return_interface()
         {
-            var sut = CreateSut(new[] { typeof(IConfigureSpecify) });
+            var sut = CreateSut(new[] { typeof(IBootstrapSpecify) });
             var result = sut.GetConfiguration();
-            result.ShouldBeOfType<SpecifyAutofacBootstrapper>();
+            result.ShouldBeOfType<DefaultAutofacBootstrapper>();
         }
 
         [Test]
         public void should_return_implementation_if_there_is_one()
         {
-            var sut = CreateSut(new[] { typeof(SpecifyAutofacBootstrapper), typeof(TestBootstrapper) });
+            var sut = CreateSut(new[] { typeof(DefaultAutofacBootstrapper), typeof(TestBootstrapper) });
             var result = sut.GetConfiguration();
             result.ShouldBeOfType<TestBootstrapper>();
         }
@@ -50,6 +50,6 @@ namespace Specify.IntegrationTests.ConfigScanners
             return new SpecifyAutofacConfigScanner(fileSystem);
         }
 
-        private class TestBootstrapper : SpecifyAutofacBootstrapper { }
+        private class TestBootstrapper : DefaultAutofacBootstrapper { }
     }
 }

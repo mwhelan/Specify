@@ -3,9 +3,9 @@
 namespace Specify.Configuration
 {
     /// <summary>
-    /// Interface IConfigureSpecify
+    /// Interface IBootstrapSpecify
     /// </summary>
-    public interface IConfigureSpecify
+    public interface IBootstrapSpecify
     {
         /// <summary>
         /// Gets the container that will be used for the lifetime of the application.

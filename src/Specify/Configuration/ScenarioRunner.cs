@@ -9,7 +9,7 @@ namespace Specify.Configuration
     {
         private readonly ITestEngine _testEngine;
 
-        public ScenarioRunner(IConfigureSpecify configuration, ITestEngine testEngine)
+        public ScenarioRunner(IBootstrapSpecify configuration, ITestEngine testEngine)
         {
             Configuration = configuration;
             _testEngine = testEngine;
@@ -61,6 +61,6 @@ namespace Specify.Configuration
             Configuration.ApplicationContainer.Dispose();
         }
 
-        internal IConfigureSpecify Configuration { get; set; }
+        internal IBootstrapSpecify Configuration { get; set; }
     }
 }
