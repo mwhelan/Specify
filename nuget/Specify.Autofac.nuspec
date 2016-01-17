@@ -20,6 +20,6 @@
   </metadata>
   <files>
     <file src="..\src\Specify.Autofac\bin\Release\Specify.Autofac.*" target="lib\net40" /> 
-    <file src="SpecifyAutofacBootstrapper.cs.pp" target="content\SpecifyBootstrapper.cs.pp" />    
+    <file src="SpecifyAutofacBootstrapper.cs.pp" target="content\SpecifyAutofacBootstrapper.cs.pp" />    
   </files>
 </package>

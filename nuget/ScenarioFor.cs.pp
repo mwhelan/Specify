@@ -17,7 +17,7 @@
 //using Fixie;
 using Specify.Stories;
 
-namespace $rootnamespace$.Specify
+namespace $rootnamespace$
 {
     /// <summary>
     /// The base class for scenarios without a story (normally unit test scenarios).

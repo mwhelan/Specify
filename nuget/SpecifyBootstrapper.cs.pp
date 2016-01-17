@@ -1,3 +1,4 @@
+using Specify.Configuration;
 using TinyIoC;
 
 namespace $rootnamespace$
