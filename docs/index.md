@@ -1,8 +1,9 @@
 # What is Specify?
-Specify is a BDD-style testing library for .Net that builds on top of BDDfy from [TestStack](http://teststack.net/). While BDDfy is primarily intended for BDD testing, it is beautifully designed to be very easy to customize and extend. Specify provides base test fixtures that extend BDDfy with support for containers - both Inversion of Control (IoC) containers and auto mocking containers - which act as a SUT factory to automatically create the SUT (System Under Test) and other dependencies.
+Specify is a BDD-style testing library for .Net that builds on top of BDDfy from [TestStack](http://www.teststack.net/). While BDDfy is primarily intended for BDD testing, it is beautifully designed to be very easy to customize and extend. Specify provides base test fixtures that extend BDDfy with support for containers - both Inversion of Control (IoC) containers and auto mocking containers - which act as a SUT factory to automatically create the SUT (System Under Test) and other dependencies.
 
 ## Works with your unit test framework
 Specify works with the main .Net unit testing frameworks (and probably others not tested against such as mbunit) by simply wiring it up in one place:
+
 - NUnit
 - xUnit
 - MsTest
