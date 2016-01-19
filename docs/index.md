@@ -9,12 +9,6 @@ Specify works with the main .Net unit testing frameworks (and probably others no
 - MsTest
 - Fixie
 
-## Works with your Inversion of Control container
-Specify uses TinyIoc under the covers and provides a plugin for Autofac, with a plugin for Ninject hopefully available soon. You can also write a custom adapter for other IoC containers and plug them in to Specify.
-
-## Works with your mocking container
-There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/) auto-mocking containers. Just add a reference to one of these projects and Specify will detect it and use the relevant adapter. You can also write a custom adapter for other mocking containers and plug them in to Specify.
-
 ## Consistent style for all test types
 All tests (or specifications) are written as a class per scenario in the familiar Given When Then style. 
 
@@ -48,3 +42,9 @@ If you've come across TestStack.BDDfy, you will already know about its awesome r
 ![Unit test and BDD test reports](consistent-reporting.png)
 
 The BDD report on the right groups specifications with the typical BDD user story, whereas the unit test report on the left groups specifications by the System Under Test.
+
+## Works with your Inversion of Control container
+Specify uses TinyIoc under the covers and provides a plugin for Autofac, with a plugin for Ninject hopefully available soon. You can also write a custom adapter for other IoC containers and plug them in to Specify.
+
+## Works with your mocking container
+There is transparent built-in support for [NSubstitute](http://nsubstitute.github.io/), [Moq](https://github.com/Moq/moq4), and [FakeItEasy](http://fakeiteasy.github.io/) auto-mocking containers. Just add a reference to one of these projects and Specify will detect it and use the relevant adapter. You can also write a custom adapter for other mocking containers and plug them in to Specify.
