@@ -3,6 +3,8 @@ theme: readthedocs
 markdown_extensions: [fenced_code]
 pages:
 - Home: index.md
+- Features:
+  - Overview: features-overview.md
 - Using Specify:
   - Getting Started: getting-started.md
   - Configuration: configuration.md

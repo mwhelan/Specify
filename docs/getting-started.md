@@ -1,6 +1,6 @@
-# Getting Started
+## Installing and Configuring Specify
 
-I am assuming that you have a test project that you want to write tests in and that you are using Visual Studio. This could be a unit tests project for MsTest, or a class library for other types of test frameworks.
+I am assuming that you have a test project that you want to write tests in and that you are using Visual Studio. This could be a unit tests project for MsTest, or a class library for other test frameworks.
 
 ## Add NuGet package
 Specify is available as a NuGet package. You can add it via the `Manage NuGet Packages` dialog or by the `Package Manager Console`.
