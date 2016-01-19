@@ -22,7 +22,7 @@ namespace ContosoUniversity.UnitTests
         /// Register any additional items into the TinyIoc container or leave it as it is. 
         /// </summary>
         /// <param name="container">The <see cref="TinyIoCContainer"/> container.</param>
-        public virtual void ConfigureContainer(TinyIoCContainer container)
+        public override void ConfigureContainer(TinyIoCContainer container)
         {
 
         }

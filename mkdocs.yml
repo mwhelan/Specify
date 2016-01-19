@@ -5,3 +5,4 @@ pages:
 - Home: index.md
 - Using Specify:
   - Getting Started: getting-started.md
+  - Configuration: configuration.md
