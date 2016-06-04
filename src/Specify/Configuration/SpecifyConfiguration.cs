@@ -85,7 +85,7 @@ namespace Specify.Configuration
         private void LogSpecifyConfiguration()
         {
             string containerName;
-            using (IContainer container = ApplicationContainer.Resolve<IContainer>())
+            using (IContainer container = ApplicationContainer.Get<IContainer>())
             {
                 containerName = container.GetType().FullName;
             }

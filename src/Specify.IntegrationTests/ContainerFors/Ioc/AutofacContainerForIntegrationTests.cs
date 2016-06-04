@@ -13,12 +13,12 @@ namespace Specify.IntegrationTests.ContainerFors.Ioc
             builder.RegisterType<Dependency3>().As<IDependency3>();
 
             var container = new AutofacContainer(builder.Build());
-            container.Register<IDependency1, Dependency1>();
-            container.Register<IDependency2, Dependency2>();
+            container.Set<IDependency1, Dependency1>();
+            container.Set<IDependency2, Dependency2>();
             //container.Register<IDependency3, Dependency3>();
-            container.Register<ConcreteObjectWithNoConstructor>();
-            container.Register<ConcreteObjectWithMultipleConstructors>();
-            container.Register<ConcreteObjectWithOneInterfaceCollectionConstructor>();
+            container.Set<ConcreteObjectWithNoConstructor>();
+            container.Set<ConcreteObjectWithMultipleConstructors>();
+            container.Set<ConcreteObjectWithOneInterfaceCollectionConstructor>();
             return new ContainerFor<T>(container);
         }
     }

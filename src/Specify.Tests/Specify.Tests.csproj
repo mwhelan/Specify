@@ -117,7 +117,7 @@
     <Compile Include="LoggingGatewayTests.cs" />
     <Compile Include="Mocks\MoqMockFactoryTests.cs" />
     <Compile Include="Mocks\NSubstituteMockFactoryTests.cs" />
-    <Compile Include="SpecifyExtensionTests.cs" />
+    <Compile Include="TypeExtensionTests.cs" />
     <Compile Include="Stories\UserStoryTests.cs" />
     <Compile Include="Stories\ValueStoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
