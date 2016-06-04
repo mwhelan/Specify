@@ -8,7 +8,7 @@ namespace ContosoUniversity.SubcutaneousTests.Specifications.Students
         {
             InOrderTo = "change details for a Student";
             AsA = "Student Administrator";
-            IWant = "edit the details of a Student";
+            IWant = "to edit the details of a Student";
         }
     }
 }

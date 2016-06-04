@@ -8,7 +8,7 @@ namespace ContosoUniversity.SubcutaneousTests.Specifications.Students
         {
             InOrderTo = "see what grade a student received";
             AsA = "Student Administrator";
-            IWant = "view the details of a Student";
+            IWant = "to view the details of a Student";
         }
     }
 }
