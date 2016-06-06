@@ -6,6 +6,24 @@ namespace Specify
     /// <summary>
     /// A Specify scenario
     /// </summary>
+    public interface IScenario<TSut> : IScenario where TSut : class
+    {
+        /// <summary>
+        /// Gets the container.
+        /// </summary>
+        /// <value>The container.</value>
+        ContainerFor<TSut> Container { get; }
+
+        /// <summary>
+        /// Gets or sets the SUT (System Under Test). The class being tested.
+        /// </summary>
+        /// <value>The sut.</value>
+        TSut SUT { get; set; }
+    }
+
+    /// <summary>
+    /// A Specify scenario
+    /// </summary>
     public interface IScenario : IDisposable
     {
         /// <summary>

@@ -1,7 +1,5 @@
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Specify.Logging;
-using TestStack.BDDfy.Configuration;
 
 namespace Specify.Configuration
 {

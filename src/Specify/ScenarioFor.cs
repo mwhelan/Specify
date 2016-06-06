@@ -18,23 +18,17 @@ namespace Specify
     /// </summary>
     /// <typeparam name="TSut">The type of the SUT.</typeparam>
     /// <typeparam name="TStory">The type of the t story.</typeparam>
-    public abstract class ScenarioFor<TSut, TStory> : IScenario
+    public abstract class ScenarioFor<TSut, TStory> : IScenario<TSut>
         where TSut : class
         where TStory : Stories.Story, new()
     {
-        /// <summary>
-        /// Gets the container.
-        /// </summary>
-        /// <value>The container.</value>
+        /// <inheritdoc />
         public ContainerFor<TSut> Container { get; internal set; }
 
         /// <inheritdoc />
         public ExampleTable Examples { get; set; }
 
-        /// <summary>
-        /// Gets or sets the SUT (System Under Test). The class being tested.
-        /// </summary>
-        /// <value>The sut.</value>
+        /// <inheritdoc />
         public TSut SUT
         {
             get { return Container.SystemUnderTest; }
@@ -53,7 +47,7 @@ namespace Specify
                 title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title);
                 if (Number != 0)
                 {
-                    title = string.Format("Scenario {0}: {1}", Number.ToString("00"), title);
+                    title = $"Scenario {Number.ToString("00")}: {title}";
                 }
                 return title;
             }
@@ -77,10 +71,7 @@ namespace Specify
         /// <inheritdoc />
         public void Dispose()
         {
-            if (Container != null)
-            {
-                Container.Dispose();
-            }
+            Container?.Dispose();
         }
     }
 }
