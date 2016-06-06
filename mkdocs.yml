@@ -8,3 +8,6 @@ pages:
 - Using Specify:
   - Getting Started: getting-started.md
   - Configuration: configuration.md
+- Concepts:
+  - SUT (System Under Test): system-under-test.md
+  - Scenarios: scenarios.md
