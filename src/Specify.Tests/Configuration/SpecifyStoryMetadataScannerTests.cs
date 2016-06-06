@@ -1,7 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Configuration;
 using Specify.Tests.Stubs;
+using TestStack.BDDfy;
+using TestStack.BDDfy.Reporters;
 
 namespace Specify.Tests.Configuration
 {
@@ -23,6 +27,14 @@ namespace Specify.Tests.Configuration
             var result = sut.Scan(new StubUnitScenario());
             result.Title.ShouldBe("ConcreteObjectWithMultipleConstructors");
             result.TitlePrefix.ShouldBe("Specifications For: ");
+        }
+
+        [Test]
+        public void Unit_Story_should_have_sut_for_story_type()
+        {
+            var sut = new SpecifyStoryMetadataScanner();
+            var result = sut.Scan(new StubUnitScenario());
+            result.Type.ShouldBe(typeof(ConcreteObjectWithMultipleConstructors));
         }
 
         [Test]
@@ -68,5 +80,29 @@ namespace Specify.Tests.Configuration
             result.Narrative3.ShouldBe("So that I can share a story definition between several scenarios");
         }
 
+        [Test]
+        public void should_work_correctly_with_BDDfy_file_report_model()
+        {
+            var fileReportModel = CreateReportModelWithTwoStoriesThreeScenarios();
+            fileReportModel.Stories.ToList().Count.ShouldBe(2);
+        }
+
+        private static FileReportModel CreateReportModelWithTwoStoriesThreeScenarios()
+        {
+            var stories = new List<Story>
+            {
+                CreateBDDfyStory(new StubUnitScenario()),
+                CreateBDDfyStory(new ConcreteObjectWithNoConstructorUnitScenario()),
+                CreateBDDfyStory(new UnitScenarioWithAllSupportedStepsInRandomOrder())
+            };
+
+            return new FileReportModel(stories.ToReportModel());
+        }
+        private static Story CreateBDDfyStory(IScenario scenario)
+        {
+            var story = scenario.BDDfy();
+            var metadata = new SpecifyStoryMetadataScanner().Scan(scenario);
+            return new Story(metadata, story.Scenarios.ToArray());
+        }
     }
 }
