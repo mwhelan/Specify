@@ -16,7 +16,13 @@ namespace Specify
 
         static Host()
         {
-            AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
+#if NET40
+            AppDomain.CurrentDomain.DomainUnload += (sender, e) => {
+                _scenarioRunner.AfterAllScenarios();
+            };
+#else
+            System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += context => _scenarioRunner.AfterAllScenarios(); 
+#endif
 
             Configuration = ConfigScannerFactory
                 .SelectScanner()
@@ -24,11 +30,6 @@ namespace Specify
 
             _scenarioRunner = new ScenarioRunner(Configuration, new BddfyTestEngine());
             _scenarioRunner.BeforeAllScenarios();
-        }
-
-        static void CurrentDomain_DomainUnload(object sender, EventArgs e)
-        {
-            _scenarioRunner.AfterAllScenarios();
         }
     }
 }

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Specify.Mocks;
 using TinyIoC;
 
@@ -38,14 +36,14 @@ namespace Specify
             {
                 return GetMultiple(serviceType);
             }
-            if (serviceType.IsInterface)
+            if (serviceType.IsInterface())
             {
                 if (!Container.CanResolve(serviceType))
                 {
                     RegisterMock(serviceType);
                 }
             }
-            if (serviceType.IsClass)
+            if (serviceType.IsClass())
             {
                 var constructor = serviceType.GreediestConstructor();
 

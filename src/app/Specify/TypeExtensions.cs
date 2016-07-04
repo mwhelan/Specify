@@ -18,7 +18,7 @@ namespace Specify
         /// <returns><c>true</c> if the specified type is scenario; otherwise, <c>false</c>.</returns>
         public static bool IsScenario(this Type type)
         {
-            return type.CanBeCastTo<IScenario>();
+            return type.CanBeCastTo<IScenario>() && !type.IsTypeAbstract();
         }
 
         /// <summary>
@@ -65,6 +65,11 @@ namespace Specify
             return specification.Story == typeof(SpecificationStory);
         }
 
+        internal static Type SutType(this IScenario specification)
+        {
+            return specification.GetType().GetProperty("SUT").PropertyType;
+        }
+
         /// <summary>
         /// Creates the specified type.
         /// </summary>
@@ -97,18 +102,6 @@ namespace Specify
             if (type == null) return false;
 
             return type.IsConcrete() && typeof(T).IsAssignableFrom(type);
-        }
-
-        /// <summary>
-        /// Determines whether the specified type is concrete.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if the specified type is concrete; otherwise, <c>false</c>.</returns>
-        public static bool IsConcrete(this Type type)
-        {
-            if (type == null) return false;
-
-            return !type.IsAbstract && !type.IsInterface;
         }
 
         /// <summary>
@@ -169,7 +162,7 @@ namespace Specify
         /// <returns><c>true</c> if the specified type is simple; otherwise, <c>false</c>.</returns>
         public static bool IsSimple(this Type type)
         {
-            return type.IsPrimitive || type == typeof(string) || type.IsEnum;
+            return type.IsPrimitive() || type == typeof(string) || type.IsEnum();
         }
         /// <summary>
         /// Determines whether the specified type is enumerable.
@@ -180,13 +173,13 @@ namespace Specify
         {
             if (type.IsArray) return true;
 
-            return type.IsGenericType 
+            return type.IsGenericType() 
                 && type.GetGenericTypeDefinition().IsIn(EnumerableTypes);
         }
 
         private static bool HasOneReferenceTypeGenericArg(this Type type)
         {
-            if (!type.IsGenericType) return false;
+            if (!type.IsGenericType()) return false;
 
             var genericArgs = type.GetGenericArguments();
             return genericArgs.Length == 1
@@ -218,7 +211,7 @@ namespace Specify
                     }
                 }
 
-                Type baseType = type.BaseType;
+                Type baseType = type.BaseType();
                 if (baseType == null)
                 {
                     return false;
@@ -239,5 +232,91 @@ namespace Specify
                 .OrderByDescending(x => x.GetParameters().Length)
                 .First();
         }
+
+#if NET40
+        /// <summary>
+        /// Determines whether the specified type is concrete.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if the specified type is concrete; otherwise, <c>false</c>.</returns>
+        public static bool IsConcrete(this Type type)
+        {
+            if (type == null) return false;
+
+            return !type.IsAbstract && !type.IsInterface;
+        }
+
+        internal static MethodInfo GetMethodInfo(this Type type, string name, Type[] types)
+        {
+            return type.GetMethod(name, types);
+        }
+
+        private static bool IsTypeAbstract(this Type type)
+        {
+            return type.IsAbstract;
+        }
+
+       private static Type BaseType(this Type type)
+        {
+            return type.BaseType;
+        }
+
+        private static bool IsGenericType(this Type type)
+        {
+            return type.IsGenericType;
+        }
+
+        private static bool IsPrimitive(this Type type)
+        {
+            return type.IsPrimitive;
+        }
+
+        private static bool IsEnum(this Type type)
+        {
+            return type.IsEnum;
+        }
+#else
+        /// <summary>
+        /// Determines whether the specified type is concrete.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if the specified type is concrete; otherwise, <c>false</c>.</returns>
+        public static bool IsConcrete(this Type type)
+        {
+            if (type == null) return false;
+
+            return !type.GetTypeInfo().IsAbstract && !type.GetTypeInfo().IsInterface;
+        }
+
+        internal static MethodInfo GetMethodInfo(this Type type, string name, Type[] types)
+        {
+            return type.GetTypeInfo().GetMethod(name, types);
+        }
+
+        private static bool IsTypeAbstract(this Type type)
+        {
+            return type.GetTypeInfo().IsAbstract;
+        }
+
+        private static Type BaseType(this Type type)
+        {
+            return type.GetTypeInfo().BaseType;
+        }
+
+        private static bool IsGenericType(this Type type)
+        {
+            return type.GetTypeInfo().IsGenericType;
+        }
+
+        private static bool IsPrimitive(this Type type)
+        {
+            return type.GetTypeInfo().IsPrimitive;
+        }
+
+        private static bool IsEnum(this Type type)
+        {
+            return type.GetTypeInfo().IsEnum;
+        }
+#endif
     }
 }

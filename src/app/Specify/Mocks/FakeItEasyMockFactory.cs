@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 
 namespace Specify.Mocks
 {
@@ -31,7 +32,7 @@ namespace Specify.Mocks
         /// <inheritdoc />
         public object CreateMock(Type type)
         {
-            var openFakeMethod = _mockOpenType.GetMethod("Fake", Type.EmptyTypes);
+            var openFakeMethod = _mockOpenType.GetMethodInfo("Fake", Type.EmptyTypes);
             var closedFakeMethod = openFakeMethod.MakeGenericMethod(type);
 
             try

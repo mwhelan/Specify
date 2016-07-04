@@ -43,11 +43,12 @@ namespace Specify
         {
             get
             {
-                var title = Configurator.Scanners.Humanize(GetType().Name);
-                title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title);
+                var title = Configurator.Scanners
+                    .Humanize(GetType().Name)
+                    .ToTitleCase();
                 if (Number != 0)
                 {
-                    title = $"Scenario {Number.ToString("00")}: {title}";
+                    title = $"Scenario {Number:00}: {title}";
                 }
                 return title;
             }

@@ -16,7 +16,7 @@ namespace Specify.Mocks
         {
             try
             {
-                Assembly.Load(assemblyName);
+                Assembly.Load(new AssemblyName(assemblyName));
                 return true;
             }
             catch (FileNotFoundException)
@@ -28,7 +28,7 @@ namespace Specify.Mocks
         /// <inheritdoc />
         public Assembly Load(string assemblyName)
         {
-            return Assembly.Load(assemblyName);
+            return Assembly.Load(new AssemblyName(assemblyName));
         }
 
         /// <inheritdoc />
