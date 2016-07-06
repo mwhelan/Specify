@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Specify.lib;
 using Autofac;
 using Autofac.Features.ResolveAnything;
@@ -21,7 +22,8 @@ namespace Specify.Autofac
 
         private void RegisterScenarios(ContainerBuilder builder)
         {
-            var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
+            //var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
+            var assemblies = Assembly.GetEntryAssembly();
             builder.RegisterAssemblyTypes(assemblies)
                 .AsClosedTypesOf(typeof(ScenarioFor<>));
             builder.RegisterAssemblyTypes(assemblies)

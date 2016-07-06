@@ -36,8 +36,8 @@ namespace Specify.Autofac
 
             var typedService = service as IServiceWithType;
             if (typedService == null ||
-                !typedService.ServiceType.IsInterface ||
-                typedService.ServiceType.IsGenericType &&
+                !typedService.ServiceType.IsInterface() ||
+                typedService.ServiceType.IsGenericType() &&
                 typedService.ServiceType.GetGenericTypeDefinition() == typeof(IEnumerable<>) ||
                 typedService.ServiceType.IsArray ||
                 typeof(IStartable).IsAssignableFrom(typedService.ServiceType))

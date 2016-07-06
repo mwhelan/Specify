@@ -177,7 +177,7 @@ namespace Specify
                 && type.GetGenericTypeDefinition().IsIn(EnumerableTypes);
         }
 
-        private static bool HasOneReferenceTypeGenericArg(this Type type)
+        internal static bool HasOneReferenceTypeGenericArg(this Type type)
         {
             if (!type.IsGenericType()) return false;
 
@@ -186,7 +186,7 @@ namespace Specify
                    && !genericArgs[0].IsSimple();
         }
 
-        private static readonly List<Type> EnumerableTypes = new List<Type>
+        internal static readonly List<Type> EnumerableTypes = new List<Type>
         {
             typeof (IEnumerable<>),
             typeof (IList<>),
@@ -198,7 +198,7 @@ namespace Specify
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        private static bool GenericTypeIsSpecificationStory(Type type)
+        internal static bool GenericTypeIsSpecificationStory(Type type)
         {
             while (true)
             {
@@ -234,16 +234,9 @@ namespace Specify
         }
 
 #if NET40
-        /// <summary>
-        /// Determines whether the specified type is concrete.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if the specified type is concrete; otherwise, <c>false</c>.</returns>
-        public static bool IsConcrete(this Type type)
+        internal static Type BaseType(this Type type)
         {
-            if (type == null) return false;
-
-            return !type.IsAbstract && !type.IsInterface;
+            return type.BaseType;
         }
 
         internal static MethodInfo GetMethodInfo(this Type type, string name, Type[] types)
@@ -251,41 +244,49 @@ namespace Specify
             return type.GetMethod(name, types);
         }
 
-        private static bool IsTypeAbstract(this Type type)
+         internal static bool IsAssignableFrom(this Type type, Type otherType)
         {
-            return type.IsAbstract;
+            return !type.IsAssignableFrom(otherType);
         }
 
-       private static Type BaseType(this Type type)
+       internal static bool IsClass(this Type type)
         {
-            return type.BaseType;
+            return !type.IsClass;
         }
 
-        private static bool IsGenericType(this Type type)
+        internal static bool IsConcrete(this Type type)
+        {
+            return !type.IsAbstract && !type.IsInterface;
+        }
+
+        internal static bool IsEnum(this Type type)
+        {
+            return type.IsEnum;
+        }
+
+        internal static bool IsGenericType(this Type type)
         {
             return type.IsGenericType;
         }
 
-        private static bool IsPrimitive(this Type type)
+        internal static bool IsInterface(this Type type)
+        {
+            return type.IsInterface;
+        }
+
+        internal static bool IsPrimitive(this Type type)
         {
             return type.IsPrimitive;
         }
 
-        private static bool IsEnum(this Type type)
+        internal static bool IsTypeAbstract(this Type type)
         {
-            return type.IsEnum;
+            return type.IsAbstract;
         }
 #else
-        /// <summary>
-        /// Determines whether the specified type is concrete.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if the specified type is concrete; otherwise, <c>false</c>.</returns>
-        public static bool IsConcrete(this Type type)
+        internal static Type BaseType(this Type type)
         {
-            if (type == null) return false;
-
-            return !type.GetTypeInfo().IsAbstract && !type.GetTypeInfo().IsInterface;
+            return type.GetTypeInfo().BaseType;
         }
 
         internal static MethodInfo GetMethodInfo(this Type type, string name, Type[] types)
@@ -293,29 +294,44 @@ namespace Specify
             return type.GetTypeInfo().GetMethod(name, types);
         }
 
-        private static bool IsTypeAbstract(this Type type)
+        internal static bool IsAssignableFrom(this Type type, Type otherType)
         {
-            return type.GetTypeInfo().IsAbstract;
+            return !type.GetTypeInfo().IsAssignableFrom(otherType);
         }
 
-        private static Type BaseType(this Type type)
+        internal static bool IsClass(this Type type)
         {
-            return type.GetTypeInfo().BaseType;
+            return !type.GetTypeInfo().IsClass;
         }
 
-        private static bool IsGenericType(this Type type)
+        internal static bool IsConcrete(this Type type)
+        {
+            return !type.GetTypeInfo().IsAbstract && !type.GetTypeInfo().IsInterface;
+        }
+
+        internal static bool IsEnum(this Type type)
+        {
+            return type.GetTypeInfo().IsEnum;
+        }
+
+        internal static bool IsGenericType(this Type type)
         {
             return type.GetTypeInfo().IsGenericType;
         }
 
-        private static bool IsPrimitive(this Type type)
+        internal static bool IsInterface(this Type type)
+        {
+            return type.GetTypeInfo().IsInterface;
+        }
+
+        internal static bool IsPrimitive(this Type type)
         {
             return type.GetTypeInfo().IsPrimitive;
         }
 
-        private static bool IsEnum(this Type type)
+        internal static bool IsTypeAbstract(this Type type)
         {
-            return type.GetTypeInfo().IsEnum;
+            return type.GetTypeInfo().IsAbstract;
         }
 #endif
     }

@@ -7,10 +7,8 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Specify")]
+[assembly: AssemblyProduct("Specify.Tests")]
 [assembly: AssemblyTrademark("")]
-
-[assembly: InternalsVisibleTo("Specify.Autofac")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -18,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("edf7d294-e262-4089-97d9-e105de42172d")]
+[assembly: Guid("da325e84-dc76-4d03-a0bb-fcb6e83b1d7d")]

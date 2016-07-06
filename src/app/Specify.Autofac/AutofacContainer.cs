@@ -113,7 +113,7 @@ namespace Specify.Autofac
         /// <returns><c>true</c> if this instance can resolve the specified service type; otherwise, <c>false</c>.</returns>
         public bool CanResolve(Type serviceType)
         {
-            if (serviceType.IsClass)
+            if (serviceType.IsClass())
             {
                 var constructor = serviceType.GreediestConstructor();
 
