@@ -24,11 +24,11 @@ namespace Specify.Tests.Mocks
 
             Should.Throw<FileNotFoundException>(() => CreateSut(fileSystem));
         }
-
+#if NET46
         [Test]
         public void should_throw_InvalidOperationException_if_FakeItEasy_version_not_compatible()
         {
-            var assembly = Assembly.Load(AssemblyName);
+            var assembly = Assembly.Load(new AssemblyName(AssemblyName));
             var fileSystem = Substitute.For<IFileSystem>();
             fileSystem.Load(Arg.Any<string>()).Returns(assembly);
             fileSystem.GetTypeFrom(Arg.Any<Assembly>(), Arg.Any<string>()).Returns((Type)null);
@@ -36,5 +36,6 @@ namespace Specify.Tests.Mocks
             Should.Throw<InvalidOperationException>(() => CreateSut(fileSystem))
                 .Message.ShouldStartWith($"Unable to find Type {TypeName} in assembly ");
         }
+#endif
     }
 }

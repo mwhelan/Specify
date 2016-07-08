@@ -2,81 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Specify.Stories;
 
 namespace Specify
 {
     /// <summary>
     /// Extension methods for types.
     /// </summary>
-    public static class TypeExtensions
+    internal static partial class TypeExtensions
     {
-        /// <summary>
-        /// Determines whether the specified type is scenario.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if the specified type is scenario; otherwise, <c>false</c>.</returns>
-        public static bool IsScenario(this Type type)
-        {
-            return type.CanBeCastTo<IScenario>() && !type.IsTypeAbstract();
-        }
-
-        /// <summary>
-        /// Determines whether the specified type is a scenario with a Story that is not SpecificationStory (for unit tests).
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if [is story scenario] [the specified type]; otherwise, <c>false</c>.</returns>
-        public static bool IsStoryScenario(this Type type)
-        {
-            if (!type.CanBeCastTo<IScenario>())
-                return false;
-            return !GenericTypeIsSpecificationStory(type);
-        }
-
-        /// <summary>
-        /// Determines whether the specified type is a scenario with a Story that is not SpecificationStory (for unit tests).
-        /// </summary>
-        /// <param name="specification">The specification.</param>
-        /// <returns><c>true</c> if [is story scenario] [the specified specification]; otherwise, <c>false</c>.</returns>
-        public static bool IsStoryScenario(this IScenario specification)
-        {
-            return specification.Story != typeof(SpecificationStory);
-        }
-
-        /// <summary>
-        /// Determines whether the specified type is a scenario for unit tests).
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if [is unit scenario] [the specified type]; otherwise, <c>false</c>.</returns>
-        public static bool IsUnitScenario(this Type type)
-        {
-            if (!type.CanBeCastTo<IScenario>())
-                return false;
-            return GenericTypeIsSpecificationStory(type);
-        }
-
-        /// <summary>
-        /// Determines whether the specified type is a scenario for unit tests).
-        /// </summary>
-        /// <param name="specification">The specification.</param>
-        /// <returns><c>true</c> if [is unit scenario] [the specified specification]; otherwise, <c>false</c>.</returns>
-        public static bool IsUnitScenario(this IScenario specification)
-        {
-            return specification.Story == typeof(SpecificationStory);
-        }
-
-        internal static Type SutType(this IScenario specification)
-        {
-            return specification.GetType().GetProperty("SUT").PropertyType;
-        }
-
         /// <summary>
         /// Creates the specified type.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="type">The type.</param>
         /// <returns>T.</returns>
-        public static T Create<T>(this Type type)
+        internal static T Create<T>(this Type type)
         {
             return (T)type.Create();
         }
@@ -86,7 +26,7 @@ namespace Specify
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>System.Object.</returns>
-        public static object Create(this Type type)
+        internal static object Create(this Type type)
         {
             return Activator.CreateInstance(type);
         }
@@ -97,11 +37,11 @@ namespace Specify
         /// <typeparam name="T"></typeparam>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if type is the concrete type of the specified type; otherwise, <c>false</c>.</returns>
-        public static bool IsConcreteTypeOf<T>(this Type type)
+        internal static bool IsConcreteTypeOf<T>(this Type type)
         {
             if (type == null) return false;
 
-            return type.IsConcrete() && typeof(T).IsAssignableFrom(type);
+            return type.IsConcrete() && type.CanBeCastTo<T>();
         }
 
         /// <summary>
@@ -110,26 +50,12 @@ namespace Specify
         /// <typeparam name="T"></typeparam>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if this instance [can be cast to] the specified type; otherwise, <c>false</c>.</returns>
-        public static bool CanBeCastTo<T>(this Type type)
+        internal static bool CanBeCastTo<T>(this Type type)
         {
             if (type == null) return false;
             Type destinationType = typeof(T);
 
             return CanBeCastTo(type, destinationType);
-        }
-
-        /// <summary>
-        /// Determines whether this instance [can be cast to] the specified destination type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <param name="destinationType">Type of the destination.</param>
-        /// <returns><c>true</c> if this instance [can be cast to] the specified destination type; otherwise, <c>false</c>.</returns>
-        public static bool CanBeCastTo(this Type type, Type destinationType)
-        {
-            if (type == null) return false;
-            if (type == destinationType) return true;
-
-            return destinationType.IsAssignableFrom(type);
         }
 
         /// <summary>
@@ -150,7 +76,7 @@ namespace Specify
         /// <param name="target">The item that might be in the list.</param>
         /// <param name="list">The list of items to check.</param>
         /// <returns><c>true</c> if the specified item is in the list; otherwise, <c>false</c>.</returns>
-        public static bool IsIn<T>(this T target, IList<T> list)
+        internal static bool IsIn<T>(this T target, IList<T> list)
         {
             return list.Contains(target);
         }
@@ -160,20 +86,47 @@ namespace Specify
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if the specified type is simple; otherwise, <c>false</c>.</returns>
-        public static bool IsSimple(this Type type)
+        internal static bool IsSimple(this Type type)
         {
             return type.IsPrimitive() || type == typeof(string) || type.IsEnum();
         }
+
+        internal static readonly List<Type> EnumerableTypes = new List<Type>
+        {
+            typeof (IEnumerable<>),
+            typeof (IList<>),
+            typeof (List<>)
+        };
+
+    }
+
+#if NET40
+    internal static partial class TypeExtensions
+    {
+        /// <summary>
+        /// Determines whether this instance [can be cast to] the specified destination type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="destinationType">Type of the destination.</param>
+        /// <returns><c>true</c> if this instance [can be cast to] the specified destination type; otherwise, <c>false</c>.</returns>
+        internal static bool CanBeCastTo(this Type type, Type destinationType)
+        {
+            if (type == null) return false;
+            if (type == destinationType) return true;
+
+            return destinationType.IsAssignableFrom(type);
+        }
+
         /// <summary>
         /// Determines whether the specified type is enumerable.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if the specified type is enumerable; otherwise, <c>false</c>.</returns>
-        public static bool IsEnumerable(this Type type)
+        internal static bool IsEnumerable(this Type type)
         {
             if (type.IsArray) return true;
 
-            return type.IsGenericType() 
+            return type.IsGenericType()
                 && type.GetGenericTypeDefinition().IsIn(EnumerableTypes);
         }
 
@@ -186,39 +139,19 @@ namespace Specify
                    && !genericArgs[0].IsSimple();
         }
 
-        internal static readonly List<Type> EnumerableTypes = new List<Type>
+        public static Type[] GetGenericTypeArguments(this Type type) 
         {
-            typeof (IEnumerable<>),
-            typeof (IList<>),
-            typeof (List<>)
-        };
+            return type.GetGenericArguments();
+        }
 
-        /// <summary>
-        /// Whether or not a generic argument is of type SpecificationStory.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        internal static bool GenericTypeIsSpecificationStory(Type type)
+        internal static PropertyInfo GetPropertyInfo(this Type type, string propertyName, Type propertyType)
         {
-            while (true)
-            {
-                var genericArguments = type.GetGenericArguments();
-                if (genericArguments.Length > 0)
-                {
-                    if (genericArguments.Any(argument => argument == typeof(SpecificationStory)))
-                    {
-                        return true;
-                    }
-                }
+            return type.GetProperty(propertyName, propertyType);
+        }
 
-                Type baseType = type.BaseType();
-                if (baseType == null)
-                {
-                    return false;
-                }
-
-                type = baseType;
-            }
+        internal static PropertyInfo GetPropertyInfo(this Type type, string propertyName)
+        {
+            return type.GetProperty(propertyName);
         }
 
         /// <summary>
@@ -226,14 +159,13 @@ namespace Specify
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>ConstructorInfo.</returns>
-        public static ConstructorInfo GreediestConstructor(this Type type)
+        internal static ConstructorInfo GreediestConstructor(this Type type)
         {
             return type.GetConstructors()
                 .OrderByDescending(x => x.GetParameters().Length)
                 .First();
         }
 
-#if NET40
         internal static Type BaseType(this Type type)
         {
             return type.BaseType;
@@ -244,12 +176,7 @@ namespace Specify
             return type.GetMethod(name, types);
         }
 
-         internal static bool IsAssignableFrom(this Type type, Type otherType)
-        {
-            return !type.IsAssignableFrom(otherType);
-        }
-
-       internal static bool IsClass(this Type type)
+        internal static bool IsClass(this Type type)
         {
             return !type.IsClass;
         }
@@ -283,7 +210,73 @@ namespace Specify
         {
             return type.IsAbstract;
         }
+    }
 #else
+    internal static partial class TypeExtensions
+    {
+        /// <summary>
+        /// Determines whether this instance [can be cast to] the specified destination type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="destinationType">Type of the destination.</param>
+        /// <returns><c>true</c> if this instance [can be cast to] the specified destination type; otherwise, <c>false</c>.</returns>
+        internal static bool CanBeCastTo(this Type type, Type destinationType)
+        {
+            if (type == null) return false;
+            if (type == destinationType) return true;
+
+            return destinationType.GetTypeInfo().IsAssignableFrom(type);
+        }
+
+        /// <summary>
+        /// Determines whether the specified type is enumerable.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if the specified type is enumerable; otherwise, <c>false</c>.</returns>
+        internal static bool IsEnumerable(this Type type)
+        {
+            if (type.GetTypeInfo().IsArray) return true;
+
+            return type.IsGenericType()
+                && type.GetTypeInfo().GetGenericTypeDefinition().IsIn(EnumerableTypes);
+        }
+
+        internal static bool HasOneReferenceTypeGenericArg(this Type type)
+        {
+            if (!type.IsGenericType()) return false;
+
+            var genericArgs = type.GetTypeInfo().GetGenericArguments();
+            return genericArgs.Length == 1
+                   && !genericArgs[0].IsSimple();
+        }
+
+        public static Type[] GetGenericTypeArguments(this Type type)
+        {
+            return type.GetTypeInfo().GenericTypeArguments;
+        }
+
+        internal static PropertyInfo GetPropertyInfo(this Type type, string propertyName, Type propertyType)
+        {
+            return type.GetTypeInfo().GetProperty(propertyName, propertyType);
+        }
+
+        internal static PropertyInfo GetPropertyInfo(this Type type, string propertyName)
+        {
+            return type.GetTypeInfo().GetProperty(propertyName);
+        }
+
+        /// <summary>
+        /// Returns the constructor with the most parameters.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>ConstructorInfo.</returns>
+        internal static ConstructorInfo GreediestConstructor(this Type type)
+        {
+            return type.GetTypeInfo().GetConstructors()
+                .OrderByDescending(x => x.GetParameters().Length)
+                .First();
+        }
+
         internal static Type BaseType(this Type type)
         {
             return type.GetTypeInfo().BaseType;
@@ -292,11 +285,6 @@ namespace Specify
         internal static MethodInfo GetMethodInfo(this Type type, string name, Type[] types)
         {
             return type.GetTypeInfo().GetMethod(name, types);
-        }
-
-        internal static bool IsAssignableFrom(this Type type, Type otherType)
-        {
-            return !type.GetTypeInfo().IsAssignableFrom(otherType);
         }
 
         internal static bool IsClass(this Type type)
@@ -333,6 +321,6 @@ namespace Specify
         {
             return type.GetTypeInfo().IsAbstract;
         }
-#endif
     }
+#endif
 }

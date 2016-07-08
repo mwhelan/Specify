@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Specify")]
 [assembly: AssemblyTrademark("")]
 
+[assembly: InternalsVisibleTo("Specify.Tests")]
 [assembly: InternalsVisibleTo("Specify.Autofac")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

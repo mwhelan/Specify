@@ -35,6 +35,11 @@ namespace Specify.Tests.Configuration
 
         private class StaticNlogTimeSource : TimeSource
         {
+            public override DateTime FromSystemTime(DateTime systemTime)
+            {
+                return Time;
+            }
+
             public override DateTime Time => new DateTime(2014, 3, 25, 11, 30, 5);
         }
     }

@@ -40,7 +40,7 @@ namespace Specify.Autofac
                 typedService.ServiceType.IsGenericType() &&
                 typedService.ServiceType.GetGenericTypeDefinition() == typeof(IEnumerable<>) ||
                 typedService.ServiceType.IsArray ||
-                typeof(IStartable).IsAssignableFrom(typedService.ServiceType))
+                typedService.ServiceType.CanBeCastTo<IStartable>())
                 return Enumerable.Empty<IComponentRegistration>();
 
             var rb = RegistrationBuilder.ForDelegate<object>((c, p) => _mockFactory.CreateMock(typedService.ServiceType))

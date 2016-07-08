@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-using ApprovalTests;
-using ApprovalTests.Reporters;
+﻿using System.IO;
+//using ApprovalTests;
+//using ApprovalTests.Reporters;
 using NUnit.Framework;
+using Shouldly;
 using Specify.Configuration;
 
 namespace Specify.Tests.Configuration
@@ -10,11 +10,12 @@ namespace Specify.Tests.Configuration
     [TestFixture]
     public class LoggingProcessorTests
     {
+#if NET46
         [Test]
-        [UseReporter(typeof(DiffReporter))]
+        //[UseReporter(typeof(DiffReporter))]
         public void LoggingOutputTest()
         {
-            string filePath = Path.Combine(Environment.CurrentDirectory, "nlog-sample.txt");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "nlog-sample.txt");
             using (new TemporaryNLogLogger(filePath))
             {
                 var story = new ReportTestData()
@@ -22,10 +23,12 @@ namespace Specify.Tests.Configuration
                 var sut = new ScenarioLoggingProcessor();
                 sut.Process(story);
 
-                Approvals.VerifyFile(filePath);
+                //Approvals.VerifyFile(filePath);
+                var output = File.ReadAllText(filePath);
+                output.ShouldMatchApproved();
             }
         }
-
+#endif
         //[Test]
         //[UseReporter(typeof(DiffReporter))]
         //public void LoggingConfigurationTest()

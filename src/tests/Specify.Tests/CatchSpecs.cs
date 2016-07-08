@@ -1,12 +1,12 @@
 ﻿using System;
 using NSubstitute;
+using NUnit.Framework;
 using Specify.Tests.Stubs;
+using Shouldly;
+
 
 namespace Specify.Tests
 {
-    using NUnit.Framework;
-
-    using Shouldly;
 
     public class CatchSpecs
     {

@@ -1,7 +1,6 @@
-﻿using ApprovalTests;
-using ApprovalTests.Reporters;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
+using Shouldly;
 using Specify.Configuration;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
@@ -9,8 +8,6 @@ using TestStack.BDDfy.Reporters;
 
 namespace Specify.Tests.Configuration
 {
-    using System.Runtime.CompilerServices;
-
     [TestFixture]
     public class BddfyTestEngineTests
     {
@@ -37,10 +34,10 @@ namespace Specify.Tests.Configuration
 
             spec.Received().BDDfy();
         }
-
+#if NET46
         [Test]
-        [UseReporter(typeof(DiffReporter))]
-        [MethodImpl(MethodImplOptions.NoInlining)]
+        // [UseReporter(typeof(DiffReporter))]
+        //        [MethodImpl(MethodImplOptions.NoInlining)]
         public void should_display_examples_on_reports()
         {
             var scenario = new StubUserStoryScenarioForWithExamples();
@@ -50,7 +47,9 @@ namespace Specify.Tests.Configuration
 
             var reporter = new TextReporter();
             reporter.Process(story);
-            Approvals.Verify(reporter.ToString());
+            // Approvals.Verify(reporter.ToString());
+            reporter.ToString().ShouldMatchApproved();
         }
+#endif
     }
 }
