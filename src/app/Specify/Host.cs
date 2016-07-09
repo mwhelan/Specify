@@ -23,10 +23,8 @@ namespace Specify
 #else
             System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += context => _scenarioRunner.AfterAllScenarios(); 
 #endif
-
-            Configuration = ConfigScannerFactory
-                .SelectScanner()
-                .GetConfiguration();
+            var scanner = ConfigScannerFactory.SelectScanner();
+            Configuration = scanner.GetConfiguration();
 
             _scenarioRunner = new ScenarioRunner(Configuration, new BddfyTestEngine());
             _scenarioRunner.BeforeAllScenarios();

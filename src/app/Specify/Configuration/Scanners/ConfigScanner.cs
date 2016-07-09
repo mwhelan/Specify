@@ -43,7 +43,7 @@ namespace Specify.Configuration.Scanners
 
         private Func<Type, bool> IsSpecifyConfigurationImplementation()
         {
-            return type => type.IsConcreteTypeOf<IBootstrapSpecify>()
+            return type => type.IsConcreteTypeOf(DefaultBootstrapperType)
                            && type != DefaultBootstrapperType;
         }
     }

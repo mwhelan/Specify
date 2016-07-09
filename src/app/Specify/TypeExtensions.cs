@@ -44,6 +44,13 @@ namespace Specify
             return type.IsConcrete() && type.CanBeCastTo<T>();
         }
 
+        internal static bool IsConcreteTypeOf(this Type type, Type candidateType)
+        {
+            if (type == null) return false;
+
+            return type.IsConcrete() && type.CanBeCastTo(candidateType);
+        }
+
         /// <summary>
         /// Determines whether this instance [can be cast to] the specified type.
         /// </summary>

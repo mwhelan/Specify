@@ -85,8 +85,9 @@ namespace Specify.lib
         /// <returns>IEnumerable&lt;Type&gt;.</returns>
         public static IEnumerable<Type> GetAllTypesFromAppDomain()
         {
-            return GetAllAssembliesFromAppDomain()
-                .SelectMany(assembly => assembly.ExportedTypes);
+            var assemblies = GetAllAssembliesFromAppDomain();
+            var types = assemblies.SelectMany(assembly => assembly.ExportedTypes);
+            return types;
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace Specify.lib
         public static IEnumerable<Assembly> GetAllAssembliesFromAppDomain()
         {
             var assemblies = new List<Assembly>();
-            var dependencies = DependencyContext.Default.CompileLibraries;
+            var dependencies = DependencyContext.Default.RuntimeLibraries;
             foreach (var library in dependencies)
             {
                 if (IsCandidateCompilationLibrary(library))
@@ -108,10 +109,10 @@ namespace Specify.lib
             return assemblies;
         }
 
-        private static bool IsCandidateCompilationLibrary(CompilationLibrary compilationLibrary)
+        private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary)
         {
-            return !compilationLibrary.Name.ToLower().StartsWith("Specify")
-                && compilationLibrary.Dependencies.Any(d => d.Name.ToLower().StartsWith("Specify"));
+            return compilationLibrary.Name == ("Specify")
+                || compilationLibrary.Dependencies.Any(d => d.Name.StartsWith("Specify"));
         }
     }
 }
