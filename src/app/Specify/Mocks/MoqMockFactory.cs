@@ -1,40 +1,29 @@
 using System;
-using System.Reflection;
 
 namespace Specify.Mocks
 {
     /// <summary>
     /// Adapter for the Moq mocking provider.
     /// </summary>
-    public class MoqMockFactory : IMockFactory
+    public class MoqMockFactory : MockFactoryBase
     {
-        private readonly Type _mockOpenType;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MoqMockFactory"/> class.
-        /// </summary>
+        /// <inheritdoc />
         public MoqMockFactory() 
-            : this(new FileSystem()) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MoqMockFactory"/> class.
-        /// </summary>
-        /// <param name="fileSystem">The file system.</param>
-        /// <exception cref="System.InvalidOperationException">Unable to find Type Moq.Mock`1 in assembly  + assembly.Location</exception>
-        public MoqMockFactory(IFileSystem fileSystem)
-        {
-            var assembly = fileSystem.Load("Moq");
-            _mockOpenType = fileSystem.GetTypeFrom(assembly, "Moq.Mock`1");
-            if (_mockOpenType == null)
-                throw new InvalidOperationException("Unable to find Type Moq.Mock`1 in assembly " + assembly.Location);
-        }
+            : base(new FileSystem()) { }
 
         /// <inheritdoc />
-        public object CreateMock(Type type)
+        public MoqMockFactory(IFileSystem fileSystem) 
+            : base(fileSystem) { }
+
+        /// <inheritdoc />
+        protected override string MockTypeName => "Moq.Mock`1";
+
+        /// <inheritdoc />
+        public override object CreateMock(Type type)
         {
-            Type closedType = _mockOpenType.MakeGenericType(new[] {type});
-            PropertyInfo objectProperty = closedType.GetPropertyInfo("Object", type);
-            object instance = closedType.Create();
+            var closedType = MockOpenType.MakeGenericType(new[] {type});
+            var objectProperty = closedType.GetPropertyInfo("Object", type);
+            var instance = closedType.Create();
 
             return objectProperty.GetValue(instance, null);
         }

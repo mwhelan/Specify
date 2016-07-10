@@ -1,38 +1,27 @@
 using System;
-using System.Reflection;
 
 namespace Specify.Mocks
 {
     /// <summary>
     /// Adapter for the FakeItEasy mocking provider.
     /// </summary>
-    public class FakeItEasyMockFactory : IMockFactory
+    public class FakeItEasyMockFactory : MockFactoryBase
     {
-        private readonly Type _mockOpenType;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FakeItEasyMockFactory"/> class.
-        /// </summary>
+        /// <inheritdoc />
         public FakeItEasyMockFactory() 
-            : this(new FileSystem()) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FakeItEasyMockFactory"/> class.
-        /// </summary>
-        /// <param name="fileSystem">The file system.</param>
-        /// <exception cref="System.InvalidOperationException">Unable to find Type FakeItEasy.A in assembly  + assembly.Location</exception>
-        public FakeItEasyMockFactory(IFileSystem fileSystem)
-        {
-            var assembly = fileSystem.Load("FakeItEasy");
-            _mockOpenType = fileSystem.GetTypeFrom(assembly, "FakeItEasy.A");
-            if (_mockOpenType == null)
-                throw new InvalidOperationException("Unable to find Type FakeItEasy.A in assembly " + assembly.Location);
-        }
+            : base(new FileSystem()) { }
 
         /// <inheritdoc />
-        public object CreateMock(Type type)
+        public FakeItEasyMockFactory(IFileSystem fileSystem) 
+            : base(fileSystem) { }
+
+        /// <inheritdoc />
+        protected override string MockTypeName => "FakeItEasy.A";
+
+        /// <inheritdoc />
+        public override object CreateMock(Type type)
         {
-            var openFakeMethod = _mockOpenType.GetMethodInfo("Fake", Type.EmptyTypes);
+            var openFakeMethod = MockOpenType.GetMethodInfo("Fake", Type.EmptyTypes);
             var closedFakeMethod = openFakeMethod.MakeGenericMethod(type);
 
             try

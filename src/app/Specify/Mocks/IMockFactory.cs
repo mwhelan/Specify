@@ -8,6 +8,12 @@ namespace Specify.Mocks
     public interface IMockFactory
     {
         /// <summary>
+        /// The name of the mocking framework that the factory uses.
+        /// </summary>
+        /// <returns>Mocking framework name</returns>
+        string MockProviderName { get; }
+
+        /// <summary>
         /// Creates the mock.
         /// </summary>
         /// <param name="type">The type to be mocked.</param>

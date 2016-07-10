@@ -17,12 +17,12 @@ namespace Specify.Tests.Mocks
         protected abstract IMockFactory CreateSut(IFileSystem fileSystem);
 
         [Test]
-        public void should_throw_FileNotFoundException_if_Mock_assembly_not_referenced()
+        public void should_not_throw_FileNotFoundException_if_Mock_assembly_not_referenced()
         {
             var fileSystem = Substitute.For<IFileSystem>();
             fileSystem.Load(Arg.Any<string>()).Returns(x => { throw new FileNotFoundException(); });
 
-            Should.Throw<FileNotFoundException>(() => CreateSut(fileSystem));
+            Should.NotThrow(() => CreateSut(fileSystem));
         }
 #if NET46
         [Test]
