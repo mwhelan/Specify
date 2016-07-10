@@ -11,8 +11,7 @@ namespace Specify.Configuration
         /// <inheritdoc />
         protected override IContainer BuildApplicationContainer()
         {
-            var mockFactory = GetMockFactory();
-            var container = new TinyContainerFactory().Create(mockFactory);
+            var container = new TinyContainerFactory().Create(MockFactory);
             ConfigureContainer(container);
             return new TinyContainer(container);
         }

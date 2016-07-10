@@ -19,5 +19,11 @@ namespace Specify.Mocks
         /// <param name="type">The type to be mocked.</param>
         /// <returns>System.Object.</returns>
         object CreateMock(Type type);
+
+        /// <summary>
+        /// Determines whether the mock provider assembly is registered.
+        /// </summary>
+        /// <returns><c>true</c> if [is assembly available]; otherwise, <c>false</c>.</returns>
+        bool IsProviderAvailable { get; }
     }
 }

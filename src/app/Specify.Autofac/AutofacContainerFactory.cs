@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Specify.lib;
 using Autofac;
 using Autofac.Features.ResolveAnything;
@@ -10,7 +9,7 @@ namespace Specify.Autofac
 {
     internal class AutofacContainerFactory
     {
-        public ContainerBuilder Create(Func<IMockFactory> mockFactory)
+        public ContainerBuilder Create(IMockFactory mockFactory)
         {
             var builder = new ContainerBuilder();
             RegisterScenarios(builder);
@@ -28,7 +27,7 @@ namespace Specify.Autofac
                 .AsClosedTypesOf(typeof(ScenarioFor<,>));
         }
 
-        private void RegisterScenarioContainer(ContainerBuilder builder, Func<IMockFactory> mockFactory)
+        private void RegisterScenarioContainer(ContainerBuilder builder, IMockFactory mockFactory)
         {
             if (mockFactory == null)
             {
@@ -37,12 +36,11 @@ namespace Specify.Autofac
             }
             else
             {
-                var mockFactoryInstance = mockFactory.Invoke();
                 builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
-                builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactoryInstance));
+                builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactory));
                 builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
 
-                var mockFactoryName = mockFactoryInstance.GetType().Name;
+                var mockFactoryName = mockFactory.MockProviderName;
                 this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactoryName);
             }
         }

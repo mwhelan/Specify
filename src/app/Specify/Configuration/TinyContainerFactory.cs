@@ -9,7 +9,7 @@ namespace Specify.Configuration
 {
     internal class TinyContainerFactory
     {
-        public TinyIoCContainer Create(Func<IMockFactory> mockFactory)
+        public TinyIoCContainer Create(IMockFactory mockFactory)
         {
             var container = new TinyIoCContainer();
             RegisterScenarios(container);
@@ -28,9 +28,9 @@ namespace Specify.Configuration
             this.Log().DebugFormat("Registered {RegisteredScenarioCount} Scenarios", scenarios.Count);
         }
 
-        private void RegisterScenarioContainer(TinyIoCContainer container, Func<IMockFactory> mockFactory)
+        private void RegisterScenarioContainer(TinyIoCContainer container, IMockFactory mockFactory)
         {
-            if (mockFactory == null)
+            if (mockFactory.GetType() == typeof(NullMockFactory))
             {
                 container.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
                 this.Log()
@@ -38,11 +38,9 @@ namespace Specify.Configuration
             }
             else
             {
-                var mockFactoryInstance = mockFactory.Invoke();
-                container.Register<IContainer>((c, p) => new TinyMockingContainer(mockFactoryInstance, c.GetChildContainer()));
-                var mockFactoryName = mockFactory().GetType().Name;
+                container.Register<IContainer>((c, p) => new TinyMockingContainer(mockFactory, c.GetChildContainer()));
                 this.Log()
-                    .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactoryName);
+                    .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
             }
         }
     }

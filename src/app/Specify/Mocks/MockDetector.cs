@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,19 +9,9 @@ namespace Specify.Mocks
     public class MockDetector
     {
         /// <summary>
-        /// A simple abstraction of the file system.
-        /// </summary>
-        private readonly IFileSystem _fileSystem;
-
-        /// <summary>
         /// The collection of mock providers
         /// </summary>
-        private readonly List<Tuple<string, Func<IMockFactory>>> _mockProviders = new List<Tuple<string, Func<IMockFactory>>>
-        {
-            new Tuple<string, Func<IMockFactory>>("NSubstitute", () => new NSubstituteMockFactory()),
-            new Tuple<string, Func<IMockFactory>>("FakeItEasy", () => new FakeItEasyMockFactory()),
-            new Tuple<string, Func<IMockFactory>>("Moq", () => new MoqMockFactory())
-        };
+        private readonly List<IMockFactory> _mockProviders;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MockDetector"/> class.
@@ -36,19 +25,23 @@ namespace Specify.Mocks
         /// <param name="fileSystem">The file system.</param>
         public MockDetector(IFileSystem fileSystem)
         {
-            _fileSystem = fileSystem;
+            _mockProviders = new List<IMockFactory>
+            {
+                new NSubstituteMockFactory(fileSystem),
+                new FakeItEasyMockFactory(fileSystem),
+                new MoqMockFactory(fileSystem),
+                new NullMockFactory()
+            };
         }
 
         /// <summary>
         /// Finds the first mock provider that is registered.
         /// </summary>
         /// <returns>The mock factory or null if none are registered.</returns>
-        public Func<IMockFactory> FindAvailableMock()
+        public IMockFactory FindAvailableMock()
         {
             return _mockProviders
-                .Where(mock => _fileSystem.IsAssemblyAvailable(mock.Item1))
-                .Select(mock => mock.Item2)
-                .FirstOrDefault();
+                .FirstOrDefault(mock => mock.IsProviderAvailable);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Specify.Mocks;
 
 namespace Specify.Configuration
 {
@@ -12,6 +13,12 @@ namespace Specify.Configuration
         /// </summary>
         /// <value>The application container.</value>
         IContainer ApplicationContainer { get; }
+
+        /// <summary>
+        /// Gets the mock provider if one is referenced.
+        /// </summary>
+        /// <value>The mock factory.</value>
+        IMockFactory MockFactory { get; set; }
 
         /// <summary>
         /// Gets the actions that will be run before and after all the scenarios (at the beginning/end of AppDomain).

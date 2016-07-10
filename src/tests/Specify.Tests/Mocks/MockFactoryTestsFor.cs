@@ -21,9 +21,16 @@ namespace Specify.Tests.Mocks
         {
             var fileSystem = Substitute.For<IFileSystem>();
             fileSystem.Load(Arg.Any<string>()).Returns(x => { throw new FileNotFoundException(); });
-
             Should.NotThrow(() => CreateSut(fileSystem));
         }
+
+        [Test]
+        public void should_return_Name_of_mocking_framework()
+        {
+            var sut = CreateSut(Substitute.For<IFileSystem>());
+            sut.MockProviderName.ShouldBe(AssemblyName);
+        }
+
 #if NET46
         [Test]
         public void should_throw_InvalidOperationException_if_FakeItEasy_version_not_compatible()

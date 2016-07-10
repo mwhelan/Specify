@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Specify.Logging;
 using Specify.Mocks;
@@ -12,6 +11,8 @@ namespace Specify.Configuration
     /// </summary>
     public abstract class BootstrapperBase : IBootstrapSpecify
     {
+        private IMockFactory _mockFactory;
+
         /// <summary>
         /// Builds the application container.
         /// </summary>
@@ -20,6 +21,18 @@ namespace Specify.Configuration
 
         /// <inheritdoc />
         public IContainer ApplicationContainer { get; internal set; }
+
+        /// <summary>
+        /// By default, Specify will detect NSubstitute, FakeItEasy and Moq, in that order.
+        /// If none are found, or null is returned as the mock factory, then the full TinyIoc 
+        /// container will be used without mocking and you will have to configure its dependencies. 
+        /// </summary>
+        /// <returns>IMockFactory.</returns>
+        public IMockFactory MockFactory
+        {
+            get { return _mockFactory ?? (_mockFactory = new MockDetector().FindAvailableMock()); }
+            set { _mockFactory = value; }
+        }
 
         /// <inheritdoc />
         public List<IPerAppDomainActions> PerAppDomainActions { get; } = new List<IPerAppDomainActions>();
@@ -39,16 +52,6 @@ namespace Specify.Configuration
             ConfigureBddfy();
             ApplicationContainer = BuildApplicationContainer();
             LogSpecifyConfiguration();
-        }
-
-        /// <summary>
-        /// Override default behaviour. By default, Specify will detect NSubstitute, FakeItEasy and Moq, in that order.
-        /// If none are found, or null is returned as the mock factory, then the full TinyIoc container will be used without mocking. 
-        /// </summary>
-        /// <returns>Func&lt;IMockFactory&gt;.</returns>
-        public virtual Func<IMockFactory> GetMockFactory()
-        {
-            return new MockDetector().FindAvailableMock();
         }
 
         /// <summary>

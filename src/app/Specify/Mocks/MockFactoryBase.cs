@@ -13,6 +13,9 @@ namespace Specify.Mocks
         /// <inheritdoc />
         public abstract object CreateMock(Type type);
 
+        /// <inheritdoc />
+        public bool IsProviderAvailable => _fileSystem.IsAssemblyAvailable(MockProviderName);
+
         /// <summary>
         /// The name of the type in the mock library that generates mocks.
         /// </summary>
