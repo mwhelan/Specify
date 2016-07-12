@@ -40,8 +40,7 @@ namespace Specify.Autofac
                 builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactory));
                 builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
 
-                var mockFactoryName = mockFactory.MockProviderName;
-                this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactoryName);
+                this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
             }
         }
     }

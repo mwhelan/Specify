@@ -114,7 +114,7 @@ namespace Specify.Tests
             Action action = () => sut.Get<ConcreteObjectWithNoConstructor>();
 
             Should.Throw<InterfaceResolutionException>(action)
-                .Message.ShouldBe("Failed to resolve an implementation of Specify.Tests.Stubs.ConcreteObjectWithNoConstructor.");
+                .Message.ShouldStartWith("Failed to resolve an implementation of Specify.Tests.Stubs.ConcreteObjectWithNoConstructor.");
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace Specify.Tests
             Action action = () => sut.Get(typeof(ConcreteObjectWithNoConstructor));
 
             Should.Throw<InterfaceResolutionException>(action)
-                .Message.ShouldBe("Failed to resolve an implementation of Specify.Tests.Stubs.ConcreteObjectWithNoConstructor.");
+                .Message.ShouldStartWith("Failed to resolve an implementation of Specify.Tests.Stubs.ConcreteObjectWithNoConstructor.");
         }
 
         [Test]

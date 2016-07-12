@@ -2,7 +2,7 @@
 using Shouldly;
 using Specify.Examples.OrderProcessing;
 
-namespace Specify.Examples.UnitSpecs
+namespace Specify.Examples.UnitSpecs.OrderProcessing
 {
     public class given
     {

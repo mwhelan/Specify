@@ -185,7 +185,7 @@ namespace Specify
 
         internal static bool IsClass(this Type type)
         {
-            return !type.IsClass;
+            return type.IsClass;
         }
 
         internal static bool IsConcrete(this Type type)
@@ -296,7 +296,7 @@ namespace Specify
 
         internal static bool IsClass(this Type type)
         {
-            return !type.GetTypeInfo().IsClass;
+            return type.GetTypeInfo().IsClass;
         }
 
         internal static bool IsConcrete(this Type type)

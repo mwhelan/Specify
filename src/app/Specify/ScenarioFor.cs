@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using Specify.Stories;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
