@@ -2,107 +2,54 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Shouldly;
+using Specify.Configuration.Scanners;
 using Specify.Tests.Stubs;
 
 namespace Specify.Tests
 {
     [TestFixture]
-    public class TypeExtensionTests
+    public class TypeExtensionsTests
     {
         [Test]
-        public void UnitScenario_instance_should_return_true_if_UnitScenario()
+        public void Create_generic_should_create_instance_of_type()
         {
-            new StubUnitScenario()
-                .IsUnitScenario()
-                .ShouldBe(true);
+            typeof(Dependency1).Create<IDependency1>()
+                .ShouldBeOfType<Dependency1>();
         }
 
         [Test]
-        public void UnitScenario_type_should_return_true_if_UnitScenario()
+        public void Create_should_create_instance_of_type()
         {
-            typeof(StubUnitScenario)
-                .IsUnitScenario()
-                .ShouldBe(true);
+            typeof(Dependency1).Create()
+                .ShouldBeOfType<Dependency1>();
         }
 
         [Test]
-        public void StoryScenario_instance_should_return_false_if_not_UnitScenario()
-        {
-            new StubUserStoryScenario()
-                .IsUnitScenario()
-                .ShouldBe(false);;
-        }
-
-        [Test]
-        public void StoryScenario_type_should_return_false_if_not_UnitScenario()
-        {
-            typeof (StubUserStoryScenario)
-                .IsUnitScenario()
-                .ShouldBe(false);
-        }
-
-        [Test]
-        public void NonScenario_type_should_return_false_if_not_UnitScenario()
+        public void IsConcreteTypeOf_should_return_true_for_class()
         {
             typeof(Dependency1)
-                .IsUnitScenario()
-                .ShouldBe(false);
-        }
-
-        [Test]
-        public void StoryScenario_instance_should_return_true_if_StoryScenario()
-        {
-            new StubUserStoryScenario()
-                .IsStoryScenario()
-                .ShouldBe(true);
-        }
-
-        [Test]
-        public void StoryScenario_type_should_return_true_if_StoryScenario()
-        {
-            new StubUserStoryScenario()
-                .IsStoryScenario()
-                .ShouldBe(true);
-        }
-
-        [Test]
-        public void StoryScenario_instance_should_return_false_if_not_StoryScenario()
-        {
-            new StubUnitScenario()
-                .IsStoryScenario()
-                .ShouldBe(false);;
-        }
-
-        [Test]
-        public void StoryScenario_type_should_return_false_if__not_StoryScenario()
-        {
-            typeof (StubUnitScenario)
-                .IsStoryScenario()
-                .ShouldBe(false);
-        }
-
-        [Test]
-        public void NonScenario_type_should_return_false_if_not_StoryScenario()
-        {
+                .IsConcreteTypeOf<IDependency1>()
+                .ShouldBeTrue();
             typeof(Dependency1)
-                .IsStoryScenario()
-                .ShouldBe(false);
+                .IsConcreteTypeOf(typeof(IDependency1))
+                .ShouldBeTrue();
         }
 
         [Test]
-        public void Nested_StoryScenario_instance_should_return_true_if_StoryScenario()
+        public void IsConcreteTypeOf_should_return_false_for_abstract()
         {
-            new UserStoryScenarioWithAllSupportedStepsInRandomOrder()
-                .IsStoryScenario()
-                .ShouldBe(true); ;
-        }
-
-        [Test]
-        public void Nested_StoryScenario_type_should_return_true_if_StoryScenario()
-        {
-            typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder)
-                .IsStoryScenario()
-                .ShouldBe(true); ;
+            typeof(IDependency1)
+                .IsConcreteTypeOf<IDependency1>()
+                .ShouldBeFalse();
+            typeof(ConfigScanner)
+                .IsConcreteTypeOf<ConfigScanner>()
+                .ShouldBeFalse();
+            typeof(IDependency1)
+                .IsConcreteTypeOf(typeof(IDependency1))
+                .ShouldBeFalse();
+            typeof(ConfigScanner)
+                .IsConcreteTypeOf(typeof(ConfigScanner))
+                .ShouldBeFalse();
         }
 
         [Test]
