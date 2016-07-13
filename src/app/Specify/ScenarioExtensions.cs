@@ -73,7 +73,7 @@ namespace Specify
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        internal static bool GenericTypeIsSpecificationStory(Type type)
+        private static bool GenericTypeIsSpecificationStory(Type type)
         {
             while (true)
             {
