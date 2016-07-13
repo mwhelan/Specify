@@ -1,4 +1,5 @@
 ﻿using System;
+using Specify.Exceptions;
 using TestStack.BDDfy;
 
 namespace Specify
@@ -60,5 +61,50 @@ namespace Specify
         /// </summary>
         /// <param name="container">The container.</param>
         void SetContainer(IContainer container);
+
+        /// <summary>
+        /// Gets a value of the specified type from the container, optionally registered under a key.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key">The key.</param>
+        /// <returns>T.</returns>
+        /// <exception cref="InterfaceResolutionException"></exception>
+        T The<T>(string key = null) where T : class;
+
+        /// <summary>
+        /// Gets a value of the specified type from the container, optionally registered under a key.
+        /// </summary>
+        /// <param name="serviceType">Type of the service.</param>
+        /// <param name="key">The key.</param>
+        /// <returns>System.Object.</returns>
+        /// <exception cref="InterfaceResolutionException"></exception>
+        object The(Type serviceType, string key = null);
+
+        /// <summary>
+        /// Registers a type to the container.
+        /// </summary>
+        /// <typeparam name="T">The type of the component implementation.</typeparam>
+        /// <exception cref="InterfaceRegistrationException"></exception>
+        void SetThe<T>() where T : class;
+
+        /// <summary>
+        /// Registers an implementation type for a service interface
+        /// </summary>
+        /// <typeparam name="TService">The interface type</typeparam>
+        /// <typeparam name="TImplementation">The type that implements the service interface</typeparam>
+        /// <exception cref="InterfaceRegistrationException"></exception>
+        void SetThe<TService, TImplementation>()
+            where TService : class
+            where TImplementation : class, TService;
+
+        /// <summary>
+        /// Sets a value in the container, so that from now on, it will be returned when you call <see cref="Get{T}" />
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="valueToSet">The value to set.</param>
+        /// <param name="key">The key.</param>
+        /// <returns>T.</returns>
+        /// <exception cref="InterfaceRegistrationException"></exception>
+        T SetThe<T>(T valueToSet, string key = null) where T : class;
     }
 }

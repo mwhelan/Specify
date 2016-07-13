@@ -10,7 +10,7 @@ namespace Specify.Examples.UnitSpecs.OrderProcessing
         {
             protected void Given_the_item_is_available()
             {
-                Container.Get<IInventory>().IsQuantityAvailable("TestPart", 10).Returns(true);
+                The<IInventory>().IsQuantityAvailable("TestPart", 10).Returns(true);
             }
         }
     }
@@ -31,12 +31,12 @@ namespace Specify.Examples.UnitSpecs.OrderProcessing
 
         public void AndThen_it_checks_the_inventory()
         {
-            Container.Get<IInventory>().Received().IsQuantityAvailable("TestPart", 10);
+            The<IInventory>().Received().IsQuantityAvailable("TestPart", 10);
         }
 
         public void AndThen_it_raises_an_order_submitted_event()
         {
-            Container.Get<IPublisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
+            The<IPublisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
         }
     }
 
