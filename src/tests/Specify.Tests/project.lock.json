@@ -52,6 +52,32 @@
           "lib/netcoreapp1.0/dotnet-test-nunit.dll": {}
         }
       },
+      "FakeItEasy/2.2.0-coreclr-alpha30": {
+        "type": "package",
+        "dependencies": {
+          "Castle.Core": "4.0.0-alpha001",
+          "Microsoft.Extensions.DependencyModel": "1.0.0",
+          "Newtonsoft.Json": "9.0.1",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.Console": "4.0.0",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Diagnostics.Tools": "4.0.1",
+          "System.IO.FileSystem": "4.0.1",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Linq.Expressions": "4.0.11",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime.Loader": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.5/FakeItEasy.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/FakeItEasy.dll": {}
+        }
+      },
       "LibLog/4.2.5": {
         "type": "package"
       },
@@ -637,23 +663,20 @@
           "lib/netstandard1.5/NLog.dll": {}
         }
       },
-      "NSubstitute/2.0.0-alpha003": {
+      "NSubstitute/2.0.0-beta": {
         "type": "package",
         "dependencies": {
           "Castle.Core": "4.0.0-alpha001",
           "Microsoft.CSharp": "4.0.0",
-          "System.Collections": "4.0.10",
-          "System.Collections.Concurrent": "4.0.10",
-          "System.Linq": "4.0.0",
-          "System.Linq.Queryable": "4.0.1-rc2-24027",
-          "System.Runtime": "4.0.20",
-          "System.Threading": "4.0.10"
+          "NETStandard.Library": "1.6.0",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0"
         },
         "compile": {
-          "lib/dnxcore50/NSubstitute.dll": {}
+          "lib/netstandard1.5/NSubstitute.dll": {}
         },
         "runtime": {
-          "lib/dnxcore50/NSubstitute.dll": {}
+          "lib/netstandard1.5/NSubstitute.dll": {}
         }
       },
       "NuGet.Common/3.5.0-beta2-1484": {
@@ -2952,6 +2975,32 @@
           "lib/netcoreapp1.0/dotnet-test-nunit.dll": {}
         }
       },
+      "FakeItEasy/2.2.0-coreclr-alpha30": {
+        "type": "package",
+        "dependencies": {
+          "Castle.Core": "4.0.0-alpha001",
+          "Microsoft.Extensions.DependencyModel": "1.0.0",
+          "Newtonsoft.Json": "9.0.1",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.Console": "4.0.0",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Diagnostics.Tools": "4.0.1",
+          "System.IO.FileSystem": "4.0.1",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Linq.Expressions": "4.0.11",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime.Loader": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.5/FakeItEasy.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/FakeItEasy.dll": {}
+        }
+      },
       "LibLog/4.2.5": {
         "type": "package"
       },
@@ -3486,23 +3535,20 @@
           "lib/netstandard1.5/NLog.dll": {}
         }
       },
-      "NSubstitute/2.0.0-alpha003": {
+      "NSubstitute/2.0.0-beta": {
         "type": "package",
         "dependencies": {
           "Castle.Core": "4.0.0-alpha001",
           "Microsoft.CSharp": "4.0.0",
-          "System.Collections": "4.0.10",
-          "System.Collections.Concurrent": "4.0.10",
-          "System.Linq": "4.0.0",
-          "System.Linq.Queryable": "4.0.1-rc2-24027",
-          "System.Runtime": "4.0.20",
-          "System.Threading": "4.0.10"
+          "NETStandard.Library": "1.6.0",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0"
         },
         "compile": {
-          "lib/dnxcore50/NSubstitute.dll": {}
+          "lib/netstandard1.5/NSubstitute.dll": {}
         },
         "runtime": {
-          "lib/dnxcore50/NSubstitute.dll": {}
+          "lib/netstandard1.5/NSubstitute.dll": {}
         }
       },
       "NuGet.Common/3.5.0-beta2-1484": {
@@ -6010,8 +6056,11 @@
           "lib/net451/dotnet-test-nunit.exe": {}
         }
       },
-      "FakeItEasy/2.1.0": {
+      "FakeItEasy/2.2.0-coreclr-alpha30": {
         "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
         "compile": {
           "lib/net40/FakeItEasy.dll": {}
         },
@@ -6171,14 +6220,8 @@
           "lib/net45/NLog.dll": {}
         }
       },
-      "NSubstitute/2.0.0-alpha003": {
+      "NSubstitute/2.0.0-beta": {
         "type": "package",
-        "dependencies": {
-          "Castle.Core": "3.3.3"
-        },
-        "frameworkAssemblies": [
-          "System.ServiceModel"
-        ],
         "compile": {
           "lib/net45/NSubstitute.dll": {}
         },
@@ -6490,8 +6533,11 @@
           "lib/net451/dotnet-test-nunit.exe": {}
         }
       },
-      "FakeItEasy/2.1.0": {
+      "FakeItEasy/2.2.0-coreclr-alpha30": {
         "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
         "compile": {
           "lib/net40/FakeItEasy.dll": {}
         },
@@ -6628,14 +6674,8 @@
           "lib/net45/NLog.dll": {}
         }
       },
-      "NSubstitute/2.0.0-alpha003": {
+      "NSubstitute/2.0.0-beta": {
         "type": "package",
-        "dependencies": {
-          "Castle.Core": "3.3.3"
-        },
-        "frameworkAssemblies": [
-          "System.ServiceModel"
-        ],
         "compile": {
           "lib/net45/NSubstitute.dll": {}
         },
@@ -6955,16 +6995,19 @@
         "lib/netcoreapp1.0/dotnet-test-nunit.runtimeconfig.json"
       ]
     },
-    "FakeItEasy/2.1.0": {
-      "sha512": "vYjnPsr1vw+gSqwQE6AT48ndtqCd47O+ov9SNcPFnyMqfkQ6CYPu246+hcfTQ+uqazsBZLfgvdfshnM1bSNu/A==",
+    "FakeItEasy/2.2.0-coreclr-alpha30": {
+      "sha512": "B/3EP3OztwaPhfzx/u9afepaPl7vfvyGCztIXJJtfsIX4V0+1qo1Nb1yKw5doiPZ7nrZf0X+HhGKSwXZCvNu6w==",
       "type": "package",
-      "path": "FakeItEasy/2.1.0",
+      "path": "FakeItEasy/2.2.0-coreclr-alpha30",
       "files": [
-        "FakeItEasy.2.1.0.nupkg.sha512",
+        "FakeItEasy.2.2.0-coreclr-alpha30.nupkg.sha512",
         "FakeItEasy.nuspec",
         "lib/net40/FakeItEasy.dll",
         "lib/net40/FakeItEasy.pdb",
-        "lib/net40/FakeItEasy.xml"
+        "lib/net40/FakeItEasy.xml",
+        "lib/netstandard1.5/FakeItEasy.XML",
+        "lib/netstandard1.5/FakeItEasy.dll",
+        "lib/netstandard1.5/FakeItEasy.pdb"
       ]
     },
     "LibLog/4.2.5": {
@@ -7486,16 +7529,25 @@
         "lib/wp80/NLog.dll"
       ]
     },
-    "NSubstitute/2.0.0-alpha003": {
-      "sha512": "4ij2zIMIAHIv5UyBGJtTv9ULekGKsGLikrhJHse0xMfpYBbXuZjWlCEeVbDSWbGdQzdYJl/zTtgyFFg3ZLH4+w==",
+    "NSubstitute/2.0.0-beta": {
+      "sha512": "78G3ejBEfoY0cXkSVb2Dzm0sueG9NlLL1qZVb+4rsG/5W2nWQADwyOjWYq0Q+yVXN6UKzAv4vh1mECSP80tymQ==",
       "type": "package",
-      "path": "NSubstitute/2.0.0-alpha003",
+      "path": "NSubstitute/2.0.0-beta",
       "files": [
-        "NSubstitute.2.0.0-alpha003.nupkg.sha512",
+        "BreakingChanges.txt",
+        "CHANGELOG.txt",
+        "LICENSE.txt",
+        "NSubstitute.2.0.0-beta.nupkg.sha512",
         "NSubstitute.nuspec",
-        "lib/dnxcore50/NSubstitute.dll",
+        "README.txt",
+        "acknowledgements.txt",
+        "lib/net35/NSubstitute.XML",
+        "lib/net35/NSubstitute.dll",
+        "lib/net40/NSubstitute.XML",
         "lib/net40/NSubstitute.dll",
-        "lib/net45/NSubstitute.dll"
+        "lib/net45/NSubstitute.XML",
+        "lib/net45/NSubstitute.dll",
+        "lib/netstandard1.5/NSubstitute.dll"
       ]
     },
     "NuGet.Common/3.5.0-beta2-1484": {
@@ -13049,10 +13101,11 @@
   "projectFileDependencyGroups": {
     "": [
       "Autofac >= 4.0.0-rc3-286",
+      "FakeItEasy >= 2.2.0-coreclr-alpha30",
       "Microsoft.NETCore.Platforms >= 1.0.1",
       "Moq >= 4.6.25-alpha",
       "NLog >= 4.4.0-beta13",
-      "NSubstitute >= 2.0.0-alpha003",
+      "NSubstitute >= 2.0.0-beta",
       "NUnit >= 3.4.1",
       "Shouldly >= 2.8.0",
       "Specify",
@@ -13064,9 +13117,7 @@
       "Microsoft.NETCore.App >= 1.0.0",
       "System.Linq >= 4.1.0"
     ],
-    ".NETFramework,Version=v4.6": [
-      "FakeItEasy >= 2.1.0"
-    ]
+    ".NETFramework,Version=v4.6": []
   },
   "tools": {},
   "projectFileToolGroups": {}
