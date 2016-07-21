@@ -1,5 +1,7 @@
 using System.Linq;
 using Specify.Logging;
+using TestStack.BDDfy.Processors;
+using TestStack.BDDfy.Reporters.Html;
 
 namespace Specify.Configuration
 {
@@ -49,6 +51,10 @@ namespace Specify.Configuration
         public void AfterAllScenarios()
         {
             this.Log().DebugFormat("AfterAllScenarios");
+
+            var reporter = new HtmlReporter(new ClassicReportBuilder());
+            reporter.Process(StoryCache.Stories);
+
 
             foreach (var action in Configuration.PerAppDomainActions.AsEnumerable().Reverse())
             {
