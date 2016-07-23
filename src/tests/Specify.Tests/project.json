@@ -41,9 +41,6 @@
         }
       }
     },
-    "runtimes": {
-        "win10-x64": {}
-    },
     "testRunner": "nunit",
     "version": "1.0.0-*"
 }

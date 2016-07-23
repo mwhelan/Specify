@@ -31,9 +31,6 @@
           ]
         }
   },
-  "runtimes": {
-    "win10-x64": {}
-  },
   "testRunner": "xunit",
   "version": "1.0.0-*"
 }
