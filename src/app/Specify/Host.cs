@@ -1,6 +1,7 @@
 ﻿using System;
 using Specify.Configuration;
 using Specify.Configuration.Scanners;
+using Specify.Logging;
 
 namespace Specify
 {
@@ -17,10 +18,12 @@ namespace Specify
         static Host()
         {
 #if NET40
+            "Host".Log().DebugFormat("Registering AppDomain DomainUnload event");
             AppDomain.CurrentDomain.DomainUnload += (sender, e) => {
                 _scenarioRunner.AfterAllScenarios();
             };
 #else
+            "Host".Log().DebugFormat("Registering System.Runtime.Loader.AssemblyLoadContext Unloading event");
             System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += context => _scenarioRunner.AfterAllScenarios(); 
 #endif
             var scanner = ConfigScannerFactory.SelectScanner();

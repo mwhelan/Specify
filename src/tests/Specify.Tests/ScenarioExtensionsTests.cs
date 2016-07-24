@@ -8,6 +8,20 @@ namespace Specify.Tests
     public class ScenarioExtensionsTests
     {
         [Test]
+        public void IsScenario_type_should_return_true_if_concrete_scenario()
+        {
+            typeof(StubUnitScenario).IsScenario().ShouldBe(true);
+            typeof(StubUserStoryScenario).IsScenario().ShouldBe(true);
+        }
+
+        [Test]
+        public void IsScenario_type_should_return_false_if_not_concrete_scenario()
+        {
+            typeof(Dependency1).IsScenario().ShouldBe(false);
+            typeof(IScenario).IsScenario().ShouldBe(false);
+        }
+
+        [Test]
         public void UnitScenario_instance_should_return_true_if_UnitScenario()
         {
             new StubUnitScenario()
@@ -102,6 +116,13 @@ namespace Specify.Tests
                 .IsStoryScenario()
                 .ShouldBe(true); ;
         }
-        
+
+        [Test]
+        public void SutType_should_return_type_of_SUT()
+        {
+            new StubUnitScenario()
+                .SutType()
+                .ShouldBe(typeof(ConcreteObjectWithMultipleConstructors));
+        }
     }
 }

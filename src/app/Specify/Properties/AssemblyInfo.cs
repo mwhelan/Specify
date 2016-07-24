@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 
 [assembly: InternalsVisibleTo("Specify.Tests")]
+[assembly: InternalsVisibleTo("Specify.IntegrationTests")]
 [assembly: InternalsVisibleTo("Specify.Autofac")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

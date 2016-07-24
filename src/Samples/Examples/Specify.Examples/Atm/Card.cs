@@ -1,4 +1,4 @@
-namespace Specify.Examples.Atm
+namespace Specify.Examples.ATM
 {
     public class Card
     {

@@ -18,7 +18,7 @@
           "Microsoft.CSharp"
         ]
       },
-      "TestStack.BDDfy/4.3.0": {
+      "TestStack.BDDfy/4.3.1": {
         "type": "package",
         "frameworkAssemblies": [
           "System.Runtime.Serialization",
@@ -36,7 +36,7 @@
         "framework": ".NETFramework,Version=v4.0",
         "dependencies": {
           "LibLog": "4.2.5",
-          "TestStack.BDDfy": "4.3.0"
+          "TestStack.BDDfy": "4.3.1"
         },
         "frameworkAssemblies": [
           "System.Runtime.Serialization",
@@ -1415,10 +1415,11 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "TestStack.BDDfy/4.3.0": {
+      "TestStack.BDDfy/4.3.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
+          "System.AppContext": "4.1.0",
           "System.Linq.Expressions": "4.1.0",
           "System.Reflection": "4.1.0",
           "System.Reflection.TypeExtensions": "4.1.0",
@@ -1445,7 +1446,7 @@
           "Microsoft.Extensions.DependencyModel": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "System.Dynamic.Runtime": "4.0.11",
-          "TestStack.BDDfy": "4.3.0"
+          "TestStack.BDDfy": "4.3.1"
         },
         "compile": {
           "netstandard1.6/Specify.dll": {}
@@ -4964,12 +4965,12 @@
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
     },
-    "TestStack.BDDfy/4.3.0": {
-      "sha512": "z+TKyJ/ZWGFIpW2R/sefim4HuCm+LgOwzyXEZc0Pa1D5etdTUX/EL5dAo3A0ZpeVnVoe6qa88LCRmf5rUYsTKQ==",
+    "TestStack.BDDfy/4.3.1": {
+      "sha512": "IKwGGzSQkzqMDGd7UknL4fFB98Jv9Y1EWRbBbqwyTvMUEBga8+Q6HTZ4li1XeVbqOnT/4pfGV5gBmBpKCZ2bLQ==",
       "type": "package",
-      "path": "TestStack.BDDfy/4.3.0",
+      "path": "TestStack.BDDfy/4.3.1",
       "files": [
-        "TestStack.BDDfy.4.3.0.nupkg.sha512",
+        "TestStack.BDDfy.4.3.1.nupkg.sha512",
         "TestStack.BDDfy.nuspec",
         "lib/net40/TestStack.BDDfy.dll",
         "lib/netstandard1.5/TestStack.BDDfy.dll"

@@ -53,6 +53,29 @@ namespace Specify.Tests
         }
 
         [Test]
+        public void CanBeCastTo_should_return_true_for_child_classes()
+        {
+            typeof(Dependency1)
+                .CanBeCastTo<IDependency1>()
+                .ShouldBeTrue();
+            typeof(Dependency1)
+                .CanBeCastTo(typeof(IDependency1))
+                .ShouldBeTrue();
+        }
+
+        [Test]
+        public void CanBeCastTo_should_return_false_for_nonchild_classes()
+        {
+            typeof(Dependency1)
+                .CanBeCastTo<IDependency2>()
+                .ShouldBeFalse();
+            typeof(Dependency1)
+                .CanBeCastTo(typeof(IDependency2))
+                .ShouldBeFalse();
+        }
+
+
+        [Test]
         public void IsEnumerable_should_return_true_if_type_is_enumerable()
         {
             var array = new[] { "apples", "oranges", "pears" };

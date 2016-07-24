@@ -1,17 +1,20 @@
-﻿{
+{
   "dependencies": {
-    "dotnet-test-nunit": "3.4.0-beta-1",
-    "NETStandard.Library": "1.6.0",
-    "NSubstitute": "2.0.0-alpha003",
-    "NUnit": "3.4.1",
-    "Shouldly": "2.8.0",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Microsoft.NETCore.Platforms": "1.0.1",
+    "NSubstitute": "2.0.0-beta",
+    "xunit.core": "2.2.0-beta2-build3300",
+    "Serilog.Sinks.Literate": "2.1.0-dev-00028",
+    "Serilog.Sinks.RollingFile": "2.1.0",
+    "Shouldly": "2.8.1",
     "Specify": {
       "target": "project"
     },
     "Specify.Examples": {
       "target": "project"
     },
-    "System.Diagnostics.TraceSource": "4.0.0"
+    "System.Diagnostics.TraceSource": "4.0.0",
+    "TestStack.BDDfy": "4.3.1"
   },
   "frameworks": {
         "netcoreapp1.0": {
@@ -28,9 +31,6 @@
           ]
         }
   },
-  "runtimes": {
-    "win10-x64": {}
-  },
-  "testRunner": "nunit",
+  "testRunner": "xunit",
   "version": "1.0.0-*"
 }
