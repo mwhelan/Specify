@@ -48,7 +48,7 @@ Task("Test")
 	.IsDependentOn("Build")
 	.Does(() => {
 		DotNetCoreTest("./src/tests/Specify.Tests");
-		DotNetCoreTest("./src/tests/Specify.Tests");
+		DotNetCoreTest("./src/tests/Specify.IntegrationTests");
 		DotNetCoreTest("./src/Samples/Examples/Specify.Examples.UnitSpecs");
 	});
 
