@@ -1,7 +1,3 @@
-install:
-  - choco install gitversion.portable -y
-  - choco install gitlink -pre -y
-
 assembly_info:
   patch: false
 
@@ -11,28 +7,11 @@ platform:
 configuration:
   - Release
 
-os: 
-- Visual Studio 2015
-
 build_script:
-  - cmd: set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
-  - cmd: nuget restore src\Specify.sln
-  - cmd: gitversion /l console /output buildserver /updateAssemblyInfo
-  
-  - cmd: msbuild src\Specify.sln /verbosity:minimal "/p:Configuration=%CONFIGURATION%;Platform=%PLATFORM%"
+  - ps: .\build.ps1
 
-  - cmd: GitLink.exe . -u https://github.com/mwhelan/Specify -c %CONFIGURATION% -include Specify,Specify.Autofac,Specify.Ninject
-
-  - cmd: nuget pack nuget\Specify.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: appveyor PushArtifact "Specify.%GitVersion_NuGetVersion%.nupkg"
-
-  - cmd: nuget pack nuget\Specify.Autofac.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: appveyor PushArtifact "Specify.Autofac.%GitVersion_NuGetVersion%.nupkg"
+test: off
+skip_tags: true
 
 cache:
   - src\packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
-  
-test:
-  assemblies:
-  - Specify.Tests.dll
-  - Specify.IntegrationTests.dll  
