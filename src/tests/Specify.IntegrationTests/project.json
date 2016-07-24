@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Autofac": "4.0.0-rc3-286",
     "dotnet-test-nunit": "3.4.0-beta-1",
@@ -8,7 +8,7 @@
     "NLog": "4.4.0-beta13",
     "NSubstitute": "2.0.0-beta",
     "NUnit": "3.4.1",
-    "Shouldly": "2.8.0",
+    "Shouldly": "2.8.1",
     "Specify": {
       "target": "project"
     },
