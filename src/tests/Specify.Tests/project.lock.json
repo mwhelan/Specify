@@ -2889,7 +2889,7 @@
           "lib/netstandard1.5/TestStack.BDDfy.dll": {}
         }
       },
-      "Specify/1.0.0": {
+      "Specify/1.0.0-enhancements0001": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -2914,7 +2914,7 @@
           "Autofac": "4.0.0-rc3-286",
           "Microsoft.CSharp": "4.0.1",
           "NETStandard.Library": "1.6.0",
-          "Specify": "1.0.0",
+          "Specify": "(, )",
           "System.Dynamic.Runtime": "4.0.11",
           "System.Reflection.TypeExtensions": "4.1.0"
         },
@@ -3366,7 +3366,7 @@
           "lib/net40/TestStack.BDDfy.dll": {}
         }
       },
-      "Specify/1.0.0": {
+      "Specify/1.0.0-enhancements0001": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.0",
         "dependencies": {
@@ -3389,7 +3389,7 @@
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Autofac": "4.0.0-rc3-286",
-          "Specify": "1.0.0"
+          "Specify": "(, )"
         },
         "frameworkAssemblies": [
           "System.Runtime.Serialization",
@@ -8904,7 +8904,7 @@
         "lib/netstandard1.5/TestStack.BDDfy.dll"
       ]
     },
-    "Specify/1.0.0": {
+    "Specify/1.0.0-enhancements0001": {
       "type": "project",
       "path": "../../app/Specify/project.json",
       "msbuildProject": "../../app/Specify/Specify.xproj"

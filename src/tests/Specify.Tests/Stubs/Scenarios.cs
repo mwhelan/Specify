@@ -18,8 +18,20 @@ namespace Specify.Tests.Stubs
     class StubUserStoryScenarioForWithStoryAttribute : ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
 
     class StubUserStoryScenarioForWithExamples :
-                ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory>
+                ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory>, IScenario
     {
+        public int ExamplesWasCalled;
+
+        ExampleTable IScenario.Examples 
+        {
+            get
+            {
+                ExamplesWasCalled++;
+                return base.Examples;
+            }
+            set { base.Examples = value; }
+        }
+
         public StubUserStoryScenarioForWithExamples()
         {
             Examples = new ExampleTable("First Example", "Second Example")

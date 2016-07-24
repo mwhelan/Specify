@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Configuration;
@@ -14,14 +15,12 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_handle_specification_with_examples()
         {
-            var examples = new ExampleTable();
-            var spec = Substitute.For<IScenario>();
-            spec.Examples.Returns(examples);
+            var spec = new StubUserStoryScenarioForWithExamples();
             var sut = new BddfyTestEngine();
 
             sut.Execute(spec);
 
-            spec.Received().WithExamples(examples);
+            spec.ExamplesWasCalled.ShouldBe(2);
         }
 
         [Test]

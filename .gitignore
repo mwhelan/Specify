@@ -12,7 +12,7 @@ obj/
 *.ncrunchsolution
 *.ncrunchproject
 *.cache
-src/packages/*
+tools/*
 PackageBuild/*
 Build/*
 *.mdf
