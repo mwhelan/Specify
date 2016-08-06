@@ -12,4 +12,4 @@ pages:
   - Supported Test Frameworks: using-specify-supported-test-frameworks.md
 - Concepts:
   - SUT (System Under Test): concepts-system-under-test.md
-  - Scenarios: concepts-context-specification.md
+  - Context Specification: concepts-context-specification.md

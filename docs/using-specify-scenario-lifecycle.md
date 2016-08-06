@@ -1,7 +1,7 @@
 # Scenario Lifecycle
 Specify uses BDDfy's Reflective API to scan Scenario classes for methods. By default, BDDfy recognises the standard BDD methods, as well as Setup and TearDown. You can read more about them [here](http://www.mehdi-khalili.com/bddify-in-action/method-name-conventions) and you can always [customize them](http://www.michael-whelan.net/roll-your-own-testing-framework/) if you have your own preferences by creating a new BDDfy `MethodNameStepScanner`. 
 
-The methods are found based on these method name conventions - and run in this order.  executed in the following order according to these method nameThe method name:
+The methods are found based on these method name conventions - and run in this order. 
 
 * Ending with `Context` is considered as a setup method. `Not reported`.
 * `Setup` is considered as a setup method. `Not reported`.

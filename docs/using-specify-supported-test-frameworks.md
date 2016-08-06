@@ -1,4 +1,3 @@
-# Supported Test Frameworks
 Like BDDfy, Specify can run with any testing framework. Well, NUnit, xUnit, MsTest and Fixie anyway, which are the ones I've tried it with. 
 
 If you are using [Fixie](http://fixie.github.io/), then you can use Specify as is, and you just have to provide a convention to tell it how to disover and run your specifications.
