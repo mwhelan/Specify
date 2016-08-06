@@ -6,8 +6,10 @@ pages:
 - Features:
   - Overview: features-overview.md
 - Using Specify:
-  - Getting Started: getting-started.md
-  - Configuration: configuration.md
+  - Getting Started: using-specify-getting-started.md
+  - Configuration: using-specify-configuration.md
+  - Scenario Lifecycle: using-specify-scenario-lifecycle.md
+  - Supported Test Frameworks: using-specify-supported-test-frameworks.md
 - Concepts:
-  - SUT (System Under Test): system-under-test.md
-  - Scenarios: scenarios.md
+  - SUT (System Under Test): concepts-system-under-test.md
+  - Scenarios: concepts-context-specification.md

@@ -2914,7 +2914,7 @@
           "Autofac": "4.0.0-rc3-286",
           "Microsoft.CSharp": "4.0.1",
           "NETStandard.Library": "1.6.0",
-          "Specify": "1.0.0",
+          "Specify": "(, )",
           "System.Dynamic.Runtime": "4.0.11",
           "System.Reflection.TypeExtensions": "4.1.0"
         },
@@ -2938,8 +2938,8 @@
           "NSubstitute": "2.0.0-beta",
           "NUnit": "3.4.1",
           "Shouldly": "2.8.1",
-          "Specify": "1.0.0",
-          "Specify.Autofac": "1.0.0",
+          "Specify": "(, )",
+          "Specify.Autofac": "(, )",
           "System.Diagnostics.TraceSource": "4.0.0",
           "System.Linq": "4.1.0",
           "dotnet-test-nunit": "3.4.0-beta-1"
@@ -3415,7 +3415,7 @@
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Autofac": "4.0.0-rc3-286",
-          "Specify": "1.0.0"
+          "Specify": "(, )"
         },
         "frameworkAssemblies": [
           "System.Runtime.Serialization",
@@ -3440,8 +3440,8 @@
           "NSubstitute": "2.0.0-beta",
           "NUnit": "3.4.1",
           "Shouldly": "2.8.1",
-          "Specify": "1.0.0",
-          "Specify.Autofac": "1.0.0",
+          "Specify": "(, )",
+          "Specify.Autofac": "(, )",
           "System.Diagnostics.TraceSource": "4.0.0",
           "dotnet-test-nunit": "3.4.0-beta-1"
         },

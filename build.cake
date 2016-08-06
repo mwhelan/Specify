@@ -4,6 +4,7 @@
 
 var target = Argument("target", "Default");
 var outputDir = "./artifacts/";
+var solutionPath = "./src/Specify.sln";
 var specifyProjectJson = "./src/app/Specify/project.json";
 var specifyAutofacProjectJson = "./src/app/Specify.Autofac/project.json";
 
@@ -41,7 +42,7 @@ Task("Build")
 	.IsDependentOn("Version")
 	.IsDependentOn("Restore")
 	.Does(() => {
-		MSBuild("./src/Specify.sln");
+		MSBuild(solutionPath);
 	});
 
 Task("Test")
@@ -55,7 +56,7 @@ Task("Test")
 Task("Package")
 	.IsDependentOn("Test")
 	.Does(() => {
-		GitLink(".");
+		//GitLink("./", new GitLinkSettings { ArgumentCustomization = args => args.Append("-include Specify,Specify.Autofac") });
         
         GenerateReleaseNotes();
 
@@ -88,7 +89,7 @@ private void PackageProject(string projectName, string projectJsonPath)
 
 private void GenerateReleaseNotes()
 {
-		var releaseNotesExitCode = StartProcess(
+	var releaseNotesExitCode = StartProcess(
 		@"tools\GitReleaseNotes\tools\gitreleasenotes.exe", 
 		new ProcessSettings { Arguments = ". /o artifacts/releasenotes.md" });
 	if (string.IsNullOrEmpty(System.IO.File.ReadAllText("./artifacts/releasenotes.md")))

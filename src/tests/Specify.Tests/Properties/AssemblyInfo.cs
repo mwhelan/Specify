@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -20,3 +20,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("da325e84-dc76-4d03-a0bb-fcb6e83b1d7d")]
+
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0+243.Branch.master.Sha.f61a21ae0f41f744cc78b9717a6827fa4326f500")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
