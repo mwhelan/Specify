@@ -1,0 +1,49 @@
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.IntegrationTests")]
+[assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
+[assembly: System.Runtime.InteropServices.GuidAttribute("2cb27234-4675-4f6b-b165-052ff7e5fa5e")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.0", FrameworkDisplayName=".NET Framework 4")]
+
+namespace Specify.Autofac
+{
+    
+    public class AutofacContainer : Specify.IContainer, System.IDisposable
+    {
+        protected Autofac.ContainerBuilder _containerBuilder;
+        public AutofacContainer() { }
+        public AutofacContainer(Autofac.ILifetimeScope container) { }
+        public AutofacContainer(Autofac.ContainerBuilder containerBuilder) { }
+        public Autofac.ILifetimeScope Container { get; }
+        public bool CanResolve<T>()
+            where T :  class { }
+        public bool CanResolve(System.Type serviceType) { }
+        public void Dispose() { }
+        public T Get<T>(string key = null)
+            where T :  class { }
+        public object Get(System.Type serviceType, string key = null) { }
+        public void Set<T>()
+            where T :  class { }
+        public void Set<TService, TImplementation>()
+            where TService :  class
+            where TImplementation :  class, TService { }
+        public T Set<T>(T valueToSet, string key = null)
+            where T :  class { }
+    }
+    public class AutofacMockRegistrationHandler : Autofac.Core.IRegistrationSource
+    {
+        public AutofacMockRegistrationHandler(Specify.Mocks.IMockFactory mockFactory) { }
+        public bool IsAdapterForIndividualComponents { get; }
+        public System.Collections.Generic.IEnumerable<Autofac.Core.IComponentRegistration> RegistrationsFor(Autofac.Core.Service service, System.Func<Autofac.Core.Service, System.Collections.Generic.IEnumerable<Autofac.Core.IComponentRegistration>> registrationAccessor) { }
+    }
+    public class DefaultAutofacBootstrapper : Specify.Configuration.BootstrapperBase
+    {
+        public DefaultAutofacBootstrapper() { }
+        protected override Specify.IContainer BuildApplicationContainer() { }
+        public virtual void ConfigureContainer(Autofac.ContainerBuilder builder) { }
+    }
+    public class SpecifyAutofacConfigScanner : Specify.Configuration.Scanners.ConfigScanner
+    {
+        public SpecifyAutofacConfigScanner(Specify.Mocks.IFileSystem fileSystem) { }
+        public SpecifyAutofacConfigScanner() { }
+        protected override System.Type DefaultBootstrapperType { get; }
+    }
+}

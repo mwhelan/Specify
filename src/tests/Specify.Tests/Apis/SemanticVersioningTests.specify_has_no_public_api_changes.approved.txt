@@ -1,0 +1,668 @@
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.Autofac")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.Examples")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.IntegrationTests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.Ninject")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.Tests")]
+[assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
+[assembly: System.Runtime.InteropServices.GuidAttribute("e0f81c86-6a60-411d-9adc-ae92eec6d2ad")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.0", FrameworkDisplayName=".NET Framework 4")]
+
+namespace Specify
+{
+    
+    public class ArrayCoercion<T> : Specify.IEnumerableCoercion
+        where T :  class
+    {
+        public ArrayCoercion() { }
+        public System.Type ElementType { get; }
+        public object Convert(System.Collections.Generic.IEnumerable<object> enumerable) { }
+    }
+    public class static Catch
+    {
+        public static System.Exception Exception(System.Action throwingAction) { }
+        public static System.Exception Exception<T>(System.Func<T> throwingFunc) { }
+        public static TException Only<TException>(System.Action throwingAction)
+            where TException : System.Exception { }
+    }
+    public class ContainerFor<TSut> : Specify.IContainer, System.IDisposable
+        where TSut :  class
+    {
+        public ContainerFor(Specify.IContainer sourceContainer) { }
+        public TSut SystemUnderTest { get; set; }
+        public bool CanResolve<T>()
+            where T :  class { }
+        public bool CanResolve(System.Type type) { }
+        public void Dispose() { }
+        public T Get<T>(string key = null)
+            where T :  class { }
+        public object Get(System.Type serviceType, string key = null) { }
+        public void Set<T>()
+            where T :  class { }
+        public void Set<TService, TImplementation>()
+            where TService :  class
+            where TImplementation :  class, TService { }
+        public T Set<T>(T valueToSet, string key = null)
+            where T :  class { }
+    }
+    public class static EnumerableTypes
+    {
+        public static System.Type GetTypeFromEnumerable(this System.Type enumerableType) { }
+    }
+    public interface IContainer : System.IDisposable
+    {
+        bool CanResolve<T>()
+            where T :  class;
+        bool CanResolve(System.Type type);
+        T Get<T>(string key = null)
+            where T :  class;
+        object Get(System.Type serviceType, string key = null);
+        void Set<T>()
+            where T :  class;
+        void Set<TService, TImplementation>()
+            where TService :  class
+            where TImplementation :  class, TService;
+        T Set<T>(T valueToSet, string key = null)
+            where T :  class;
+    }
+    public interface IEnumerableCoercion
+    {
+        System.Type ElementType { get; }
+        object Convert(System.Collections.Generic.IEnumerable<object> enumerable);
+    }
+    public interface IScenario : System.IDisposable
+    {
+        TestStack.BDDfy.ExampleTable Examples { get; set; }
+        int Number { get; set; }
+        System.Type Story { get; }
+        string Title { get; }
+        void SetContainer(Specify.IContainer container);
+        void Specify();
+    }
+    public interface IScenario<TSut> : Specify.IScenario, System.IDisposable
+        where TSut :  class
+    {
+        Specify.ContainerFor<TSut> Container { get; }
+        TSut SUT { get; set; }
+    }
+    public class ListCoercion<T> : Specify.IEnumerableCoercion
+        where T :  class
+    {
+        public ListCoercion() { }
+        public System.Type ElementType { get; }
+        public object Convert(System.Collections.Generic.IEnumerable<object> enumerable) { }
+    }
+    public class static ObjectExtensions
+    {
+        public static TSubject And<TSubject, TReturnValue>(this TSubject subject, System.Func<TSubject, TReturnValue> func) { }
+        public static System.Threading.Tasks.Task<T> Asynchronously<T>(this T subject) { }
+        public static TSubject With<TSubject, TReturnValue>(this TSubject subject, System.Func<TSubject, TReturnValue> func) { }
+    }
+    public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut, Specify.Stories.SpecificationStory>
+        where TSut :  class
+    {
+        protected ScenarioFor() { }
+    }
+    public abstract class ScenarioFor<TSut, TStory> : Specify.IScenario, Specify.IScenario<TSut>, System.IDisposable
+        where TSut :  class
+        where TStory : Specify.Stories.Story, new ()
+    {
+        protected ScenarioFor() { }
+        public Specify.ContainerFor<TSut> Container { get; }
+        public TestStack.BDDfy.ExampleTable Examples { get; set; }
+        public int Number { get; set; }
+        public virtual System.Type Story { get; }
+        public TSut SUT { get; set; }
+        public virtual string Title { get; }
+        public void Dispose() { }
+        public virtual void SetContainer(Specify.IContainer container) { }
+        public virtual void Specify() { }
+    }
+    public abstract class TestsFor<TSut>
+        where TSut :  class
+    {
+        protected Specify.ContainerFor<TSut> Container;
+        protected TestsFor() { }
+        protected TSut SUT { get; set; }
+        public void BaseSetup() { }
+        public void BaseTearDown() { }
+    }
+    public class TinyContainer : Specify.IContainer, System.IDisposable
+    {
+        public TinyContainer(TinyIoC.TinyIoCContainer container) { }
+        public TinyIoC.TinyIoCContainer Container { get; }
+        public bool CanResolve<T>()
+            where T :  class { }
+        public virtual bool CanResolve(System.Type type) { }
+        public void Dispose() { }
+        public T Get<T>(string key = null)
+            where T :  class { }
+        public virtual object Get(System.Type serviceType, string key = null) { }
+        public virtual System.Collections.Generic.IEnumerable<object> GetMultiple(System.Type baseType) { }
+        public System.Collections.Generic.IEnumerable<T> GetMultiple<T>()
+            where T :  class { }
+        public void Set<T>()
+            where T :  class { }
+        public void Set<TService, TImplementation>()
+            where TService :  class
+            where TImplementation :  class, TService { }
+        public T Set<T>(T valueToSet, string key = null)
+            where T :  class { }
+        public void SetMultiple(System.Type baseType, System.Collections.Generic.IEnumerable<System.Type> implementationTypes) { }
+        public void SetMultiple<T>(System.Collections.Generic.IEnumerable<System.Type> implementationTypes) { }
+    }
+    public class TinyMockingContainer : Specify.TinyContainer
+    {
+        public TinyMockingContainer(Specify.Mocks.IMockFactory mockFactory, TinyIoC.TinyIoCContainer container) { }
+        public override bool CanResolve(System.Type type) { }
+        public override object Get(System.Type serviceType, string key = null) { }
+        public override System.Collections.Generic.IEnumerable<object> GetMultiple(System.Type baseType) { }
+    }
+    public class static TypeExtensions
+    {
+        public static bool CanBeCastTo<T>(this System.Type type) { }
+        public static bool CanBeCastTo(this System.Type type, System.Type destinationType) { }
+        public static T Create<T>(this System.Type type) { }
+        public static object Create(this System.Type type) { }
+        public static System.Reflection.ConstructorInfo GreediestConstructor(this System.Type type) { }
+        public static bool IsConcrete(this System.Type type) { }
+        public static bool IsConcreteTypeOf<T>(this System.Type type) { }
+        public static bool IsEnumerable(this System.Type type) { }
+        public static bool IsIn<T>(this T target, System.Collections.Generic.IList<T> list) { }
+        public static bool IsScenario(this System.Type type) { }
+        public static bool IsSimple(this System.Type type) { }
+        public static bool IsStoryScenario(this System.Type type) { }
+        public static bool IsStoryScenario(this Specify.IScenario specification) { }
+        public static bool IsUnitScenario(this System.Type type) { }
+        public static bool IsUnitScenario(this Specify.IScenario specification) { }
+    }
+}
+namespace Specify.Configuration
+{
+    
+    public abstract class BootstrapperBase : Specify.Configuration.IBootstrapSpecify
+    {
+        protected BootstrapperBase() { }
+        public Specify.IContainer ApplicationContainer { get; }
+        public Specify.Configuration.HtmlReportConfiguration HtmlReport { get; }
+        public bool LoggingEnabled { get; set; }
+        public System.Collections.Generic.List<Specify.Configuration.IPerAppDomainActions> PerAppDomainActions { get; }
+        public System.Collections.Generic.List<Specify.Configuration.IPerScenarioActions> PerScenarioActions { get; }
+        protected abstract Specify.IContainer BuildApplicationContainer();
+        public virtual void ConfigureReport() { }
+        public virtual System.Func<Specify.Mocks.IMockFactory> GetMockFactory() { }
+        public void InitializeSpecify() { }
+    }
+    public class DefaultBootstrapper : Specify.Configuration.BootstrapperBase
+    {
+        public DefaultBootstrapper() { }
+        protected override Specify.IContainer BuildApplicationContainer() { }
+        public virtual void ConfigureContainer(TinyIoC.TinyIoCContainer container) { }
+    }
+    public class HtmlReportConfiguration : TestStack.BDDfy.Reporters.Html.DefaultHtmlReportConfiguration
+    {
+        public HtmlReportConfiguration() { }
+        public Specify.Configuration.HtmlReportConfiguration.HtmlReportType ReportType { get; set; }
+        public enum HtmlReportType
+        {
+            Classic = 0,
+            Metro = 1,
+        }
+    }
+    public interface IBootstrapSpecify
+    {
+        Specify.IContainer ApplicationContainer { get; }
+        Specify.Configuration.HtmlReportConfiguration HtmlReport { get; }
+        bool LoggingEnabled { get; set; }
+        System.Collections.Generic.List<Specify.Configuration.IPerAppDomainActions> PerAppDomainActions { get; }
+        System.Collections.Generic.List<Specify.Configuration.IPerScenarioActions> PerScenarioActions { get; }
+        void InitializeSpecify();
+    }
+    public interface IPerAppDomainActions
+    {
+        void After();
+        void Before();
+    }
+    public interface IPerScenarioActions
+    {
+        void After();
+        void Before(Specify.IContainer container);
+    }
+    public interface ITestEngine
+    {
+        TestStack.BDDfy.Story Execute(Specify.IScenario scenario);
+    }
+    public class ScenarioLoggingProcessor : TestStack.BDDfy.IProcessor
+    {
+        public ScenarioLoggingProcessor() { }
+        public TestStack.BDDfy.ProcessType ProcessType { get; }
+        public void Process(TestStack.BDDfy.Story story) { }
+    }
+    public class SpecifyStoryMetadataScanner : TestStack.BDDfy.IStoryMetadataScanner
+    {
+        public SpecifyStoryMetadataScanner() { }
+        public virtual TestStack.BDDfy.StoryMetadata Scan(object testObject, System.Type explicityStoryType = null) { }
+    }
+}
+namespace Specify.Configuration.Scanners
+{
+    
+    public abstract class ConfigScanner : Specify.Configuration.Scanners.IConfigScanner
+    {
+        protected ConfigScanner() { }
+        protected ConfigScanner(Specify.Mocks.IFileSystem fileSystem) { }
+        protected abstract System.Type DefaultBootstrapperType { get; }
+        public Specify.Configuration.IBootstrapSpecify GetConfiguration() { }
+    }
+    public class ConfigScannerFactory
+    {
+        public ConfigScannerFactory() { }
+        public static Specify.Configuration.Scanners.IConfigScanner SelectScanner(Specify.Mocks.IFileSystem fileSystem = null) { }
+    }
+    public interface IConfigScanner
+    {
+        Specify.Configuration.IBootstrapSpecify GetConfiguration();
+    }
+    public class SpecifyConfigScanner : Specify.Configuration.Scanners.ConfigScanner
+    {
+        public SpecifyConfigScanner(Specify.Mocks.IFileSystem fileSystem) { }
+        public SpecifyConfigScanner() { }
+        protected override System.Type DefaultBootstrapperType { get; }
+    }
+}
+namespace Specify.Exceptions
+{
+    
+    public class InterfaceRegistrationException : System.Exception
+    {
+        public const string ExceptionMessageFormat = "Cannot register service {0} after SUT is created";
+        public InterfaceRegistrationException(System.Type serviceThatCouldNotBeRegisteredForSomeReason) { }
+    }
+    public class InterfaceResolutionException : System.Exception
+    {
+        public const string ExceptionMessageFormat = "Failed to resolve an implementation of {0}.";
+        public InterfaceResolutionException(System.Exception innerException, System.Type interfaceThatCouldNotBeResolvedForSomeReason) { }
+    }
+    public class LoggingException : System.Exception
+    {
+        public const string ExceptionMessageFormat = "Failed to log for {0} logger.";
+        public LoggingException(System.Exception innerException, string loggerThatCouldNotLogForSomeReason) { }
+    }
+}
+namespace Specify.lib
+{
+    
+    public class static AssemblyTypeResolver
+    {
+        public static System.Collections.Generic.IEnumerable<System.Reflection.Assembly> GetAllAssembliesFromAppDomain() { }
+        public static System.Collections.Generic.IEnumerable<System.Type> GetAllTypesFromAppDomain() { }
+    }
+}
+namespace Specify.Logging
+{
+    
+    public interface ILogProvider
+    {
+        Specify.Logging.Logger GetLogger(string name);
+        System.IDisposable OpenMappedContext(string key, string value);
+        System.IDisposable OpenNestedContext(string message);
+    }
+    public delegate bool Logger(Specify.Logging.LogLevel logLevel, System.Func<string> messageFunc, System.Exception exception = null, params object[] formatParameters);
+    public enum LogLevel
+    {
+        Trace = 0,
+        Debug = 1,
+        Info = 2,
+        Warn = 3,
+        Error = 4,
+        Fatal = 5,
+    }
+    public class static LogProvider
+    {
+        public const string DisableLoggingEnvironmentVariable = "Specify_LIBLOG_DISABLE";
+        public static bool IsDisabled { get; set; }
+        public static void SetCurrentLogProvider(Specify.Logging.ILogProvider logProvider) { }
+    }
+}
+namespace Specify.Mocks
+{
+    
+    public class AutoMockerFor<TSut> : Specify.ContainerFor<TSut>
+        where TSut :  class
+    {
+        public AutoMockerFor() { }
+    }
+    public class FakeItEasyMockFactory : Specify.Mocks.IMockFactory
+    {
+        public FakeItEasyMockFactory() { }
+        public FakeItEasyMockFactory(Specify.Mocks.IFileSystem fileSystem) { }
+        public object CreateMock(System.Type type) { }
+    }
+    public class FileSystem : Specify.Mocks.IFileSystem
+    {
+        public FileSystem() { }
+        public System.Collections.Generic.IEnumerable<System.Type> GetAllTypesFromAppDomain() { }
+        public System.Type GetTypeFrom(System.Reflection.Assembly assembly, string typeName) { }
+        public bool IsAssemblyAvailable(string assemblyName) { }
+        public System.Reflection.Assembly Load(string assemblyName) { }
+    }
+    public interface IFileSystem
+    {
+        System.Collections.Generic.IEnumerable<System.Type> GetAllTypesFromAppDomain();
+        System.Type GetTypeFrom(System.Reflection.Assembly assembly, string typeName);
+        bool IsAssemblyAvailable(string assemblyName);
+        System.Reflection.Assembly Load(string assemblyName);
+    }
+    public interface IMockFactory
+    {
+        object CreateMock(System.Type type);
+    }
+    public class MockDetector
+    {
+        public MockDetector() { }
+        public MockDetector(Specify.Mocks.IFileSystem fileSystem) { }
+        public System.Func<Specify.Mocks.IMockFactory> FindAvailableMock() { }
+    }
+    public class MoqMockFactory : Specify.Mocks.IMockFactory
+    {
+        public MoqMockFactory() { }
+        public MoqMockFactory(Specify.Mocks.IFileSystem fileSystem) { }
+        public object CreateMock(System.Type type) { }
+    }
+    public class NSubstituteMockFactory : Specify.Mocks.IMockFactory
+    {
+        public NSubstituteMockFactory() { }
+        public NSubstituteMockFactory(Specify.Mocks.IFileSystem fileSystem) { }
+        public object CreateMock(System.Type type) { }
+    }
+}
+namespace Specify.Stories
+{
+    
+    public class SpecificationStory : Specify.Stories.Story
+    {
+        public SpecificationStory() { }
+    }
+    public abstract class Story
+    {
+        protected Story() { }
+        public string Narrative1 { get; set; }
+        public string Narrative2 { get; set; }
+        public string Narrative3 { get; set; }
+        public string Title { get; set; }
+        public string TitlePrefix { get; set; }
+        protected string CleanseProperty(string text, string prefix) { }
+    }
+    public abstract class UserStory : Specify.Stories.Story
+    {
+        protected UserStory() { }
+        public string AsA { get; set; }
+        public string IWant { get; set; }
+        public string SoThat { get; set; }
+    }
+    public abstract class ValueStory : Specify.Stories.Story
+    {
+        protected ValueStory() { }
+        public string AsA { get; set; }
+        public string InOrderTo { get; set; }
+        public string IWant { get; set; }
+    }
+}
+namespace System.Reflection
+{
+    
+    public class static ReverseTypeExtender { }
+}
+namespace TinyIoC
+{
+    
+    public class static AssemblyExtensions
+    {
+        public static System.Type[] SafeGetTypes(this System.Reflection.Assembly assembly) { }
+    }
+    public enum DuplicateImplementationActions
+    {
+        RegisterSingle = 0,
+        RegisterMultiple = 1,
+        Fail = 2,
+    }
+    public sealed class NamedParameterOverloads : System.Collections.Generic.Dictionary<string, object>
+    {
+        public NamedParameterOverloads() { }
+        public NamedParameterOverloads(System.Collections.Generic.IDictionary<string, object> data) { }
+        public static TinyIoC.NamedParameterOverloads Default { get; }
+        public static TinyIoC.NamedParameterOverloads FromIDictionary(System.Collections.Generic.IDictionary<string, object> data) { }
+    }
+    public enum NamedResolutionFailureActions
+    {
+        AttemptUnnamedResolution = 0,
+        Fail = 1,
+    }
+    public sealed class ResolveOptions
+    {
+        public ResolveOptions() { }
+        public static TinyIoC.ResolveOptions Default { get; }
+        public static TinyIoC.ResolveOptions FailNameNotFoundOnly { get; }
+        public static TinyIoC.ResolveOptions FailUnregisteredAndNameNotFound { get; }
+        public static TinyIoC.ResolveOptions FailUnregisteredOnly { get; }
+        public TinyIoC.NamedResolutionFailureActions NamedResolutionFailureAction { get; set; }
+        public TinyIoC.UnregisteredResolutionActions UnregisteredResolutionAction { get; set; }
+    }
+    public class SafeDictionary<TKey, TValue> : System.IDisposable
+    
+    
+    {
+        public SafeDictionary() { }
+        public TValue this[TKey key] { set; }
+        public System.Collections.Generic.IEnumerable<TKey> Keys { get; }
+        public void Clear() { }
+        public void Dispose() { }
+        public bool Remove(TKey key) { }
+        public bool TryGetValue(TKey key, out TValue value) { }
+    }
+    public class TinyIoCAutoRegistrationException : System.Exception
+    {
+        public TinyIoCAutoRegistrationException(System.Type registerType, System.Collections.Generic.IEnumerable<System.Type> types) { }
+        public TinyIoCAutoRegistrationException(System.Type registerType, System.Collections.Generic.IEnumerable<System.Type> types, System.Exception innerException) { }
+    }
+    public class TinyIoCConstructorResolutionException : System.Exception
+    {
+        public TinyIoCConstructorResolutionException(System.Type type) { }
+        public TinyIoCConstructorResolutionException(System.Type type, System.Exception innerException) { }
+        public TinyIoCConstructorResolutionException(string message, System.Exception innerException) { }
+        public TinyIoCConstructorResolutionException(string message) { }
+    }
+    public sealed class TinyIoCContainer : System.IDisposable
+    {
+        public TinyIoCContainer() { }
+        public static TinyIoC.TinyIoCContainer Current { get; }
+        public void AutoRegister() { }
+        public void AutoRegister(System.Func<System.Type, bool> registrationPredicate) { }
+        public void AutoRegister(TinyIoC.DuplicateImplementationActions duplicateAction) { }
+        public void AutoRegister(TinyIoC.DuplicateImplementationActions duplicateAction, System.Func<System.Type, bool> registrationPredicate) { }
+        public void AutoRegister(System.Collections.Generic.IEnumerable<System.Reflection.Assembly> assemblies) { }
+        public void AutoRegister(System.Collections.Generic.IEnumerable<System.Reflection.Assembly> assemblies, System.Func<System.Type, bool> registrationPredicate) { }
+        public void AutoRegister(System.Collections.Generic.IEnumerable<System.Reflection.Assembly> assemblies, TinyIoC.DuplicateImplementationActions duplicateAction) { }
+        public void AutoRegister(System.Collections.Generic.IEnumerable<System.Reflection.Assembly> assemblies, TinyIoC.DuplicateImplementationActions duplicateAction, System.Func<System.Type, bool> registrationPredicate) { }
+        public void BuildUp(object input) { }
+        public void BuildUp(object input, TinyIoC.ResolveOptions resolveOptions) { }
+        public bool CanResolve(System.Type resolveType) { }
+        public bool CanResolve(System.Type resolveType, TinyIoC.ResolveOptions options) { }
+        public bool CanResolve(System.Type resolveType, string name, TinyIoC.ResolveOptions options) { }
+        public bool CanResolve(System.Type resolveType, TinyIoC.NamedParameterOverloads parameters) { }
+        public bool CanResolve(System.Type resolveType, string name, TinyIoC.NamedParameterOverloads parameters) { }
+        public bool CanResolve(System.Type resolveType, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options) { }
+        public bool CanResolve(System.Type resolveType, string name, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options) { }
+        public bool CanResolve<ResolveType>()
+            where ResolveType :  class { }
+        public bool CanResolve<ResolveType>(string name)
+            where ResolveType :  class { }
+        public bool CanResolve<ResolveType>(TinyIoC.ResolveOptions options)
+            where ResolveType :  class { }
+        public bool CanResolve<ResolveType>(string name, TinyIoC.ResolveOptions options)
+            where ResolveType :  class { }
+        public bool CanResolve<ResolveType>(TinyIoC.NamedParameterOverloads parameters)
+            where ResolveType :  class { }
+        public bool CanResolve<ResolveType>(string name, TinyIoC.NamedParameterOverloads parameters)
+            where ResolveType :  class { }
+        public bool CanResolve<ResolveType>(TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options)
+            where ResolveType :  class { }
+        public bool CanResolve<ResolveType>(string name, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options)
+            where ResolveType :  class { }
+        public void Dispose() { }
+        public TinyIoC.TinyIoCContainer GetChildContainer() { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, string name) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, System.Type registerImplementation) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, System.Type registerImplementation, string name) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, object instance) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, object instance, string name) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, System.Type registerImplementation, object instance) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, System.Type registerImplementation, object instance, string name) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, System.Func<TinyIoC.TinyIoCContainer, TinyIoC.NamedParameterOverloads, object> factory) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register(System.Type registerType, System.Func<TinyIoC.TinyIoCContainer, TinyIoC.NamedParameterOverloads, object> factory, string name) { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType>()
+            where RegisterType :  class { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType>(string name)
+            where RegisterType :  class { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType, RegisterImplementation>()
+            where RegisterType :  class
+            where RegisterImplementation :  class, RegisterType { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType, RegisterImplementation>(string name)
+            where RegisterType :  class
+            where RegisterImplementation :  class, RegisterType { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType>(RegisterType instance)
+            where RegisterType :  class { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType>(RegisterType instance, string name)
+            where RegisterType :  class { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType, RegisterImplementation>(RegisterImplementation instance)
+            where RegisterType :  class
+            where RegisterImplementation :  class, RegisterType { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType, RegisterImplementation>(RegisterImplementation instance, string name)
+            where RegisterType :  class
+            where RegisterImplementation :  class, RegisterType { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType>(System.Func<TinyIoC.TinyIoCContainer, TinyIoC.NamedParameterOverloads, RegisterType> factory)
+            where RegisterType :  class { }
+        public TinyIoC.TinyIoCContainer.RegisterOptions Register<RegisterType>(System.Func<TinyIoC.TinyIoCContainer, TinyIoC.NamedParameterOverloads, RegisterType> factory, string name)
+            where RegisterType :  class { }
+        public TinyIoC.TinyIoCContainer.MultiRegisterOptions RegisterMultiple<RegisterType>(System.Collections.Generic.IEnumerable<System.Type> implementationTypes) { }
+        public TinyIoC.TinyIoCContainer.MultiRegisterOptions RegisterMultiple(System.Type registrationType, System.Collections.Generic.IEnumerable<System.Type> implementationTypes) { }
+        public object Resolve(System.Type resolveType) { }
+        public object Resolve(System.Type resolveType, TinyIoC.ResolveOptions options) { }
+        public object Resolve(System.Type resolveType, string name) { }
+        public object Resolve(System.Type resolveType, string name, TinyIoC.ResolveOptions options) { }
+        public object Resolve(System.Type resolveType, TinyIoC.NamedParameterOverloads parameters) { }
+        public object Resolve(System.Type resolveType, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options) { }
+        public object Resolve(System.Type resolveType, string name, TinyIoC.NamedParameterOverloads parameters) { }
+        public object Resolve(System.Type resolveType, string name, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options) { }
+        public ResolveType Resolve<ResolveType>()
+            where ResolveType :  class { }
+        public ResolveType Resolve<ResolveType>(TinyIoC.ResolveOptions options)
+            where ResolveType :  class { }
+        public ResolveType Resolve<ResolveType>(string name)
+            where ResolveType :  class { }
+        public ResolveType Resolve<ResolveType>(string name, TinyIoC.ResolveOptions options)
+            where ResolveType :  class { }
+        public ResolveType Resolve<ResolveType>(TinyIoC.NamedParameterOverloads parameters)
+            where ResolveType :  class { }
+        public ResolveType Resolve<ResolveType>(TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options)
+            where ResolveType :  class { }
+        public ResolveType Resolve<ResolveType>(string name, TinyIoC.NamedParameterOverloads parameters)
+            where ResolveType :  class { }
+        public ResolveType Resolve<ResolveType>(string name, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options)
+            where ResolveType :  class { }
+        public System.Collections.Generic.IEnumerable<object> ResolveAll(System.Type resolveType, bool includeUnnamed) { }
+        public System.Collections.Generic.IEnumerable<object> ResolveAll(System.Type resolveType) { }
+        public System.Collections.Generic.IEnumerable<ResolveType> ResolveAll<ResolveType>(bool includeUnnamed)
+            where ResolveType :  class { }
+        public System.Collections.Generic.IEnumerable<ResolveType> ResolveAll<ResolveType>()
+            where ResolveType :  class { }
+        public bool TryResolve(System.Type resolveType, out object resolvedType) { }
+        public bool TryResolve(System.Type resolveType, TinyIoC.ResolveOptions options, out object resolvedType) { }
+        public bool TryResolve(System.Type resolveType, string name, out object resolvedType) { }
+        public bool TryResolve(System.Type resolveType, string name, TinyIoC.ResolveOptions options, out object resolvedType) { }
+        public bool TryResolve(System.Type resolveType, TinyIoC.NamedParameterOverloads parameters, out object resolvedType) { }
+        public bool TryResolve(System.Type resolveType, string name, TinyIoC.NamedParameterOverloads parameters, out object resolvedType) { }
+        public bool TryResolve(System.Type resolveType, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options, out object resolvedType) { }
+        public bool TryResolve(System.Type resolveType, string name, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options, out object resolvedType) { }
+        public bool TryResolve<ResolveType>(out ResolveType resolvedType)
+            where ResolveType :  class { }
+        public bool TryResolve<ResolveType>(TinyIoC.ResolveOptions options, out ResolveType resolvedType)
+            where ResolveType :  class { }
+        public bool TryResolve<ResolveType>(string name, out ResolveType resolvedType)
+            where ResolveType :  class { }
+        public bool TryResolve<ResolveType>(string name, TinyIoC.ResolveOptions options, out ResolveType resolvedType)
+            where ResolveType :  class { }
+        public bool TryResolve<ResolveType>(TinyIoC.NamedParameterOverloads parameters, out ResolveType resolvedType)
+            where ResolveType :  class { }
+        public bool TryResolve<ResolveType>(string name, TinyIoC.NamedParameterOverloads parameters, out ResolveType resolvedType)
+            where ResolveType :  class { }
+        public bool TryResolve<ResolveType>(TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options, out ResolveType resolvedType)
+            where ResolveType :  class { }
+        public bool TryResolve<ResolveType>(string name, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options, out ResolveType resolvedType)
+            where ResolveType :  class { }
+        public interface ITinyIoCObjectLifetimeProvider
+        {
+            object GetObject();
+            void ReleaseObject();
+            void SetObject(object value);
+        }
+        public sealed class MultiRegisterOptions
+        {
+            public MultiRegisterOptions(System.Collections.Generic.IEnumerable<TinyIoC.TinyIoCContainer.RegisterOptions> registerOptions) { }
+            public TinyIoC.TinyIoCContainer.MultiRegisterOptions AsMultiInstance() { }
+            public TinyIoC.TinyIoCContainer.MultiRegisterOptions AsSingleton() { }
+            public static TinyIoC.TinyIoCContainer.MultiRegisterOptions ToCustomLifetimeManager(TinyIoC.TinyIoCContainer.MultiRegisterOptions instance, TinyIoC.TinyIoCContainer.ITinyIoCObjectLifetimeProvider lifetimeProvider, string errorString) { }
+        }
+        public sealed class RegisterOptions
+        {
+            public RegisterOptions(TinyIoC.TinyIoCContainer container, TinyIoC.TinyIoCContainer.TypeRegistration registration) { }
+            public TinyIoC.TinyIoCContainer.RegisterOptions AsMultiInstance() { }
+            public TinyIoC.TinyIoCContainer.RegisterOptions AsSingleton() { }
+            public static TinyIoC.TinyIoCContainer.RegisterOptions ToCustomLifetimeManager(TinyIoC.TinyIoCContainer.RegisterOptions instance, TinyIoC.TinyIoCContainer.ITinyIoCObjectLifetimeProvider lifetimeProvider, string errorString) { }
+            public TinyIoC.TinyIoCContainer.RegisterOptions UsingConstructor<RegisterType>(System.Linq.Expressions.Expression<System.Func<RegisterType>> constructor) { }
+            public TinyIoC.TinyIoCContainer.RegisterOptions WithStrongReference() { }
+            public TinyIoC.TinyIoCContainer.RegisterOptions WithWeakReference() { }
+        }
+        public sealed class TypeRegistration
+        {
+            public TypeRegistration(System.Type type) { }
+            public TypeRegistration(System.Type type, string name) { }
+            public string Name { get; }
+            public System.Type Type { get; }
+            public override bool Equals(object obj) { }
+            public override int GetHashCode() { }
+        }
+    }
+    public class TinyIoCRegistrationException : System.Exception
+    {
+        public TinyIoCRegistrationException(System.Type type, string method) { }
+        public TinyIoCRegistrationException(System.Type type, string method, System.Exception innerException) { }
+        public TinyIoCRegistrationException(System.Type registerType, System.Type implementationType) { }
+        public TinyIoCRegistrationException(System.Type registerType, System.Type implementationType, System.Exception innerException) { }
+    }
+    public class TinyIoCRegistrationTypeException : System.Exception
+    {
+        public TinyIoCRegistrationTypeException(System.Type type, string factory) { }
+        public TinyIoCRegistrationTypeException(System.Type type, string factory, System.Exception innerException) { }
+    }
+    public class TinyIoCResolutionException : System.Exception
+    {
+        public TinyIoCResolutionException(System.Type type) { }
+        public TinyIoCResolutionException(System.Type type, System.Exception innerException) { }
+    }
+    public class TinyIoCWeakReferenceException : System.Exception
+    {
+        public TinyIoCWeakReferenceException(System.Type type) { }
+        public TinyIoCWeakReferenceException(System.Type type, System.Exception innerException) { }
+    }
+    public class static TypeExtensions
+    {
+        public static System.Reflection.MethodInfo GetGenericMethod(this System.Type sourceType, System.Reflection.BindingFlags bindingFlags, string methodName, System.Type[] genericTypes, System.Type[] parameterTypes) { }
+    }
+    public enum UnregisteredResolutionActions
+    {
+        AttemptResolve = 0,
+        Fail = 1,
+        GenericsOnly = 2,
+    }
+}

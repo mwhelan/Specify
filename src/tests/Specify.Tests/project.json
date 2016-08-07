@@ -33,6 +33,7 @@
         },
       "net46": {
         "dependencies": {
+          "PublicApiGenerator": "4.0.1"
         },
         "buildOptions": {
           "define": [

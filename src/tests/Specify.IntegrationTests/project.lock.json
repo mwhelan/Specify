@@ -2914,7 +2914,7 @@
           "Autofac": "4.0.0-rc3-286",
           "Microsoft.CSharp": "4.0.1",
           "NETStandard.Library": "1.6.0",
-          "Specify": "(, )",
+          "Specify": "1.0.0",
           "System.Dynamic.Runtime": "4.0.11",
           "System.Reflection.TypeExtensions": "4.1.0"
         },
@@ -2938,8 +2938,8 @@
           "NSubstitute": "2.0.0-beta",
           "NUnit": "3.4.1",
           "Shouldly": "2.8.1",
-          "Specify": "(, )",
-          "Specify.Autofac": "(, )",
+          "Specify": "1.0.0",
+          "Specify.Autofac": "1.0.0",
           "System.Diagnostics.TraceSource": "4.0.0",
           "System.Linq": "4.1.0",
           "dotnet-test-nunit": "3.4.0-beta-1"
@@ -3287,6 +3287,15 @@
           "lib/net45/NUnit.Portable.Agent.dll": {}
         }
       },
+      "PublicApiGenerator/4.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/PublicApiGenerator.dll": {}
+        },
+        "runtime": {
+          "lib/net40/PublicApiGenerator.dll": {}
+        }
+      },
       "Shouldly/2.8.1": {
         "type": "package",
         "compile": {
@@ -3415,7 +3424,7 @@
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Autofac": "4.0.0-rc3-286",
-          "Specify": "(, )"
+          "Specify": "1.0.0"
         },
         "frameworkAssemblies": [
           "System.Runtime.Serialization",
@@ -3439,9 +3448,10 @@
           "NLog": "4.4.0-beta13",
           "NSubstitute": "2.0.0-beta",
           "NUnit": "3.4.1",
+          "PublicApiGenerator": "4.0.1",
           "Shouldly": "2.8.1",
-          "Specify": "(, )",
-          "Specify.Autofac": "(, )",
+          "Specify": "1.0.0",
+          "Specify.Autofac": "1.0.0",
           "System.Diagnostics.TraceSource": "4.0.0",
           "dotnet-test-nunit": "3.4.0-beta-1"
         },
@@ -4186,6 +4196,17 @@
         "NUnit.Portable.Agent.nuspec",
         "lib/net45/NUnit.Portable.Agent.dll",
         "lib/netstandard1.3/NUnit.Portable.Agent.dll"
+      ]
+    },
+    "PublicApiGenerator/4.0.1": {
+      "sha512": "4rWlKS8Stjv16ADaF85dbF8t/iDnMpaVQgnLjvrqIEbYtB/L1K3krRsx9Oqezo/RajRvMNTB7D63vp7VktfuuA==",
+      "type": "package",
+      "path": "PublicApiGenerator/4.0.1",
+      "files": [
+        "PublicApiGenerator.4.0.1.nupkg.sha512",
+        "PublicApiGenerator.nuspec",
+        "lib/net40/PublicApiGenerator.dll",
+        "lib/net40/PublicApiGenerator.pdb"
       ]
     },
     "runtime.native.System/4.0.0": {
