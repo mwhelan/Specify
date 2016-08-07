@@ -10,7 +10,7 @@ namespace Specify
         public static readonly IBootstrapSpecify Configuration;
         private static readonly ScenarioRunner _scenarioRunner;
 
-        public static void Specify(IScenario testObject, string scenarioTitle = null)
+        public static void Specify<TSut>(IScenario<TSut> testObject, string scenarioTitle = null) where TSut : class
         {
             _scenarioRunner.Execute(testObject, scenarioTitle);
         }

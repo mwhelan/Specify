@@ -53,7 +53,7 @@ namespace Specify.Tests.Configuration
             AfterActions.Clear();
         }
 
-        public void Before(IContainer container)
+        public void Before<TSut>(IScenario<TSut> scenario) where TSut : class
         {
             BeforeActions.Add(Name);
         }

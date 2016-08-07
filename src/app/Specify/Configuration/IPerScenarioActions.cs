@@ -8,7 +8,7 @@
         /// <summary>
         /// Action to be performed before each scenario.
         /// </summary>
-        void Before(IContainer container);
+        void Before<TSut>(IScenario<TSut> scenario) where TSut : class;
 
         /// <summary>
         /// Action to be performed after each scenario.

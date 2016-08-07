@@ -15,17 +15,18 @@ namespace Specify.Configuration
             _testEngine = testEngine;
         }
 
-        public void Execute(IScenario testObject, string scenarioTitle = null)
+        public void Execute<TSut>(IScenario<TSut> testObject, string scenarioTitle = null) where TSut : class
         {
             using (var container = Configuration.ApplicationContainer.Get<IContainer>())
             {
+                var scenario = (IScenario<TSut>)container.Get(testObject.GetType());
+                scenario.SetContainer(container);
+
                 foreach (var action in Configuration.PerScenarioActions)
                 {
-                    action.Before(container);
+                    action.Before(scenario);
                 }
 
-                var scenario = (IScenario)container.Get(testObject.GetType());
-                scenario.SetContainer(container);
                 _testEngine.Execute(scenario);
 
                 foreach (var action in Configuration.PerScenarioActions.AsEnumerable().Reverse())
