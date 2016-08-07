@@ -1,0 +1,37 @@
+﻿2016-08-07 15:43:09.985 +01:00 [Debug] BeforeAllScenarios
+2016-08-07 15:43:10.044 +01:00 [Debug] Added SpecifyStoryMetadataScanner to BDDfy pipeline.
+2016-08-07 15:43:10.049 +01:00 [Debug] Classic HTML report selected.
+2016-08-07 15:43:10.069 +01:00 [Debug] Registered 4 Scenarios
+2016-08-07 15:43:10.074 +01:00 [Debug] Registered "TinyMockingContainer" for IContainer with mock factory "NSubstitute"
+2016-08-07 15:43:10.088 +01:00 [Debug] Bootstrapper: "Specify.Examples.UnitSpecs.SpecifyBootstrapper"
+2016-08-07 15:43:10.089 +01:00 [Debug] ApplicationContainer: "Specify.TinyContainer"
+2016-08-07 15:43:10.090 +01:00 [Debug] ScenarioContainer: "Specify.TinyMockingContainer"
+2016-08-07 15:43:10.090 +01:00 [Debug] PerAppDomainActions: 0
+2016-08-07 15:43:10.091 +01:00 [Debug] PerScenarioActions: 0
+2016-08-07 15:43:10.092 +01:00 [Debug] Logging Enabled = True.
+2016-08-07 15:43:10.163 +01:00 [Information] Scenario: "Card Has Been Disabled" Result: "Passed" Duration: 2 milliseconds.
+2016-08-07 15:43:10.163 +01:00 [Information] Scenario: "Account Has Sufficient Funds" Result: "Passed" Duration: 2 milliseconds.
+2016-08-07 15:43:10.164 +01:00 [Debug] Step: "Given the Card is disabled" Result: "Passed" Duration: 1 milliseconds.
+2016-08-07 15:43:10.166 +01:00 [Debug] Step: "When the account holder requests $20" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.165 +01:00 [Debug] Step: "Given the account balance is $100" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.167 +01:00 [Debug] Step: "Then the Card should be retained" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.167 +01:00 [Debug] Step: "And the Card is valid" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.168 +01:00 [Debug] Step: "And the ATM should say the Card has been retained" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.169 +01:00 [Debug] Step: "And the machine contains enough money" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.170 +01:00 [Debug] Step: "When the account holder requests $20" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.171 +01:00 [Debug] Step: "Then the ATM should dispense $20" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.172 +01:00 [Debug] Step: "And the account balance should be $80" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.173 +01:00 [Debug] Step: "And the Card should not be retained" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.499 +01:00 [Information] Scenario: "Orders With A Negative Quantity" Result: "Passed" Duration: 343 milliseconds.
+2016-08-07 15:43:10.501 +01:00 [Debug] Step: "Given the item is available" Result: "Passed" Duration: 292 milliseconds.
+2016-08-07 15:43:10.502 +01:00 [Debug] Step: "When processing an order with a negative quantity" Result: "Passed" Duration: 12 milliseconds.
+2016-08-07 15:43:10.502 +01:00 [Information] Scenario: "Processing An Order" Result: "Passed" Duration: 347 milliseconds.
+2016-08-07 15:43:10.504 +01:00 [Debug] Step: "Given the item is available" Result: "Passed" Duration: 292 milliseconds.
+2016-08-07 15:43:10.503 +01:00 [Debug] Step: "Then the order is rejected" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.506 +01:00 [Debug] Step: "And it does not check the inventory" Result: "Passed" Duration: 11 milliseconds.
+2016-08-07 15:43:10.505 +01:00 [Debug] Step: "When processing an order" Result: "Passed" Duration: 38 milliseconds.
+2016-08-07 15:43:10.507 +01:00 [Debug] Step: "And it does not raise an order submitted event" Result: "Passed" Duration: 26 milliseconds.
+2016-08-07 15:43:10.509 +01:00 [Debug] Step: "Then the order is accepted" Result: "Passed" Duration: 0 milliseconds.
+2016-08-07 15:43:10.513 +01:00 [Debug] Step: "And it checks the inventory" Result: "Passed" Duration: 3 milliseconds.
+2016-08-07 15:43:10.537 +01:00 [Debug] Step: "And it raises an order submitted event" Result: "Passed" Duration: 11 milliseconds.
+2016-08-07 15:43:10.684 +01:00 [Debug] AfterAllScenarios

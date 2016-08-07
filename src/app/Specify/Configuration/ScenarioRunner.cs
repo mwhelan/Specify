@@ -24,14 +24,20 @@ namespace Specify.Configuration
 
                 foreach (var action in Configuration.PerScenarioActions)
                 {
-                    action.Before(scenario);
+                    if (action.ShouldExecute(scenario.GetType()))
+                    {
+                        action.Before(scenario);
+                    }
                 }
 
                 _testEngine.Execute(scenario);
 
                 foreach (var action in Configuration.PerScenarioActions.AsEnumerable().Reverse())
                 {
-                    action.After();
+                    if (action.ShouldExecute(scenario.GetType()))
+                    {
+                        action.After();
+                    }
                 }
             }
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NSubstitute;
 using Specify.Configuration;
 
@@ -43,6 +44,7 @@ namespace Specify.Tests.Configuration
     internal class StubPerScenarioAction : IPerScenarioAction
     {
         public string Name { get; set; }
+        public Func<Type, bool> ShouldExecutePredicate { get; set; } = (type) => true;
 
         public static List<string> BeforeActions = new List<string>();
         public static List<string> AfterActions = new List<string>();
@@ -61,6 +63,11 @@ namespace Specify.Tests.Configuration
         public void After()
         {
             AfterActions.Add(Name);
+        }
+
+        public bool ShouldExecute(Type type)
+        {
+            return ShouldExecutePredicate(type);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Specify.Configuration
+﻿using System;
+
+namespace Specify.Configuration
 {
     /// <summary>
     /// Represents an action to be performed before and after each scenario.
@@ -14,5 +16,10 @@
         /// Action to be performed after each scenario.
         /// </summary>
         void After();
+
+        /// <summary>
+        /// Whether this action should be performed for a particular type.
+        /// </summary>
+        bool ShouldExecute(Type type);
     }
 }

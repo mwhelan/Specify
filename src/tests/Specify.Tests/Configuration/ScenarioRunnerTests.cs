@@ -27,7 +27,17 @@ namespace Specify.Tests.Configuration
         }
 
         [Test]
-        public void should_call_per_scenario_actions_before_scenario_starts()
+        public void should_not_call_per_scenario_actions_before_scenario_starts_if_ShouldExecute_false()
+        {
+            var action = Substitute.For<IPerScenarioAction>();
+            action.ShouldExecute(Arg.Any<Type>()).Returns(false);
+            SUT.Configuration.PerScenarioActions.Add(action);
+
+            action.DidNotReceive().Before(_spec);
+        }
+
+        [Test]
+        public void should_call_per_scenario_actions_before_scenario_starts_if_ShouldExecute_true()
         {
             SUT.Execute(_spec);
 
@@ -37,7 +47,16 @@ namespace Specify.Tests.Configuration
         }
 
         [Test]
-        public void should_call_per_scenario_actions_after_scenario_completes()
+        public void should_not_call_per_scenario_actions_after_scenario_completes_if_ShouldExecute_false()
+        {
+            var action = Substitute.For<IPerScenarioAction>();
+            action.ShouldExecute(Arg.Any<Type>()).Returns(false);
+            SUT.Configuration.PerScenarioActions.Add(action);
+
+            action.DidNotReceive().After();
+        }
+        [Test]
+        public void should_call_per_scenario_actions_after_scenario_completes_if_ShouldExecute_true()
         {
             SUT.Execute(_spec);
 
