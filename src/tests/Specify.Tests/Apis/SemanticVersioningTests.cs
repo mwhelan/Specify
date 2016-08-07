@@ -1,5 +1,4 @@
-﻿#if NET46
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Shouldly;
 using Specify.Autofac;
 
@@ -7,6 +6,7 @@ namespace Specify.Tests.Apis
 {
     public class SemanticVersioningTests
     {
+#if NET46
         [Test]
         public void specify_has_no_public_api_changes()
         {
@@ -20,6 +20,6 @@ namespace Specify.Tests.Apis
             var publicApi = PublicApiGenerator.PublicApiGenerator.GetPublicApi(typeof(AutofacContainer).Assembly);
             publicApi.ShouldMatchApproved();
         }
+#endif
     }
 }
-#endif
