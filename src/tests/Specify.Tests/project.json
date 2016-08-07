@@ -33,6 +33,7 @@
         },
       "net46": {
         "dependencies": {
+          "FakeItEasy": "2.2.0",
           "PublicApiGenerator": "4.0.1"
         },
         "buildOptions": {

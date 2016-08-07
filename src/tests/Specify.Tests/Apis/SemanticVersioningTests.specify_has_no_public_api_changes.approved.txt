@@ -1,22 +1,13 @@
 [assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.Autofac")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.Examples")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.IntegrationTests")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.Ninject")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.Tests")]
 [assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
-[assembly: System.Runtime.InteropServices.GuidAttribute("e0f81c86-6a60-411d-9adc-ae92eec6d2ad")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.0", FrameworkDisplayName=".NET Framework 4")]
+[assembly: System.Runtime.InteropServices.GuidAttribute("edf7d294-e262-4089-97d9-e105de42172d")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.0")]
 
 namespace Specify
 {
     
-    public class ArrayCoercion<T> : Specify.IEnumerableCoercion
-        where T :  class
-    {
-        public ArrayCoercion() { }
-        public System.Type ElementType { get; }
-        public object Convert(System.Collections.Generic.IEnumerable<object> enumerable) { }
-    }
     public class static Catch
     {
         public static System.Exception Exception(System.Action throwingAction) { }
@@ -44,10 +35,6 @@ namespace Specify
         public T Set<T>(T valueToSet, string key = null)
             where T :  class { }
     }
-    public class static EnumerableTypes
-    {
-        public static System.Type GetTypeFromEnumerable(this System.Type enumerableType) { }
-    }
     public interface IContainer : System.IDisposable
     {
         bool CanResolve<T>()
@@ -64,11 +51,6 @@ namespace Specify
         T Set<T>(T valueToSet, string key = null)
             where T :  class;
     }
-    public interface IEnumerableCoercion
-    {
-        System.Type ElementType { get; }
-        object Convert(System.Collections.Generic.IEnumerable<object> enumerable);
-    }
     public interface IScenario : System.IDisposable
     {
         TestStack.BDDfy.ExampleTable Examples { get; set; }
@@ -76,7 +58,17 @@ namespace Specify
         System.Type Story { get; }
         string Title { get; }
         void SetContainer(Specify.IContainer container);
+        void SetThe<T>()
+            where T :  class;
+        void SetThe<TService, TImplementation>()
+            where TService :  class
+            where TImplementation :  class, TService;
+        T SetThe<T>(T valueToSet, string key = null)
+            where T :  class;
         void Specify();
+        T The<T>(string key = null)
+            where T :  class;
+        object The(System.Type serviceType, string key = null);
     }
     public interface IScenario<TSut> : Specify.IScenario, System.IDisposable
         where TSut :  class
@@ -84,18 +76,19 @@ namespace Specify
         Specify.ContainerFor<TSut> Container { get; }
         TSut SUT { get; set; }
     }
-    public class ListCoercion<T> : Specify.IEnumerableCoercion
-        where T :  class
-    {
-        public ListCoercion() { }
-        public System.Type ElementType { get; }
-        public object Convert(System.Collections.Generic.IEnumerable<object> enumerable) { }
-    }
     public class static ObjectExtensions
     {
         public static TSubject And<TSubject, TReturnValue>(this TSubject subject, System.Func<TSubject, TReturnValue> func) { }
         public static System.Threading.Tasks.Task<T> Asynchronously<T>(this T subject) { }
         public static TSubject With<TSubject, TReturnValue>(this TSubject subject, System.Func<TSubject, TReturnValue> func) { }
+    }
+    public class static ScenarioExtensions
+    {
+        public static bool IsScenario(this System.Type type) { }
+        public static bool IsStoryScenario(this System.Type type) { }
+        public static bool IsStoryScenario(this Specify.IScenario specification) { }
+        public static bool IsUnitScenario(this System.Type type) { }
+        public static bool IsUnitScenario(this Specify.IScenario specification) { }
     }
     public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut, Specify.Stories.SpecificationStory>
         where TSut :  class
@@ -115,7 +108,21 @@ namespace Specify
         public virtual string Title { get; }
         public void Dispose() { }
         public virtual void SetContainer(Specify.IContainer container) { }
+        public void SetThe<T>()
+            where T :  class { }
+        public void SetThe<TService, TImplementation>()
+            where TService :  class
+            where TImplementation :  class, TService { }
+        public T SetThe<T>(T valueToSet, string key = null)
+            where T :  class { }
         public virtual void Specify() { }
+        public T The<T>(string key = null)
+            where T :  class { }
+        public object The(System.Type serviceType, string key = null) { }
+    }
+    public class static StringExtensions
+    {
+        public static string ToTitleCase(this string input) { }
     }
     public abstract class TestsFor<TSut>
         where TSut :  class
@@ -157,24 +164,6 @@ namespace Specify
         public override object Get(System.Type serviceType, string key = null) { }
         public override System.Collections.Generic.IEnumerable<object> GetMultiple(System.Type baseType) { }
     }
-    public class static TypeExtensions
-    {
-        public static bool CanBeCastTo<T>(this System.Type type) { }
-        public static bool CanBeCastTo(this System.Type type, System.Type destinationType) { }
-        public static T Create<T>(this System.Type type) { }
-        public static object Create(this System.Type type) { }
-        public static System.Reflection.ConstructorInfo GreediestConstructor(this System.Type type) { }
-        public static bool IsConcrete(this System.Type type) { }
-        public static bool IsConcreteTypeOf<T>(this System.Type type) { }
-        public static bool IsEnumerable(this System.Type type) { }
-        public static bool IsIn<T>(this T target, System.Collections.Generic.IList<T> list) { }
-        public static bool IsScenario(this System.Type type) { }
-        public static bool IsSimple(this System.Type type) { }
-        public static bool IsStoryScenario(this System.Type type) { }
-        public static bool IsStoryScenario(this Specify.IScenario specification) { }
-        public static bool IsUnitScenario(this System.Type type) { }
-        public static bool IsUnitScenario(this Specify.IScenario specification) { }
-    }
 }
 namespace Specify.Configuration
 {
@@ -185,11 +174,11 @@ namespace Specify.Configuration
         public Specify.IContainer ApplicationContainer { get; }
         public Specify.Configuration.HtmlReportConfiguration HtmlReport { get; }
         public bool LoggingEnabled { get; set; }
-        public System.Collections.Generic.List<Specify.Configuration.IPerAppDomainActions> PerAppDomainActions { get; }
-        public System.Collections.Generic.List<Specify.Configuration.IPerScenarioActions> PerScenarioActions { get; }
+        public Specify.Mocks.IMockFactory MockFactory { get; set; }
+        public System.Collections.Generic.List<Specify.Configuration.IPerApplicationAction> PerAppDomainActions { get; }
+        public System.Collections.Generic.List<Specify.Configuration.IPerScenarioAction> PerScenarioActions { get; }
         protected abstract Specify.IContainer BuildApplicationContainer();
         public virtual void ConfigureReport() { }
-        public virtual System.Func<Specify.Mocks.IMockFactory> GetMockFactory() { }
         public void InitializeSpecify() { }
     }
     public class DefaultBootstrapper : Specify.Configuration.BootstrapperBase
@@ -213,19 +202,22 @@ namespace Specify.Configuration
         Specify.IContainer ApplicationContainer { get; }
         Specify.Configuration.HtmlReportConfiguration HtmlReport { get; }
         bool LoggingEnabled { get; set; }
-        System.Collections.Generic.List<Specify.Configuration.IPerAppDomainActions> PerAppDomainActions { get; }
-        System.Collections.Generic.List<Specify.Configuration.IPerScenarioActions> PerScenarioActions { get; }
+        Specify.Mocks.IMockFactory MockFactory { get; set; }
+        System.Collections.Generic.List<Specify.Configuration.IPerApplicationAction> PerAppDomainActions { get; }
+        System.Collections.Generic.List<Specify.Configuration.IPerScenarioAction> PerScenarioActions { get; }
         void InitializeSpecify();
     }
-    public interface IPerAppDomainActions
+    public interface IPerApplicationAction
     {
         void After();
         void Before();
     }
-    public interface IPerScenarioActions
+    public interface IPerScenarioAction
     {
         void After();
-        void Before(Specify.IContainer container);
+        void Before<TSut>(Specify.IScenario<TSut> scenario)
+            where TSut :  class;
+        bool ShouldExecute(System.Type type);
     }
     public interface ITestEngine
     {
@@ -318,7 +310,7 @@ namespace Specify.Logging
     }
     public class static LogProvider
     {
-        public const string DisableLoggingEnvironmentVariable = "Specify_LIBLOG_DISABLE";
+        public const string DisableLoggingEnvironmentVariable = "$rootnamespace$_LIBLOG_DISABLE";
         public static bool IsDisabled { get; set; }
         public static void SetCurrentLogProvider(Specify.Logging.ILogProvider logProvider) { }
     }
@@ -331,11 +323,12 @@ namespace Specify.Mocks
     {
         public AutoMockerFor() { }
     }
-    public class FakeItEasyMockFactory : Specify.Mocks.IMockFactory
+    public class FakeItEasyMockFactory : Specify.Mocks.MockFactoryBase
     {
         public FakeItEasyMockFactory() { }
         public FakeItEasyMockFactory(Specify.Mocks.IFileSystem fileSystem) { }
-        public object CreateMock(System.Type type) { }
+        protected override string MockTypeName { get; }
+        public override object CreateMock(System.Type type) { }
     }
     public class FileSystem : Specify.Mocks.IFileSystem
     {
@@ -354,24 +347,44 @@ namespace Specify.Mocks
     }
     public interface IMockFactory
     {
+        bool IsProviderAvailable { get; }
+        string MockProviderName { get; }
         object CreateMock(System.Type type);
     }
     public class MockDetector
     {
         public MockDetector() { }
         public MockDetector(Specify.Mocks.IFileSystem fileSystem) { }
-        public System.Func<Specify.Mocks.IMockFactory> FindAvailableMock() { }
+        public Specify.Mocks.IMockFactory FindAvailableMock() { }
     }
-    public class MoqMockFactory : Specify.Mocks.IMockFactory
+    public abstract class MockFactoryBase : Specify.Mocks.IMockFactory
+    {
+        protected MockFactoryBase(Specify.Mocks.IFileSystem fileSystem) { }
+        public bool IsProviderAvailable { get; }
+        protected System.Type MockOpenType { get; }
+        public string MockProviderName { get; }
+        protected abstract string MockTypeName { get; }
+        public abstract object CreateMock(System.Type type);
+    }
+    public class MoqMockFactory : Specify.Mocks.MockFactoryBase
     {
         public MoqMockFactory() { }
         public MoqMockFactory(Specify.Mocks.IFileSystem fileSystem) { }
-        public object CreateMock(System.Type type) { }
+        protected override string MockTypeName { get; }
+        public override object CreateMock(System.Type type) { }
     }
-    public class NSubstituteMockFactory : Specify.Mocks.IMockFactory
+    public class NSubstituteMockFactory : Specify.Mocks.MockFactoryBase
     {
         public NSubstituteMockFactory() { }
         public NSubstituteMockFactory(Specify.Mocks.IFileSystem fileSystem) { }
+        protected override string MockTypeName { get; }
+        public override object CreateMock(System.Type type) { }
+    }
+    public class NullMockFactory : Specify.Mocks.IMockFactory
+    {
+        public NullMockFactory() { }
+        public bool IsProviderAvailable { get; }
+        public string MockProviderName { get; }
         public object CreateMock(System.Type type) { }
     }
 }
@@ -406,11 +419,6 @@ namespace Specify.Stories
         public string InOrderTo { get; set; }
         public string IWant { get; set; }
     }
-}
-namespace System.Reflection
-{
-    
-    public class static ReverseTypeExtender { }
 }
 namespace TinyIoC
 {
@@ -463,6 +471,7 @@ namespace TinyIoC
     {
         public TinyIoCAutoRegistrationException(System.Type registerType, System.Collections.Generic.IEnumerable<System.Type> types) { }
         public TinyIoCAutoRegistrationException(System.Type registerType, System.Collections.Generic.IEnumerable<System.Type> types, System.Exception innerException) { }
+        protected TinyIoCAutoRegistrationException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
     }
     public class TinyIoCConstructorResolutionException : System.Exception
     {
@@ -470,6 +479,7 @@ namespace TinyIoC
         public TinyIoCConstructorResolutionException(System.Type type, System.Exception innerException) { }
         public TinyIoCConstructorResolutionException(string message, System.Exception innerException) { }
         public TinyIoCConstructorResolutionException(string message) { }
+        protected TinyIoCConstructorResolutionException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
     }
     public sealed class TinyIoCContainer : System.IDisposable
     {
@@ -600,6 +610,10 @@ namespace TinyIoC
             where ResolveType :  class { }
         public bool TryResolve<ResolveType>(string name, TinyIoC.NamedParameterOverloads parameters, TinyIoC.ResolveOptions options, out ResolveType resolvedType)
             where ResolveType :  class { }
+        public bool Unregister<RegisterType>() { }
+        public bool Unregister<RegisterType>(string name) { }
+        public bool Unregister(System.Type registerType) { }
+        public bool Unregister(System.Type registerType, string name) { }
         public interface ITinyIoCObjectLifetimeProvider
         {
             object GetObject();
@@ -639,21 +653,25 @@ namespace TinyIoC
         public TinyIoCRegistrationException(System.Type type, string method, System.Exception innerException) { }
         public TinyIoCRegistrationException(System.Type registerType, System.Type implementationType) { }
         public TinyIoCRegistrationException(System.Type registerType, System.Type implementationType, System.Exception innerException) { }
+        protected TinyIoCRegistrationException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
     }
     public class TinyIoCRegistrationTypeException : System.Exception
     {
         public TinyIoCRegistrationTypeException(System.Type type, string factory) { }
         public TinyIoCRegistrationTypeException(System.Type type, string factory, System.Exception innerException) { }
+        protected TinyIoCRegistrationTypeException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
     }
     public class TinyIoCResolutionException : System.Exception
     {
         public TinyIoCResolutionException(System.Type type) { }
         public TinyIoCResolutionException(System.Type type, System.Exception innerException) { }
+        protected TinyIoCResolutionException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
     }
     public class TinyIoCWeakReferenceException : System.Exception
     {
         public TinyIoCWeakReferenceException(System.Type type) { }
         public TinyIoCWeakReferenceException(System.Type type, System.Exception innerException) { }
+        protected TinyIoCWeakReferenceException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
     }
     public class static TypeExtensions
     {

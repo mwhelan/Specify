@@ -1,7 +1,7 @@
 [assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Specify.IntegrationTests")]
 [assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
-[assembly: System.Runtime.InteropServices.GuidAttribute("2cb27234-4675-4f6b-b165-052ff7e5fa5e")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.0", FrameworkDisplayName=".NET Framework 4")]
+[assembly: System.Runtime.InteropServices.GuidAttribute("66ad2b9c-5990-4bf2-8b3b-686637c31b28")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.5.1")]
 
 namespace Specify.Autofac
 {

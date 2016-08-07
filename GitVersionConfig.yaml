@@ -1,6 +1,6 @@
 assembly-versioning-scheme: MajorMinor
 mode: ContinuousDelivery
-next-version: 1.0.0
+next-version: 2.0.0-beta0001
 branches:
   master:
     tag: 

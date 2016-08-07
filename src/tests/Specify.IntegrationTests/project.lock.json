@@ -9013,7 +9013,9 @@
       "Microsoft.NETCore.App >= 1.0.0",
       "System.Linq >= 4.1.0"
     ],
-    ".NETFramework,Version=v4.6": []
+    ".NETFramework,Version=v4.6": [
+      "FakeItEasy >= 2.2.0"
+    ]
   },
   "tools": {},
   "projectFileToolGroups": {}

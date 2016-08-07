@@ -766,14 +766,15 @@
           "lib/netstandard1.3/Serilog.Sinks.Literate.dll": {}
         }
       },
-      "Serilog.Sinks.RollingFile/2.1.0": {
+      "Serilog.Sinks.RollingFile/2.2.0": {
         "type": "package",
         "dependencies": {
           "Serilog": "2.0.0",
           "Serilog.Sinks.File": "2.0.0",
           "System.IO": "4.1.0",
           "System.IO.FileSystem.Primitives": "4.0.1",
-          "System.Runtime.InteropServices": "4.1.0"
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
         },
         "compile": {
           "lib/netstandard1.3/Serilog.Sinks.RollingFile.dll": {}
@@ -3525,12 +3526,12 @@
         "lib/netstandard1.3/Serilog.Sinks.Literate.xml"
       ]
     },
-    "Serilog.Sinks.RollingFile/2.1.0": {
-      "sha512": "bBCGuXxlLq2yho3QLdRzEsW2sp7zQKcrNb7gmyqLtNwE3K20MolNYWoWqEmZJGGBktPt8quFYQJCFXSPdpGkTQ==",
+    "Serilog.Sinks.RollingFile/2.2.0": {
+      "sha512": "/L6gmS5b91rPspK4GnLKbJMZyQ6aE7DFUEOVn/kR+6HMPz/SoVgaixy6XUTHLX/HWIDN528+EXW4og5eZArUpA==",
       "type": "package",
-      "path": "Serilog.Sinks.RollingFile/2.1.0",
+      "path": "Serilog.Sinks.RollingFile/2.2.0",
       "files": [
-        "Serilog.Sinks.RollingFile.2.1.0.nupkg.sha512",
+        "Serilog.Sinks.RollingFile.2.2.0.nupkg.sha512",
         "Serilog.Sinks.RollingFile.nuspec",
         "lib/net45/Serilog.Sinks.RollingFile.dll",
         "lib/net45/Serilog.Sinks.RollingFile.xml",
@@ -8080,7 +8081,7 @@
       "Microsoft.NETCore.Platforms >= 1.0.1",
       "NSubstitute >= 2.0.0-beta",
       "Serilog.Sinks.Literate >= 2.1.0-dev-00028",
-      "Serilog.Sinks.RollingFile >= 2.1.0",
+      "Serilog.Sinks.RollingFile >= 2.2.0",
       "Shouldly >= 2.8.1",
       "Specify",
       "Specify.Examples",
