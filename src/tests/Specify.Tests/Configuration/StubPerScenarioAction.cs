@@ -10,13 +10,13 @@ namespace Specify.Tests.Configuration
         {
             ApplicationContainer = Substitute.For<IContainer>();
             StubPerScenarioAction.Reset();
-            PerAppDomainActions.Add(new StubPerAppDomainAction { Name = "PerAppDomainAction 1" });
-            PerAppDomainActions.Add(new StubPerAppDomainAction { Name = "PerAppDomainAction 2" });
+            PerAppDomainActions.Add(new StubPerApplicationAction { Name = "PerAppDomainAction 1" });
+            PerAppDomainActions.Add(new StubPerApplicationAction { Name = "PerAppDomainAction 2" });
             PerScenarioActions.Add(new StubPerScenarioAction { Name = "PerTestAction 1" });
             PerScenarioActions.Add(new StubPerScenarioAction { Name = "PerTestAction 2" });
         }
     }
-    internal class StubPerAppDomainAction : IPerAppDomainActions
+    internal class StubPerApplicationAction : IPerApplicationAction
     {
         public string Name { get; set; }
 
@@ -40,7 +40,7 @@ namespace Specify.Tests.Configuration
         }
     }
 
-    internal class StubPerScenarioAction : IPerScenarioActions
+    internal class StubPerScenarioAction : IPerScenarioAction
     {
         public string Name { get; set; }
 

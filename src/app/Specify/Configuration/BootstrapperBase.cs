@@ -35,10 +35,10 @@ namespace Specify.Configuration
         }
 
         /// <inheritdoc />
-        public List<IPerAppDomainActions> PerAppDomainActions { get; } = new List<IPerAppDomainActions>();
+        public List<IPerApplicationAction> PerAppDomainActions { get; } = new List<IPerApplicationAction>();
 
         /// <inheritdoc />
-        public List<IPerScenarioActions> PerScenarioActions { get; } = new List<IPerScenarioActions>();
+        public List<IPerScenarioAction> PerScenarioActions { get; } = new List<IPerScenarioAction>();
 
         /// <inheritdoc />
         public bool LoggingEnabled { get; set; } = false;

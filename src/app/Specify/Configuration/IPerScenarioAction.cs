@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents an action to be performed before and after each scenario.
     /// </summary>
-    public interface IPerScenarioActions
+    public interface IPerScenarioAction
     {
         /// <summary>
         /// Action to be performed before each scenario.

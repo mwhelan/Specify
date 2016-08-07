@@ -1,9 +1,9 @@
 namespace Specify.Configuration
 {
     /// <summary>
-    /// Represents an action to be performed per AppDomain (before and after scenarios are run).
+    /// Represents an action to be performed once per Appliction (before and after all scenarios are run).
     /// </summary>
-    public interface IPerAppDomainActions
+    public interface IPerApplicationAction
     {
         /// <summary>
         /// Action to be performed before any scenarios have run.
