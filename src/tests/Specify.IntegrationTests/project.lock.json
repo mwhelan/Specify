@@ -78,9 +78,6 @@
           "lib/netstandard1.5/FakeItEasy.dll": {}
         }
       },
-      "LibLog/4.2.5": {
-        "type": "package"
-      },
       "Libuv/1.9.0": {
         "type": "package",
         "dependencies": {
@@ -2889,11 +2886,10 @@
           "lib/netstandard1.5/TestStack.BDDfy.dll": {}
         }
       },
-      "Specify/1.0.0": {
+      "Specify/2.0.0-beta0001": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "LibLog": "4.2.5",
           "Microsoft.CSharp": "4.0.1",
           "Microsoft.Extensions.DependencyModel": "1.0.0",
           "NETStandard.Library": "1.6.0",
@@ -2907,14 +2903,14 @@
           "netstandard1.6/Specify.dll": {}
         }
       },
-      "Specify.Autofac/1.0.0": {
+      "Specify.Autofac/2.0.0-beta0001": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "Autofac": "4.0.0-rc3-286",
           "Microsoft.CSharp": "4.0.1",
           "NETStandard.Library": "1.6.0",
-          "Specify": "1.0.0",
+          "Specify": "(, )",
           "System.Dynamic.Runtime": "4.0.11",
           "System.Reflection.TypeExtensions": "4.1.0"
         },
@@ -2938,8 +2934,8 @@
           "NSubstitute": "2.0.0-beta",
           "NUnit": "3.4.1",
           "Shouldly": "2.8.1",
-          "Specify": "1.0.0",
-          "Specify.Autofac": "1.0.0",
+          "Specify": "(, )",
+          "Specify.Autofac": "(, )",
           "System.Diagnostics.TraceSource": "4.0.0",
           "System.Linq": "4.1.0",
           "dotnet-test-nunit": "3.4.0-beta-1"
@@ -2996,12 +2992,6 @@
         "runtime": {
           "lib/net40/FakeItEasy.dll": {}
         }
-      },
-      "LibLog/4.2.5": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "Microsoft.CSharp"
-        ]
       },
       "Microsoft.DiaSymReader/1.0.8": {
         "type": "package",
@@ -3401,11 +3391,10 @@
           "lib/net40/TestStack.BDDfy.dll": {}
         }
       },
-      "Specify/1.0.0": {
+      "Specify/2.0.0-beta0001": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.0",
         "dependencies": {
-          "LibLog": "4.2.5",
           "TestStack.BDDfy": "4.3.1"
         },
         "frameworkAssemblies": [
@@ -3419,12 +3408,12 @@
           "net40/Specify.dll": {}
         }
       },
-      "Specify.Autofac/1.0.0": {
+      "Specify.Autofac/2.0.0-beta0001": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Autofac": "4.0.0-rc3-286",
-          "Specify": "1.0.0"
+          "Specify": "(, )"
         },
         "frameworkAssemblies": [
           "System.Runtime.Serialization",
@@ -3450,8 +3439,8 @@
           "NUnit": "3.4.1",
           "PublicApiGenerator": "4.0.1",
           "Shouldly": "2.8.1",
-          "Specify": "1.0.0",
-          "Specify.Autofac": "1.0.0",
+          "Specify": "(, )",
+          "Specify.Autofac": "(, )",
           "System.Diagnostics.TraceSource": "4.0.0",
           "dotnet-test-nunit": "3.4.0-beta-1"
         },
@@ -3527,16 +3516,6 @@
         "lib/netstandard1.5/FakeItEasy.XML",
         "lib/netstandard1.5/FakeItEasy.dll",
         "lib/netstandard1.5/FakeItEasy.pdb"
-      ]
-    },
-    "LibLog/4.2.5": {
-      "sha512": "3QVpWGApoJvpUBSyeJJOlpPwDgtgK5uoK0lT+5esmxFsmcNUu3QveRIP1G/s9dHfgcPhmSHAHa1W7Vgqpk98NA==",
-      "type": "package",
-      "path": "LibLog/4.2.5",
-      "files": [
-        "LibLog.4.2.5.nupkg.sha512",
-        "LibLog.nuspec",
-        "content/App_Packages/LibLog.4.2/LibLog.cs.pp"
       ]
     },
     "Libuv/1.9.0": {
@@ -4032,7 +4011,7 @@
       ]
     },
     "NLog/4.4.0-beta13": {
-      "sha512": "a7wcVlNWbqrwJVtIGvtLxOPI1PRbxqFocMlbYkGPIwiLomqO94m7dGOSF7KgNu9fsAjSyu998fBEICyOuMqxUw==",
+      "sha512": "U6goL5l9BGFmk8Z8QmHL+C77R4JHja/Y8a8Ns8nK3gxLLVxD+blwiqOoHLlpOpxtp9CUB4HdcusXNhSz32bmYA==",
       "type": "package",
       "path": "NLog/4.4.0-beta13",
       "files": [
@@ -8977,12 +8956,12 @@
         "lib/netstandard1.5/TestStack.BDDfy.pdb"
       ]
     },
-    "Specify/1.0.0": {
+    "Specify/2.0.0-beta0001": {
       "type": "project",
       "path": "../../app/Specify/project.json",
       "msbuildProject": "../../app/Specify/Specify.xproj"
     },
-    "Specify.Autofac/1.0.0": {
+    "Specify.Autofac/2.0.0-beta0001": {
       "type": "project",
       "path": "../../app/Specify.Autofac/project.json",
       "msbuildProject": "../../app/Specify.Autofac/Specify.Autofac.xproj"

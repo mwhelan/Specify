@@ -30,11 +30,10 @@ Task("Version")
 			OutputType = GitVersionOutput.BuildServer
 		});
 		versionInfo = GitVersion(new GitVersionSettings{ OutputType = GitVersionOutput.Json });
-		// Update project.json
-		var updatedProjectJson = System.IO.File.ReadAllText(specifyProjectJson)
-			.Replace("1.0.0-*", versionInfo.NuGetVersion);
 
-		System.IO.File.WriteAllText(specifyProjectJson, updatedProjectJson);
+		// Update project.json
+		VersionProject(specifyProjectJson, versionInfo);
+		VersionProject(specifyAutofacProjectJson, versionInfo);
 	});
 
 Task("Build")
@@ -69,6 +68,13 @@ Task("Package")
 				AppVeyor.UploadArtifact(file.FullPath);
 		}
 	});
+
+private void VersionProject(string projectJsonPath, GitVersion versionInfo)
+{
+	var updatedProjectJson = System.IO.File.ReadAllText(projectJsonPath)
+		.Replace("1.0.0-*", versionInfo.NuGetVersion);
+	System.IO.File.WriteAllText(projectJsonPath, updatedProjectJson);
+}
 
 private void PackageProject(string projectName, string projectJsonPath)
 {

@@ -26,9 +26,6 @@
           "lib/netcoreapp1.0/dotnet-test-xunit.dll": {}
         }
       },
-      "LibLog/4.2.5": {
-        "type": "package"
-      },
       "Libuv/1.9.0": {
         "type": "package",
         "dependencies": {
@@ -2764,11 +2761,10 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Specify/1.0.0": {
+      "Specify/2.0.0-beta0001": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "LibLog": "4.2.5",
           "Microsoft.CSharp": "4.0.1",
           "Microsoft.Extensions.DependencyModel": "1.0.0",
           "NETStandard.Library": "1.6.0",
@@ -2833,16 +2829,6 @@
         "runtimes/unix-x64/lib/net451/dotnet-test-xunit.exe",
         "runtimes/win7-x64/lib/net451/dotnet-test-xunit.exe",
         "runtimes/win7-x86/lib/net451/dotnet-test-xunit.exe"
-      ]
-    },
-    "LibLog/4.2.5": {
-      "sha512": "3QVpWGApoJvpUBSyeJJOlpPwDgtgK5uoK0lT+5esmxFsmcNUu3QveRIP1G/s9dHfgcPhmSHAHa1W7Vgqpk98NA==",
-      "type": "package",
-      "path": "LibLog/4.2.5",
-      "files": [
-        "LibLog.4.2.5.nupkg.sha512",
-        "LibLog.nuspec",
-        "content/App_Packages/LibLog.4.2/LibLog.cs.pp"
       ]
     },
     "Libuv/1.9.0": {
@@ -8065,7 +8051,7 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "Specify/1.0.0": {
+    "Specify/2.0.0-beta0001": {
       "type": "project",
       "path": "../../../app/Specify/project.json",
       "msbuildProject": "../../../app/Specify/Specify.xproj"
