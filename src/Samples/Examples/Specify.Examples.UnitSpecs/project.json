@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "dotnet-test-nunit": "3.4.0-beta-2",
     "Microsoft.NETCore.Platforms": "1.0.1",
     "NSubstitute": "2.0.0-beta",
-    "xunit.core": "2.2.0-beta2-build3300",
+    "NUnit": "3.4.1",
     "Serilog.Sinks.Literate": "2.1.0-dev-00028",
     "Serilog.Sinks.RollingFile": "2.2.0",
     "Shouldly": "2.8.1",

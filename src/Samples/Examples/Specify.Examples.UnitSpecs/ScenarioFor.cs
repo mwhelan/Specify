@@ -1,5 +1,5 @@
-﻿using Specify.Stories;
-using Xunit;
+﻿using NUnit.Framework;
+using Specify.Stories;
 
 namespace Specify.Examples.UnitSpecs
 {
@@ -7,7 +7,7 @@ namespace Specify.Examples.UnitSpecs
         where TSut : class
         where TStory : Story, new()
     {
-        [Fact]
+        [Test]
         public override void Specify()
         {
             base.Specify();
@@ -17,7 +17,7 @@ namespace Specify.Examples.UnitSpecs
     public abstract class ScenarioFor<TSut> : Specify.ScenarioFor<TSut>
             where TSut : class
     {
-        [Fact]
+        [Test]
         public override void Specify()
         {
             base.Specify();
