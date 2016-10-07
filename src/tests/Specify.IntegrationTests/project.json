@@ -1,8 +1,7 @@
 {
   "dependencies": {
-    "Autofac": "4.0.0-rc3-286",
+    "Autofac": "4.1.1",
     "dotnet-test-nunit": "3.4.0-beta-1",
-    "FakeItEasy": "2.2.0-coreclr-alpha30",
     "Microsoft.NETCore.Platforms": "1.0.1",
     "Moq": "4.6.25-alpha",
     "NLog": "4.4.0-beta13",
@@ -22,13 +21,14 @@
   },
     "frameworks": {
         "netcoreapp1.0": {
-            "dependencies": {
-                "Microsoft.NETCore.App": {
-                    "type": "platform",
-                    "version": "1.0.0"
-                },
-                "System.Linq": "4.1.0"
+          "dependencies": {
+            "FakeItEasy": "2.2.0-coreclr-alpha30",
+            "Microsoft.NETCore.App": {
+              "type": "platform",
+              "version": "1.0.0"
             },
+            "System.Linq": "4.1.0"
+          },
             "imports": [
                 "dnxcore50",
                 "portable-net45+win8"
@@ -36,7 +36,7 @@
         },
       "net46": {
         "dependencies": {
-          "FakeItEasy": "2.2.0"
+          "FakeItEasy": "2.2.0-coreclr-alpha30"
         },
         "buildOptions": {
           "define": [

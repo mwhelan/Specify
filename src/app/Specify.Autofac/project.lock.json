@@ -3,13 +3,13 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.5.1": {
-      "Autofac/4.0.0": {
+      "Autofac/4.1.1": {
         "type": "package",
         "compile": {
-          "lib/net451/Autofac.dll": {}
+          "lib/net45/Autofac.dll": {}
         },
         "runtime": {
-          "lib/net451/Autofac.dll": {}
+          "lib/net45/Autofac.dll": {}
         }
       },
       "TestStack.BDDfy/4.3.1": {
@@ -44,7 +44,7 @@
       }
     },
     ".NETStandard,Version=v1.6": {
-      "Autofac/4.0.0": {
+      "Autofac/4.1.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -1435,19 +1435,17 @@
     }
   },
   "libraries": {
-    "Autofac/4.0.0": {
-      "sha512": "SCKzdkxEhyP0ahU4j2Fl3SQEO3BzAgGl1WpXe7oNHdDiVKRJ6DRpumfSekABPaBygeWwjDt88PBqe2nRToRrYA==",
+    "Autofac/4.1.1": {
+      "sha512": "C0O06dJ1/WAYr4CZzBu3RCs2GZuR3G8PQFqgxa3PP4jDMUb9//jgL2ONvF06qxPsC0UflkBS55wmd7C5oaEsEg==",
       "type": "package",
-      "path": "Autofac/4.0.0",
+      "path": "Autofac/4.1.1",
       "files": [
-        "Autofac.4.0.0.nupkg.sha512",
+        "Autofac.4.1.1.nupkg.sha512",
         "Autofac.nuspec",
-        "lib/net451/Autofac.dll",
-        "lib/net451/Autofac.xml",
+        "lib/net45/Autofac.dll",
+        "lib/net45/Autofac.xml",
         "lib/netstandard1.1/Autofac.dll",
-        "lib/netstandard1.1/Autofac.xml",
-        "lib/uap10.0/Autofac.dll",
-        "lib/uap10.0/Autofac.xml"
+        "lib/netstandard1.1/Autofac.xml"
       ]
     },
     "Microsoft.CSharp/4.0.1": {
@@ -4951,7 +4949,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Autofac >= 4.0.0",
+      "Autofac >= 4.1.1",
       "Specify"
     ],
     ".NETFramework,Version=v4.5.1": [

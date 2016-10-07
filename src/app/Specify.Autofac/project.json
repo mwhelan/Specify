@@ -2,7 +2,7 @@
   "version": "2.0.0-beta0001",
 
   "dependencies": {
-    "Autofac": "4.0.0",
+    "Autofac": "4.1.1",
     "Specify": {
       "target": "project"
     }
