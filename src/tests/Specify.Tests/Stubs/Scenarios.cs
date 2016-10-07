@@ -14,7 +14,9 @@ namespace Specify.Tests.Stubs
         TitlePrefix = "Title prefix from attribute",
         AsA = "As a programmer",
         IWant = "I want to be able to explicitly specify a story",
-        SoThat = "So that I can share a story definition between several scenarios")]
+        SoThat = "So that I can share a story definition between several scenarios",
+        ImageUri = "http://www.google.co.uk",
+        StoryUri = "http://www.bbc.co.uk")]
     class StubUserStoryScenarioForWithStoryAttribute : ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
 
     class StubUserStoryScenarioForWithExamples :

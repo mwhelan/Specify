@@ -40,7 +40,7 @@ namespace Specify.Configuration
 
             var story = scenario.Story.Create<Story>(); 
             return new StoryMetadata(scenario.Story, story.Narrative1, story.Narrative2,
-                story.Narrative3, story.Title, story.TitlePrefix);
+                story.Narrative3, story.Title, story.TitlePrefix, story.ImageUri, story.StoryUri);
         }
 
         private StoryMetadata CreateSpecificationMetadata(IScenario specification)

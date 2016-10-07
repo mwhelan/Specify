@@ -47,6 +47,18 @@ namespace Specify.Stories
         public string Narrative3 { get; set; }
 
         /// <summary>
+        /// Gets or sets the ImageUri.
+        /// </summary>
+        /// <value>The ImageUri.</value>
+        public string ImageUri { get; set; }
+
+        /// <summary>
+        /// Gets or sets the StoryUri.
+        /// </summary>
+        /// <value>The StoryUri.</value>
+        public string StoryUri { get; set; }
+
+        /// <summary>
         /// Cleanses the property.
         /// </summary>
         /// <param name="text">The text.</param>

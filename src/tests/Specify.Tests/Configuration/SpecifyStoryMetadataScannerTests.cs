@@ -78,6 +78,8 @@ namespace Specify.Tests.Configuration
             result.Narrative1.ShouldBe("As a programmer");
             result.Narrative2.ShouldBe("I want to be able to explicitly specify a story");
             result.Narrative3.ShouldBe("So that I can share a story definition between several scenarios");
+            result.ImageUri.ShouldBe("http://www.google.co.uk");
+            result.StoryUri.ShouldBe("http://www.bbc.co.uk");
         }
 
         [Test]
