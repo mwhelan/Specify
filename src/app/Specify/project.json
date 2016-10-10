@@ -1,38 +1,65 @@
 {
   "version": "2.0.0-beta0001",
 
-  "dependencies": {
-    "TestStack.BDDfy": "4.3.2"
-  },
-
-  "devDependencies": {
-    "LibLog": "4.2.5"
-  },
-
-  "frameworks": {
-    "net40": {
-      "dependencies": {
-
-      },
-      "frameworkAssemblies": {
-        "System.Runtime.Serialization": "4.0.0.0",
-        "System.Xml": "4.0.0.0"
-      }
+  "description": "Specify is a .Net testing library that builds on top of BDDfy from TestStack",
+  "copyright": "Copyright 2016 Michael Whelan",
+  "authors": [
+    "Michael Whelan"
+  ],
+  "packOptions": {
+    "summary": "Copyright 2016 Michael Whelan",
+    "licenseUrl": "https://github.com/mwhelan/Specify/blob/master/license.txt",
+    "requireLicenseAcceptance": false,
+    "tags": [
+      "TDD",
+      "BDD",
+      "Testing",
+      "BDDfy"
+    ],
+    "files": {
+      "include": [
+        "ScenarioFor.cs.pp",
+        "SpecifyBootstrapper.cs.pp"
+      ]
     },
-    "netstandard1.6": {
-      "imports": "dnxcore50",
-      "buildOptions": {
-        "define": [
-          "LIBLOG_PORTABLE",
-          "NETSTANDARD1_5"
-        ]
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/mwhelan/Specify"
+    }
+  }, 
+
+    "dependencies": {
+      "TestStack.BDDfy": "4.3.2"
+    },
+
+    "devDependencies": {
+      "LibLog": "4.2.5"
+    },
+
+    "frameworks": {
+      "net40": {
+        "dependencies": {
+
+        },
+        "frameworkAssemblies": {
+          "System.Runtime.Serialization": "4.0.0.0",
+          "System.Xml": "4.0.0.0"
+        }
       },
-      "dependencies": {
-        "NETStandard.Library": "1.6.0",
-        "Microsoft.CSharp": "4.0.1",
-        "Microsoft.Extensions.DependencyModel": "1.0.0",
-        "System.Dynamic.Runtime": "4.0.11"
+      "netstandard1.6": {
+        "imports": "dnxcore50",
+        "buildOptions": {
+          "define": [
+            "LIBLOG_PORTABLE",
+            "NETSTANDARD1_5"
+          ]
+        },
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "Microsoft.CSharp": "4.0.1",
+          "Microsoft.Extensions.DependencyModel": "1.0.0",
+          "System.Dynamic.Runtime": "4.0.11"
+        }
       }
     }
   }
-}
