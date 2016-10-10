@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.0": {
-      "TestStack.BDDfy/4.3.1": {
+      "TestStack.BDDfy/4.3.2": {
         "type": "package",
         "frameworkAssemblies": [
           "System.Runtime.Serialization",
@@ -1342,7 +1342,7 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "TestStack.BDDfy/4.3.1": {
+      "TestStack.BDDfy/4.3.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -4792,12 +4792,12 @@
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
     },
-    "TestStack.BDDfy/4.3.1": {
-      "sha512": "IKwGGzSQkzqMDGd7UknL4fFB98Jv9Y1EWRbBbqwyTvMUEBga8+Q6HTZ4li1XeVbqOnT/4pfGV5gBmBpKCZ2bLQ==",
+    "TestStack.BDDfy/4.3.2": {
+      "sha512": "Et6UFY0PECXPIjvtGOlkfQdVDz75Oi1seBZhyJoJ2ubJZn98FKRcQYIzk6bJSUCHSlsk3bNgIUfC/KJE4j7+ag==",
       "type": "package",
-      "path": "TestStack.BDDfy/4.3.1",
+      "path": "TestStack.BDDfy/4.3.2",
       "files": [
-        "TestStack.BDDfy.4.3.1.nupkg.sha512",
+        "TestStack.BDDfy.4.3.2.nupkg.sha512",
         "TestStack.BDDfy.nuspec",
         "lib/net40/TestStack.BDDfy.dll",
         "lib/netstandard1.5/TestStack.BDDfy.dll"
@@ -4806,7 +4806,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "TestStack.BDDfy >= 4.3.1"
+      "TestStack.BDDfy >= 4.3.2"
     ],
     ".NETFramework,Version=v4.0": [
       "System.Runtime.Serialization >= 4.0.0",
