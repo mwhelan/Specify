@@ -41,7 +41,13 @@ Task("Build")
 	.IsDependentOn("Version")
 	.IsDependentOn("Restore")
 	.Does(() => {
-		MSBuild(solutionPath);
+		MSBuild(solutionPath, new MSBuildSettings 
+		{
+			Verbosity = Verbosity.Minimal,
+			ToolVersion = MSBuildToolVersion.VS2015,
+			Configuration = "Release",
+			PlatformTarget = PlatformTarget.MSIL
+		});
 	});
 
 Task("Test")
@@ -49,7 +55,7 @@ Task("Test")
 	.Does(() => {
 		DotNetCoreTest("./src/tests/Specify.Tests");
 		DotNetCoreTest("./src/tests/Specify.IntegrationTests");
-		DotNetCoreTest("./src/Samples/Examples/Specify.Examples.UnitSpecs");
+		DotNetCoreTest("./src/Samples/Specify.Samples");
 	});
 
 Task("Package")
@@ -59,8 +65,8 @@ Task("Package")
         
         GenerateReleaseNotes();
 
-		PackageProject("Specify", specifyProjectJson);
-		PackageProject("Specify.Autofac", specifyAutofacProjectJson);
+		PackageProject("Specify");
+		PackageProject("Specify.Autofac");
 
 		if (AppVeyor.IsRunningOnAppVeyor)
 		{
@@ -76,15 +82,16 @@ private void VersionProject(string projectJsonPath, GitVersion versionInfo)
 	System.IO.File.WriteAllText(projectJsonPath, updatedProjectJson);
 }
 
-private void PackageProject(string projectName, string projectJsonPath)
+private void PackageProject(string projectName)
 {
-	var settings = new DotNetCorePackSettings
-		{
-			OutputDirectory = outputDir,
-			NoBuild = true
-		};
+	var settings = new NuGetPackSettings 
+	{ 
+		OutputDirectory = outputDir, 
+		Version = versionInfo.NuGetVersion
+	};
+	var nuspec = "nuget/" + projectName + ".nuspec";
 
-	DotNetCorePack(projectJsonPath, settings);
+	NuGetPack(nuspec, settings);
 
 	System.IO.File.WriteAllLines(outputDir + "artifacts", new[]{
 		"nuget:" + projectName + "." + versionInfo.NuGetVersion + ".nupkg",
