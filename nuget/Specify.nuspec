@@ -18,7 +18,7 @@
 	<tags>TDD BDD Testing BDDfy</tags>
   </metadata>
   <files>
-    <file src="..\src\app\Specify\bin\Release\Specify.*" target="lib\net40" /> 
+    <file src="..\src\app\Specify\bin\Release\**\Specify.*" target="lib" exclude="**\*.json" /> 
     <file src="ScenarioFor.cs.pp" target="content\ScenarioFor.cs.pp" />
     <file src="SpecifyBootstrapper.cs.pp" target="content\SpecifyBootstrapper.cs.pp" />
   </files>

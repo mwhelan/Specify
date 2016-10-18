@@ -19,7 +19,7 @@
 	<tags>TDD BDD Testing BDDfy</tags>
   </metadata>
   <files>
-    <file src="..\src\app\Specify.Autofac\bin\Release\Specify.Autofac.*" target="lib\net40" /> 
+    <file src="..\src\app\Specify.Autofac\bin\Release\**\Specify.Autofac.*" target="lib" exclude="**\*.json" /> 
     <file src="SpecifyAutofacBootstrapper.cs.pp" target="content\SpecifyAutofacBootstrapper.cs.pp" />    
   </files>
 </package>
