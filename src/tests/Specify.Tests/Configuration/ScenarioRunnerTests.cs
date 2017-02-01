@@ -75,11 +75,20 @@ namespace Specify.Tests.Configuration
         }
 
         [Test]
-        public void should_resolve_specification_from_child_container()
+        public void should_not_resolve_specification_from_child_container()
         {
             SUT.Execute(_spec);
 
-            _childContainer.Received(1).Get(typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder));
+            _childContainer.DidNotReceive().Get(typeof(UserStoryScenarioWithAllSupportedStepsInRandomOrder));
+        }
+
+
+        [Test]
+        public void should_assign_child_container_to_scenario()
+        {
+            SUT.Execute(_spec);
+
+            _spec.Container.SourceContainer.ShouldBe(_childContainer);
         }
     }
 }

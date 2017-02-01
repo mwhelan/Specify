@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Specify.Exceptions;
 
 namespace Specify
@@ -32,7 +33,10 @@ namespace Specify
             {
                 if (_systemUnderTest == null)
                 {
-                    _systemUnderTest = Get<TSut>();
+                    var constructor = typeof(TSut).GreediestConstructor();
+                    var sut = (TSut)constructor.Invoke(constructor.GetParameters().Select(x => Get(x.ParameterType)).ToArray());
+                    Set(sut);
+                    _systemUnderTest = sut;
                 }
                 return _systemUnderTest;
             }

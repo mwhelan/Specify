@@ -36,23 +36,11 @@ namespace Specify
             {
                 return GetMultiple(serviceType);
             }
-            if (serviceType.IsInterface())
+            if (serviceType.IsInterface() || serviceType.IsAbstract() || serviceType.IsClass() && !serviceType.IsSealed())
             {
-                if (!Container.CanResolve(serviceType))
+                if (!Container.CanResolve(serviceType, ResolveOptions.FailUnregisteredAndNameNotFound))
                 {
                     RegisterMock(serviceType);
-                }
-            }
-            if (serviceType.IsClass())
-            {
-                var constructor = serviceType.GreediestConstructor();
-
-                foreach (var parameterInfo in constructor.GetParameters())
-                {
-                    if (!Container.CanResolve(parameterInfo.ParameterType))
-                    {
-                        RegisterMock(parameterInfo.ParameterType);
-                    }
                 }
             }
             return base.Get(serviceType, key);

@@ -188,6 +188,11 @@ namespace Specify
             return type.IsClass;
         }
 
+        internal static bool IsSealed(this Type type)
+        {
+            return type.IsSealed;
+        }
+
         internal static bool IsConcrete(this Type type)
         {
             return !type.IsAbstract && !type.IsInterface;
@@ -297,6 +302,11 @@ namespace Specify
         internal static bool IsClass(this Type type)
         {
             return type.GetTypeInfo().IsClass;
+        }
+
+        internal static bool IsSealed(this Type type)
+        {
+            return type.GetTypeInfo().IsSealed;
         }
 
         internal static bool IsConcrete(this Type type)

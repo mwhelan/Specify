@@ -11,11 +11,29 @@ namespace Specify.Tests
     public class ContainerForTests
     {
         [Test]
-        public void should_use_container_to_create_sut()
+        public void should_not_use_container_to_create_sut()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
-            sut.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.DidNotReceive().Get<ConcreteObjectWithNoConstructor>();
+        }
+
+        [Test]
+        public void should_register_sut_in_container()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
+            var result = sut.SystemUnderTest;
+            sut.SourceContainer.Received().Set(result);
+        }
+
+        [Test]
+        public void should_be_able_to_create_sut_with_concrete_constructor_retrieved_from_container()
+        {
+            var sut = this.CreateSut<ConcreteObjectWithOneConcreteConstructor>();
+            object dependency1 = new Dependency1();
+            sut.SourceContainer.Get(typeof(Dependency1)).Returns(dependency1);
+            var result = sut.SystemUnderTest;
+            result.Dependency1.ShouldBe(dependency1);
         }
 
         [Test]
@@ -26,7 +44,6 @@ namespace Specify.Tests
             var result = sut.SystemUnderTest;
 
             sut.SystemUnderTest.ShouldBeSameAs(result);
-            sut.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
