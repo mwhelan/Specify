@@ -58,7 +58,7 @@ namespace Specify.Tests.Stubs
     {
         private int _value = 5;
 
-        public int Value
+        public virtual int Value
         {
             get { return _value; }
             set { _value = value; }

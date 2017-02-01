@@ -40,8 +40,8 @@ namespace Specify
         /// </summary>
         protected TSut SUT
         {
-            get { return _sut ?? (_sut = Container.Get<TSut>()); }
-            set { _sut = value; }
+            get { return Container.SystemUnderTest; }
+            set { Container.SystemUnderTest = value; }
         }
     }
 }

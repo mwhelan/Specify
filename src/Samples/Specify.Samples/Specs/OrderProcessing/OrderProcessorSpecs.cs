@@ -36,7 +36,7 @@ namespace Specify.Samples.Specs.OrderProcessing
 
         public void AndThen_it_raises_an_order_submitted_event()
         {
-            The<IPublisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
+            The<Publisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
         }
     }
 
@@ -61,7 +61,7 @@ namespace Specify.Samples.Specs.OrderProcessing
 
         public void AndThen_it_does_not_raise_an_order_submitted_event()
         {
-            Container.Get<IPublisher>().DidNotReceive().Publish(Arg.Any<OrderSubmitted>());
+            Container.Get<Publisher>().DidNotReceive().Publish(Arg.Any<OrderSubmitted>());
         }
     }
 }

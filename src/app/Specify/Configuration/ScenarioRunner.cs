@@ -15,11 +15,10 @@ namespace Specify.Configuration
             _testEngine = testEngine;
         }
 
-        public void Execute<TSut>(IScenario<TSut> testObject, string scenarioTitle = null) where TSut : class
+        public void Execute<TSut>(IScenario<TSut> scenario, string scenarioTitle = null) where TSut : class
         {
             using (var container = Configuration.ApplicationContainer.Get<IContainer>())
             {
-                var scenario = (IScenario<TSut>)container.Get(testObject.GetType());
                 scenario.SetContainer(container);
 
                 foreach (var action in Configuration.PerScenarioActions)

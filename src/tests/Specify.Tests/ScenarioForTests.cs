@@ -31,11 +31,11 @@ namespace Specify.Tests
         }
 
         [Test]
-        public void should_use_context_to_create_sut()
+        public void should_not_use_context_to_create_sut()
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.DidNotReceive().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -45,8 +45,17 @@ namespace Specify.Tests
             var result = sut.SUT;
 
             sut.SUT.ShouldBeSameAs(result);
-            sut.Container.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
         }
+
+        [Test]
+        public void sut_should_be_container_system_under_test()
+        {
+            var sut = CreateSut();
+            var result = sut.SUT;
+
+            sut.SUT.ShouldBeSameAs(sut.Container.SystemUnderTest);
+        }
+
         [Test]
         public void should_be_able_to_set_sut_independently()
         {
@@ -58,6 +67,7 @@ namespace Specify.Tests
 
             sut.SUT.ShouldBeSameAs(instance);
             sut.SUT.ShouldNotBeSameAs(original);
+            sut.SUT.ShouldBeSameAs(sut.Container.SystemUnderTest);
         }
 
         [Test]
