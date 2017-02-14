@@ -6,7 +6,7 @@
     <title>Specify.Autofac</title>
     <authors>Michael Whelan</authors>
     <owners>Michael Whelan</owners>
-    <projectUrl>http://specify.readme.io/</projectUrl>
+    <projectUrl>http://specify-dotnet.readthedocs.org/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Specify is a .Net testing library that builds on top of BDDfy from TestStack. Specify.Autofac provides Autofac adapters for IoC and automocking.</description>
     <releaseNotes>The baseline for Specify</releaseNotes>

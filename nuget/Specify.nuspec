@@ -6,11 +6,11 @@
     <title>Specify</title>
     <authors>Michael Whelan</authors>
     <owners>Michael Whelan</owners>
-    <projectUrl>http://specify.readme.io/</projectUrl>
+    <projectUrl>http://specify-dotnet.readthedocs.org/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</description>
     <releaseNotes>The baseline for Specify</releaseNotes>
-    <copyright>Copyright 2016 Michael Whelan</copyright>
+    <copyright>Copyright 2017 Michael Whelan</copyright>
 	<dependencies> 
 	  <dependency id="TestStack.BDDfy" version="4.3.2" />
 	</dependencies>

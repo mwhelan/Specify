@@ -7,7 +7,8 @@ When I first started using BDDfy for acceptance testing, I would use a different
 
 [![Build status](https://ci.appveyor.com/api/projects/status/vj6ec2yubg8ii9sn?svg=true)](https://ci.appveyor.com/project/mwhelan/specify)
 [![Documentation Status](https://readthedocs.org/projects/specify-dotnet/badge/?version=latest)](http://specify-dotnet.readthedocs.org/en/latest/?badge=latest)
-[![NuGet](https://img.shields.io/nuget/dt/specify.svg)](https://www.nuget.org/packages/Specify) 
+[![NuGet (stable)](https://img.shields.io/nuget/v/specify.svg)](https://www.nuget.org/packages/Specify) 
+[![NuGet (latest)](https://img.shields.io/nuget/vpre/specify.svg)](https://www.nuget.org/packages/Specify) 
 
 ## Overview of Features
 * Tests use a context-specification style, with a class per scenario.

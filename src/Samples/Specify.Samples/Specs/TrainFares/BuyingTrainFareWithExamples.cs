@@ -1,15 +1,14 @@
 ﻿using Specify.Samples.Domain.TrainFares;
 using TestStack.BDDfy;
-
 namespace Specify.Samples.Specs.TrainFares
 {
     public class SuccessfulRailcardPurchasesWithExamples : ScenarioFor<object>
     {
-#pragma warning disable 649
+#pragma warning disable 169
         // ReSharper disable once InconsistentNaming
         private Fare fare;
         private BuyerCategory _buyerCategory;
-#pragma warning restore 649
+#pragma warning restore 169
         Money Price { get; set; }
 
         public SuccessfulRailcardPurchasesWithExamples()
