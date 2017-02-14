@@ -36,6 +36,7 @@ namespace Specify
             {
                 return GetMultiple(serviceType);
             }
+
             if (serviceType.IsInterface())
             {
                 if (!Container.CanResolve(serviceType))
@@ -43,18 +44,20 @@ namespace Specify
                     RegisterMock(serviceType);
                 }
             }
+
             if (serviceType.IsClass())
             {
                 var constructor = serviceType.GreediestConstructor();
 
                 foreach (var parameterInfo in constructor.GetParameters())
                 {
-                    if (!Container.CanResolve(parameterInfo.ParameterType))
+                    if (!Container.CanResolve(parameterInfo.ParameterType, ResolveOptions.FailUnregisteredAndNameNotFound))
                     {
                         RegisterMock(parameterInfo.ParameterType);
                     }
                 }
             }
+
             return base.Get(serviceType, key);
         }
 

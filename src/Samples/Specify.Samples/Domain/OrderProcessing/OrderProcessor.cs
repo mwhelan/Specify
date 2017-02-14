@@ -5,9 +5,9 @@ namespace Specify.Samples.Domain.OrderProcessing
     public class OrderProcessor
     {
         private readonly IInventory _inventory;
-        private readonly IPublisher _publisher;
+        private readonly Publisher _publisher;
 
-        public OrderProcessor(IInventory inventory, IPublisher publisher)
+        public OrderProcessor(IInventory inventory, Publisher publisher)
         {
             _inventory = inventory;
             _publisher = publisher;
