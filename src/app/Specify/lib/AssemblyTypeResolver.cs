@@ -98,11 +98,13 @@ namespace Specify.lib
         {
             var assemblies = new List<Assembly>();
             var dependencies = DependencyContext.Default.RuntimeLibraries;
+            var assembly = Assembly.Load(new AssemblyName("Specify"));
+            assemblies.Add(assembly);
             foreach (var library in dependencies)
             {
                 if (IsCandidateCompilationLibrary(library))
                 {
-                    var assembly = Assembly.Load(new AssemblyName(library.Name));
+                    assembly = Assembly.Load(new AssemblyName(library.Name));
                     assemblies.Add(assembly);
                 }
             }
@@ -111,8 +113,7 @@ namespace Specify.lib
 
         private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary)
         {
-            return compilationLibrary.Name == ("Specify")
-                || compilationLibrary.Dependencies.Any(d => d.Name.StartsWith("Specify"));
+            return compilationLibrary.Dependencies.Any(d => d.Name.StartsWith("Specify"));
         }
     }
 }
