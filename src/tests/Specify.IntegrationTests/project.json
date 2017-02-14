@@ -23,7 +23,10 @@
     "netcoreapp1.0": {
       "dependencies": {
         "FakeItEasy": "2.2.0-coreclr-alpha30",
-        "Microsoft.NETCore.App": "1.0.1",
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.1"
+        },
         "System.Linq": "4.1.0"
       },
       "imports": [
@@ -41,9 +44,6 @@
         ]
       }
     }
-  },
-  "runtimes": {
-    "win10-x64": {}
   },
   "testRunner": "nunit",
   "version": "1.0.0-*"
