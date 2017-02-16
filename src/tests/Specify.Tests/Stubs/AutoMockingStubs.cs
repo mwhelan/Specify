@@ -5,7 +5,7 @@ namespace Specify.Tests.Stubs
     class ConcreteObjectWithNoConstructor
     {
     }
-    class ConcreteObjectWithOneInterfaceConstructor
+    public class ConcreteObjectWithOneInterfaceConstructor
     {
         public readonly IDependency1 Dependency1;
 
