@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using Castle.Core.Logging;
+using NSubstitute;
 using Shouldly;
 using Specify.Samples.Domain.OrderProcessing;
 
@@ -38,6 +39,11 @@ namespace Specify.Samples.Specs.OrderProcessing
         {
             The<Publisher>().Received().Publish(Arg.Is<OrderSubmitted>(x => x.OrderNumber == _result.OrderNumber));
         }
+
+        public void AndThen_it_logs_the_order_part_number()
+        {
+            The<ILogger>().Received().Info(Arg.Is<string>(x => x == "TestPart"));
+        }
     }
 
     public class orders_with_a_negative_quantity : given.the_item_is_available
@@ -62,6 +68,11 @@ namespace Specify.Samples.Specs.OrderProcessing
         public void AndThen_it_does_not_raise_an_order_submitted_event()
         {
             Container.Get<Publisher>().DidNotReceive().Publish(Arg.Any<OrderSubmitted>());
+        }
+
+        public void AndThen_it_logs_the_order_part_number()
+        {
+            The<ILogger>().Received().Info(Arg.Is<string>(x => x == "TestPart"));
         }
     }
 }
