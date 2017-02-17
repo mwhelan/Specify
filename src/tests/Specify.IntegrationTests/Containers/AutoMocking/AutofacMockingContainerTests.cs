@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.Linq;
+using System.Reflection;
+using Autofac;
 using Autofac.Features.ResolveAnything;
 using Specify.Autofac;
 using Specify.Mocks;
@@ -12,7 +14,7 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
         {
             var mockFactoryInstance = typeof(TMockFactory).Create<IMockFactory>();
             var builder = new ContainerBuilder();
-            builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
+            builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource(x => x.GetConstructors().Any()));
             builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactoryInstance));
             var container = builder.Build();
             return new AutofacContainer(container);

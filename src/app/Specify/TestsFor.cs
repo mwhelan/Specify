@@ -31,8 +31,6 @@ namespace Specify
         /// </summary>
         protected ContainerFor<TSut> Container;
 
-        private TSut _sut;
-
         /// <summary>
         /// The class that is being tested. Is lazily instantiated from the Container the first time it is called.
         /// This allows for adding particular constructor dependencies to the Container to be used in construction.
@@ -40,8 +38,8 @@ namespace Specify
         /// </summary>
         protected TSut SUT
         {
-            get { return _sut ?? (_sut = Container.Get<TSut>()); }
-            set { _sut = value; }
+            get { return Container.SystemUnderTest; }
+            set { Container.SystemUnderTest = value; }
         }
     }
 }
