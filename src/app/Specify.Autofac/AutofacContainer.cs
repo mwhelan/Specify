@@ -113,20 +113,7 @@ namespace Specify.Autofac
         /// <returns><c>true</c> if this instance can resolve the specified service type; otherwise, <c>false</c>.</returns>
         public bool CanResolve(Type serviceType)
         {
-            if (serviceType.IsClass())
-            {
-                var constructor = serviceType.GreediestConstructor();
-
-                foreach (var parameterInfo in constructor.GetParameters())
-                {
-                    if (!Container.IsRegistered(parameterInfo.ParameterType))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return Container.IsRegistered(serviceType);
+            return serviceType.CanBeResolvedUsingContainer(x => Container.IsRegistered(x));
         }
 
         public void Dispose()

@@ -105,6 +105,36 @@ namespace Specify
             typeof (List<>)
         };
 
+        internal static bool CanBeResolvedUsingContainer(this Type type, Func<Type, bool> containerCanResolve, bool requiresRegistration = true)
+        {
+            if (type.IsClass())
+            {
+                var constructor = type.GreediestConstructor();
+
+                if (constructor == null)
+                {
+                    return containerCanResolve(type);
+                }
+
+                foreach (var parameterInfo in constructor.GetParameters())
+                {
+                    if (!containerCanResolve(parameterInfo.ParameterType))
+                    {
+                        if (!parameterInfo.ParameterType.CanBeResolvedUsingContainer(containerCanResolve, requiresRegistration))
+                        {
+                            return false;
+                        }
+                    }
+                }
+
+                if (!requiresRegistration)
+                {
+                    return true;
+                }
+            }
+
+            return containerCanResolve(type);
+        }
     }
 
 #if NET40
@@ -170,7 +200,7 @@ namespace Specify
         {
             return type.GetConstructors()
                 .OrderByDescending(x => x.GetParameters().Length)
-                .First();
+                .FirstOrDefault();
         }
 
         internal static Type BaseType(this Type type)
@@ -186,6 +216,11 @@ namespace Specify
         internal static bool IsClass(this Type type)
         {
             return type.IsClass;
+        }
+
+        internal static bool IsSealed(this Type type)
+        {
+            return type.IsSealed;
         }
 
         internal static bool IsConcrete(this Type type)
@@ -279,9 +314,9 @@ namespace Specify
         /// <returns>ConstructorInfo.</returns>
         internal static ConstructorInfo GreediestConstructor(this Type type)
         {
-            return type.GetTypeInfo().GetConstructors()
+            return type.GetTypeInfo().GetConstructors(BindingFlags.Public|BindingFlags.Instance)
                 .OrderByDescending(x => x.GetParameters().Length)
-                .First();
+                .FirstOrDefault();
         }
 
         internal static Type BaseType(this Type type)
@@ -297,6 +332,11 @@ namespace Specify
         internal static bool IsClass(this Type type)
         {
             return type.GetTypeInfo().IsClass;
+        }
+
+        internal static bool IsSealed(this Type type)
+        {
+            return type.GetTypeInfo().IsSealed;
         }
 
         internal static bool IsConcrete(this Type type)

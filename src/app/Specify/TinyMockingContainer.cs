@@ -26,7 +26,7 @@ namespace Specify
         /// <inheritdoc />
         public override bool CanResolve(Type type)
         {
-            return true;
+            return type.CanBeResolvedUsingContainer(x => x.IsInterface() || Container.CanResolve(x, ResolveOptions.FailUnregisteredAndNameNotFound), false);
         }
 
         /// <inheritdoc />
@@ -37,6 +37,13 @@ namespace Specify
                 return GetMultiple(serviceType);
             }
 
+            RegisterMocksIfNecessary(serviceType);
+
+            return base.Get(serviceType, key);
+        }
+
+        private void RegisterMocksIfNecessary(Type serviceType)
+        {
             if (serviceType.IsInterface())
             {
                 if (!Container.CanResolve(serviceType))
@@ -49,16 +56,26 @@ namespace Specify
             {
                 var constructor = serviceType.GreediestConstructor();
 
+                if (constructor == null)
+                {
+                    return;
+                }
+
                 foreach (var parameterInfo in constructor.GetParameters())
                 {
                     if (!Container.CanResolve(parameterInfo.ParameterType, ResolveOptions.FailUnregisteredAndNameNotFound))
                     {
-                        RegisterMock(parameterInfo.ParameterType);
+                        if (parameterInfo.ParameterType.IsSealed())
+                        {
+                            RegisterMocksIfNecessary(parameterInfo.ParameterType);
+                        }
+                        else
+                        {
+                            RegisterMock(parameterInfo.ParameterType);
+                        }
                     }
                 }
             }
-
-            return base.Get(serviceType, key);
         }
 
         /// <inheritdoc />
