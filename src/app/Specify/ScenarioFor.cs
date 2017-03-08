@@ -43,7 +43,7 @@ namespace Specify
             get
             {
                 var title = Configurator.Scanners
-                    .Humanize(GetType().Name)
+                    .Humanize(GetType().FullName.Replace(GetType().Namespace + ".", string.Empty))
                     .ToTitleCase();
                 if (Number != 0)
                 {
