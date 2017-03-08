@@ -3,6 +3,14 @@ using TestStack.BDDfy;
 
 namespace Specify.Tests.Stubs
 {
+    abstract class ParentScenario : ScenarioFor<object>
+    {
+        internal abstract class ChildScenario : ParentScenario
+        {
+            internal class GrandChildScenario : ChildScenario { }
+        }
+    }
+
     class StubUnitScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors> { }
     class StubUserStoryScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
     class StubValueStoryScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors, TicTacToeValueStory> { }

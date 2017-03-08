@@ -106,6 +106,13 @@ namespace Specify.Tests
         }
 
         [Test]
+        public void scenario_title_should_be_full_class_name_including_parent_class_names()
+        {
+            var sut = new ParentScenario.ChildScenario.GrandChildScenario();
+            sut.Title.ShouldBe("Parent Scenario + Child Scenario + Grand Child Scenario");
+        }
+
+		[Test]
         public void unit_specification_title_should_be_class_name()
         {
             var sut = CreateSut();
