@@ -50,6 +50,12 @@ namespace Specify.Tests.Stubs
             SealedDependencyWithOneInterfaceConstructor = sealedDependencyWithOneInterfaceConstructor;
         }
     }
+    class ConcreteObjectWithValueTypeConstuctorParmeter
+    {
+        public ConcreteObjectWithValueTypeConstuctorParmeter(bool enabled, int accountBalance)
+        {
+        }
+    }
     class ConcreteObjectWithPrivateConstructor
     {
         private ConcreteObjectWithPrivateConstructor()

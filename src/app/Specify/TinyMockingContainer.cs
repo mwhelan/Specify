@@ -58,9 +58,19 @@ namespace Specify
 
                 if (constructor == null)
                 {
+                    // TinyIocContainer will construct class.
                     return;
                 }
 
+                if (constructor.HasAnyValueTypeParameters())
+                {
+                    // Mocking framework will construct class
+                    RegisterMock(serviceType);
+                    return;
+                }
+
+                // serviceType is class with constructor only containing reference types.
+                // TinyIocContainer will construct class and register mocks with container for parameters that mocking framework will construct
                 foreach (var parameterInfo in constructor.GetParameters())
                 {
                     if (!Container.CanResolve(parameterInfo.ParameterType, ResolveOptions.FailUnregisteredAndNameNotFound))
