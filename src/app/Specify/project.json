@@ -26,11 +26,12 @@
       "type": "git",
       "url": "https://github.com/mwhelan/Specify"
     }
-  }, 
+  },
 
-    "dependencies": {
-      "TestStack.BDDfy": "4.3.2"
-    },
+  "dependencies": {
+    "NETStandard.Library": "1.6.1",
+    "TestStack.BDDfy": "4.3.2"
+  },
 
     "devDependencies": {
       "LibLog": "4.2.5"
@@ -55,10 +56,9 @@
           ]
         },
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "Microsoft.CSharp": "4.0.1",
-          "Microsoft.Extensions.DependencyModel": "1.0.0",
-          "System.Dynamic.Runtime": "4.0.11"
+          "Microsoft.CSharp": "4.3.0",
+          "Microsoft.Extensions.DependencyModel": "1.1.2",
+          "System.Dynamic.Runtime": "4.3.0"
         }
       }
     }

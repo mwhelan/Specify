@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "Autofac": "4.1.1",
-    "dotnet-test-nunit": "3.4.0-beta-2",
-    "Microsoft.NETCore.Platforms": "1.0.1",
-    "Moq": "4.6.25-alpha",
-    "NLog": "4.4.0-beta13",
-    "NSubstitute": "2.0.0-beta",
-    "NUnit": "3.5.0",
-    "Shouldly": "2.8.2",
+    "Autofac": "4.6.0",
+    "dotnet-test-nunit": "3.4.0-beta-3",
+    "FakeItEasy": "3.4.2",
+    "Microsoft.NETCore.Platforms": "1.1.0",
+    "Moq": "4.7.63",
+    "NSubstitute": "2.0.3",
+    "NUnit": "3.7.1",
+    "Shouldly": "2.8.3",
     "Specify": {
       "target": "project"
     },
@@ -17,17 +17,15 @@
     "Specify.Tests": {
       "target": "project"
     },
-    "System.Diagnostics.TraceSource": "4.0.0"
+    "System.Linq": "4.3.0"
   },
   "frameworks": {
     "netcoreapp1.0": {
       "dependencies": {
-        "FakeItEasy": "2.2.0-coreclr-alpha30",
         "Microsoft.NETCore.App": {
-          "type": "platform",
-          "version": "1.0.1"
-        },
-        "System.Linq": "4.1.0"
+          "version": "1.1.2",
+          "type": "platform"
+        }
       },
       "imports": [
         "dnxcore50",
@@ -36,7 +34,8 @@
     },
     "net46": {
       "dependencies": {
-        "FakeItEasy": "2.2.0-coreclr-alpha30"
+        "NLog": "4.4.11",
+        "System.Diagnostics.TraceSource": "4.3.0"
       },
       "buildOptions": {
         "define": [
