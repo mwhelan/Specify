@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DB279CD9-4476-4C30-837B-922C2A943CCD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D7AB3141-7A17-4262-BD7B-75DCE79EFA22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{3129F9EC-95D9-4CA8-B889-80A907FAF055}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Specify", "app\Specify\Specify.xproj", "{EDF7D294-E262-4089-97D9-E105DE42172D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{5DC499CA-BEC0-4285-BBAF-47662557ADFA}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,19 +17,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		..\build.cake = ..\build.cake
 		..\build.ps1 = ..\build.ps1
 		..\GitVersionConfig.yaml = ..\GitVersionConfig.yaml
-		global.json = global.json
 		..\mkdocs.yml = ..\mkdocs.yml
 		NuGet.config = NuGet.config
 		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Specify.Tests", "tests\Specify.Tests\Specify.Tests.xproj", "{DA325E84-DC76-4D03-A0BB-FCB6E83B1D7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specify", "app\Specify\Specify.csproj", "{EDF7D294-E262-4089-97D9-E105DE42172D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Specify.Autofac", "app\Specify.Autofac\Specify.Autofac.xproj", "{66AD2B9C-5990-4BF2-8B3B-686637C31B28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specify.Tests", "tests\Specify.Tests\Specify.Tests.csproj", "{DA325E84-DC76-4D03-A0BB-FCB6E83B1D7D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Specify.IntegrationTests", "tests\Specify.IntegrationTests\Specify.IntegrationTests.xproj", "{09ED85C2-88FC-4865-BEF5-B6CBF5B9A76C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specify.Autofac", "app\Specify.Autofac\Specify.Autofac.csproj", "{66AD2B9C-5990-4BF2-8B3B-686637C31B28}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Specify.Samples", "Samples\Specify.Samples\Specify.Samples.xproj", "{CC7BFB4B-1229-4289-89D1-2FD431B6B1F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specify.IntegrationTests", "tests\Specify.IntegrationTests\Specify.IntegrationTests.csproj", "{09ED85C2-88FC-4865-BEF5-B6CBF5B9A76C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specify.Samples", "Samples\Specify.Samples\Specify.Samples.csproj", "{CC7BFB4B-1229-4289-89D1-2FD431B6B1F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

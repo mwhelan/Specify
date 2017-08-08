@@ -1,4 +1,4 @@
-﻿using Castle.Core.Logging;
+﻿using Serilog;
 
 namespace Specify.Samples.Domain.OrderProcessing
 {
@@ -13,7 +13,7 @@ namespace Specify.Samples.Domain.OrderProcessing
 
         public void Audit(Order order)
         {
-            _logger.Info(order.PartNumber);
+            _logger.Information(order.PartNumber);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Castle.Core.Logging;
+﻿using Serilog;
 using NSubstitute;
 using Shouldly;
 using Specify.Samples.Domain.OrderProcessing;
@@ -42,7 +42,7 @@ namespace Specify.Samples.Specs.OrderProcessing
 
         public void AndThen_it_logs_the_order_part_number()
         {
-            The<ILogger>().Received().Info(Arg.Is<string>(x => x == "TestPart"));
+            The<ILogger>().Received().Information(Arg.Is<string>(x => x == "TestPart"));
         }
     }
 
@@ -72,7 +72,7 @@ namespace Specify.Samples.Specs.OrderProcessing
 
         public void AndThen_it_logs_the_order_part_number()
         {
-            The<ILogger>().Received().Info(Arg.Is<string>(x => x == "TestPart"));
+            The<ILogger>().Received().Information(Arg.Is<string>(x => x == "TestPart"));
         }
     }
 }
