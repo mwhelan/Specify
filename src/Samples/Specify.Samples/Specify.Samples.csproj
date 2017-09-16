@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="1.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Microsoft.NETCore.Platforms" Version="2.0.0" />
     <PackageReference Include="NSubstitute" Version="2.0.3" />
-    <PackageReference Include="NUnit" Version="3.7.1" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
+    <PackageReference Include="NUnit" Version="3.8.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.8.0" />
     <PackageReference Include="Serilog.Sinks.Literate" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Shouldly" Version="2.8.3" />
