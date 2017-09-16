@@ -11,6 +11,11 @@ namespace Specify.Autofac
     {
         public ContainerBuilder Create(IMockFactory mockFactory)
         {
+            if (mockFactory == null)
+            {
+                mockFactory = new NullMockFactory();
+            }
+
             var builder = new ContainerBuilder();
             RegisterScenarios(builder);
             RegisterScenarioContainer(builder, mockFactory);
@@ -29,7 +34,7 @@ namespace Specify.Autofac
 
         private void RegisterScenarioContainer(ContainerBuilder builder, IMockFactory mockFactory)
         {
-            if (mockFactory == null)
+            if (mockFactory.GetType() == typeof(NullMockFactory))
             {
                 builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
                 this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
