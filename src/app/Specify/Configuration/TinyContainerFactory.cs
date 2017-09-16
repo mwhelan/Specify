@@ -11,6 +11,11 @@ namespace Specify.Configuration
     {
         public TinyIoCContainer Create(IMockFactory mockFactory)
         {
+            if (mockFactory == null)
+            {
+                mockFactory = new NullMockFactory();
+            }
+
             var container = new TinyIoCContainer();
             RegisterScenarios(container);
             RegisterScenarioContainer(container, mockFactory);
