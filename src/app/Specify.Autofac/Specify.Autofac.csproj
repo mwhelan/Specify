@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
-    <VersionPrefix>2.0.0-beta0001</VersionPrefix>
+    <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
+    <Copyright>Copyright 2016 Michael Whelan</Copyright>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <AssemblyName>Specify.Autofac</AssemblyName>
     <PackageId>Specify.Autofac</PackageId>
+    <ProjectUrl>http://specify-dotnet.readthedocs.org/</ProjectUrl>
+    <RepositoryUrl>https://github.com/mwhelan/Specify</RepositoryUrl>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
