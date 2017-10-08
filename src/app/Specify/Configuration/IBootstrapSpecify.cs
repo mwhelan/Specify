@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Specify.Mocks;
 
 namespace Specify.Configuration
@@ -24,13 +25,13 @@ namespace Specify.Configuration
         /// Gets the actions that will be run before and after all the scenarios (at the beginning/end of AppDomain).
         /// </summary>
         /// <value>The per AppDomain actions.</value>
-        List<IPerApplicationAction> PerAppDomainActions { get; }
+        IReadOnlyList<IPerApplicationAction> PerAppDomainActions { get; }
 
         /// <summary>
         /// Gets the actions that will be run before and after each scenario.
         /// </summary>
         /// <value>The per scenario actions.</value>
-        List<IPerScenarioAction> PerScenarioActions { get; }
+        IReadOnlyList<IPerScenarioAction> PerScenarioActions { get; }
 
         /// <summary>
         /// Gets or sets a value indicating whether logging is enabled.

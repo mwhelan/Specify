@@ -30,15 +30,19 @@ namespace Specify.Configuration
         /// <returns>IMockFactory.</returns>
         public IMockFactory MockFactory
         {
-            get { return _mockFactory ?? (_mockFactory = new MockDetector().FindAvailableMock()); }
+            get
+            {
+                return _mockFactory ?? (_mockFactory =
+                           (_mockFactory = new MockDetector().FindAvailableMock()) ?? new NullMockFactory());
+            }
             set { _mockFactory = value; }
         }
 
         /// <inheritdoc />
-        public List<IPerApplicationAction> PerAppDomainActions { get; } = new List<IPerApplicationAction>();
+        public IReadOnlyList<IPerApplicationAction> PerAppDomainActions { get; } = new List<IPerApplicationAction>();
 
         /// <inheritdoc />
-        public List<IPerScenarioAction> PerScenarioActions { get; } = new List<IPerScenarioAction>();
+        public IReadOnlyList<IPerScenarioAction> PerScenarioActions { get; } = new List<IPerScenarioAction>();
 
         /// <inheritdoc />
         public bool LoggingEnabled { get; set; } = false;

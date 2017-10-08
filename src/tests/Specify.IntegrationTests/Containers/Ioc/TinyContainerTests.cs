@@ -11,7 +11,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override TinyContainer CreateSut()
         {
-            var container = new TinyContainerFactory().Create(new NullMockFactory());
+            var config = new DefaultBootstrapper { MockFactory = new NullMockFactory() };
+            var container = new TinyContainerFactory(config).Create();
             return new TinyContainer(container);
         }
 

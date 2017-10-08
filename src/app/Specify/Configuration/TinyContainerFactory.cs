@@ -9,43 +9,45 @@ namespace Specify.Configuration
 {
     internal class TinyContainerFactory
     {
-        public TinyIoCContainer Create(IMockFactory mockFactory)
-        {
-            if (mockFactory == null)
-            {
-                mockFactory = new NullMockFactory();
-            }
+        private readonly IBootstrapSpecify _configuration;
+        private readonly TinyIoCContainer _container = new TinyIoCContainer();
 
-            var container = new TinyIoCContainer();
-            RegisterScenarios(container);
-            RegisterScenarioContainer(container, mockFactory);
-            return container;
+        public TinyContainerFactory(IBootstrapSpecify configuration)
+        {
+            _configuration = configuration;
         }
 
-        private void RegisterScenarios(TinyIoCContainer container)
+        public TinyIoCContainer Create()
+        {
+            RegisterScenarios();
+            RegisterScenarioContainer();
+            return _container;
+        }
+
+        private void RegisterScenarios()
         {
             var scenarios = AssemblyTypeResolver
                 .GetAllTypesFromAppDomain()
                 .Where(type => type.IsScenario())
                 .ToList();
 
-            container.RegisterMultiple<IScenario>(scenarios);
+            _container.RegisterMultiple<IScenario>(scenarios);
             this.Log().DebugFormat("Registered {RegisteredScenarioCount} Scenarios", scenarios.Count);
         }
 
-        private void RegisterScenarioContainer(TinyIoCContainer container, IMockFactory mockFactory)
+        private void RegisterScenarioContainer()
         {
-            if (mockFactory.GetType() == typeof(NullMockFactory))
+            if (_configuration.MockFactory.GetType() == typeof(NullMockFactory))
             {
-                container.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
+                _container.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
             }
             else
             {
-                container.Register<IContainer>((c, p) => new TinyMockingContainer(mockFactory, c.GetChildContainer()));
+                _container.Register<IContainer>((c, p) => new TinyMockingContainer(_configuration.MockFactory, c.GetChildContainer()));
                 this.Log()
-                    .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
+                    .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", _configuration.MockFactory.MockProviderName);
             }
         }
     }

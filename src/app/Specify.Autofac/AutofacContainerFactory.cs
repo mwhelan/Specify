@@ -2,6 +2,7 @@
 using Specify.lib;
 using Autofac;
 using Autofac.Features.ResolveAnything;
+using Specify.Configuration;
 using Specify.Logging;
 using Specify.Mocks;
 
@@ -9,43 +10,59 @@ namespace Specify.Autofac
 {
     internal class AutofacContainerFactory
     {
-        public ContainerBuilder Create(IMockFactory mockFactory)
+        private readonly IBootstrapSpecify _configuration;
+        private readonly ContainerBuilder _builder = new ContainerBuilder();
+
+        public AutofacContainerFactory(IBootstrapSpecify configuration)
         {
-            if (mockFactory == null)
-            {
-                mockFactory = new NullMockFactory();
-            }
-
-            var builder = new ContainerBuilder();
-            RegisterScenarios(builder);
-            RegisterScenarioContainer(builder, mockFactory);
-
-            return builder;
+            _configuration = configuration;
         }
 
-        private void RegisterScenarios(ContainerBuilder builder)
+        public ContainerBuilder Create()
+        {
+            RegisterScenarios();
+            RegisterScenarioContainer();
+            RegisterActions();
+
+            return _builder;
+        }
+
+        private void RegisterScenarios()
         {
             var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
-            builder.RegisterAssemblyTypes(assemblies)
+            _builder.RegisterAssemblyTypes(assemblies)
                 .AsClosedTypesOf(typeof(ScenarioFor<>));
-            builder.RegisterAssemblyTypes(assemblies)
+            _builder.RegisterAssemblyTypes(assemblies)
                 .AsClosedTypesOf(typeof(ScenarioFor<,>));
         }
 
-        private void RegisterScenarioContainer(ContainerBuilder builder, IMockFactory mockFactory)
+        private void RegisterScenarioContainer()
         {
-            if (mockFactory.GetType() == typeof(NullMockFactory))
+            if (_configuration.MockFactory.GetType() == typeof(NullMockFactory))
             {
-                builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
+                _builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
                 this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
             }
             else
             {
-                builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
-                builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactory));
-                builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
+                _builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
+                _builder.RegisterSource(new AutofacMockRegistrationHandler(_configuration.MockFactory));
+                _builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
 
-                this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
+                this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", _configuration.MockFactory.MockProviderName);
+            }
+        }
+
+        private void RegisterActions()
+        {
+            foreach (var applicationAction in _configuration.PerAppDomainActions)
+            {
+                _builder.RegisterType(applicationAction.GetType()).As<IPerApplicationAction>();
+            }
+
+            foreach (var scenarioAction in _configuration.PerScenarioActions)
+            {
+                _builder.RegisterType(scenarioAction.GetType()).As<IPerScenarioAction>();
             }
         }
     }

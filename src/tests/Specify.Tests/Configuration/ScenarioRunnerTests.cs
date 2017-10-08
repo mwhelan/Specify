@@ -29,11 +29,10 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_not_call_per_scenario_actions_before_scenario_starts_if_ShouldExecute_false()
         {
-            var action = Substitute.For<IPerScenarioAction>();
-            action.ShouldExecute(Arg.Any<Type>()).Returns(false);
-            SUT.Configuration.PerScenarioActions.Add(action);
+            Container.Get<IPerScenarioAction>()
+                .ShouldExecute(Arg.Any<Type>()).Returns(false);
 
-            action.DidNotReceive().Before(_spec);
+            Container.Get<IPerScenarioAction>().DidNotReceive().Before(_spec);
         }
 
         [Test]
@@ -49,11 +48,10 @@ namespace Specify.Tests.Configuration
         [Test]
         public void should_not_call_per_scenario_actions_after_scenario_completes_if_ShouldExecute_false()
         {
-            var action = Substitute.For<IPerScenarioAction>();
-            action.ShouldExecute(Arg.Any<Type>()).Returns(false);
-            SUT.Configuration.PerScenarioActions.Add(action);
+            Container.Get<IPerScenarioAction>()
+                .ShouldExecute(Arg.Any<Type>()).Returns(false);
 
-            action.DidNotReceive().After();
+            Container.Get<IPerScenarioAction>().DidNotReceive().After();
         }
         [Test]
         public void should_call_per_scenario_actions_after_scenario_completes_if_ShouldExecute_true()
