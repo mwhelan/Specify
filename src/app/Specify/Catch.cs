@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Specify
 {
@@ -57,5 +58,22 @@ namespace Specify
 
             return null;
         }
+
+        public static async Task<Exception> ExceptionAsync(Func<Task> action)
+        {
+            Exception exception = null;
+
+            try
+            {
+                await action();
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            return exception;
+        }
+
     }
 }

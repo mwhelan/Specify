@@ -17,7 +17,7 @@ namespace Specify
 
         static Host()
         {
-#if NET40
+#if NET45
             "Host".Log().DebugFormat("Registering AppDomain DomainUnload event");
             AppDomain.CurrentDomain.DomainUnload += (sender, e) => {
                 _scenarioRunner.AfterAllScenarios();

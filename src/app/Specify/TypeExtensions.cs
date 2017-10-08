@@ -137,7 +137,7 @@ namespace Specify
         }
     }
 
-#if NET40
+#if NET45
     internal static partial class TypeExtensions
     {
         /// <summary>
