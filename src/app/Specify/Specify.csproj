@@ -4,7 +4,7 @@
     <TargetFrameworks>net45;netstandard1.6</TargetFrameworks>
     <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
     <Copyright>Copyright 2016 Michael Whelan</Copyright>
-    <VersionPrefix>2.1.0</VersionPrefix>
+    <VersionPrefix>2.1.1</VersionPrefix>
     <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify</AssemblyName>
     <PackageId>Specify</PackageId>
