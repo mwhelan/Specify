@@ -18,8 +18,7 @@ namespace Specify.Configuration
         /// <returns>StoryMetadata.</returns>
         public virtual StoryMetadata Scan(object testObject, Type explicityStoryType = null)
         {
-            var scenario = testObject as IScenario;
-            if (scenario == null)
+            if (!(testObject is IScenario scenario))
                 return null;
 
             return scenario.IsStoryScenario() 
@@ -27,7 +26,8 @@ namespace Specify.Configuration
                 : CreateSpecificationMetadata(scenario);
         }
 
-        private StoryMetadata CreateScenarioMetadata(IScenario scenario)
+        // creates display for normal BDDfy-style reports
+        private static StoryMetadata CreateScenarioMetadata(IScenario scenario)
         {
             var storyAttribute = (StoryNarrativeAttribute)scenario.GetType()
                 .GetCustomAttributes(typeof(StoryNarrativeAttribute), true)
@@ -35,20 +35,22 @@ namespace Specify.Configuration
 
             if (storyAttribute != null)
             {
-                return new StoryMetadata(scenario.Story, storyAttribute);
+                return new StoryMetadata(scenario.Story.GetType(), storyAttribute);
             }
 
-            var story = scenario.Story.Create<Story>(); 
-            return new StoryMetadata(scenario.Story, story.Narrative1, story.Narrative2,
+            var story = scenario.Story; 
+            return new StoryMetadata(scenario.Story.GetType(), story.Narrative1, story.Narrative2,
                 story.Narrative3, story.Title, story.TitlePrefix, story.ImageUri, story.StoryUri);
         }
 
-        private StoryMetadata CreateSpecificationMetadata(IScenario specification)
+        // creates display for unit test reports
+        private static StoryMetadata CreateSpecificationMetadata(IScenario specification)
         {
             var sutType = specification.SutType();
-            var title = sutType.Name;
-            var story = specification.Story.Create<Story>();
-            var storyAttribute = new StoryAttribute() { Title = title, TitlePrefix = story.TitlePrefix };
+            // scenario title on report is name of SUT class unless story title is overridden in
+            var title = specification.Story.Title ?? sutType.Name;
+            var story = specification.Story;
+            var storyAttribute = new StoryAttribute { Title = title, TitlePrefix = story.TitlePrefix };
             return new StoryMetadata(sutType, storyAttribute);
         }
     }

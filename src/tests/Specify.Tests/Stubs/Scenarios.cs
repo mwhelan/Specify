@@ -15,6 +15,14 @@ namespace Specify.Tests.Stubs
     class StubUserStoryScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
     class StubValueStoryScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors, TicTacToeValueStory> { }
 
+    class StubUnitScenarioWithCustomTitle : ScenarioFor<ConcreteObjectWithMultipleConstructors>
+    {
+        public StubUnitScenarioWithCustomTitle()
+        {
+            this.Story.Title = "Custom title";
+        }
+    }
+
     class ConcreteObjectWithNoConstructorUnitScenario : ScenarioFor<ConcreteObjectWithNoConstructor> { }
 
     [Story(

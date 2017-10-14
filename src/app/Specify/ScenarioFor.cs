@@ -2,6 +2,7 @@ using System;
 using Specify.Stories;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
+using Story = Specify.Stories.Story;
 
 namespace Specify
 {
@@ -19,7 +20,7 @@ namespace Specify
     /// <typeparam name="TStory">The type of the t story.</typeparam>
     public abstract class ScenarioFor<TSut, TStory> : IScenario<TSut>
         where TSut : class
-        where TStory : Stories.Story, new()
+        where TStory : Story, new()
     {
         /// <inheritdoc />
         public ContainerFor<TSut> Container { get; internal set; }
@@ -30,12 +31,12 @@ namespace Specify
         /// <inheritdoc />
         public TSut SUT
         {
-            get { return Container.SystemUnderTest; }
-            set { Container.SystemUnderTest = value; }
+            get => Container.SystemUnderTest;
+            set => Container.SystemUnderTest = value;
         }
 
-        /// <inheritdoc />
-        public virtual Type Story => typeof(TStory);
+         /// <inheritdoc />
+       public Story Story { get; } = new TStory();
 
         /// <inheritdoc />
         public virtual string Title

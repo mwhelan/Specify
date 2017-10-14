@@ -38,7 +38,7 @@ namespace Specify
         /// <returns><c>true</c> if [is story scenario] [the specified specification]; otherwise, <c>false</c>.</returns>
         public static bool IsStoryScenario(this IScenario specification)
         {
-            return specification.Story != typeof(SpecificationStory);
+            return specification.Story.GetType() != typeof(SpecificationStory);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Specify
         /// <returns><c>true</c> if [is unit scenario] [the specified specification]; otherwise, <c>false</c>.</returns>
         public static bool IsUnitScenario(this IScenario specification)
         {
-            return specification.Story == typeof(SpecificationStory);
+            return specification.Story.GetType() == typeof(SpecificationStory);
         }
 
         internal static Type SutType(this IScenario specification)

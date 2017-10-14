@@ -1,6 +1,6 @@
 ﻿using System;
-using Specify.Exceptions;
 using TestStack.BDDfy;
+using Story = Specify.Stories.Story;
 
 namespace Specify
 {
@@ -19,6 +19,7 @@ namespace Specify
         /// Gets or sets the SUT (System Under Test). The class being tested.
         /// </summary>
         /// <value>The sut.</value>
+        // ReSharper disable once InconsistentNaming
         TSut SUT { get; set; }
     }
 
@@ -42,7 +43,7 @@ namespace Specify
         /// Gets the story type.
         /// </summary>
         /// <value>The story.</value>
-        Type Story { get; }
+        Story Story { get; }
 
         /// <summary>
         /// Gets the title that will be printed on the BDDfy report.

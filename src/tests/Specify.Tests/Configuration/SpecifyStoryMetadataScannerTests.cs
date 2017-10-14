@@ -12,74 +12,77 @@ namespace Specify.Tests.Configuration
     [TestFixture]
     public class SpecifyStoryMetadataScannerTests
     {
+        private readonly SpecifyStoryMetadataScanner _sut = new SpecifyStoryMetadataScanner();
+        private StoryMetadata _result;
+
         [Test]
         public void should_return_null_if_scanned_object_is_not_a_specification()
         {
-            var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new ConcreteObjectWithMultipleConstructors(new Dependency1()));
-            result.ShouldBe(null);
+            _result = _sut.Scan(new ConcreteObjectWithMultipleConstructors(new Dependency1()));
+            _result.ShouldBe(null);
         }
 
         [Test]
         public void Unit_Story_should_have_sut_for_title_and_custom_title_prefix()
         {
-            var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubUnitScenario());
-            result.Title.ShouldBe("ConcreteObjectWithMultipleConstructors");
-            result.TitlePrefix.ShouldBe("Specifications For: ");
+            _result = _sut.Scan(new StubUnitScenario());
+            _result.Title.ShouldBe("ConcreteObjectWithMultipleConstructors");
+            _result.TitlePrefix.ShouldBe("Specifications For: ");
+        }
+
+        [Test]
+        public void Unit_Story_should_be_able_to_customise_sut_title_for_report()
+        {
+            _result = _sut.Scan(new StubUnitScenarioWithCustomTitle());
+            var title = _result.Title;
+            title.ShouldBe("Custom title");
         }
 
         [Test]
         public void Unit_Story_should_have_sut_for_story_type()
         {
-            var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubUnitScenario());
-            result.Type.ShouldBe(typeof(ConcreteObjectWithMultipleConstructors));
+            _result = _sut.Scan(new StubUnitScenario());
+            _result.Type.ShouldBe(typeof(ConcreteObjectWithMultipleConstructors));
         }
 
         [Test]
         public void User_Story_should_have_Humanized_story_class_name_as_title_if_no_title_specified()
         {
-            var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubUserStoryScenario());
-            result.Title.ShouldBe("Withdraw cash user story");
+            _result = _sut.Scan(new StubUserStoryScenario());
+            _result.Title.ShouldBe("Withdraw cash user story");
         }
 
         [Test]
         public void Value_Story_should_have_specified_story_title()
         {
-            var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubValueStoryScenario());
-            result.Title.ShouldBe("Tic Tac Toe Story");
+            _result = _sut.Scan(new StubValueStoryScenario());
+            _result.Title.ShouldBe("Tic Tac Toe Story");
         }
 
         [Test]
         public void User_Story_should_have_standard_title_prefix_if_none_specified()
         {
-            var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubUserStoryScenario());
-            result.TitlePrefix.ShouldBe("Story: ");
+            _result = _sut.Scan(new StubUserStoryScenario());
+            _result.TitlePrefix.ShouldBe("Story: ");
         }
 
         [Test]
         public void Value_Story_should_have_specified_title_prefix()
         {
-            var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubValueStoryScenario());
-            result.TitlePrefix.ShouldBe("User Story 1:");
+            _result = _sut.Scan(new StubValueStoryScenario());
+            _result.TitlePrefix.ShouldBe("User Story 1:");
         }
         [Test]
         public void should_use_story_attribute_if_present()
         {
-            var sut = new SpecifyStoryMetadataScanner();
-            var result = sut.Scan(new StubUserStoryScenarioForWithStoryAttribute());
-            result.Title.ShouldBe("Title from attribute");
-            result.TitlePrefix.ShouldBe("Title prefix from attribute");
-            result.Narrative1.ShouldBe("As a programmer");
-            result.Narrative2.ShouldBe("I want to be able to explicitly specify a story");
-            result.Narrative3.ShouldBe("So that I can share a story definition between several scenarios");
-            result.ImageUri.ShouldBe("http://www.google.co.uk");
-            result.StoryUri.ShouldBe("http://www.bbc.co.uk");
+            _result = _sut.Scan(new StubUserStoryScenarioForWithStoryAttribute());
+            _result.Title.ShouldBe("Title from attribute");
+            _result.TitlePrefix.ShouldBe("Title prefix from attribute");
+            _result.Narrative1.ShouldBe("As a programmer");
+            _result.Narrative2.ShouldBe("I want to be able to explicitly specify a story");
+            _result.Narrative3.ShouldBe("So that I can share a story definition between several scenarios");
+            _result.ImageUri.ShouldBe("http://www.google.co.uk");
+            _result.StoryUri.ShouldBe("http://www.bbc.co.uk");
         }
 
         [Test]
