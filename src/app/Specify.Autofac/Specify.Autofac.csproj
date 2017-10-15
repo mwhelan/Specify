@@ -4,7 +4,7 @@
     <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
     <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
     <Copyright>Copyright 2016 Michael Whelan</Copyright>
-    <VersionPrefix>2.1.0</VersionPrefix>
+    <VersionPrefix>2.2.0</VersionPrefix>
     <AssemblyName>Specify.Autofac</AssemblyName>
     <PackageId>Specify.Autofac</PackageId>
     <ProjectUrl>http://specify-dotnet.readthedocs.org/</ProjectUrl>

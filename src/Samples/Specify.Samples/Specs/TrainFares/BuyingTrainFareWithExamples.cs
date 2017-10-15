@@ -13,6 +13,8 @@ namespace Specify.Samples.Specs.TrainFares
 
         public SuccessfulRailcardPurchasesWithExamples()
         {
+            Story.Title = "Train Fares";
+
             Examples = (new ExampleTable(
                 "Buyer Category", "Fare", "Price")
             {

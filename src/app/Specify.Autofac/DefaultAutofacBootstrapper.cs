@@ -7,15 +7,20 @@ namespace Specify.Autofac
     {
         protected override IContainer BuildApplicationContainer()
         {
-            var builder = new AutofacContainerFactory().Create(MockFactory);
-            ConfigureContainer(builder);
+            var builder = ConfigureContainerForApplication();
+            ConfigureContainerForSpecify(builder);
             var container = builder.Build();
             return new AutofacContainer(container);
         }
 
-        public virtual void ConfigureContainer(ContainerBuilder builder)
+        public virtual ContainerBuilder ConfigureContainerForApplication()
         {
+            return new ContainerBuilder();
+        }
 
+        public void ConfigureContainerForSpecify(ContainerBuilder builder)
+        {
+            builder.RegisterSpecify(MockFactory);
         }
     }
 }

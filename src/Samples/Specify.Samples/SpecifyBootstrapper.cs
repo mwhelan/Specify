@@ -16,6 +16,7 @@ namespace Specify.Samples
             LoggingEnabled = true;
             HtmlReport.ReportHeader = "Specify Examples";
             HtmlReport.ReportDescription = "Unit Specifications";
+            HtmlReport.OutputFileName = "Specify Examples - Unit Specifications.html";
             HtmlReport.OutputPath = Path.GetDirectoryName(GetType().GetTypeInfo().Assembly.Location);
 
             //Log.Logger = new LoggerConfiguration()

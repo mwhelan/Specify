@@ -7,23 +7,25 @@ using Specify.Mocks;
 
 namespace Specify.Autofac
 {
-    internal class AutofacContainerFactory
+    public static class ContainerBuilderExtensions
     {
-        public ContainerBuilder Create(IMockFactory mockFactory)
+        public static void RegisterSpecify(this ContainerBuilder builder, IMockFactory mockFactory = null)
         {
+            if (builder == null)
+            {
+                builder = new ContainerBuilder();
+            }
+
             if (mockFactory == null)
             {
                 mockFactory = new NullMockFactory();
             }
 
-            var builder = new ContainerBuilder();
             RegisterScenarios(builder);
             RegisterScenarioContainer(builder, mockFactory);
-
-            return builder;
         }
 
-        private void RegisterScenarios(ContainerBuilder builder)
+        private static void RegisterScenarios(ContainerBuilder builder)
         {
             var assemblies = AssemblyTypeResolver.GetAllAssembliesFromAppDomain().ToArray();
             builder.RegisterAssemblyTypes(assemblies)
@@ -32,12 +34,12 @@ namespace Specify.Autofac
                 .AsClosedTypesOf(typeof(ScenarioFor<,>));
         }
 
-        private void RegisterScenarioContainer(ContainerBuilder builder, IMockFactory mockFactory)
+        private static void RegisterScenarioContainer(ContainerBuilder builder, IMockFactory mockFactory)
         {
             if (mockFactory.GetType() == typeof(NullMockFactory))
             {
                 builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
-                this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
+                nameof(ContainerBuilderExtensions).Log().DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
             }
             else
             {
@@ -45,7 +47,7 @@ namespace Specify.Autofac
                 builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactory));
                 builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
 
-                this.Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
+                nameof(ContainerBuilderExtensions).Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
             }
         }
     }
