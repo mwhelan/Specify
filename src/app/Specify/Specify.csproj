@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0;net46;netstandard1.6</TargetFrameworks>
     <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
-    <Copyright>Copyright 2016 Michael Whelan</Copyright>
-    <VersionPrefix>2.2.0</VersionPrefix>
+    <Copyright>Copyright 2017 Michael Whelan</Copyright>
+    <VersionPrefix>2.3.0</VersionPrefix>
     <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify</AssemblyName>
     <PackageId>Specify</PackageId>
@@ -24,10 +24,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.3" />
     <PackageReference Include="TestStack.BDDfy" Version="4.3.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Xml" />
@@ -40,8 +42,8 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.2" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.3" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
   </ItemGroup>
 

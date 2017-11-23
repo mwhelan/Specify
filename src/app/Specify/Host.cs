@@ -5,19 +5,19 @@ using Specify.Logging;
 
 namespace Specify
 {
-    internal static class Host
+    public static class Host
     {
         public static readonly IBootstrapSpecify Configuration;
         private static readonly ScenarioRunner _scenarioRunner;
 
-        public static void Specify<TSut>(IScenario<TSut> testObject, string scenarioTitle = null) where TSut : class
+        internal static void Specify<TSut>(IScenario<TSut> testObject, string scenarioTitle = null) where TSut : class
         {
             _scenarioRunner.Execute(testObject, scenarioTitle);
         }
 
         static Host()
         {
-#if NET45
+#if NET46
             "Host".Log().DebugFormat("Registering AppDomain DomainUnload event");
             AppDomain.CurrentDomain.DomainUnload += (sender, e) => {
                 _scenarioRunner.AfterAllScenarios();
