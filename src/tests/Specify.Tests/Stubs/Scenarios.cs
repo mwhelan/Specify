@@ -70,4 +70,17 @@ namespace Specify.Tests.Stubs
             SecondExample.ShouldBeOneOf("foo", "bar");
         }
     }
+
+    public class StubScenarioWithNumberOverridden : ScenarioFor<object>
+    {
+        public override int Number => 29;
+    }
+    public class StubScenarioWithNumberSetCtor : ScenarioFor<object>
+    {
+        public StubScenarioWithNumberSetCtor()
+        {
+            Number = 29;
+        }
+    }
+
 }

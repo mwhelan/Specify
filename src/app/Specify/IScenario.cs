@@ -52,10 +52,10 @@ namespace Specify
         string Title { get; }
 
         /// <summary>
-        /// Optionally specify a number if you want to order scenarios on the report. The Title will then being with 'Scenario [Number]'.
+        /// Optionally specify a number if you want to order scenarios on the report. The Title will then being with '[Number]:'.
         /// </summary>
         /// <value>The number.</value>
-        int Number { get; set; }
+        int Number { get; }
 
         /// <summary>
         /// Used by Specify to set the container for each scenario.
