@@ -39,23 +39,10 @@ namespace Specify
        public Story Story { get; } = new TStory();
 
         /// <inheritdoc />
-        public virtual string Title
-        {
-            get
-            {
-                var title = Configurator.Scanners
-                    .Humanize(GetType().FullName.Replace(GetType().Namespace + ".", string.Empty))
-                    .ToTitleCase();
-                if (Number != 0)
-                {
-                    title = $"Scenario {Number:00}: {title}";
-                }
-                return title;
-            }
-        }
+        public virtual string Title => Config.ScenarioTitle(this);
 
         /// <inheritdoc />
-        public int Number { get; set; }
+        public virtual int Number { get; internal set; }
 
         /// <inheritdoc />
         public virtual void SetContainer(IContainer container)

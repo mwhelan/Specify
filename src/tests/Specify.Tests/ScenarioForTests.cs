@@ -131,8 +131,29 @@ namespace Specify.Tests
         {
             var container = new ContainerFor<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
             var sut = new UserStoryScenarioWithAllSupportedStepsInRandomOrder {Container = container, Number = 3};
-            sut.Title.ShouldBe("Scenario 03: User Story Scenario With All Supported Steps In Random Order");
+            sut.Title.ShouldBe("03: User Story Scenario With All Supported Steps In Random Order");
         }
+
+        [Test]
+        public void scenario_title_can_be_overridden_in_config()
+        {
+            var originalTitle = Config.ScenarioTitle;
+            Config.ScenarioTitle = scenario => $"Scenario {scenario.Number:00}";
+            var container = new ContainerFor<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+
+            var sut = new UserStoryScenarioWithAllSupportedStepsInRandomOrder { Container = container, Number = 3 };
+
+            sut.Title.ShouldBe("Scenario 03");
+            Config.ScenarioTitle = originalTitle;
+        }
+
+        [TestCase(typeof(StubScenarioWithNumberOverridden))]
+        [TestCase(typeof(StubScenarioWithNumberSetCtor))]
+        public void scenario_number_can_be_set_in_scenario(Type scenarioType)
+        {
+            scenarioType.Create<IScenario>().Number.ShouldBe(29);
+        }
+
         private static UnitScenarioWithAllSupportedStepsInRandomOrder CreateSut()
         {
             var container = new ContainerFor<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
