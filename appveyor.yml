@@ -1,9 +1,6 @@
 assembly_info:
   patch: false
 
-platform:
-  - Any CPU
-
 configuration:
   - Release
 
