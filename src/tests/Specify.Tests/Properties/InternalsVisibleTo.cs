@@ -7,8 +7,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Specify.IntegrationTests")]
+[assembly: AssemblyProduct("Specify.Tests")]
 [assembly: AssemblyTrademark("")]
+
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("Specify.IntegrationTests")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -16,8 +19,8 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("09ed85c2-88fc-4865-bef5-b6cbf5b9a76c")]
+[assembly: Guid("da325e84-dc76-4d03-a0bb-fcb6e83b1d7d")]
 
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0+243.Branch.master.Sha.f61a21ae0f41f744cc78b9717a6827fa4326f500")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2.4.0.0")]
+[assembly: AssemblyInformationalVersion("2.4.0-vnext.1+283.Branch.vnext.Sha.ba651f8dd1beb444d38d2be4f7e5de0057ad9f9a")]
+[assembly: AssemblyFileVersion("2.4.0.0")]
