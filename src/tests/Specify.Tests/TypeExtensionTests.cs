@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -88,6 +89,15 @@ namespace Specify.Tests
             ilist.GetType().IsEnumerable().ShouldBe(true);
             enumerable.GetType().IsEnumerable().ShouldBe(true);
         }
+
+        [TestCase(typeof(ConcreteObjectWithValueTypeConstuctorParmeter), true)]
+        [TestCase(typeof(ConcreteObjectWithOneInterfaceConstructor), false)]
+        [TestCase(typeof(ConcreteObjectWithOneConcreteConstructor), false)]
+        public void HasAnyValueTypeParameters_should_return_true_if_any_constructor_parameters_are_value_types(Type type, bool result)
+        {
+            type.GreediestConstructor().HasAnyValueTypeParameters().ShouldBe(result);
+        }
+
 
         //[Test]
         //public void GetTypeFromEnumerable_should_return_inner_type()

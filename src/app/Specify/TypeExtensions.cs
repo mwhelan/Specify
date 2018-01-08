@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using TestStack.BDDfy;
 
 namespace Specify
 {
@@ -104,6 +105,16 @@ namespace Specify
             typeof (IList<>),
             typeof (List<>)
         };
+
+        /// <summary>
+        /// Returns true if constructor has any value type parameters.
+        /// </summary>
+        /// <param name="constructor">The type.</param>
+        /// <returns>True if constructor has any value type parameters, False if not</returns>
+        internal static bool HasAnyValueTypeParameters(this ConstructorInfo constructor)
+        {
+            return constructor.GetParameters().Any(parameter => parameter.ParameterType.IsValueType());
+        }
 
         internal static bool CanBeResolvedUsingContainer(this Type type, Func<Type, bool> containerCanResolve, bool requiresRegistration = true)
         {
