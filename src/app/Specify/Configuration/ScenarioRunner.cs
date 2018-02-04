@@ -59,10 +59,6 @@ namespace Specify.Configuration
         {
             this.Log().DebugFormat("AfterAllScenarios");
 
-            var reporter = new HtmlReporter(new ClassicReportBuilder());
-            reporter.Process(StoryCache.Stories);
-
-
             foreach (var action in Configuration.PerAppDomainActions.AsEnumerable().Reverse())
             {
                 this.Log().DebugFormat("Executing {0} PerAppDomain After action", action.GetType().Name);
