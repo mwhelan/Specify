@@ -13,7 +13,7 @@ namespace Specify.Tests.Stubs
             Steps.Add("TearDown");
         }
 
-        public void Setup()
+        public override void Setup()
         {
             Steps.Add("Setup");
         }
