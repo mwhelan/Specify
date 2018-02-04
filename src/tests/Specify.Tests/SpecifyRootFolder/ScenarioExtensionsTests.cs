@@ -2,7 +2,7 @@ using NUnit.Framework;
 using Shouldly;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests
+namespace Specify.Tests.SpecifyRootFolder
 {
     [TestFixture]
     public class ScenarioExtensionsTests

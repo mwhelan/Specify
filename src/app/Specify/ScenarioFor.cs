@@ -1,7 +1,6 @@
 using System;
 using Specify.Stories;
 using TestStack.BDDfy;
-using TestStack.BDDfy.Configuration;
 using Story = Specify.Stories.Story;
 
 namespace Specify
@@ -54,6 +53,12 @@ namespace Specify
         public virtual void Specify()
         {
             Host.Specify(this);
+        }
+
+        public virtual void Setup()
+        {
+            // The SUT needs to be reset for every Example test case
+            SUT = null;
         }
 
         /// <inheritdoc />

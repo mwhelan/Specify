@@ -6,7 +6,7 @@ using Specify.Exceptions;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 
-namespace Specify.Tests
+namespace Specify.Tests.SpecifyRootFolder
 {
     [TestFixture]
     public class ScenarioForTests
@@ -35,7 +35,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             var result = sut.SUT;
-            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received<IContainer>().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Specify.Tests
             var result = sut.SUT;
 
             sut.SUT.ShouldBeSameAs(result);
-            sut.Container.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received<IContainer>(1).Get<ConcreteObjectWithNoConstructor>();
         }
         [Test]
         public void should_be_able_to_set_sut_independently()
@@ -65,7 +65,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             sut.Container.Set<ConcreteObjectWithNoConstructor>();
-            sut.Container.SourceContainer.Received().Set<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received<IContainer>().Set<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Specify.Tests
 
             sut.Container.Set(instance);
 
-            sut.Container.SourceContainer.Received().Set(instance);
+            sut.Container.SourceContainer.Received<IContainer>().Set(instance);
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace Specify.Tests
         {
             var sut = CreateSut();
             sut.Container.Get<ConcreteObjectWithNoConstructor>();
-            sut.Container.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received<IContainer>().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]

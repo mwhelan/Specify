@@ -5,11 +5,6 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.AutoMocking
 {
-    public abstract class ContainerSpecsFor<T> where T : IContainer
-    {
-        protected abstract T CreateSut();
-    }
-
     public abstract class MockingContainerTestsFor<T> : ContainerSpecsFor<T> 
         where T : IContainer
     {

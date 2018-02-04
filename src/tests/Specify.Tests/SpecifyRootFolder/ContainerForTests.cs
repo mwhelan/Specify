@@ -5,7 +5,7 @@ using Shouldly;
 using Specify.Exceptions;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests
+namespace Specify.Tests.SpecifyRootFolder
 {
     [TestFixture]
     public class ContainerForTests
@@ -15,7 +15,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             var result = sut.SystemUnderTest;
-            sut.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received<IContainer>().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace Specify.Tests
             var result = sut.SystemUnderTest;
 
             sut.SystemUnderTest.ShouldBeSameAs(result);
-            sut.SourceContainer.Received(1).Get<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received<IContainer>(1).Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Set<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Received().Set<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received<IContainer>().Set<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Set<IDependency1, Dependency1>();
-            sut.SourceContainer.Received().Set<IDependency1, Dependency1>();
+            sut.SourceContainer.Received<IContainer>().Set<IDependency1, Dependency1>();
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace Specify.Tests
 
             sut.Set(instance);
 
-            sut.SourceContainer.Received().Set(instance);
+            sut.SourceContainer.Received<IContainer>().Set(instance);
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Received().Get<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received<IContainer>().Get<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Get(typeof(ConcreteObjectWithNoConstructor));
-            sut.SourceContainer.Received().Get(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received<IContainer>().Get(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.CanResolve<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Received().CanResolve<ConcreteObjectWithNoConstructor>();
+            sut.SourceContainer.Received<IContainer>().CanResolve<ConcreteObjectWithNoConstructor>();
         }
 
         [Test]
@@ -151,7 +151,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.CanResolve(typeof(ConcreteObjectWithNoConstructor));
-            sut.SourceContainer.Received().CanResolve(typeof(ConcreteObjectWithNoConstructor));
+            sut.SourceContainer.Received<IContainer>().CanResolve(typeof(ConcreteObjectWithNoConstructor));
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace Specify.Tests
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
             sut.Dispose();
-            sut.SourceContainer.Received().Dispose();
+            sut.SourceContainer.Received<IContainer>().Dispose();
         }
 
         private ContainerFor<T> CreateSut<T>() where T : class

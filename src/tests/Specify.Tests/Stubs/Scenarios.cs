@@ -1,8 +1,21 @@
-﻿using Shouldly;
+﻿using NSubstitute;
+using Shouldly;
+using Specify.Stories;
 using TestStack.BDDfy;
 
 namespace Specify.Tests.Stubs
 {
+    public abstract class TestableScenarioFor<TSut, TStory> : ScenarioFor<TSut, TStory>
+        where TSut : class
+        where TStory : Specify.Stories.Story, new()
+    {
+        protected TestableScenarioFor()
+        {
+            Container = new ContainerFor<TSut>(Substitute.For<IContainer>());
+        }
+    }
+    public abstract class TestableScenarioFor<TSut> : TestableScenarioFor<TSut, SpecificationStory>
+        where TSut : class { }
     abstract class ParentScenario : ScenarioFor<object>
     {
         internal abstract class ChildScenario : ParentScenario
@@ -11,11 +24,11 @@ namespace Specify.Tests.Stubs
         }
     }
 
-    class StubUnitScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors> { }
-    class StubUserStoryScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
-    class StubValueStoryScenario : ScenarioFor<ConcreteObjectWithMultipleConstructors, TicTacToeValueStory> { }
+    class StubUnitScenario : TestableScenarioFor<ConcreteObjectWithMultipleConstructors> { }
+    class StubUserStoryScenario : TestableScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
+    class StubValueStoryScenario : TestableScenarioFor<ConcreteObjectWithMultipleConstructors, TicTacToeValueStory> { }
 
-    class StubUnitScenarioWithCustomTitle : ScenarioFor<ConcreteObjectWithMultipleConstructors>
+    class StubUnitScenarioWithCustomTitle : TestableScenarioFor<ConcreteObjectWithMultipleConstructors>
     {
         public StubUnitScenarioWithCustomTitle()
         {
@@ -23,7 +36,7 @@ namespace Specify.Tests.Stubs
         }
     }
 
-    class ConcreteObjectWithNoConstructorUnitScenario : ScenarioFor<ConcreteObjectWithNoConstructor> { }
+    class ConcreteObjectWithNoConstructorUnitScenario : TestableScenarioFor<ConcreteObjectWithNoConstructor> { }
 
     [Story(
         Title = "Title from attribute",
@@ -33,10 +46,10 @@ namespace Specify.Tests.Stubs
         SoThat = "So that I can share a story definition between several scenarios",
         ImageUri = "http://www.google.co.uk",
         StoryUri = "http://www.bbc.co.uk")]
-    class StubUserStoryScenarioForWithStoryAttribute : ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
+    class StubUserStoryScenarioForWithStoryAttribute : TestableScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory> { }
 
     class StubUserStoryScenarioForWithExamples :
-                ScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory>, IScenario
+        TestableScenarioFor<ConcreteObjectWithMultipleConstructors, WithdrawCashUserStory>, IScenario
     {
         public int ExamplesWasCalled;
 
@@ -52,6 +65,7 @@ namespace Specify.Tests.Stubs
 
         public StubUserStoryScenarioForWithExamples()
         {
+            Container = new ContainerFor<ConcreteObjectWithMultipleConstructors>(Substitute.For<IContainer>());
             Examples = new ExampleTable("First Example", "Second Example")
             {
                 {1, "foo"},
@@ -71,11 +85,11 @@ namespace Specify.Tests.Stubs
         }
     }
 
-    public class StubScenarioWithNumberOverridden : ScenarioFor<object>
+    public class StubScenarioWithNumberOverridden : TestableScenarioFor<object>
     {
         public override int Number => 29;
     }
-    public class StubScenarioWithNumberSetCtor : ScenarioFor<object>
+    public class StubScenarioWithNumberSetCtor : TestableScenarioFor<object>
     {
         public StubScenarioWithNumberSetCtor()
         {
