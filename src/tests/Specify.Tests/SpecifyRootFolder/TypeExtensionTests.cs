@@ -5,7 +5,7 @@ using Shouldly;
 using Specify.Configuration.Scanners;
 using Specify.Tests.Stubs;
 
-namespace Specify.Tests
+namespace Specify.Tests.SpecifyRootFolder
 {
     [TestFixture]
     public class TypeExtensionsTests

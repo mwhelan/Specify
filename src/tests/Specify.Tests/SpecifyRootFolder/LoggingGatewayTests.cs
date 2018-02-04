@@ -3,7 +3,7 @@ using Shouldly;
 using Specify.Exceptions;
 using Specify.Logging;
 
-namespace Specify.Tests
+namespace Specify.Tests.SpecifyRootFolder
 {
     [TestFixture]
     public class LoggingGatewayTests

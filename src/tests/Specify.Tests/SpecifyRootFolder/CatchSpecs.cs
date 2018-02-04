@@ -2,13 +2,11 @@
 using System.Threading.Tasks;
 using NSubstitute;
 using NUnit.Framework;
-using Specify.Tests.Stubs;
 using Shouldly;
+using Specify.Tests.Stubs;
 
-
-namespace Specify.Tests
+namespace Specify.Tests.Root
 {
-
     public class CatchSpecs
     {
         public class when_calling_Catch_Exception_with_an_action
@@ -16,7 +14,7 @@ namespace Specify.Tests
             [Test]
             public void throwing_action_should_return_same_exception()
             {
-                Catch.Exception(() => { throw new InvalidOperationException(); })
+                Catch.Exception(() => throw new InvalidOperationException())
                     .ShouldBeOfType<InvalidOperationException>();
             }
 
@@ -49,7 +47,7 @@ namespace Specify.Tests
             {
                 _behaviour.Value.Returns(x => { throw new InvalidOperationException(); });
 
-                var result = Catch.Exception(() => _returnValue = _behaviour.Value);
+                var result = Catch.Exception<int>(() => _returnValue = _behaviour.Value);
 
                 result.ShouldBeOfType<InvalidOperationException>();
                 _returnValue.ShouldBe(3);
@@ -60,7 +58,7 @@ namespace Specify.Tests
             {
                 _behaviour.Value.Returns(23);
 
-                var result = Catch.Exception(() => _returnValue = _behaviour.Value);
+                var result = Catch.Exception<int>(() => _returnValue = _behaviour.Value);
 
                 result.ShouldBe(null);
                 _returnValue.ShouldBe(23);
