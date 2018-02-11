@@ -1,4 +1,5 @@
 using System;
+using Specify.Configuration.ExecutableAttributes;
 using Specify.Stories;
 using TestStack.BDDfy;
 using Story = Specify.Stories.Story;
@@ -53,6 +54,18 @@ namespace Specify
         public virtual void Specify()
         {
             Host.Specify(this);
+        }
+
+        [BeginTestCase]
+        public virtual void BeginTestCase()
+        {
+            
+        }
+
+        [EndTestCase]
+        public virtual void EndTestCase()
+        {
+
         }
 
         public virtual void Setup()

@@ -1,15 +1,25 @@
-using Specify.Tests.SpecifyRootFolder;
+using TestStack.BDDfy;
 
 namespace Specify.Tests.Stubs
 {
-    internal class UnitScenarioWithAllSupportedStepsInRandomOrder 
+    internal class UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples 
         : TestableUnitScenario<ConcreteObjectWithNoConstructor>
     {
-        public UnitScenarioWithAllSupportedStepsInRandomOrder()
+        public UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples()
         {
             Steps.Add("Constructor");
+            Examples = new ExampleTable("Start", "Eat", "Left")
+            {
+                {12, 5, 7},
+                {20, 5, 15}
+            };
         }
         
+        public override void BeginTestCase()
+        {
+            Steps.Add("BeginTestCase");
+        }
+
         public void TearDown()
         {
             Steps.Add("TearDown");
@@ -20,14 +30,9 @@ namespace Specify.Tests.Stubs
             Steps.Add("Setup");
         }
 
-        public void AndGivenSomeOtherPrecondition()
+        public void AndGivenSomeOtherPrecondition(int start, int eat, int left)
         {
             Steps.Add("AndGivenSomeOtherPrecondition");
-        }
-
-        public override void BeginTestCase()
-        {
-            Steps.Add("BeginTestCase");
         }
 
         public override void EndTestCase()
