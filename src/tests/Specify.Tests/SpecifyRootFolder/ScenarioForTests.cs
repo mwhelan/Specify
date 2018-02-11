@@ -2,9 +2,11 @@ using System;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
+using Specify.Configuration.StepScanners;
 using Specify.Exceptions;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
+using TestStack.BDDfy.Configuration;
 
 namespace Specify.Tests.SpecifyRootFolder
 {
@@ -15,28 +17,31 @@ namespace Specify.Tests.SpecifyRootFolder
         [Test]
         public void specify_steps_should_wrap_standard_BDDfy_conventions_with_examples()
         {
+            Configurator.Scanners.ExecutableAttributeScanner.Disable();
+            Configurator.Scanners.Add(() => new SpecifyExecutableAttributeStepScanner());
+
             var container = new ContainerFor<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
             var sut = new UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples() { Container = container };
 
             sut
                 .WithExamples(sut.Examples)
-                .BDDfy();
+                .BDDfy(sut.Title);
 
             sut.Steps[0].ShouldBe("Constructor");
 
-            for (int i = 1; i <= sut.Examples.Count; i++)
+            for (int i = 0; i < sut.Examples.Count; i++)
             {
-                sut.Steps[i * 1].ShouldBe("BeginTestCase");             // Specify begin test case method
-                sut.Steps[i * 2].ShouldBe("Setup");
-                sut.Steps[i * 3].ShouldBe("EstablishContext");
-                sut.Steps[i * 4].ShouldBe("GivenSomePrecondition");
-                sut.Steps[i * 5].ShouldBe("AndGivenSomeOtherPrecondition");
-                sut.Steps[i * 6].ShouldBe("WhenAction");
-                sut.Steps[i * 7].ShouldBe("AndWhenAnotherAction");
-                sut.Steps[i * 8].ShouldBe("ThenAnExpectation");
-                sut.Steps[i * 9].ShouldBe("AndThenAnotherExpectation");
-                sut.Steps[i * 10].ShouldBe("TearDown");                 
-                sut.Steps[i * 11].ShouldBe("EndTestCase");              // Specify end test case method
+                sut.Steps[(i*11)+1].ShouldBe("BeginTestCase");             // Specify begin test case method
+                sut.Steps[(i*11)+2].ShouldBe("Setup");
+                sut.Steps[(i*11)+3].ShouldBe("EstablishContext");
+                sut.Steps[(i*11)+4].ShouldBe("GivenSomePrecondition");
+                sut.Steps[(i*11)+5].ShouldBe("AndGivenSomeOtherPrecondition");
+                sut.Steps[(i*11)+6].ShouldBe("WhenAction");
+                sut.Steps[(i*11)+7].ShouldBe("AndWhenAnotherAction");
+                sut.Steps[(i*11)+8].ShouldBe("ThenAnExpectation");
+                sut.Steps[(i*11)+9].ShouldBe("AndThenAnotherExpectation");
+                sut.Steps[(i*11)+10].ShouldBe("TearDown");
+                sut.Steps[(i*11)+11].ShouldBe("EndTestCase");              // Specify end test case method
             }
         }
 

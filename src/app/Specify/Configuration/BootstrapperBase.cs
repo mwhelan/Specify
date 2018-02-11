@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Specify.Configuration.StepScanners;
 using Specify.Logging;
 using Specify.Mocks;
 using TestStack.BDDfy.Configuration;
@@ -83,6 +84,9 @@ namespace Specify.Configuration
             }
 
             ConfigureReport();
+
+            Configurator.Scanners.ExecutableAttributeScanner.Disable();
+            Configurator.Scanners.Add(() => new SpecifyExecutableAttributeStepScanner());
         }
 
         private void LogSpecifyConfiguration()
