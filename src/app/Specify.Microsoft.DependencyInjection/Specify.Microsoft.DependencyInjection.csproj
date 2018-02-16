@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.0;net46;netstandard1.6</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="lib\**" />
+    <EmbeddedResource Remove="lib\**" />
+    <None Remove="lib\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DryIoc" Version="2.12.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Specify\Specify.csproj" />
+  </ItemGroup>
+
+</Project>

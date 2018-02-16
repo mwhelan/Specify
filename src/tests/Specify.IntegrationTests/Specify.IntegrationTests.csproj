@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\app\Specify.Microsoft.DependencyInjection\Specify.Microsoft.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\app\Specify\Specify.csproj" />
     <ProjectReference Include="..\..\app\Specify.Autofac\Specify.Autofac.csproj" />
     <ProjectReference Include="..\Specify.Tests\Specify.Tests.csproj" />
