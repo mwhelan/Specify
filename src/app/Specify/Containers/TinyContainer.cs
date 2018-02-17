@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TinyIoC;
 
-namespace Specify
+namespace Specify.Containers
 {
     /// <summary>
     /// Adapter for the TinyIoc container.
@@ -89,7 +89,7 @@ namespace Specify
         /// <returns>IEnumerable&lt;TInterface&gt;.</returns>
         public IEnumerable<T> GetMultiple<T>() where T : class
         {
-            return GetMultiple(typeof(T)).Cast<T>();
+            return Enumerable.Cast<T>(GetMultiple(typeof(T)));
         }
 
         /// <inheritdoc />

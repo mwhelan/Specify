@@ -1,4 +1,5 @@
-﻿using Specify.Mocks;
+﻿using Specify.Containers;
+using Specify.Mocks;
 using TinyIoC;
 
 namespace Specify.IntegrationTests.Containers.AutoMocking

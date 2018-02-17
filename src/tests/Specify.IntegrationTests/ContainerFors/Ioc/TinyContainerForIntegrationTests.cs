@@ -1,4 +1,5 @@
-﻿using Specify.Tests.Stubs;
+﻿using Specify.Containers;
+using Specify.Tests.Stubs;
 using TinyIoC;
 
 namespace Specify.IntegrationTests.ContainerFors.Ioc

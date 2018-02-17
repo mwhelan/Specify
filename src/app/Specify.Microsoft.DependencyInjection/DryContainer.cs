@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using DryIoc;
 
 namespace Specify.Microsoft.DependencyInjection
@@ -12,10 +11,10 @@ namespace Specify.Microsoft.DependencyInjection
     public class DryContainer : IContainer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TinyContainer"/> class.
+        /// Initializes a new instance of the <see cref="DryContainer"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public DryContainer(Container container)
+        public DryContainer(DryIoc.IContainer container)
         {
             Container = container;
         }
@@ -23,12 +22,12 @@ namespace Specify.Microsoft.DependencyInjection
         /// <summary>
         /// The DryIoc container.
         /// </summary>
-        public Container Container { get; }
+        public DryIoc.IContainer Container { get; }
 
         /// <inheritdoc />
         public void Set<T>() where T : class
         {
-            Container.Register<T>(Reuse.Singleton);
+            Container.Register<T>(Reuse.Singleton, ifAlreadyRegistered:IfAlreadyRegistered.Replace);
         }
 
         /// <inheritdoc />
@@ -36,14 +35,13 @@ namespace Specify.Microsoft.DependencyInjection
             where TService : class
             where TImplementation : class, TService
         {
-            Container.Register<TService, TImplementation>(Reuse.Singleton);
+            Container.Register<TService, TImplementation>(Reuse.Singleton, ifAlreadyRegistered:IfAlreadyRegistered.Replace);
         }
 
         /// <inheritdoc />
         public T Set<T>(T valueToSet, string key = null) where T : class
         {
-            Container.UseInstance(valueToSet);
-
+            Container.UseInstance(valueToSet, IfAlreadyRegistered.Replace);
             return valueToSet;
         }
 
@@ -57,7 +55,7 @@ namespace Specify.Microsoft.DependencyInjection
             //Container.reg.RegisterMultiple(baseType, implementationTypes);
             foreach (var type in implementationTypes)
             {
-                Container.Register(type);
+                Container.Register(type, ifAlreadyRegistered:IfAlreadyRegistered.Replace);
             }
         }
 

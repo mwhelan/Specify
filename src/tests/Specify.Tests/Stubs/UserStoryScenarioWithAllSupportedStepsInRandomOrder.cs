@@ -11,7 +11,7 @@ namespace Specify.Tests.Stubs
         {
             Steps.Add("Implementation - TearDown");
         }
-        public void Setup()
+        public override void Setup()
         {
             Steps.Add("Implementation - Setup");
         }

@@ -1,4 +1,5 @@
 ﻿using Specify.Configuration;
+using Specify.Containers;
 using Specify.Mocks;
 
 namespace Specify.IntegrationTests.Containers.Ioc.Application

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Specify.lib;
 using Specify.Logging;
 using Specify.Mocks;
 using TinyIoC;
 
-namespace Specify.Configuration
+namespace Specify.Containers
 {
     internal class TinyContainerFactory
     {

@@ -2,6 +2,7 @@ using System.Linq;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Configuration;
+using Specify.Containers;
 using Specify.Mocks;
 using Specify.Tests.Stubs;
 

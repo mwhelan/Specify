@@ -1,4 +1,5 @@
-﻿using TinyIoC;
+﻿using Specify.Containers;
+using TinyIoC;
 
 namespace Specify.Configuration
 {

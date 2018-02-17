@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Specify.Mocks;
 using TinyIoC;
 
-namespace Specify
+namespace Specify.Containers
 {
     /// <summary>
     /// Adapter for the TinyIoc container with auto mocking using the specified mocking provider.

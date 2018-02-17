@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Tests.Stubs;
@@ -26,7 +27,15 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
             sut.Set<IDependency1>(new Dependency1());
             var childContainer = sut.Get<IContainer>();
 
+            Console.WriteLine(sut.Get<IDependency1>().GetHashCode());
+            Console.WriteLine(childContainer.Get<IDependency1>().GetHashCode());
+
             childContainer.Set<IDependency1>(new Dependency1());
+
+            Console.WriteLine(sut.Get<IDependency1>().GetHashCode());
+            Console.WriteLine(childContainer.Get<IDependency1>().GetHashCode());
+            var parentItem = sut.Get<IDependency1>();
+            var childItem = childContainer.Get<IDependency1>();
 
             sut.Get<IDependency1>()
                 .ShouldNotBeSameAs(childContainer.Get<IDependency1>());
@@ -38,8 +47,8 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
             var instance = new Dependency1();
             var sut = this.CreateSut();
             sut.Set<IDependency1>(instance);
-            var childContainer = sut.Get<IContainer>();
 
+            var childContainer = sut.Get<IContainer>();
             childContainer.Set<IDependency1>(new Dependency1());
 
             sut.Get<IDependency1>().ShouldBeSameAs(instance);
