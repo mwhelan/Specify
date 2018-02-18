@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Specify.Exceptions;
 
 namespace Specify
@@ -136,6 +137,26 @@ namespace Specify
         public bool CanResolve(Type type)
         {
             return _sourceContainer.CanResolve(type);
+        }
+
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<object> GetMultiple(Type baseType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> GetMultiple<T>() where T : class
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

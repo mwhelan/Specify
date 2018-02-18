@@ -52,6 +52,37 @@ namespace Specify
             return valueToSet;
         }
 
+        /// <inheritdoc />
+        public T Get<T>(string key = null) where T : class
+        {
+            return (T)Get(typeof(T), key);
+        }
+
+        /// <inheritdoc />
+        public virtual object Get(Type serviceType, string key = null)
+        {
+            if (key == null)
+            {
+                return Container.Resolve(serviceType);
+            }
+            else
+            {
+                return Container.Resolve(serviceType, key);
+            }
+        }
+
+        /// <inheritdoc />
+        public bool CanResolve<T>() where T : class
+        {
+            return CanResolve(typeof(T));
+        }
+
+        /// <inheritdoc />
+        public virtual bool CanResolve(Type type)
+        {
+            return Container.CanResolve(type, ResolveOptions.FailUnregisteredAndNameNotFound);
+        }
+
         /// <summary>
         /// Register multiple implementations of a type.
         /// </summary>
@@ -90,37 +121,6 @@ namespace Specify
         public IEnumerable<T> GetMultiple<T>() where T : class
         {
             return GetMultiple(typeof(T)).Cast<T>();
-        }
-
-        /// <inheritdoc />
-        public T Get<T>(string key = null) where T : class
-        {
-            return (T)Get(typeof(T), key);
-        }
-
-        /// <inheritdoc />
-        public virtual object Get(Type serviceType, string key = null)
-        {
-            if (key == null)
-            {
-                return Container.Resolve(serviceType);
-            }
-            else
-            {
-                return Container.Resolve(serviceType, key);
-            }
-        }
-
-        /// <inheritdoc />
-        public bool CanResolve<T>() where T : class
-        {
-            return CanResolve(typeof(T));
-        }
-
-        /// <inheritdoc />
-        public virtual bool CanResolve(Type type)
-        {
-            return Container.CanResolve(type, ResolveOptions.FailUnregisteredAndNameNotFound);
         }
 
         /// <inheritdoc />

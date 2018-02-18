@@ -69,5 +69,7 @@ namespace Specify.Tests.Configuration
         {
             return ShouldExecutePredicate(type);
         }
+
+        public int Order { get; set; }
     }
 }

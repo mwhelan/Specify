@@ -1,4 +1,5 @@
 ﻿using System;
+using Specify.Exceptions;
 using TestStack.BDDfy;
 using Story = Specify.Stories.Story;
 
@@ -26,7 +27,7 @@ namespace Specify
     /// <summary>
     /// A Specify scenario
     /// </summary>
-    public interface IScenario : IDisposable
+    public interface IScenario 
     {
         /// <summary>
         /// Executes the scenario using BDDfy.
@@ -60,8 +61,8 @@ namespace Specify
         /// <summary>
         /// Used by Specify to set the container for each scenario.
         /// </summary>
-        /// <param name="container">The container.</param>
-        void SetContainer(IContainer container);
+        /// <param name="applicationContainer">The container.</param>
+        void SetContainer(IContainer applicationContainer);
 
         /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.

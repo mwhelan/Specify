@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Specify.Configuration;
 using Specify.Configuration.ExecutableAttributes;
 using Specify.Stories;
 using TestStack.BDDfy;
@@ -22,6 +25,8 @@ namespace Specify
         where TSut : class
         where TStory : Story, new()
     {
+        private IContainer _applicationContainer;
+
         /// <inheritdoc />
         public ContainerFor<TSut> Container { get; internal set; }
 
@@ -45,40 +50,43 @@ namespace Specify
         public virtual int Number { get; internal set; }
 
         /// <inheritdoc />
-        public virtual void SetContainer(IContainer container)
-        {
-            Container = new ContainerFor<TSut>(container);
-        }
-
-        /// <inheritdoc />
         public virtual void Specify()
         {
             Host.Specify(this);
         }
 
+        /// <inheritdoc />
+        public virtual void SetContainer(IContainer applicationContainer)
+        {
+            _applicationContainer = applicationContainer;
+        }
+
         [BeginTestCase]
         public virtual void BeginTestCase()
         {
-            
+            // Reset child container and SUT for every Example test case
+            var container = _applicationContainer.Get<IContainer>();
+            Container = new ContainerFor<TSut>(container);
+            Container.GetMultiple<IPerScenarioAction>()
+                .OrderBy(x => x.Order)
+                .Each(action => action.Before(this));
         }
 
         [EndTestCase]
         public virtual void EndTestCase()
         {
-
-        }
-
-        public virtual void Setup()
-        {
-            // The SUT needs to be reset for every Example test case
+            Container.GetMultiple<IPerScenarioAction>()
+                .OrderByDescending(x => x.Order)
+                .Each(action => action.After());
             SUT = null;
-        }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
             Container?.Dispose();
         }
+
+        ///// <inheritdoc />
+        //public void Dispose()
+        //{
+        //    Container?.Dispose();
+        //}
 
         /// <inheritdoc />
         public T The<T>(string key = null) where T : class 

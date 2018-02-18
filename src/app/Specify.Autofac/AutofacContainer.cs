@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+using Autofac.Core.Activators.Reflection;
 
 namespace Specify.Autofac
 {
@@ -114,6 +117,35 @@ namespace Specify.Autofac
         public bool CanResolve(Type serviceType)
         {
             return serviceType.CanBeResolvedUsingContainer(x => Container.IsRegistered(x));
+        }
+
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            foreach (var type in implementationTypes)
+            {
+                Container
+                    .ComponentRegistry
+                    .Register(RegistrationBuilder.ForType(type).As(baseType)
+                        .InstancePerLifetimeScope()
+                        .CreateRegistration());
+            }
+        }
+
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            SetMultiple(typeof(T), implementationTypes);
+        }
+
+        public IEnumerable<object> GetMultiple(Type baseType)
+        {
+            return Container.ComponentRegistry
+                .RegistrationsFor(new TypedService(baseType))
+                .Select(x => x.Activator);
+        }
+
+        public IEnumerable<T> GetMultiple<T>() where T : class
+        {
+            return Container.Resolve<IEnumerable<T>>();
         }
 
         public void Dispose()
