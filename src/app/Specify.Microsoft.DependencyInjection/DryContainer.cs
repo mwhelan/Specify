@@ -41,7 +41,7 @@ namespace Specify.Microsoft.DependencyInjection
         /// <inheritdoc />
         public T Set<T>(T valueToSet, string key = null) where T : class
         {
-            Container.UseInstance(valueToSet, IfAlreadyRegistered.Replace);
+            Container.RegisterDelegate(_ => valueToSet, ifAlreadyRegistered: IfAlreadyRegistered.Replace);
             return valueToSet;
         }
 
@@ -111,17 +111,14 @@ namespace Specify.Microsoft.DependencyInjection
         /// <inheritdoc />
         public bool CanResolve<T>() where T : class
         {
-            // This is the preferred approach as it doesn't actually resolve the item from the container
-            var isResolvable = Container.Resolve<Func<T>>(ifUnresolved: IfUnresolved.ReturnDefault) != null;
-            return isResolvable;
+            return CanResolve(typeof(T));
         }
 
         /// <inheritdoc />
         public virtual bool CanResolve(Type type)
         {
-            // TODO: This actually resolves the item from the container.
-            // DryIoc does support checking without a full resolve but have to work out the non-generic syntax
-            var isResolvable = Container.Resolve(type, ifUnresolved: IfUnresolved.ReturnDefault) != null;
+            // This is the preferred approach as it doesn't actually resolve the item from the container
+            var isResolvable = Container.Resolve<Func<object>>(requiredServiceType: type, ifUnresolved: IfUnresolved.ReturnDefault) != null;
             return isResolvable;
         }
 

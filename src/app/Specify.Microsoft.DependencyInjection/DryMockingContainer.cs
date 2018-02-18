@@ -27,7 +27,7 @@ namespace Specify.Microsoft.DependencyInjection
         /// <inheritdoc />
         public override bool CanResolve(Type type)
         {
-            return type.CanBeResolvedUsingContainer(x => x.IsInterface() || base.CanResolve(x));
+            return type.CanBeResolvedUsingContainer(x => x.IsInterface() || base.CanResolve(x), false);
         }
 
         /// <inheritdoc />
@@ -93,7 +93,7 @@ namespace Specify.Microsoft.DependencyInjection
         private void RegisterMock(Type serviceType)
         {
             var mockInstance = _mockFactory.CreateMock(serviceType);
-            Container.UseInstance(serviceType, mockInstance,IfAlreadyRegistered.Replace);
+            Container.RegisterDelegate(_ => mockInstance, ifAlreadyRegistered: IfAlreadyRegistered.Replace);
         }
     }
 }

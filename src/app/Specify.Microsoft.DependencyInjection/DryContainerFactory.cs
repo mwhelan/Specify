@@ -37,13 +37,15 @@ namespace Specify.Microsoft.DependencyInjection
         {
             if (mockFactory.GetType() == typeof(NullMockFactory))
             {
-                container.RegisterDelegate<IContainer>((r) => new DryContainer(container.CreateFacade()));
+                container.RegisterDelegate<IContainer>(r => new DryContainer(container.CreateFacade()));
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer", "DryContainer");
             }
             else
             {
-                container.RegisterDelegate<IContainer>((r) => new DryMockingContainer(mockFactory, container.CreateFacade()));
+                container.RegisterDelegate<IContainer>(r => new DryMockingContainer(mockFactory,
+                    container.CreateFacade()
+                        .With(rules => rules.WithConcreteTypeDynamicRegistrations())));
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "DryMockingContainer", mockFactory.MockProviderName);
             }
