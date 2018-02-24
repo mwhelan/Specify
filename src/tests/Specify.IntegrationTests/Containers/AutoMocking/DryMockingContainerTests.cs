@@ -10,7 +10,7 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
         protected override DryMockingContainer CreateSut()
         {
             var mockFactoryInstance = typeof(TMockFactory).Create<IMockFactory>();
-            var container = new DryMockingContainer(mockFactoryInstance, new Container());
+            var container = new DryMockingContainer(mockFactoryInstance, new Container(rules => rules.WithConcreteTypeDynamicRegistrations()));
             return container;
         }
     }

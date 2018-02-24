@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using DryIoc;
 using Specify.Mocks;
-using Container = DryIoc.Container;
 
 namespace Specify.Microsoft.DependencyInjection
 {
@@ -27,7 +26,8 @@ namespace Specify.Microsoft.DependencyInjection
         /// <inheritdoc />
         public override bool CanResolve(Type type)
         {
-            return type.CanBeResolvedUsingContainer(x => x.IsInterface() || base.CanResolve(x), false);
+            var canResolve = type.CanBeResolvedUsingContainer(x => x.IsInterface() || base.CanResolve(x), false);
+            return canResolve;
         }
 
         /// <inheritdoc />
@@ -64,7 +64,7 @@ namespace Specify.Microsoft.DependencyInjection
 
                 foreach (var parameterInfo in constructor.GetParameters())
                 {
-                    if (!CanResolve(parameterInfo.ParameterType))
+                    if (!base.CanResolve(parameterInfo.ParameterType))
                     {
                         if (parameterInfo.ParameterType.IsSealed())
                         {
@@ -93,7 +93,7 @@ namespace Specify.Microsoft.DependencyInjection
         private void RegisterMock(Type serviceType)
         {
             var mockInstance = _mockFactory.CreateMock(serviceType);
-            Container.RegisterDelegate(_ => mockInstance, ifAlreadyRegistered: IfAlreadyRegistered.Replace);
+            Container.RegisterDelegate(serviceType, _ => mockInstance, ifAlreadyRegistered: IfAlreadyRegistered.Replace);
         }
     }
 }

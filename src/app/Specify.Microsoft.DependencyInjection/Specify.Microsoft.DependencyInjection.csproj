@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0;net46;netstandard1.6</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +14,10 @@
     <PackageReference Include="DryIoc" Version="3.0.0-preview-08" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Specify\Specify.csproj" />
+  </ItemGroup>
+  <!--
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
   </ItemGroup>
@@ -25,5 +29,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Specify\Specify.csproj" />
   </ItemGroup>
-
+-->
 </Project>
