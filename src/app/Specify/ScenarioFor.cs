@@ -1,4 +1,6 @@
 using System;
+using Specify.Configuration;
+using Specify.Configuration.Examples;
 using Specify.Configuration.ExecutableAttributes;
 using Specify.Stories;
 using TestStack.BDDfy;
@@ -23,7 +25,12 @@ namespace Specify
         where TStory : Story, new()
     {
         /// <inheritdoc />
-        public ContainerFor<TSut> Container { get; internal set; }
+        public ContainerFor<TSut> Container { get; set; }
+
+        /// <summary>
+        /// Resets the Container and SUT before every Example.
+        /// </summary>
+        public IExampleScope ExampleScope { get; set; } = new NullExampleScope();
 
         /// <inheritdoc />
         public ExampleTable Examples { get; set; }
@@ -35,8 +42,8 @@ namespace Specify
             set => Container.SystemUnderTest = value;
         }
 
-         /// <inheritdoc />
-       public Story Story { get; } = new TStory();
+        /// <inheritdoc />
+        public Story Story { get; } = new TStory();
 
         /// <inheritdoc />
         public virtual string Title => Config.ScenarioTitle(this);
@@ -59,19 +66,13 @@ namespace Specify
         [BeginTestCase]
         public virtual void BeginTestCase()
         {
-            
+            ExampleScope.BeginScope(this);
         }
 
         [EndTestCase]
         public virtual void EndTestCase()
         {
-
-        }
-
-        public virtual void Setup()
-        {
-            // The SUT needs to be reset for every Example test case
-            SUT = null;
+            ExampleScope.EndScope(this);
         }
 
         /// <inheritdoc />

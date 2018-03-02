@@ -1,7 +1,6 @@
 using System.Linq;
+using Specify.Configuration.Examples;
 using Specify.Logging;
-using TestStack.BDDfy.Processors;
-using TestStack.BDDfy.Reporters.Html;
 
 namespace Specify.Configuration
 {
@@ -17,9 +16,11 @@ namespace Specify.Configuration
 
         public void Execute<TSut>(IScenario<TSut> testObject, string scenarioTitle = null) where TSut : class
         {
-            using (var container = Configuration.ApplicationContainer.Get<IContainer>())
+            var scenario = (IScenario<TSut>)Configuration.ApplicationContainer.Get(testObject.GetType());
+            scenario.ExampleScope = new ExampleScope(Configuration.ApplicationContainer);
+
+          using (var container = Configuration.ApplicationContainer.Get<IContainer>())
             {
-                var scenario = (IScenario<TSut>)container.Get(testObject.GetType());
                 scenario.SetContainer(container);
 
                 foreach (var action in Configuration.PerScenarioActions)
