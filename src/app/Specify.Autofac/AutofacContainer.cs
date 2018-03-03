@@ -1,42 +1,63 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 
 namespace Specify.Autofac
 {
+    /// <summary>
+    /// Adapter for the Autofac container.
+    /// </summary>
     public class AutofacContainer : Specify.IContainer
     {
         private ILifetimeScope _container;
-        protected ContainerBuilder _containerBuilder;
+        protected ContainerBuilder ContainerBuilder;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutofacContainer"/> class.
+        /// </summary>
         public AutofacContainer()
             : this(new ContainerBuilder())
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutofacContainer"/> class.
+        /// </summary>
+        /// <param name="container">An <see cref="ILifetimeScope"/> tracks the instantiation of component instances.</param>
         public AutofacContainer(ILifetimeScope container)
         {
             _container = container;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutofacContainer"/> class.
+        /// </summary>
+        /// <param name="containerBuilder">Used to build an <see cref="IContainer"/> from component registrations.</param>
         public AutofacContainer(ContainerBuilder containerBuilder)
         {
-            _containerBuilder = containerBuilder;
+            ContainerBuilder = containerBuilder;
         }
 
+        /// <summary>
+        /// The Autofac container.
+        /// </summary>
         public ILifetimeScope Container
         {
             get
             {
                 if (_container == null)
                 {
-                    _container = _containerBuilder.Build();
+                    _container = ContainerBuilder.Build();
                 }
                 return _container;
             }
         }
 
+        /// <inheritdoc />
         public void Set<T>() where T : class
         {
             Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
@@ -44,6 +65,7 @@ namespace Specify.Autofac
                 .CreateRegistration());
         }
 
+        /// <inheritdoc />
         public void Set<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
@@ -55,6 +77,7 @@ namespace Specify.Autofac
                 .CreateRegistration());
         }
 
+        /// <inheritdoc />
         public T Set<T>(T valueToSet, string key = null) where T : class
         {
             if (key == null)
@@ -74,6 +97,7 @@ namespace Specify.Autofac
             return Get<T>(key);
         }
 
+        /// <inheritdoc />
         public T Get<T>(string key = null) where T : class
         {
             if (key == null)
@@ -86,6 +110,7 @@ namespace Specify.Autofac
             }
         }
 
+        /// <inheritdoc />
         public object Get(Type serviceType, string key = null)
         {
             if (key == null)
@@ -98,9 +123,42 @@ namespace Specify.Autofac
             }
         }
 
+        /// <inheritdoc />
         public bool CanResolve<T>() where T : class
         {
             return CanResolve(typeof(T));
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<object> GetMultiple(Type baseType)
+        {
+            var enumerableOfType = typeof(IEnumerable<>).MakeGenericType(baseType);
+            return (IEnumerable<object>) Container.ResolveService(new TypedService(enumerableOfType));
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<T> GetMultiple<T>() where T : class
+        {
+            return Container.Resolve<IEnumerable<T>>();
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            foreach (var type in implementationTypes)
+            {
+                Container
+                    .ComponentRegistry
+                    .Register(RegistrationBuilder.ForType(type).As(baseType)
+                        .InstancePerLifetimeScope()
+                        .CreateRegistration());
+            }
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            SetMultiple(typeof(T), implementationTypes);
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using Shouldly;
-using Specify.IntegrationTests.Containers.AutoMocking;
 using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.Ioc
@@ -54,11 +54,75 @@ namespace Specify.IntegrationTests.Containers.Ioc
         }
 
         [Test]
-        public void RegisterService_should_register_singleton_lifetime()
+        public void Set_should_register_singleton_lifetime()
         {
             var sut = CreateSut();
             sut.Set<IDependency2, Dependency2>();
             sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
+        }
+
+        [Test]
+        public void SetMultiple_generic_should_set_multiple_implementations()
+        {
+            var sut = CreateSut();
+
+            sut.SetMultiple<IDependency3>(new[] { typeof(Dependency3), typeof(Dependency4) });
+
+            var result = sut.GetMultiple(typeof(IDependency3)).ToList();
+            result.Count.ShouldBe(2);
+            result.ForEach(x => x.ShouldBeAssignableTo<IDependency3>());
+        }
+
+        [Test]
+        public void SetMultiple_type_should_set_multiple_implementations()
+        {
+            var sut = CreateSut();
+
+            sut.SetMultiple(typeof(IDependency3), new[] { typeof(Dependency3), typeof(Dependency4) });
+
+            var result = sut.GetMultiple<IDependency3>().ToList();
+            result.Count.ShouldBe(2);
+            result.ForEach(x => x.ShouldBeAssignableTo<IDependency3>());
+        }
+
+        [Test]
+        public void GetMultiple_generic_should_get_multiple_implementations()
+        {
+            var sut = CreateSut();
+            sut.SetMultiple<IDependency3>(new[] { typeof(Dependency3), typeof(Dependency4) });
+
+            var result = sut.GetMultiple<IDependency3>().ToList();
+            result.Count.ShouldBe(2);
+            result.ForEach(x => x.ShouldBeAssignableTo<IDependency3>());
+        }
+
+        [Test]
+        public void GetMultiple_type_should_get_multiple_implementations()
+        {
+            var sut = CreateSut();
+            sut.SetMultiple<IDependency3>(new[] { typeof(Dependency3), typeof(Dependency4) });
+
+            var result = sut.GetMultiple(typeof(IDependency3)).ToList();
+            result.Count.ShouldBe(2);
+            result.ForEach(x => x.ShouldBeAssignableTo<IDependency3>());
+        }
+
+        [Test]
+        public void GetMultiple_generic_NoTypesRegistered_ReturnsIEnumerableWithNoItems()
+        {
+            var sut = CreateSut();
+            var result = sut.GetMultiple<IDependency3>();
+            result.ShouldBe(Enumerable.Empty<object>());
+            result.Count().ShouldBe(0);
+        }
+
+        [Test]
+        public void GetMultiple_type_NoTypesRegistered_ReturnsIEnumerableWithNoItems()
+        {
+            var sut = CreateSut();
+            var result = sut.GetMultiple(typeof(IDependency3));
+            result.ShouldBe(Enumerable.Empty<object>());
+            result.Count().ShouldBe(0);
         }
     }
 }
