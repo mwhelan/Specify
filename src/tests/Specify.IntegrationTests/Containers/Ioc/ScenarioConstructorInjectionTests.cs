@@ -21,6 +21,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
             SUT = CreateSut();
             _scenario = SUT.Get<ScenarioWithConstuctorParmeters>();
             _scenario.SetContainer(SUT);
+            _scenario.BeginTestCase();
         }
 
         [Test]
@@ -42,10 +43,10 @@ namespace Specify.IntegrationTests.Containers.Ioc
         protected override AutofacContainer CreateSut()
         {
             var builder = new ContainerBuilder();
+            builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
             builder.RegisterType<ScenarioWithConstuctorParmeters>();
             builder.RegisterType<ConcreteObjectWithOneInterfaceConstructor>();
-            builder.Register(c => Substitute.For<IDependency1>()).As<IDependency1>()
-                .InstancePerLifetimeScope();
+            builder.RegisterType<Dependency1>().As<IDependency1>().SingleInstance();
             builder.Register(c => Substitute.For<IDependency2>()).As<IDependency2>();
             return new AutofacContainer(builder);
         }
@@ -56,10 +57,10 @@ namespace Specify.IntegrationTests.Containers.Ioc
         protected override TinyContainer CreateSut()
         {
             var builder = new TinyIoCContainer();
+            builder.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
             builder.Register<ScenarioWithConstuctorParmeters>();
             builder.Register<ConcreteObjectWithOneInterfaceConstructor>();
-            builder.Register<IDependency1, Dependency1>()
-                .AsSingleton();
+            builder.Register<IDependency1, Dependency1>().AsSingleton();
             builder.Register<IDependency2>((c, p) => Substitute.For<IDependency2>());
             return new TinyContainer(builder);
         }

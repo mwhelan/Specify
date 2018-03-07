@@ -16,31 +16,9 @@ namespace Specify.Configuration
 
         public void Execute<TSut>(IScenario<TSut> testObject, string scenarioTitle = null) where TSut : class
         {
-            var scenario = (IScenario<TSut>)Configuration.ApplicationContainer.Get(testObject.GetType());
-            scenario.ExampleScope = new ExampleScope(Configuration.ApplicationContainer);
-
-          using (var container = Configuration.ApplicationContainer.Get<IContainer>())
-            {
-                scenario.SetContainer(container);
-
-                foreach (var action in Configuration.PerScenarioActions)
-                {
-                    if (action.ShouldExecute(scenario.GetType()))
-                    {
-                        action.Before(scenario);
-                    }
-                }
-
-                _testEngine.Execute(scenario);
-
-                foreach (var action in Configuration.PerScenarioActions.AsEnumerable().Reverse())
-                {
-                    if (action.ShouldExecute(scenario.GetType()))
-                    {
-                        action.After();
-                    }
-                }
-            }
+            var scenario = (IScenario<TSut>) Configuration.ApplicationContainer.Get(testObject.GetType());
+            scenario.SetContainer(Configuration.ApplicationContainer);
+            _testEngine.Execute(scenario);
         }
 
         public void BeforeAllScenarios()

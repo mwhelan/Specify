@@ -46,12 +46,6 @@ namespace Specify
         /// Gets the story type.
         /// </summary>
         /// <value>The story.</value>
-        IExampleScope ExampleScope { get; set; }
-
-        /// <summary>
-        /// Gets the story type.
-        /// </summary>
-        /// <value>The story.</value>
         Story Story { get; }
 
         /// <summary>
@@ -67,10 +61,16 @@ namespace Specify
         int Number { get; }
 
         /// <summary>
+        /// The current test case (example). Increments from 1 to the total count of examples.
+        /// </summary>
+        /// <value>The number.</value>
+        int TestCaseNumber { get; }
+
+        /// <summary>
         /// Used by Specify to set the container for each scenario.
         /// </summary>
-        /// <param name="container">The container.</param>
-        void SetContainer(IContainer container);
+        /// <param name="applicationContainer">The container.</param>
+        void SetContainer(IContainer applicationContainer);
 
         /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.

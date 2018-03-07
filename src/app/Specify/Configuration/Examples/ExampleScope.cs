@@ -5,22 +5,22 @@ namespace Specify.Configuration.Examples
 {
     public class ExampleScope : IExampleScope
     {
-        private readonly IContainer _rootContainer;
+        private readonly IContainer _applicationContainer;
         private IEnumerable<IPerScenarioAction> _actions;
 
-        public ExampleScope(IContainer rootContainer)
+        public ExampleScope(IContainer applicationContainer)
         {
-            _rootContainer = rootContainer;
+            _applicationContainer = applicationContainer;
         }
 
         public void BeginScope<T>(IScenario<T> scenario)
             where T : class
         {
-            var childContainer = _rootContainer.Get<IContainer>();
+            var childContainer = _applicationContainer.Get<IContainer>();
             scenario.Container = new ContainerFor<T>(childContainer);
 
-            _actions = childContainer.Get<IEnumerable<IPerScenarioAction>>();
-            foreach (var action in _actions)
+            _actions = childContainer.GetMultiple<IPerScenarioAction>();
+            foreach (var action in _actions.OrderBy(x => x.Order))
             {
                 if (action.ShouldExecute(scenario.GetType()))
                 {
@@ -32,7 +32,7 @@ namespace Specify.Configuration.Examples
         public void EndScope<T>(IScenario<T> scenario)
             where T : class
         {
-            foreach (var action in Enumerable.Reverse<IPerScenarioAction>(_actions))
+            foreach (var action in _actions.OrderByDescending(x => x.Order))
             {
                 if (action.ShouldExecute(scenario.GetType()))
                 {

@@ -52,9 +52,13 @@ namespace Specify
         public virtual int Number { get; internal set; }
 
         /// <inheritdoc />
-        public virtual void SetContainer(IContainer container)
+        public int TestCaseNumber { get; private set; }
+
+
+        /// <inheritdoc />
+        public virtual void SetContainer(IContainer applicationContainer)
         {
-            Container = new ContainerFor<TSut>(container);
+            ExampleScope = new ExampleScope(applicationContainer);
         }
 
         /// <inheritdoc />
@@ -64,13 +68,14 @@ namespace Specify
         }
 
         [BeginTestCase]
-        public virtual void BeginTestCase()
+        public void BeginTestCase()
         {
+            TestCaseNumber++;
             ExampleScope.BeginScope(this);
         }
 
         [EndTestCase]
-        public virtual void EndTestCase()
+        public void EndTestCase()
         {
             ExampleScope.EndScope(this);
         }

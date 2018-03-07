@@ -25,14 +25,16 @@ namespace Specify.Tests.Stubs
             Steps.Add("AndGivenSomeOtherPrecondition");
         }
 
-        public override void BeginTestCase()
+        public new void BeginTestCase()
         {
             Steps.Add("BeginTestCase");
+            base.BeginTestCase();
         }
 
-        public override void EndTestCase()
+        public new void EndTestCase()
         {
             Steps.Add("EndTestCase");
+            base.EndTestCase();
         }
 
         public void ThenAnExpectation()

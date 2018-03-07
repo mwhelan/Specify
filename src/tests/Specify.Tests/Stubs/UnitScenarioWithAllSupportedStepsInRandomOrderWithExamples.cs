@@ -16,11 +16,6 @@ namespace Specify.Tests.Stubs
             };
         }
         
-        public override void BeginTestCase()
-        {
-            Steps.Add("BeginTestCase");
-        }
-
         public void TearDown()
         {
             Steps.Add("TearDown");
@@ -34,11 +29,6 @@ namespace Specify.Tests.Stubs
         public void AndGivenSomeOtherPrecondition(int start, int eat, int left)
         {
             Steps.Add("AndGivenSomeOtherPrecondition");
-        }
-
-        public override void EndTestCase()
-        {
-            Steps.Add("EndTestCase");
         }
 
         public void ThenAnExpectation()

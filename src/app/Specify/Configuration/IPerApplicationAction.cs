@@ -14,5 +14,10 @@ namespace Specify.Configuration
         /// Action to be performed after all scenarios have run.
         /// </summary>
         void After();
+
+        /// <summary>
+        /// The order the action will run in.
+        /// </summary>
+        int Order { get; set; }
     }
 }

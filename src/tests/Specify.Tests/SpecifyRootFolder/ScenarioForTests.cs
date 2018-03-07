@@ -13,7 +13,6 @@ namespace Specify.Tests.SpecifyRootFolder
     [TestFixture]
     public class ScenarioForTests
     {
-        // TODO: Get this working with examples
         [Test]
         public void specify_steps_should_wrap_standard_BDDfy_conventions_with_examples()
         {
@@ -31,17 +30,17 @@ namespace Specify.Tests.SpecifyRootFolder
 
             for (int i = 0; i < sut.Examples.Count; i++)
             {
-                sut.Steps[(i*11)+1].ShouldBe("BeginTestCase");             // Specify begin test case method
-                sut.Steps[(i*11)+2].ShouldBe("Setup");
-                sut.Steps[(i*11)+3].ShouldBe("EstablishContext");
-                sut.Steps[(i*11)+4].ShouldBe("GivenSomePrecondition");
-                sut.Steps[(i*11)+5].ShouldBe("AndGivenSomeOtherPrecondition");
-                sut.Steps[(i*11)+6].ShouldBe("WhenAction");
-                sut.Steps[(i*11)+7].ShouldBe("AndWhenAnotherAction");
-                sut.Steps[(i*11)+8].ShouldBe("ThenAnExpectation");
-                sut.Steps[(i*11)+9].ShouldBe("AndThenAnotherExpectation");
-                sut.Steps[(i*11)+10].ShouldBe("TearDown");
-                sut.Steps[(i*11)+11].ShouldBe("EndTestCase");              // Specify end test case method
+                //sut.Steps[(i*11)+1].ShouldBe("BeginTestCase");             // Specify begin test case method
+                sut.Steps[(i*9)+1].ShouldBe("Setup");
+                sut.Steps[(i*9)+2].ShouldBe("EstablishContext");
+                sut.Steps[(i*9)+3].ShouldBe("GivenSomePrecondition");
+                sut.Steps[(i*9)+4].ShouldBe("AndGivenSomeOtherPrecondition");
+                sut.Steps[(i*9)+5].ShouldBe("WhenAction");
+                sut.Steps[(i*9)+6].ShouldBe("AndWhenAnotherAction");
+                sut.Steps[(i*9)+7].ShouldBe("ThenAnExpectation");
+                sut.Steps[(i*9)+8].ShouldBe("AndThenAnotherExpectation");
+                sut.Steps[(i*9)+9].ShouldBe("TearDown");
+                //sut.Steps[(i*11)+11].ShouldBe("EndTestCase");              // Specify end test case method
             }
         }
 
@@ -55,17 +54,17 @@ namespace Specify.Tests.SpecifyRootFolder
 
             sut.Steps[0].ShouldBe("Constructor");
 
-            sut.Steps[1].ShouldBe("BeginTestCase"); // Specify begin test case method
-            sut.Steps[2].ShouldBe("Setup");
-            sut.Steps[3].ShouldBe("EstablishContext");
-            sut.Steps[4].ShouldBe("GivenSomePrecondition");
-            sut.Steps[5].ShouldBe("AndGivenSomeOtherPrecondition");
-            sut.Steps[6].ShouldBe("WhenAction");
-            sut.Steps[7].ShouldBe("AndWhenAnotherAction");
-            sut.Steps[8].ShouldBe("ThenAnExpectation");
-            sut.Steps[9].ShouldBe("AndThenAnotherExpectation");
-            sut.Steps[10].ShouldBe("TearDown");
-            sut.Steps[11].ShouldBe("EndTestCase"); // Specify end test case method
+            //sut.Steps[1].ShouldBe("BeginTestCase"); // Specify begin test case method
+            sut.Steps[1].ShouldBe("Setup");
+            sut.Steps[2].ShouldBe("EstablishContext");
+            sut.Steps[3].ShouldBe("GivenSomePrecondition");
+            sut.Steps[4].ShouldBe("AndGivenSomeOtherPrecondition");
+            sut.Steps[5].ShouldBe("WhenAction");
+            sut.Steps[6].ShouldBe("AndWhenAnotherAction");
+            sut.Steps[7].ShouldBe("ThenAnExpectation");
+            sut.Steps[8].ShouldBe("AndThenAnotherExpectation");
+            sut.Steps[9].ShouldBe("TearDown");
+            //sut.Steps[11].ShouldBe("EndTestCase"); // Specify end test case method
 
         }
 

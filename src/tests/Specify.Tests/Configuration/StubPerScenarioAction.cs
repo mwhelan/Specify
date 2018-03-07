@@ -39,6 +39,8 @@ namespace Specify.Tests.Configuration
         {
             AfterActions.Add(Name);
         }
+
+        public int Order { get; set; } = 1;
     }
 
     internal class StubPerScenarioAction : IPerScenarioAction
@@ -69,5 +71,7 @@ namespace Specify.Tests.Configuration
         {
             return ShouldExecutePredicate(type);
         }
+
+        public int Order { get; set; } = 1;
     }
 }
