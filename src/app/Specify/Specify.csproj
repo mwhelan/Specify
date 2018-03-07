@@ -5,7 +5,6 @@
     <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
     <Copyright>Copyright 2018 Michael Whelan</Copyright>
     <VersionPrefix>3.0.0-alpha01</VersionPrefix>
-    <VersionPrefix>2.3.0</VersionPrefix>
     <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify</AssemblyName>
     <PackageId>Specify</PackageId>
