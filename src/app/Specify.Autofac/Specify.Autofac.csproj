@@ -3,11 +3,15 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net46;netstandard1.6</TargetFrameworks>
     <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
-    <Copyright>Copyright 2017 Michael Whelan</Copyright>
-    <VersionPrefix>2.2.0</VersionPrefix>
+    <Copyright>Copyright 2018 Michael Whelan</Copyright>
+    <VersionPrefix>3.0.0-alpha01</VersionPrefix>
+	<Authors>Michael Whelan</Authors>
     <AssemblyName>Specify.Autofac</AssemblyName>
     <PackageId>Specify.Autofac</PackageId>
-    <ProjectUrl>http://specify-dotnet.readthedocs.org/</ProjectUrl>
+	<PackageTags>TDD;BDD;Testing;BDDfy</PackageTags>
+	<PackageLicenseUrl>https://github.com/mwhelan/Specify/blob/master/license.txt</PackageLicenseUrl>
+	<RepositoryType>git</RepositoryType>
+	<ProjectUrl>http://specify-dotnet.readthedocs.org/</ProjectUrl>
     <RepositoryUrl>https://github.com/mwhelan/Specify</RepositoryUrl>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
@@ -17,6 +21,7 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <PackageProjectUrl>http://specify-dotnet.readthedocs.io/en/latest/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using System.Linq;
-using Specify.Configuration.Examples;
 using Specify.Logging;
 
 namespace Specify.Configuration
@@ -7,6 +7,7 @@ namespace Specify.Configuration
     internal class ScenarioRunner
     {
         private readonly ITestEngine _testEngine;
+        private IEnumerable<IPerApplicationAction> _actions;
 
         public ScenarioRunner(IBootstrapSpecify configuration, ITestEngine testEngine)
         {
@@ -27,9 +28,10 @@ namespace Specify.Configuration
 
             Configuration.InitializeSpecify();
 
-            foreach (var action in Configuration.PerAppDomainActions)
+            _actions = Configuration.ApplicationContainer.GetMultiple<IPerApplicationAction>();
+            foreach (var action in _actions.OrderBy(x => x.Order))
             {
-                this.Log().DebugFormat("Executing {0} PerAppDomain Before action", action.GetType().Name);
+                this.Log().DebugFormat("Executing {0} PerApplication Before action", action.GetType().Name);
                 action.Before();
             }
         }
@@ -38,9 +40,9 @@ namespace Specify.Configuration
         {
             this.Log().DebugFormat("AfterAllScenarios");
 
-            foreach (var action in Configuration.PerAppDomainActions.AsEnumerable().Reverse())
+            foreach (var action in _actions.OrderByDescending(x => x.Order))
             {
-                this.Log().DebugFormat("Executing {0} PerAppDomain After action", action.GetType().Name);
+                this.Log().DebugFormat("Executing {0} PerApplication After action", action.GetType().Name);
                 action.After();
             }
 

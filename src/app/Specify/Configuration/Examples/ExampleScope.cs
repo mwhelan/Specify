@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Specify.Logging;
 
 namespace Specify.Configuration.Examples
 {
@@ -24,6 +25,7 @@ namespace Specify.Configuration.Examples
             {
                 if (action.ShouldExecute(scenario.GetType()))
                 {
+                    this.Log().DebugFormat("Executing {0} PerScenario Before action", action.GetType().Name);
                     action.Before(scenario);
                 }
             }
@@ -36,6 +38,7 @@ namespace Specify.Configuration.Examples
             {
                 if (action.ShouldExecute(scenario.GetType()))
                 {
+                    this.Log().DebugFormat("Executing {0} PerScenario After action", action.GetType().Name);
                     action.After();
                 }
             }
