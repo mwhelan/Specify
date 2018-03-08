@@ -2,9 +2,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net46;netstandard1.6</TargetFrameworks>
+	<Title>Specify</Title>
     <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
-    <Copyright>Copyright 2017 Michael Whelan</Copyright>
-    <VersionPrefix>2.3.0</VersionPrefix>
+	<Summary>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Summary>
+    <Copyright>Copyright 2018 Michael Whelan</Copyright>
+    <VersionPrefix>3.0.0-alpha01</VersionPrefix>
     <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify</AssemblyName>
     <PackageId>Specify</PackageId>
@@ -21,6 +23,7 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <PackageProjectUrl>http://specify-dotnet.readthedocs.io/en/latest/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

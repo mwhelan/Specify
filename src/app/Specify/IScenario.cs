@@ -1,4 +1,7 @@
 ﻿using System;
+using Specify.Configuration;
+using Specify.Configuration.Examples;
+using Specify.Exceptions;
 using TestStack.BDDfy;
 using Story = Specify.Stories.Story;
 
@@ -13,7 +16,7 @@ namespace Specify
         /// Gets the container.
         /// </summary>
         /// <value>The container.</value>
-        ContainerFor<TSut> Container { get; }
+        ContainerFor<TSut> Container { get; set; }
 
         /// <summary>
         /// Gets or sets the SUT (System Under Test). The class being tested.
@@ -58,10 +61,16 @@ namespace Specify
         int Number { get; }
 
         /// <summary>
+        /// The current test case (example). Increments from 1 to the total count of examples.
+        /// </summary>
+        /// <value>The number.</value>
+        int TestCaseNumber { get; }
+
+        /// <summary>
         /// Used by Specify to set the container for each scenario.
         /// </summary>
-        /// <param name="container">The container.</param>
-        void SetContainer(IContainer container);
+        /// <param name="applicationContainer">The container.</param>
+        void SetContainer(IContainer applicationContainer);
 
         /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.

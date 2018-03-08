@@ -79,15 +79,15 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public override IEnumerable<object> GetMultiple(Type baseType)
-        {
-            if (!baseType.IsEnumerable())
-            {
-                throw new ArgumentException(
-                    $"Only IEnumerable<T> types can be passed to the GetMultiple method.  {baseType.AssemblyQualifiedName} is invalid");
-            }
-            return base.GetMultiple(baseType);
-        }
+        //public override IEnumerable<object> GetMultiple(Type baseType)
+        //{
+        //    if (!baseType.IsEnumerable())
+        //    {
+        //        throw new ArgumentException(
+        //            $"Only IEnumerable<T> types can be passed to the GetMultiple method.  {baseType.AssemblyQualifiedName} is invalid");
+        //    }
+        //    return base.GetMultiple(baseType);
+        //}
 
         private void RegisterMock(Type serviceType)
         {

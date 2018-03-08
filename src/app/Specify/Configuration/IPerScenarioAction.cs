@@ -21,5 +21,10 @@ namespace Specify.Configuration
         /// Whether this action should be performed for a particular type.
         /// </summary>
         bool ShouldExecute(Type type);
+
+        /// <summary>
+        /// The order the action will run in.
+        /// </summary>
+        int Order { get; set; }
     }
 }

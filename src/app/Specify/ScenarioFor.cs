@@ -1,4 +1,7 @@
 using System;
+using Specify.Configuration;
+using Specify.Configuration.Examples;
+using Specify.Configuration.ExecutableAttributes;
 using Specify.Stories;
 using TestStack.BDDfy;
 using Story = Specify.Stories.Story;
@@ -22,7 +25,12 @@ namespace Specify
         where TStory : Story, new()
     {
         /// <inheritdoc />
-        public ContainerFor<TSut> Container { get; internal set; }
+        public ContainerFor<TSut> Container { get; set; }
+
+        /// <summary>
+        /// Resets the Container and SUT before every Example.
+        /// </summary>
+        public IExampleScope ExampleScope { get; set; } = new NullExampleScope();
 
         /// <inheritdoc />
         public ExampleTable Examples { get; set; }
@@ -34,8 +42,8 @@ namespace Specify
             set => Container.SystemUnderTest = value;
         }
 
-         /// <inheritdoc />
-       public Story Story { get; } = new TStory();
+        /// <inheritdoc />
+        public Story Story { get; } = new TStory();
 
         /// <inheritdoc />
         public virtual string Title => Config.ScenarioTitle(this);
@@ -44,9 +52,13 @@ namespace Specify
         public virtual int Number { get; internal set; }
 
         /// <inheritdoc />
-        public virtual void SetContainer(IContainer container)
+        public int TestCaseNumber { get; private set; }
+
+
+        /// <inheritdoc />
+        public virtual void SetContainer(IContainer applicationContainer)
         {
-            Container = new ContainerFor<TSut>(container);
+            ExampleScope = new ExampleScope(applicationContainer);
         }
 
         /// <inheritdoc />
@@ -55,10 +67,17 @@ namespace Specify
             Host.Specify(this);
         }
 
-        public virtual void Setup()
+        [BeginTestCase]
+        public void BeginTestCase()
         {
-            // The SUT needs to be reset for every Example test case
-            SUT = null;
+            TestCaseNumber++;
+            ExampleScope.BeginScope(this);
+        }
+
+        [EndTestCase]
+        public void EndTestCase()
+        {
+            ExampleScope.EndScope(this);
         }
 
         /// <inheritdoc />

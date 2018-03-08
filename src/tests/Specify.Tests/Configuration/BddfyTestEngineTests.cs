@@ -33,22 +33,22 @@ namespace Specify.Tests.Configuration
 
             spec.Received().BDDfy();
         }
-#if NET46
-        [Test]
-        // [UseReporter(typeof(DiffReporter))]
-        //        [MethodImpl(MethodImplOptions.NoInlining)]
-        public void should_display_examples_on_reports()
-        {
-            var scenario = new StubUserStoryScenarioForWithExamples();
-            var sut = new BddfyTestEngine();
+//#if NET46
+//        [Test]
+//        // [UseReporter(typeof(DiffReporter))]
+//        //        [MethodImpl(MethodImplOptions.NoInlining)]
+//        public void should_display_examples_on_reports()
+//        {
+//            var scenario = new StubUserStoryScenarioForWithExamples();
+//            var sut = new BddfyTestEngine();
 
-            var story = sut.Execute(scenario);
+//            var story = sut.Execute(scenario);
 
-            var reporter = new TextReporter();
-            reporter.Process(story);
-            // Approvals.Verify(reporter.ToString());
-            reporter.ToString().ShouldMatchApproved();
-        }
-#endif
+//            var reporter = new TextReporter();
+//            reporter.Process(story);
+//            // Approvals.Verify(reporter.ToString());
+//            reporter.ToString().ShouldMatchApproved();
+//        }
+//#endif
     }
 }

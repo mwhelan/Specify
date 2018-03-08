@@ -25,6 +25,25 @@ namespace Specify
         public TinyIoCContainer Container { get; }
 
         /// <inheritdoc />
+        public T Get<T>(string key = null) where T : class
+        {
+            return (T)Get(typeof(T), key);
+        }
+
+        /// <inheritdoc />
+        public virtual object Get(Type serviceType, string key = null)
+        {
+            if (key == null)
+            {
+                return Container.Resolve(serviceType);
+            }
+            else
+            {
+                return Container.Resolve(serviceType, key);
+            }
+        }
+
+        /// <inheritdoc />
         public void Set<T>() where T : class
         {
             Container.Register<T>().AsSingleton();
@@ -53,26 +72,6 @@ namespace Specify
         }
 
         /// <summary>
-        /// Register multiple implementations of a type.
-        /// </summary>
-        /// <param name="baseType">The type that each implementation implements.</param>
-        /// <param name="implementationTypes">Types that implement T.</param>
-        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
-        {
-            Container.RegisterMultiple(baseType, implementationTypes);
-        }
-
-        /// <summary>
-        /// Register multiple implementations of a type.
-        /// </summary>
-        /// <typeparam name="T">The type that each implementation implements.</typeparam>
-        /// <param name="implementationTypes">Types that implement T.</param>
-        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
-        {
-            SetMultiple(typeof(T), implementationTypes);
-        }
-
-        /// <summary>
         /// Gets all implementations of a type.
         /// </summary>
         /// <param name="baseType">The type that each implementation implements.</param>
@@ -92,23 +91,24 @@ namespace Specify
             return GetMultiple(typeof(T)).Cast<T>();
         }
 
-        /// <inheritdoc />
-        public T Get<T>(string key = null) where T : class
+        /// <summary>
+        /// Register multiple implementations of a type.
+        /// </summary>
+        /// <param name="baseType">The type that each implementation implements.</param>
+        /// <param name="implementationTypes">Types that implement T.</param>
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
         {
-            return (T)Get(typeof(T), key);
+            Container.RegisterMultiple(baseType, implementationTypes);
         }
 
-        /// <inheritdoc />
-        public virtual object Get(Type serviceType, string key = null)
+        /// <summary>
+        /// Register multiple implementations of a type.
+        /// </summary>
+        /// <typeparam name="T">The type that each implementation implements.</typeparam>
+        /// <param name="implementationTypes">Types that implement T.</param>
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
         {
-            if (key == null)
-            {
-                return Container.Resolve(serviceType);
-            }
-            else
-            {
-                return Container.Resolve(serviceType, key);
-            }
+            SetMultiple(typeof(T), implementationTypes);
         }
 
         /// <inheritdoc />

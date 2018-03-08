@@ -2,9 +2,11 @@ using System;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
+using Specify.Configuration.StepScanners;
 using Specify.Exceptions;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
+using TestStack.BDDfy.Configuration;
 
 namespace Specify.Tests.SpecifyRootFolder
 {
@@ -12,13 +14,47 @@ namespace Specify.Tests.SpecifyRootFolder
     public class ScenarioForTests
     {
         [Test]
-        public void specification_step_order_should_follow_standard_BDDfy_conventions()
+        public void specify_steps_should_wrap_standard_BDDfy_conventions_with_examples()
         {
-            var sut = CreateSut();
+            Configurator.Scanners.ExecutableAttributeScanner.Disable();
+            Configurator.Scanners.Add(() => new SpecifyExecutableAttributeStepScanner());
+
+            var container = new ContainerFor<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var sut = new UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples() { Container = container };
+
+            sut
+                .WithExamples(sut.Examples)
+                .BDDfy(sut.Title);
+
+            sut.Steps[0].ShouldBe("Constructor");
+
+            for (int i = 0; i < sut.Examples.Count; i++)
+            {
+                //sut.Steps[(i*11)+1].ShouldBe("BeginTestCase");             // Specify begin test case method
+                sut.Steps[(i*9)+1].ShouldBe("Setup");
+                sut.Steps[(i*9)+2].ShouldBe("EstablishContext");
+                sut.Steps[(i*9)+3].ShouldBe("GivenSomePrecondition");
+                sut.Steps[(i*9)+4].ShouldBe("AndGivenSomeOtherPrecondition");
+                sut.Steps[(i*9)+5].ShouldBe("WhenAction");
+                sut.Steps[(i*9)+6].ShouldBe("AndWhenAnotherAction");
+                sut.Steps[(i*9)+7].ShouldBe("ThenAnExpectation");
+                sut.Steps[(i*9)+8].ShouldBe("AndThenAnotherExpectation");
+                sut.Steps[(i*9)+9].ShouldBe("TearDown");
+                //sut.Steps[(i*11)+11].ShouldBe("EndTestCase");              // Specify end test case method
+            }
+        }
+
+        [Test]
+        public void specify_steps_should_wrap_standard_BDDfy_conventions()
+        {
+            var container = new ContainerFor<ConcreteObjectWithNoConstructor>(Substitute.For<IContainer>());
+            var sut = new UnitScenarioWithAllSupportedStepsInRandomOrder() {Container = container};
 
             sut.BDDfy();
 
             sut.Steps[0].ShouldBe("Constructor");
+
+            //sut.Steps[1].ShouldBe("BeginTestCase"); // Specify begin test case method
             sut.Steps[1].ShouldBe("Setup");
             sut.Steps[2].ShouldBe("EstablishContext");
             sut.Steps[3].ShouldBe("GivenSomePrecondition");
@@ -28,6 +64,8 @@ namespace Specify.Tests.SpecifyRootFolder
             sut.Steps[7].ShouldBe("ThenAnExpectation");
             sut.Steps[8].ShouldBe("AndThenAnotherExpectation");
             sut.Steps[9].ShouldBe("TearDown");
+            //sut.Steps[11].ShouldBe("EndTestCase"); // Specify end test case method
+
         }
 
         [Test]
