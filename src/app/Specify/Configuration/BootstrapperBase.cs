@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Specify.Configuration.StepScanners;
 using Specify.Logging;
 using Specify.Mocks;
@@ -31,15 +32,9 @@ namespace Specify.Configuration
         /// <returns>IMockFactory.</returns>
         public IMockFactory MockFactory
         {
-            get { return _mockFactory ?? (_mockFactory = new MockDetector().FindAvailableMock()); }
-            set { _mockFactory = value; }
+            get => _mockFactory ?? (_mockFactory = new MockDetector().FindAvailableMock());
+            set => _mockFactory = value;
         }
-
-        /// <inheritdoc />
-        public List<IPerApplicationAction> PerAppDomainActions { get; } = new List<IPerApplicationAction>();
-
-        /// <inheritdoc />
-        public List<IPerScenarioAction> PerScenarioActions { get; } = new List<IPerScenarioAction>();
 
         /// <inheritdoc />
         public bool LoggingEnabled { get; set; } = false;
@@ -92,23 +87,27 @@ namespace Specify.Configuration
         private void LogSpecifyConfiguration()
         {
             string containerName;
-            using (IContainer container = ApplicationContainer.Get<IContainer>())
+            IList<IPerApplicationAction> perApplicationActions;
+            IList<IPerScenarioAction> perScenarioActions;
+            using (var container = ApplicationContainer.Get<IContainer>())
             {
                 containerName = container.GetType().FullName;
+                perApplicationActions = container.GetMultiple<IPerApplicationAction>().ToList();
+                perScenarioActions = container.GetMultiple<IPerScenarioAction>().ToList();
             }
 
             this.Log().DebugFormat("Bootstrapper: {Bootstrapper}", GetType().FullName);
             this.Log().DebugFormat("ApplicationContainer: {ApplicationContainer}", ApplicationContainer.GetType().FullName);
             this.Log().DebugFormat("ScenarioContainer: {ScenarioContainer}", containerName);
-            this.Log().DebugFormat("PerAppDomainActions: {PerAppDomainActionCount}", PerAppDomainActions.Count);
+            this.Log().DebugFormat("PerAppDomainActions: {PerAppDomainActionCount}", perApplicationActions.Count);
 
-            foreach (var action in PerAppDomainActions)
+            foreach (var action in perApplicationActions)
             {
                 this.Log().DebugFormat("- Action: {PerAppDomainAction}", action.GetType().Name);
             }
 
-            this.Log().DebugFormat("PerScenarioActions: {PerScenarioActionCount}", PerScenarioActions.Count);
-            foreach (var action in PerScenarioActions)
+            this.Log().DebugFormat("PerScenarioActions: {PerScenarioActionCount}", perScenarioActions.Count);
+            foreach (var action in perScenarioActions)
             {
                 this.Log().DebugFormat("- Action: {PerScenarioAction}", action.GetType().Name);
             }
