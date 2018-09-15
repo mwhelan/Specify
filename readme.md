@@ -5,7 +5,7 @@ Specify is a .Net testing library that builds on top of BDDfy from [TestStack](h
 
 When I first started using BDDfy for acceptance testing, I would use a different framework for unit testing, but I didn't like the context switching between different frameworks, syntaxes and testing styles. Specify provides a base fixture which gives a consistent experience for all types of tests (or specifications). Why not have the fantastic BDDfy reports for all of your different test types?
 
-[![Build status](https://ci.appveyor.com/api/projects/status/vj6ec2yubg8ii9sn?svg=true)](https://ci.appveyor.com/project/mwhelan/specify)
+[![Build Status](https://dev.azure.com/specify-dotnet/Specify/_apis/build/status/mwhelan.Specify)](https://dev.azure.com/specify-dotnet/Specify/_build/latest?definitionId=1)
 [![Documentation Status](https://readthedocs.org/projects/specify-dotnet/badge/?version=latest)](http://specify-dotnet.readthedocs.org/en/latest/?badge=latest)
 [![NuGet (stable)](https://img.shields.io/nuget/v/specify.svg)](https://www.nuget.org/packages/Specify) 
 [![NuGet (latest)](https://img.shields.io/nuget/vpre/specify.svg)](https://www.nuget.org/packages/Specify) 
