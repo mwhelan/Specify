@@ -4,9 +4,19 @@
     <TargetFrameworks>netcoreapp2.0;net46;netstandard1.6</TargetFrameworks>
 	<Title>Specify</Title>
     <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
-	<Summary>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Summary>
+	  <Summary>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Summary>
+
+    <!-- SourceLink https://github.com/dotnet/sourcelink -->
+    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    
     <Copyright>Copyright 2018 Michael Whelan</Copyright>
-    <VersionPrefix>3.0.0-alpha01</VersionPrefix>
+    <VersionPrefix>3.0.0-alpha02</VersionPrefix>
     <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify</AssemblyName>
     <PackageId>Specify</PackageId>
@@ -27,8 +37,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.4" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19351-01" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
     <PackageReference Include="TestStack.BDDfy" Version="4.3.2" />
   </ItemGroup>
 
@@ -45,8 +56,8 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.3" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
   </ItemGroup>
 

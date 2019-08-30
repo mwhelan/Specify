@@ -2,18 +2,28 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net46;netstandard1.6</TargetFrameworks>
-	<Title>Specify.Autofac</Title>
-	<Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
-	<Summary>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Summary>
+	  <Title>Specify.Autofac</Title>
+	  <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
+	  <Summary>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Summary>
+
+    <!-- SourceLink https://github.com/dotnet/sourcelink -->
+    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
     <Copyright>Copyright 2018 Michael Whelan</Copyright>
-    <VersionPrefix>3.0.0-alpha01</VersionPrefix>
-	<Authors>Michael Whelan</Authors>
+    <VersionPrefix>3.0.0-alpha02</VersionPrefix>
+	  <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify.Autofac</AssemblyName>
     <PackageId>Specify.Autofac</PackageId>
-	<PackageTags>TDD;BDD;Testing;BDDfy</PackageTags>
-	<PackageLicenseUrl>https://github.com/mwhelan/Specify/blob/master/license.txt</PackageLicenseUrl>
-	<RepositoryType>git</RepositoryType>
-	<ProjectUrl>http://specify-dotnet.readthedocs.org/</ProjectUrl>
+	  <PackageTags>TDD;BDD;Testing;BDDfy</PackageTags>
+	  <PackageLicenseUrl>https://github.com/mwhelan/Specify/blob/master/license.txt</PackageLicenseUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <ProjectUrl>http://specify-dotnet.readthedocs.org/</ProjectUrl>
     <RepositoryUrl>https://github.com/mwhelan/Specify</RepositoryUrl>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
@@ -31,10 +41,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.6.2" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19351-01" PrivateAssets="All"/>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
@@ -49,7 +60,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.1" />
   </ItemGroup>
 
 </Project>
