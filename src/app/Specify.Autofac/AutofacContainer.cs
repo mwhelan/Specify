@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
@@ -133,7 +131,7 @@ namespace Specify.Autofac
         public IEnumerable<object> GetMultiple(Type baseType)
         {
             var enumerableOfType = typeof(IEnumerable<>).MakeGenericType(baseType);
-            return (IEnumerable<object>) Container.ResolveService(new TypedService(enumerableOfType));
+            return (IEnumerable<object>)Container.ResolveService(new TypedService(enumerableOfType));
         }
 
         /// <inheritdoc />

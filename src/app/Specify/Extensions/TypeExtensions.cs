@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,7 +9,7 @@ namespace Specify
     /// <summary>
     /// Extension methods for types.
     /// </summary>
-    internal static partial class TypeExtensions
+    internal static class TypeExtensions
     {
         /// <summary>
         /// Creates the specified type.
@@ -135,127 +136,7 @@ namespace Specify
 
             return containerCanResolve(type);
         }
-    }
 
-#if NET46
-    internal static partial class TypeExtensions
-    {
-        /// <summary>
-        /// Determines whether this instance [can be cast to] the specified destination type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <param name="destinationType">Type of the destination.</param>
-        /// <returns><c>true</c> if this instance [can be cast to] the specified destination type; otherwise, <c>false</c>.</returns>
-        internal static bool CanBeCastTo(this Type type, Type destinationType)
-        {
-            if (type == null) return false;
-            if (type == destinationType) return true;
-
-            return destinationType.IsAssignableFrom(type);
-        }
-
-        /// <summary>
-        /// Determines whether the specified type is enumerable.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if the specified type is enumerable; otherwise, <c>false</c>.</returns>
-        internal static bool IsEnumerable(this Type type)
-        {
-            if (type.IsArray) return true;
-
-            return type.IsGenericType()
-                && type.GetGenericTypeDefinition().IsIn(EnumerableTypes);
-        }
-
-        internal static bool HasOneReferenceTypeGenericArg(this Type type)
-        {
-            if (!type.IsGenericType()) return false;
-
-            var genericArgs = type.GetGenericArguments();
-            return genericArgs.Length == 1
-                   && !genericArgs[0].IsSimple();
-        }
-
-        public static Type[] GetGenericTypeArguments(this Type type) 
-        {
-            return type.GetGenericArguments();
-        }
-
-        internal static PropertyInfo GetPropertyInfo(this Type type, string propertyName, Type propertyType)
-        {
-            return type.GetProperty(propertyName, propertyType);
-        }
-
-        internal static PropertyInfo GetPropertyInfo(this Type type, string propertyName)
-        {
-            return type.GetProperty(propertyName);
-        }
-
-        /// <summary>
-        /// Returns the constructor with the most parameters.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>ConstructorInfo.</returns>
-        internal static ConstructorInfo GreediestConstructor(this Type type)
-        {
-            return type.GetConstructors()
-                .OrderByDescending(x => x.GetParameters().Length)
-                .FirstOrDefault();
-        }
-
-        internal static Type BaseType(this Type type)
-        {
-            return type.BaseType;
-        }
-
-        internal static MethodInfo GetMethodInfo(this Type type, string name, Type[] types)
-        {
-            return type.GetMethod(name, types);
-        }
-
-        internal static bool IsClass(this Type type)
-        {
-            return type.IsClass;
-        }
-
-        internal static bool IsSealed(this Type type)
-        {
-            return type.IsSealed;
-        }
-
-        internal static bool IsConcrete(this Type type)
-        {
-            return !type.IsAbstract && !type.IsInterface;
-        }
-
-        internal static bool IsEnum(this Type type)
-        {
-            return type.IsEnum;
-        }
-
-        internal static bool IsGenericType(this Type type)
-        {
-            return type.IsGenericType;
-        }
-
-        internal static bool IsInterface(this Type type)
-        {
-            return type.IsInterface;
-        }
-
-        internal static bool IsPrimitive(this Type type)
-        {
-            return type.IsPrimitive;
-        }
-
-        internal static bool IsTypeAbstract(this Type type)
-        {
-            return type.IsAbstract;
-        }
-    }
-#else
-    internal static partial class TypeExtensions
-    {
         /// <summary>
         /// Determines whether this instance [can be cast to] the specified destination type.
         /// </summary>
@@ -277,10 +158,11 @@ namespace Specify
         /// <returns><c>true</c> if the specified type is enumerable; otherwise, <c>false</c>.</returns>
         internal static bool IsEnumerable(this Type type)
         {
-            if (type.GetTypeInfo().IsArray) return true;
+            var isGenericEnumerable = typeof(IEnumerable<>).IsAssignableFrom(type);
+            var legacyEnumerable = typeof(IEnumerable).IsAssignableFrom(type);
 
-            return type.IsGenericType()
-                && type.GetTypeInfo().GetGenericTypeDefinition().IsIn(EnumerableTypes);
+            return isGenericEnumerable ||
+                   legacyEnumerable;
         }
 
         internal static bool HasOneReferenceTypeGenericArg(this Type type)
@@ -369,5 +251,4 @@ namespace Specify
             return type.GetTypeInfo().IsAbstract;
         }
     }
-#endif
 }

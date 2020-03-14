@@ -8,61 +8,63 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
     public abstract class MockingContainerTestsFor<T> : ContainerSpecsFor<T> 
         where T : IContainer
     {
+        public T SUT { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            SUT = CreateSut();
+        }
+
         [Test]
         public void CanResolve_should_return_true_if_service_not_registered_and_dependency_chains_are_resolvable()
         {
-            var sut = CreateSut();
-            sut.CanResolve<ConcreteObjectWithOneInterfaceConstructor>().ShouldBe(true);
-            sut.CanResolve<ConcreteObjectWithOneInterfaceCollectionConstructor>().ShouldBe(true);
-            sut.CanResolve<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(true);
-            sut.CanResolve<ConcreteObjectWithMultipleConstructors>().ShouldBe(true);
-            sut.CanResolve<ConcreteObjectWithOneSealedConstructorHavingNoConstructor>().ShouldBe(true);
-            sut.CanResolve<ConcreteObjectWithOneSealedConstructorHavingOneInterfaceConstructor>().ShouldBe(true);
+            SUT.CanResolve<ConcreteObjectWithOneInterfaceConstructor>().ShouldBe(true);
+            SUT.CanResolve<ConcreteObjectWithOneInterfaceCollectionConstructor>().ShouldBe(true);
+            SUT.CanResolve<ConcreteObjectWithOneConcreteConstructor>().ShouldBe(true);
+            SUT.CanResolve<ConcreteObjectWithMultipleConstructors>().ShouldBe(true);
+            SUT.CanResolve<ConcreteObjectWithOneSealedConstructorHavingNoConstructor>().ShouldBe(true);
+            SUT.CanResolve<ConcreteObjectWithOneSealedConstructorHavingOneInterfaceConstructor>().ShouldBe(true);
         }
 
         [Test]
         public void CanResolve_should_return_false_if_service_not_registered_and_dependency_chains_are_not_resolvable()
         {
-            var sut = CreateSut();
-            sut.CanResolve<ConcreteObjectWithPrivateConstructor>().ShouldBe(false);
-            sut.CanResolve<ConcreteObjectWithOneConcreteConstructorHavingPrivateConstructor>().ShouldBe(false);
-            sut.CanResolve<ConcreteObjectWithOneSealedConstructorHavingPrivateConstructor>().ShouldBe(false);
+            SUT.CanResolve<ConcreteObjectWithPrivateConstructor>().ShouldBe(false);
+            SUT.CanResolve<ConcreteObjectWithOneConcreteConstructorHavingPrivateConstructor>().ShouldBe(false);
+            SUT.CanResolve<ConcreteObjectWithOneSealedConstructorHavingPrivateConstructor>().ShouldBe(false);
         }
 
         [Test]
         public void Set_should_register_service_by_type()
         {
-            var sut = CreateSut();
-            sut.Set<IDependency1, Dependency1>();
-            sut.CanResolve<IDependency1>().ShouldBe(true);
+            SUT.Set<IDependency1, Dependency1>();
+            SUT.CanResolve<IDependency1>().ShouldBe(true);
         }
 
         [Test]
         public void Set_should_register_singleton_lifetime()
         {
-            var sut = CreateSut();
-            sut.Set<IDependency2, Dependency2>();
-            sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
+            SUT.Set<IDependency2, Dependency2>();
+            SUT.Get<IDependency2>().ShouldBeSameAs(SUT.Get<IDependency2>());
         }
 
         [Test]
         public void Get_should_resolve_for_all_concrete_types_where_dependency_chains_are_resolvable()
         {
-            var sut = CreateSut();
+            SUT.Get<SealedDependencyWithNoConstructor>().ShouldNotBeNull();
+            SUT.Get<SealedDependencyWithOneInterfaceConstructor>().ShouldNotBeNull();
 
-            sut.Get<SealedDependencyWithNoConstructor>().ShouldNotBeNull();
-            sut.Get<SealedDependencyWithOneInterfaceConstructor>().ShouldNotBeNull();
+            SUT.Get<ConcreteObjectWithOneInterfaceConstructor>().ShouldNotBeNull();
+            SUT.Get<ConcreteObjectWithOneInterfaceCollectionConstructor>().ShouldNotBeNull();
+            SUT.Get<ConcreteObjectWithOneConcreteConstructor>().ShouldNotBeNull();
+            SUT.Get<ConcreteObjectWithMultipleConstructors>().ShouldNotBeNull();
 
-            sut.Get<ConcreteObjectWithOneInterfaceConstructor>().ShouldNotBeNull();
-            sut.Get<ConcreteObjectWithOneInterfaceCollectionConstructor>().ShouldNotBeNull();
-            sut.Get<ConcreteObjectWithOneConcreteConstructor>().ShouldNotBeNull();
-            sut.Get<ConcreteObjectWithMultipleConstructors>().ShouldNotBeNull();
-
-            var resolvedConcreteObjectWithOneSealedConstructorHavingNoConstructor = sut.Get<ConcreteObjectWithOneSealedConstructorHavingNoConstructor>();
+            var resolvedConcreteObjectWithOneSealedConstructorHavingNoConstructor = SUT.Get<ConcreteObjectWithOneSealedConstructorHavingNoConstructor>();
             resolvedConcreteObjectWithOneSealedConstructorHavingNoConstructor.ShouldNotBeNull();
             resolvedConcreteObjectWithOneSealedConstructorHavingNoConstructor.SealedDependencyWithNoConstructor.ShouldNotBeNull();
 
-            var resolvedConcreteObjectWithOneSealedConstructorHavingOneInterfaceConstructor = sut.Get<ConcreteObjectWithOneSealedConstructorHavingOneInterfaceConstructor>();
+            var resolvedConcreteObjectWithOneSealedConstructorHavingOneInterfaceConstructor = SUT.Get<ConcreteObjectWithOneSealedConstructorHavingOneInterfaceConstructor>();
             resolvedConcreteObjectWithOneSealedConstructorHavingOneInterfaceConstructor.ShouldNotBeNull();
             resolvedConcreteObjectWithOneSealedConstructorHavingOneInterfaceConstructor.SealedDependencyWithOneInterfaceConstructor.ShouldNotBeNull();
         }
@@ -70,30 +72,17 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
         [Test]
         public void Get_should_not_resolve_for_any_concrete_types_where_dependency_chains_are_not_resolvable()
         {
-            var sut = CreateSut();
+            //ShouldNotResolve<ConcreteObjectWithPrivateConstructor>();
+            ShouldNotResolve<ConcreteObjectWithOneConcreteConstructorHavingPrivateConstructor>();
+           // ShouldNotResolve<ConcreteObjectWithOneSealedConstructorHavingPrivateConstructor>();
+        }
 
+        private void ShouldNotResolve<TService>() where TService : class
+        {
             try
             {
-                sut.Get<ConcreteObjectWithPrivateConstructor>();
-                Assert.Fail();
-            }
-            catch (Exception e)
-            {
-                e.ShouldNotBeNull();
-            }
-            try
-            {
-                sut.Get<ConcreteObjectWithOneConcreteConstructorHavingPrivateConstructor>();
-                Assert.Fail();
-            }
-            catch (Exception e)
-            {
-                e.ShouldNotBeNull();
-            }
-            try
-            {
-                sut.Get<ConcreteObjectWithOneSealedConstructorHavingPrivateConstructor>();
-                Assert.Fail();
+                var instance = SUT.Get<TService>();
+                Assert.Fail($"{SUT.GetType().Name} should not have resolved {typeof(TService).Name}");
             }
             catch (Exception e)
             {

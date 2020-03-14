@@ -15,7 +15,6 @@ namespace Specify.Autofac
 
         public AutofacMockRegistrationHandler(IMockFactory mockFactory)
         {
-
             _mockFactory = mockFactory;
         }
 
@@ -43,7 +42,8 @@ namespace Specify.Autofac
                 typedService.ServiceType.CanBeCastTo<IStartable>())
                 return Enumerable.Empty<IComponentRegistration>();
 
-            var rb = RegistrationBuilder.ForDelegate<object>((c, p) => _mockFactory.CreateMock(typedService.ServiceType))
+            var rb = RegistrationBuilder.ForDelegate<object>(
+                    (c, p) => _mockFactory.CreateMock(typedService.ServiceType))
                 .As(service)
                 .InstancePerLifetimeScope();
 

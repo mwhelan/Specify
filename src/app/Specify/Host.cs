@@ -17,15 +17,9 @@ namespace Specify
 
         static Host()
         {
-#if NET46
-            "Host".Log().DebugFormat("Registering AppDomain DomainUnload event");
-            AppDomain.CurrentDomain.DomainUnload += (sender, e) => {
-                _scenarioRunner.AfterAllScenarios();
-            };
-#else
             "Host".Log().DebugFormat("Registering System.Runtime.Loader.AssemblyLoadContext Unloading event");
             System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += context => _scenarioRunner.AfterAllScenarios(); 
-#endif
+
             var scanner = ConfigScannerFactory.SelectScanner();
             Configuration = scanner.GetConfiguration();
 

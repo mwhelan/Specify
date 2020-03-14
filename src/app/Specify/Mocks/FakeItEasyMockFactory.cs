@@ -24,14 +24,7 @@ namespace Specify.Mocks
             var openFakeMethod = MockOpenType.GetMethodInfo("Fake", Type.EmptyTypes);
             var closedFakeMethod = openFakeMethod.MakeGenericMethod(type);
 
-            try
-            {
-                return closedFakeMethod.Invoke(null, null);
-            }
-            catch
-            {
-                return null;
-            }
+            return closedFakeMethod.Invoke(null, null);
         }
     }
 }
