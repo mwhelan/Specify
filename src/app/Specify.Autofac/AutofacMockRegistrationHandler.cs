@@ -4,6 +4,7 @@ using System.Linq;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+using Autofac.Features.Decorators;
 using Specify.Mocks;
 
 namespace Specify.Autofac
@@ -19,11 +20,14 @@ namespace Specify.Autofac
         }
 
         /// <summary>
-        /// Retrieve a registration for an unregistered service, to be used
-        /// by the container.
+        /// Retrieve a registration for an unregistered service, to be used by the container.
         /// </summary>
         /// <param name="service">The service that was requested.</param>
         /// <param name="registrationAccessor"></param>
+        /// <remarks>
+        ///     Since Autofac v4.9.0 the DecoratorService also passed though this
+        ///     registration source, make sure this is not mocked out by a proxy.
+        /// </remarks>
         /// <returns>
         /// Registrations for the service.
         /// </returns>
@@ -39,7 +43,8 @@ namespace Specify.Autofac
                 typedService.ServiceType.IsGenericType() &&
                 typedService.ServiceType.GetGenericTypeDefinition() == typeof(IEnumerable<>) ||
                 typedService.ServiceType.IsArray ||
-                typedService.ServiceType.CanBeCastTo<IStartable>())
+                typedService.ServiceType.CanBeCastTo<IStartable>() ||
+                service is DecoratorService)
                 return Enumerable.Empty<IComponentRegistration>();
 
             var rb = RegistrationBuilder.ForDelegate<object>(
