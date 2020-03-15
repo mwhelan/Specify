@@ -11,8 +11,11 @@ namespace Specify.Autofac
     /// </summary>
     public class AutofacContainer : Specify.IContainer
     {
-        private ILifetimeScope _container;
+        private ILifetimeScope _parentScope;
+        private ILifetimeScope _childScope;
         protected ContainerBuilder ContainerBuilder;
+
+        private List<Action<ContainerBuilder>> _builderActions = new List<Action<ContainerBuilder>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AutofacContainer"/> class.
@@ -28,7 +31,7 @@ namespace Specify.Autofac
         /// <param name="container">An <see cref="ILifetimeScope"/> tracks the instantiation of component instances.</param>
         public AutofacContainer(ILifetimeScope container)
         {
-            _container = container;
+            _parentScope = container;
         }
 
         /// <summary>
@@ -38,29 +41,34 @@ namespace Specify.Autofac
         public AutofacContainer(ContainerBuilder containerBuilder)
         {
             ContainerBuilder = containerBuilder;
+            _parentScope = ContainerBuilder.Build();
         }
 
         /// <summary>
         /// The Autofac container.
         /// </summary>
-        public ILifetimeScope Container
+        public ILifetimeScope Container => _childScope ?? _parentScope;
+
+        public void BeginScope()
         {
-            get
+            if (_childScope != null)
             {
-                if (_container == null)
-                {
-                    _container = ContainerBuilder.Build();
-                }
-                return _container;
+                throw new ApplicationException("Cannot set scope more than once.");
             }
+
+            _childScope = Container.BeginLifetimeScope(builder =>
+            {
+                foreach (var action in _builderActions)
+                {
+                    action(builder);
+                }
+            });
         }
 
         /// <inheritdoc />
         public void Set<T>() where T : class
         {
-            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
-                .InstancePerLifetimeScope()
-                .CreateRegistration());
+            _builderActions.Add(builder => builder.RegisterType<T>().InstancePerLifetimeScope());
         }
 
         /// <inheritdoc />
@@ -68,11 +76,10 @@ namespace Specify.Autofac
             where TService : class
             where TImplementation : class, TService
         {
-            Container
-                .ComponentRegistry
-                .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>()
-                .InstancePerLifetimeScope()
-                .CreateRegistration());
+            _builderActions.Add(builder => builder
+                .RegisterType<TImplementation>()
+                .As<TService>()
+                .InstancePerLifetimeScope());
         }
 
         /// <inheritdoc />
@@ -80,32 +87,44 @@ namespace Specify.Autofac
         {
             if (key == null)
             {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .InstancePerLifetimeScope().CreateRegistration());
-
+                _builderActions.Add(builder => builder
+                    .Register((c, p) => valueToSet)
+                    .As<T>()
+                    .InstancePerLifetimeScope());
             }
             else
             {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .As(new KeyedService(key, typeof(T)))
-                        .InstancePerLifetimeScope().CreateRegistration());
+                _builderActions.Add(builder => builder
+                    .Register((c, p) => valueToSet)
+                    .As(new KeyedService(key, typeof(T)))
+                    .InstancePerLifetimeScope());
             }
-            return Get<T>(key);
+
+            return valueToSet;
         }
 
         /// <inheritdoc />
+        /// <inheritdoc />
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            foreach (var type in implementationTypes)
+            {
+                _builderActions.Add(builder => builder
+                    .RegisterType(type)
+                    .As(baseType)
+                    .InstancePerLifetimeScope());
+            }
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            SetMultiple(typeof(T), implementationTypes);
+        }
+
         public T Get<T>(string key = null) where T : class
         {
-            if (key == null)
-            {
-                return Container.Resolve<T>();
-            }
-            else
-            {
-                return Container.ResolveKeyed<T>(key);
-            }
+            return key == null ? Container.Resolve<T>() : Container.ResolveKeyed<T>(key);
         }
 
         /// <inheritdoc />
@@ -138,25 +157,6 @@ namespace Specify.Autofac
         public IEnumerable<T> GetMultiple<T>() where T : class
         {
             return Container.Resolve<IEnumerable<T>>();
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
-        {
-            foreach (var type in implementationTypes)
-            {
-                Container
-                    .ComponentRegistry
-                    .Register(RegistrationBuilder.ForType(type).As(baseType)
-                        .InstancePerLifetimeScope()
-                        .CreateRegistration());
-            }
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
-        {
-            SetMultiple(typeof(T), implementationTypes);
         }
 
         /// <summary>

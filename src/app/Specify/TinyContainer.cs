@@ -43,6 +43,11 @@ namespace Specify
             }
         }
 
+        public void BeginScope()
+        {
+            // do nothing
+        }
+
         /// <inheritdoc />
         public void Set<T>() where T : class
         {

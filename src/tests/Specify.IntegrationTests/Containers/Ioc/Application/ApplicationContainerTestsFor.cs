@@ -13,23 +13,27 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
         public void child_should_resolve_same_instance_as_parent()
         {
             var sut = this.CreateSut();
-            sut.Set<IDependency1>(new Dependency1());
-            var childContainer = sut.Get<IContainer>();
-            sut.Get<IDependency1>()
-                .ShouldBeSameAs(childContainer.Get<IDependency1>());
+            var parentInstance = sut.Get<IDependency1>();
+
+            sut.BeginScope();
+
+            var childInstance = sut.Get<IDependency1>();
+            childInstance.ShouldBeSameAs(parentInstance);
         }
 
         [Test]
         public void child_can_change_service_implementation_from_parent()
         {
             var sut = this.CreateSut();
-            sut.Set<IDependency1>(new Dependency1());
-            var childContainer = sut.Get<IContainer>();
+            var instance1 = sut.Get<IDependency1>();
 
-            childContainer.Set<IDependency1>(new Dependency1());
+            var instance2 = new Dependency1 {Value = 10};
+            sut.Set<IDependency1>(instance2);
+            
+            sut.BeginScope();
 
             sut.Get<IDependency1>()
-                .ShouldNotBeSameAs(childContainer.Get<IDependency1>());
+                .ShouldNotBeSameAs(instance1);
         }
 
         [Test]

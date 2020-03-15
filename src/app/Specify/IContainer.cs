@@ -10,6 +10,11 @@ namespace Specify
     public interface IContainer : IDisposable
     {
         /// <summary>
+        /// Initialize a child container / lifetime scope for each test.
+        /// </summary>
+        void BeginScope();
+        
+        /// <summary>
         /// Registers a type to the container.
         /// </summary>
         /// <typeparam name="T">The type of the component implementation.</typeparam>

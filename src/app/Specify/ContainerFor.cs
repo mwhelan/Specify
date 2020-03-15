@@ -33,11 +33,17 @@ namespace Specify
             {
                 if (_systemUnderTest == null)
                 {
+                    _sourceContainer.BeginScope();
                     _systemUnderTest = Get<TSut>();
                 }
                 return _systemUnderTest;
             }
             set { _systemUnderTest = value; }
+        }
+
+        public void BeginScope()
+        {
+            _sourceContainer.BeginScope();
         }
 
         /// <summary>

@@ -92,6 +92,7 @@ namespace Specify.IntegrationTests.ContainerFors
             var instance = new Dependency3();
 
             sut.Set<IDependency3>(instance);
+            var subject = sut.SystemUnderTest;
 
             sut.Get<IDependency3>().ShouldNotBe(null);
             sut.Get<IDependency3>().ShouldBeSameAs(instance);
@@ -116,6 +117,8 @@ namespace Specify.IntegrationTests.ContainerFors
             sut.Set<Dependency3>(instance1, "instance1");
             sut.Set<Dependency3>(instance2, "instance2");
 
+            sut.BeginScope();
+
             sut.Get<Dependency3>("instance1").ShouldBeSameAs(instance1);
             sut.Get<Dependency3>("instance2").ShouldBeSameAs(instance2);
         }
@@ -126,9 +129,10 @@ namespace Specify.IntegrationTests.ContainerFors
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             var instance1 = new Dependency3();
             var instance2 = new Dependency3();
-
             sut.Set<Dependency3>(instance1, "instance1");
             sut.Set<Dependency3>(instance2);
+
+            sut.BeginScope();
 
             sut.Get<Dependency3>("instance1").ShouldBeSameAs(instance1);
             sut.Get<Dependency3>().ShouldBeSameAs(instance2);
@@ -171,6 +175,7 @@ namespace Specify.IntegrationTests.ContainerFors
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Set<Dependency1>();
+            sut.BeginScope();
             sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
         }
 
@@ -179,6 +184,7 @@ namespace Specify.IntegrationTests.ContainerFors
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Set<IDependency2, Dependency2>();
+            sut.BeginScope();
             sut.Get<IDependency2>().ShouldBeSameAs(sut.Get<IDependency2>());
         }
 
@@ -187,6 +193,7 @@ namespace Specify.IntegrationTests.ContainerFors
         {
             var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
             sut.Set<Dependency1>(new Dependency1());
+            sut.BeginScope();
             sut.Get<Dependency1>().ShouldBeSameAs(sut.Get<Dependency1>());
         }
 

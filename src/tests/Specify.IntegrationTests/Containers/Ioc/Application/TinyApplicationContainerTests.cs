@@ -1,5 +1,6 @@
 ﻿using Specify.Configuration;
 using Specify.Mocks;
+using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.Ioc.Application
 {
@@ -8,6 +9,7 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
         protected override TinyContainer CreateSut()
         {
             var container = new TinyContainerFactory().Create(new NullMockFactory());
+            container.Register<IDependency1>(new Dependency1());
             return new TinyContainer(container);
         }
     }
