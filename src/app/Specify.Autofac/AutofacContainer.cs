@@ -9,7 +9,7 @@ namespace Specify.Autofac
     /// <summary>
     /// Adapter for the Autofac container.
     /// </summary>
-    public class AutofacContainer : Specify.IContainer
+    public class AutofacContainer : Specify.IContainer, IContainerRoot
     {
         private ILifetimeScope _container;
         protected ContainerBuilder ContainerBuilder;
@@ -38,6 +38,11 @@ namespace Specify.Autofac
         public AutofacContainer(ContainerBuilder containerBuilder)
         {
             ContainerBuilder = containerBuilder;
+        }
+
+        public IContainer GetChildContainer()
+        {
+            return new AutofacContainer(_container.BeginLifetimeScope());
         }
 
         /// <summary>
@@ -174,7 +179,7 @@ namespace Specify.Autofac
 
         public void Dispose()
         {
-            Container.Dispose();
+            //  Container.Dispose();
         }
     }
 }

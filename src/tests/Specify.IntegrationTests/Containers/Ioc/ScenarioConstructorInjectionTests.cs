@@ -8,12 +8,12 @@ using TinyIoC;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
-    public abstract class ScenarioConstructorInjectionTests<T> where T : IContainer
+    public abstract class ScenarioConstructorInjectionTests<T> where T : IContainerRoot
     {
         protected abstract T CreateSut();
         private ScenarioWithConstuctorParmeters _scenario;
 
-        public IContainer SUT { get; set; }
+        public IContainerRoot SUT { get; set; }
 
         [SetUp]
         public void SetUp()

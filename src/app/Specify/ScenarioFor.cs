@@ -56,7 +56,7 @@ namespace Specify
 
 
         /// <inheritdoc />
-        public virtual void SetContainer(IContainer applicationContainer)
+        public virtual void SetContainer(IContainerRoot applicationContainer)
         {
             ExampleScope = new ExampleScope(applicationContainer);
         }
@@ -83,7 +83,7 @@ namespace Specify
         /// <inheritdoc />
         public void Dispose()
         {
-            Container?.Dispose();
+            //Container?.Dispose();
         }
 
         /// <inheritdoc />

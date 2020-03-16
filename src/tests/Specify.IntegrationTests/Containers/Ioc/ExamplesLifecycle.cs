@@ -37,12 +37,12 @@ namespace Specify.IntegrationTests.Containers.Ioc
             return new TinyContainer(builder);
         }
     }
-    public abstract class ExamplesLifecycle<T> where T : IContainer
+    public abstract class ExamplesLifecycle<T> where T : IContainerRoot
     {
         protected abstract T CreateSut();
         private UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples _scenario;
 
-        public IContainer SUT { get; set; }
+        public IContainerRoot SUT { get; set; }
 
         [Test]
         public void specify_steps_should_wrap_standard_BDDfy_conventions_with_examples()

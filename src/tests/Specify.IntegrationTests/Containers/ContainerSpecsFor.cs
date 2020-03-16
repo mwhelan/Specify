@@ -7,7 +7,7 @@ using TestStack.BDDfy;
 
 namespace Specify.IntegrationTests.Containers
 {
-    public abstract class ContainerSpecsFor<T> where T : IContainer
+    public abstract class ContainerSpecsFor<T> where T : IContainerRoot
     {
         protected abstract T CreateSut();
 

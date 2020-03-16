@@ -8,7 +8,7 @@ namespace Specify
     /// <summary>
     /// Adapter for the TinyIoc container.
     /// </summary>
-    public class TinyContainer : IContainer
+    public class TinyContainer : IContainer, IContainerRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TinyContainer"/> class.
@@ -23,6 +23,11 @@ namespace Specify
         /// The TinyIoc container.
         /// </summary>
         public TinyIoCContainer Container { get; }
+
+        public virtual IContainer GetChildContainer()
+        {
+            return new TinyContainer(Container.GetChildContainer());
+        }
 
         /// <inheritdoc />
         public T Get<T>(string key = null) where T : class

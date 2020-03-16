@@ -5,7 +5,7 @@ using Specify.Tests.Stubs;
 namespace Specify.IntegrationTests.Containers.Ioc.Application
 {
     [TestFixture]
-    public abstract class ApplicationContainerTestsFor<T> where T : IContainer
+    public abstract class ApplicationContainerTestsFor<T> where T : IContainerRoot
     {
         protected abstract T CreateSut();
 
@@ -14,7 +14,7 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
         {
             var sut = this.CreateSut();
             sut.Set<IDependency1>(new Dependency1());
-            var childContainer = sut.Get<IContainer>();
+            var childContainer = sut.GetChildContainer();
             sut.Get<IDependency1>()
                 .ShouldBeSameAs(childContainer.Get<IDependency1>());
         }
@@ -24,7 +24,7 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
         {
             var sut = this.CreateSut();
             sut.Set<IDependency1>(new Dependency1());
-            var childContainer = sut.Get<IContainer>();
+            var childContainer = sut.GetChildContainer();
 
             childContainer.Set<IDependency1>(new Dependency1());
 
@@ -38,7 +38,7 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
             var instance = new Dependency1();
             var sut = this.CreateSut();
             sut.Set<IDependency1>(instance);
-            var childContainer = sut.Get<IContainer>();
+            var childContainer = sut.GetChildContainer();
 
             childContainer.Set<IDependency1>(new Dependency1());
 

@@ -89,6 +89,18 @@ namespace Specify
             return _sourceContainer.Set(valueToSet, key);
         }
 
+        /// <inheritdoc />
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            _sourceContainer.SetMultiple(baseType, implementationTypes);
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            _sourceContainer.SetMultiple<T>(implementationTypes);
+        }
+
         /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.
         /// </summary>
@@ -142,25 +154,13 @@ namespace Specify
         /// <inheritdoc />
         public IEnumerable<object> GetMultiple(Type baseType)
         {
-            throw new NotImplementedException();
+            return _sourceContainer.GetMultiple(baseType);
         }
 
         /// <inheritdoc />
         public IEnumerable<T> GetMultiple<T>() where T : class
         {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
-        {
-            throw new NotImplementedException();
+            return _sourceContainer.GetMultiple<T>();
         }
 
         /// <inheritdoc />

@@ -12,7 +12,7 @@ namespace Specify.Configuration
         /// Gets the container that will be used for the lifetime of the application.
         /// </summary>
         /// <value>The application container.</value>
-        IContainer ApplicationContainer { get; }
+        IContainerRoot ApplicationContainer { get; }
 
         /// <summary>
         /// Gets the mock provider if one is referenced.

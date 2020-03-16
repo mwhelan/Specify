@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 namespace Specify.IntegrationTests.Containers.AutoMocking
 {
     public abstract class MockingContainerTestsFor<T> : ContainerSpecsFor<T> 
-        where T : IContainer
+        where T : IContainerRoot
     {
         public T SUT { get; set; }
 

@@ -70,7 +70,7 @@ namespace Specify
         /// Used by Specify to set the container for each scenario.
         /// </summary>
         /// <param name="applicationContainer">The container.</param>
-        void SetContainer(IContainer applicationContainer);
+        void SetContainer(IContainerRoot applicationContainer);
 
         /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.

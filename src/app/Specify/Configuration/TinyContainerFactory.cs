@@ -37,13 +37,13 @@ namespace Specify.Configuration
         {
             if (mockFactory.GetType() == typeof(NullMockFactory))
             {
-                container.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
+                container.Register<IContainerRoot>((c, p) => new TinyContainer(c));
                 this.Log()
-                    .DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
+                    .DebugFormat("Registered {ScenarioContainer} for IContainer with no mock factory", "TinyContainer");
             }
             else
             {
-                container.Register<IContainer>((c, p) => new TinyMockingContainer(mockFactory, c.GetChildContainer()));
+                container.Register<IContainerRoot>((c, p) => new TinyMockingContainer(mockFactory, c));
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
             }

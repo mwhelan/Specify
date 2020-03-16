@@ -6,10 +6,10 @@ namespace Specify.Configuration.Examples
 {
     public class ExampleScope : IExampleScope
     {
-        private readonly IContainer _applicationContainer;
+        private readonly IContainerRoot _applicationContainer;
         private IEnumerable<IPerScenarioAction> _actions;
 
-        public ExampleScope(IContainer applicationContainer)
+        public ExampleScope(IContainerRoot applicationContainer)
         {
             _applicationContainer = applicationContainer;
         }
@@ -17,7 +17,7 @@ namespace Specify.Configuration.Examples
         public void BeginScope<T>(IScenario<T> scenario)
             where T : class
         {
-            var childContainer = _applicationContainer.Get<IContainer>();
+            var childContainer = _applicationContainer.GetChildContainer();
             scenario.Container = new ContainerFor<T>(childContainer);
 
             _actions = childContainer.GetMultiple<IPerScenarioAction>();

@@ -5,7 +5,7 @@ namespace Specify.Autofac
 {
     public class DefaultAutofacBootstrapper : BootstrapperBase
     {
-        protected override IContainer BuildApplicationContainer()
+        protected override IContainerRoot BuildApplicationContainer()
         {
             var builder = ConfigureContainerForApplication();
             ConfigureContainerForSpecify(builder);

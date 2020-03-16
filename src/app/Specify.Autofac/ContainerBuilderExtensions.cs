@@ -36,14 +36,14 @@ namespace Specify.Autofac
 
         private static void RegisterScenarioContainer(ContainerBuilder builder, IMockFactory mockFactory)
         {
+            builder.Register<IContainerRoot>(c => new AutofacContainer(c.Resolve<ILifetimeScope>())).SingleInstance();
+
             if (mockFactory.GetType() == typeof(NullMockFactory))
             {
-                builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
-                nameof(ContainerBuilderExtensions).Log().DebugFormat("Registered {ScenarioContainer} for IContainer", "AutofacContainer");
+                nameof(ContainerBuilderExtensions).Log().DebugFormat("Registered {ScenarioContainer} for IContainer with no mock factory", "AutofacContainer");
             }
             else
             {
-                builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
                 builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
                 builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactory));
 

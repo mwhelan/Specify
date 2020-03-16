@@ -23,6 +23,11 @@ namespace Specify
             _mockFactory = mockFactory;
         }
 
+        public override IContainer GetChildContainer()
+        {
+            return new TinyMockingContainer(_mockFactory, Container.GetChildContainer());
+        }
+
         /// <inheritdoc />
         public override bool CanResolve(Type type)
         {

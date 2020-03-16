@@ -7,7 +7,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
 {
     [TestFixture]
     public abstract class IocContainerTestsFor<T> : ContainerSpecsFor<T> 
-        where T : IContainer
+        where T : IContainerRoot
     {
         [Test]
         public void CanResolve_should_return_false_if_service_not_registered()
