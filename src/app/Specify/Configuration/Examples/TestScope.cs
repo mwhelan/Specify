@@ -5,20 +5,20 @@ using Specify.Logging;
 
 namespace Specify.Configuration.Examples
 {
-    public class ExampleScope : IExampleScope
+    public class TestScope : ITestScope
     {
-        public IChildContainerBuilder ChildContainerBuilder { get; }
+        public IChildContainerBuilder Registrations { get; }
         private IEnumerable<IPerScenarioAction> _actions;
 
-        public ExampleScope(IChildContainerBuilder childContainerBuilder)
+        public TestScope(IChildContainerBuilder childContainerBuilder)
         {
-            ChildContainerBuilder = childContainerBuilder;
+            Registrations = childContainerBuilder;
         }
 
         public void BeginScope<T>(IScenario<T> scenario)
             where T : class
         {
-            var childContainer = ChildContainerBuilder.GetChildContainer();
+            var childContainer = Registrations.GetChildContainer();
             scenario.Container = new ContainerFor<T>(childContainer);
 
             _actions = childContainer.GetMultiple<IPerScenarioAction>();

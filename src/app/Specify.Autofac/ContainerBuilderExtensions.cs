@@ -56,7 +56,7 @@ namespace Specify.Autofac
 
         internal static void RegisterTypes(this ContainerBuilder builder)
         {
-            builder.RegisterType<ExampleScope>().As<IExampleScope>();
+            builder.RegisterType<TestScope>().As<ITestScope>();
             builder.RegisterType<AutofacChildContainerBuilder>().As<IChildContainerBuilder>();
         }
     }

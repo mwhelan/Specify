@@ -1,7 +1,11 @@
-﻿namespace Specify.Configuration.Examples
+﻿using Specify.Containers;
+
+namespace Specify.Configuration.Examples
 {
-    class NullExampleScope : IExampleScope
+    class NullTestScope : ITestScope
     {
+        public IChildContainerBuilder Registrations { get; }
+
         public void BeginScope<T>(IScenario<T> scenario) where T : class
         {
             

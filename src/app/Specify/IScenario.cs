@@ -69,8 +69,8 @@ namespace Specify
         /// <summary>
         /// Used by Specify to set the example scope for each scenario.
         /// </summary>
-        /// <param name="exampleScope">The example scope which manages the Container lifetime for each example.</param>
-        void SetExampleScope(IExampleScope exampleScope);
+        /// <param name="testScope">The example scope which manages the Container lifetime for each example.</param>
+        void SetExampleScope(ITestScope testScope);
 
         /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.
