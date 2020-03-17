@@ -67,10 +67,10 @@ namespace Specify
         int TestCaseNumber { get; }
 
         /// <summary>
-        /// Used by Specify to set the container for each scenario.
+        /// Used by Specify to set the example scope for each scenario.
         /// </summary>
-        /// <param name="applicationContainer">The container.</param>
-        void SetContainer(IContainerRoot applicationContainer);
+        /// <param name="exampleScope">The example scope which manages the Container lifetime for each example.</param>
+        void SetExampleScope(IExampleScope exampleScope);
 
         /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.

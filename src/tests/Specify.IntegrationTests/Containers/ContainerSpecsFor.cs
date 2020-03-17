@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using Shouldly;
+using Specify.Configuration.Examples;
 using Specify.Exceptions;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
@@ -16,7 +17,7 @@ namespace Specify.IntegrationTests.Containers
         {
             var container = CreateSut();
             var scenario = new ExampleScenario();
-            scenario.SetContainer(container);
+            scenario.SetExampleScope(container.Get<IExampleScope>());
             Action action = scenario.Specify;
             action.ShouldNotThrow();
         }

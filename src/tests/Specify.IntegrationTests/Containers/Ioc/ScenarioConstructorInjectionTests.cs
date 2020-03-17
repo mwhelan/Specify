@@ -3,8 +3,8 @@ using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Autofac;
+using Specify.Configuration.Examples;
 using Specify.Tests.Stubs;
-using TinyIoC;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -20,7 +20,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
         {
             SUT = CreateSut();
             _scenario = SUT.Get<ScenarioWithConstuctorParmeters>();
-            _scenario.SetContainer(SUT);
+            _scenario.SetExampleScope(SUT.Get<IExampleScope>());
             _scenario.BeginTestCase();
         }
 
@@ -42,8 +42,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override AutofacContainer CreateSut()
         {
-            var builder = new ContainerBuilder();
-            builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
+            var builder = IocTestHelpers.InitializeAutofaContainerBuilder();
+            
             builder.RegisterType<ScenarioWithConstuctorParmeters>();
             builder.RegisterType<ConcreteObjectWithOneInterfaceConstructor>();
             builder.RegisterType<Dependency1>().As<IDependency1>().SingleInstance();
@@ -56,8 +56,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override TinyContainer CreateSut()
         {
-            var builder = new TinyIoCContainer();
-            builder.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
+            var builder = IocTestHelpers.InitializeTinyIoCContainer();
             builder.Register<ScenarioWithConstuctorParmeters>();
             builder.Register<ConcreteObjectWithOneInterfaceConstructor>();
             builder.Register<IDependency1, Dependency1>().AsSingleton();

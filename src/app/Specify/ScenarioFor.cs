@@ -2,6 +2,7 @@ using System;
 using Specify.Configuration;
 using Specify.Configuration.Examples;
 using Specify.Configuration.ExecutableAttributes;
+using Specify.Containers;
 using Specify.Stories;
 using TestStack.BDDfy;
 using Story = Specify.Stories.Story;
@@ -26,6 +27,7 @@ namespace Specify
     {
         /// <inheritdoc />
         public ContainerFor<TSut> Container { get; set; }
+        public IChildContainerBuilder ContainerOverrides { get; set; }
 
         /// <summary>
         /// Resets the Container and SUT before every Example.
@@ -56,9 +58,9 @@ namespace Specify
 
 
         /// <inheritdoc />
-        public virtual void SetContainer(IContainerRoot applicationContainer)
+        public virtual void SetExampleScope(IExampleScope exampleScope)
         {
-            ExampleScope = new ExampleScope(applicationContainer);
+            ExampleScope = exampleScope;
         }
 
         /// <inheritdoc />
@@ -116,6 +118,11 @@ namespace Specify
         public T SetThe<T>(T valueToSet, string key = null) where T : class
         {
             return Container.Set<T>(valueToSet, key);
+        }
+
+        public virtual void RegisterContainerOverrides()
+        {
+
         }
     }
 }

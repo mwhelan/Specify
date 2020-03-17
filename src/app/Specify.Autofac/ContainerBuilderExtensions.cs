@@ -2,6 +2,8 @@
 using Specify.lib;
 using Autofac;
 using Autofac.Features.ResolveAnything;
+using Specify.Configuration.Examples;
+using Specify.Containers;
 using Specify.Logging;
 using Specify.Mocks;
 
@@ -23,6 +25,7 @@ namespace Specify.Autofac
 
             RegisterScenarios(builder);
             RegisterScenarioContainer(builder, mockFactory);
+            RegisterTypes(builder);
         }
 
         private static void RegisterScenarios(ContainerBuilder builder)
@@ -49,6 +52,12 @@ namespace Specify.Autofac
 
                 nameof(ContainerBuilderExtensions).Log().DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "AutofacMockingContainer", mockFactory.MockProviderName);
             }
+        }
+
+        internal static void RegisterTypes(this ContainerBuilder builder)
+        {
+            builder.RegisterType<ExampleScope>().As<IExampleScope>();
+            builder.RegisterType<AutofacChildContainerBuilder>().As<IChildContainerBuilder>();
         }
     }
 }

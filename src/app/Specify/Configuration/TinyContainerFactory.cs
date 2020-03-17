@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Specify.Configuration.Examples;
+using Specify.Containers;
 using Specify.lib;
 using Specify.Logging;
 using Specify.Mocks;
@@ -19,6 +21,7 @@ namespace Specify.Configuration
             var container = new TinyIoCContainer();
             RegisterScenarios(container);
             RegisterScenarioContainer(container, mockFactory);
+            RegisterTypes(container);
             return container;
         }
 
@@ -47,6 +50,12 @@ namespace Specify.Configuration
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
             }
+        }
+
+        private void RegisterTypes(TinyIoCContainer container)
+        {
+            container.Register<IExampleScope, ExampleScope>();
+            container.Register<IChildContainerBuilder, TinyChildContainerBuilder>();
         }
     }
 }

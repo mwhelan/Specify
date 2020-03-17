@@ -1,23 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Specify.Containers;
 using Specify.Logging;
 
 namespace Specify.Configuration.Examples
 {
     public class ExampleScope : IExampleScope
     {
-        private readonly IContainerRoot _applicationContainer;
+        public IChildContainerBuilder ChildContainerBuilder { get; }
         private IEnumerable<IPerScenarioAction> _actions;
 
-        public ExampleScope(IContainerRoot applicationContainer)
+        public ExampleScope(IChildContainerBuilder childContainerBuilder)
         {
-            _applicationContainer = applicationContainer;
+            ChildContainerBuilder = childContainerBuilder;
         }
 
         public void BeginScope<T>(IScenario<T> scenario)
             where T : class
         {
-            var childContainer = _applicationContainer.GetChildContainer();
+            var childContainer = ChildContainerBuilder.GetChildContainer();
             scenario.Container = new ContainerFor<T>(childContainer);
 
             _actions = childContainer.GetMultiple<IPerScenarioAction>();

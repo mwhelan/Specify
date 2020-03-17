@@ -77,26 +77,6 @@ namespace Specify
         }
 
         /// <summary>
-        /// Gets all implementations of a type.
-        /// </summary>
-        /// <param name="baseType">The type that each implementation implements.</param>
-        /// <returns>IEnumerable&lt;TInterface&gt;.</returns>
-        public virtual IEnumerable<object> GetMultiple(Type baseType)
-        {
-            return Container.ResolveAll(baseType, true);
-        }
-
-        /// <summary>
-        /// Gets all implementations of a type.
-        /// </summary>
-        /// <typeparam name="T">The type that each implementation implements.</typeparam>
-        /// <returns>IEnumerable&lt;TInterface&gt;.</returns>
-        public IEnumerable<T> GetMultiple<T>() where T : class
-        {
-            return GetMultiple(typeof(T)).Cast<T>();
-        }
-
-        /// <summary>
         /// Register multiple implementations of a type.
         /// </summary>
         /// <param name="baseType">The type that each implementation implements.</param>
@@ -114,6 +94,26 @@ namespace Specify
         public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
         {
             SetMultiple(typeof(T), implementationTypes);
+        }
+
+        /// <summary>
+        /// Gets all implementations of a type.
+        /// </summary>
+        /// <param name="baseType">The type that each implementation implements.</param>
+        /// <returns>IEnumerable&lt;TInterface&gt;.</returns>
+        public virtual IEnumerable<object> GetMultiple(Type baseType)
+        {
+            return Container.ResolveAll(baseType, true);
+        }
+
+        /// <summary>
+        /// Gets all implementations of a type.
+        /// </summary>
+        /// <typeparam name="T">The type that each implementation implements.</typeparam>
+        /// <returns>IEnumerable&lt;TInterface&gt;.</returns>
+        public IEnumerable<T> GetMultiple<T>() where T : class
+        {
+            return GetMultiple(typeof(T)).Cast<T>();
         }
 
         /// <inheritdoc />

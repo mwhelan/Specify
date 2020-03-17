@@ -5,7 +5,9 @@ using NUnit.Framework;
 using Shouldly;
 using Specify.Autofac;
 using Specify.Configuration;
+using Specify.Configuration.Examples;
 using Specify.Configuration.StepScanners;
+using Specify.Containers;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
@@ -19,6 +21,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
         {
             var builder = new ContainerBuilder();
             builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
+            builder.RegisterTypes();
+
             builder.RegisterType<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
             builder.RegisterType<ExampleLifecycleAction1>().As<IPerScenarioAction>();
             builder.RegisterType<ExampleLifecycleAction2>().As<IPerScenarioAction>();
@@ -29,8 +33,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override TinyContainer CreateSut()
         {
-            var builder = new TinyIoCContainer();
-            builder.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
+            var builder = IocTestHelpers.InitializeTinyIoCContainer();
             builder.Register<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
             builder.RegisterMultiple<IPerScenarioAction>(new[]
                 {typeof(ExampleLifecycleAction1), typeof(ExampleLifecycleAction2)});
@@ -52,7 +55,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
 
             SUT = CreateSut();
             _scenario = SUT.Get<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
-            _scenario.SetContainer(SUT);
+            _scenario.SetExampleScope(SUT.Get<IExampleScope>());
 
             _scenario
                 .WithExamples(_scenario.Examples)
