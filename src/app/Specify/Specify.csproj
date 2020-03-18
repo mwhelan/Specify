@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
 
     <Title>Specify</Title>
     <Description>Specify is a .Net testing library that builds on top of BDDfy from TestStack</Description>
