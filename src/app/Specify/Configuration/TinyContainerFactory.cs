@@ -54,7 +54,7 @@ namespace Specify.Configuration
 
         private void RegisterTypes(TinyIoCContainer container)
         {
-            container.Register<ITestScope, TestScope>();
+            container.Register<TestScope>();
             container.Register<IChildContainerBuilder, TinyChildContainerBuilder>();
         }
     }

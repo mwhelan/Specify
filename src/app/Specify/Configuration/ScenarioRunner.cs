@@ -19,7 +19,7 @@ namespace Specify.Configuration
         public void Execute<TSut>(IScenario<TSut> testObject, string scenarioTitle = null) where TSut : class
         {
             var scenario = (IScenario<TSut>) Configuration.ApplicationContainer.Get(testObject.GetType());
-            var exampleScope = Configuration.ApplicationContainer.Get<ITestScope>();
+            var exampleScope = Configuration.ApplicationContainer.Get<TestScope>();
             scenario.SetExampleScope(exampleScope);
             _testEngine.Execute(scenario);
         }

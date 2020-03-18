@@ -55,7 +55,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
 
             SUT = CreateSut();
             _scenario = SUT.Get<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
-            _scenario.SetExampleScope(SUT.Get<ITestScope>());
+            _scenario.SetExampleScope(SUT.Get<TestScope>());
 
             _scenario
                 .WithExamples(_scenario.Examples)

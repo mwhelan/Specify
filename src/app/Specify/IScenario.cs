@@ -70,7 +70,7 @@ namespace Specify
         /// Used by Specify to set the example scope for each scenario.
         /// </summary>
         /// <param name="testScope">The example scope which manages the Container lifetime for each example.</param>
-        void SetExampleScope(ITestScope testScope);
+        void SetExampleScope(TestScope testScope);
 
         /// <summary>
         /// Place to register container overrides using TestScope.Registrations methods.

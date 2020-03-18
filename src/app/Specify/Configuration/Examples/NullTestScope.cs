@@ -2,16 +2,19 @@
 
 namespace Specify.Configuration.Examples
 {
-    class NullTestScope : ITestScope
+    class NullTestScope : TestScope
     {
         public IChildContainerBuilder Registrations { get; }
 
-        public void BeginScope<T>(IScenario<T> scenario) where T : class
+        public NullTestScope()
+            : base(null) { }
+
+        public override void BeginScope<T>(IScenario<T> scenario) 
         {
             
         }
 
-        public void EndScope<T>(IScenario<T> scenario) where T : class
+        public override void EndScope<T>(IScenario<T> scenario) 
         {
             
         }

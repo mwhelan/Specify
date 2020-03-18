@@ -20,7 +20,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
         {
             SUT = CreateSut();
             _scenario = SUT.Get<ScenarioWithConstuctorParmeters>();
-            _scenario.SetExampleScope(SUT.Get<ITestScope>());
+            _scenario.SetExampleScope(SUT.Get<TestScope>());
             _scenario.BeginTestCase();
         }
 

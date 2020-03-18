@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Specify.Containers;
 using TinyIoC;
 
-namespace Specify
+namespace Specify.Containers
 {
     public class TinyChildContainerBuilder : IChildContainerBuilder
     {

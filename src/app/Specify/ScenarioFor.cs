@@ -29,7 +29,7 @@ namespace Specify
         /// <summary>
         /// Resets the Container and SUT before every Example.
         /// </summary>
-        public ITestScope TestScope { get; set; } = new NullTestScope();
+        public TestScope TestScope { get; set; } = new NullTestScope();
 
         /// <inheritdoc />
         public ExampleTable Examples { get; set; }
@@ -54,7 +54,7 @@ namespace Specify
         public int TestCaseNumber { get; private set; }
 
         /// <inheritdoc />
-        public virtual void SetExampleScope(ITestScope testScope)
+        public virtual void SetExampleScope(TestScope testScope)
         {
             TestScope = testScope;
         }

@@ -17,7 +17,7 @@ namespace Specify.IntegrationTests.Containers
         {
             var container = CreateSut();
             var scenario = new ExampleScenario();
-            scenario.SetExampleScope(container.Get<ITestScope>());
+            scenario.SetExampleScope(container.Get<TestScope>());
             Action action = scenario.Specify;
             action.ShouldNotThrow();
         }

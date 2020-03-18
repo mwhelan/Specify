@@ -34,7 +34,7 @@ namespace Specify.IntegrationTests.Containers
 
 
             container.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
-            container.Register<ITestScope, TestScope>();
+            container.Register<TestScope>();
             container.Register<IChildContainerBuilder, TinyChildContainerBuilder>();
 
             return container;

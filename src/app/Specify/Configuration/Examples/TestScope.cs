@@ -5,7 +5,7 @@ using Specify.Logging;
 
 namespace Specify.Configuration.Examples
 {
-    public class TestScope : ITestScope
+    public class TestScope 
     {
         public IChildContainerBuilder Registrations { get; }
         private IEnumerable<IPerScenarioAction> _actions;
@@ -15,7 +15,7 @@ namespace Specify.Configuration.Examples
             Registrations = childContainerBuilder;
         }
 
-        public void BeginScope<T>(IScenario<T> scenario)
+        public virtual void BeginScope<T>(IScenario<T> scenario)
             where T : class
         {
             scenario.RegisterContainerOverrides();
@@ -33,7 +33,7 @@ namespace Specify.Configuration.Examples
             }
         }
 
-        public void EndScope<T>(IScenario<T> scenario)
+        public virtual void EndScope<T>(IScenario<T> scenario)
             where T : class
         {
             foreach (var action in _actions.OrderByDescending(x => x.Order))
