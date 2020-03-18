@@ -18,6 +18,7 @@ namespace Specify.Configuration.Examples
         public void BeginScope<T>(IScenario<T> scenario)
             where T : class
         {
+            scenario.RegisterContainerOverrides();
             var childContainer = Registrations.GetChildContainer();
             scenario.Container = new ContainerFor<T>(childContainer);
 

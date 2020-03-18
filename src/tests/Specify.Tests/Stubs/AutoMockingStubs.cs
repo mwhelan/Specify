@@ -96,6 +96,12 @@ namespace Specify.Tests.Stubs
     {
         int Value { get; set; }
     }
+    public interface IDependency2
+    {
+        void Run();
+    }
+    public interface IDependency3 { }
+
     public class Dependency1 : IDependency1
     {
         private int _value = 5;
@@ -136,10 +142,4 @@ namespace Specify.Tests.Stubs
             return new SealedDependencyWithPrivateConstructor();
         }
     }
-
-    public interface IDependency2
-    {
-        void Run();
-    }
-    public interface IDependency3 { }
 }

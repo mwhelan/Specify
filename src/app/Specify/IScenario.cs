@@ -73,6 +73,11 @@ namespace Specify
         void SetExampleScope(ITestScope testScope);
 
         /// <summary>
+        /// Place to register container overrides using TestScope.Registrations methods.
+        /// </summary>
+        void RegisterContainerOverrides();
+
+        /// <summary>
         /// Gets a value of the specified type from the container, optionally registered under a key.
         /// </summary>
         /// <typeparam name="T"></typeparam>

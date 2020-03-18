@@ -53,7 +53,6 @@ namespace Specify
         /// <inheritdoc />
         public int TestCaseNumber { get; private set; }
 
-
         /// <inheritdoc />
         public virtual void SetExampleScope(ITestScope testScope)
         {
