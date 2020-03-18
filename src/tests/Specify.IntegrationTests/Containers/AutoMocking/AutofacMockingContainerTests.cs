@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Reflection;
 using Autofac;
 using Autofac.Features.ResolveAnything;
 using Specify.Autofac;

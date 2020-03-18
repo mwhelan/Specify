@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Specify.Mocks;
+﻿using Specify.Mocks;
 
 namespace Specify.Configuration
 {

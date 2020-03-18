@@ -54,7 +54,7 @@ namespace Specify
         public int TestCaseNumber { get; private set; }
 
         /// <inheritdoc />
-        public virtual void SetExampleScope(TestScope testScope)
+        public virtual void SetTestScope(TestScope testScope)
         {
             TestScope = testScope;
         }
@@ -94,26 +94,6 @@ namespace Specify
         public object The(Type serviceType, string key = null)
         {
             return Container.Get(serviceType, key);
-        }
-
-        /// <inheritdoc />
-        public void SetThe<T>() where T : class
-        {
-            Container.Set<T>();
-        }
-
-        /// <inheritdoc />
-        public void SetThe<TService, TImplementation>()
-            where TService : class
-            where TImplementation : class, TService
-        {
-            Container.Set<TService, TImplementation>();
-        }
-
-        /// <inheritdoc />
-        public T SetThe<T>(T valueToSet, string key = null) where T : class
-        {
-            return Container.Set<T>(valueToSet, key);
         }
 
         public virtual void RegisterContainerOverrides()

@@ -20,7 +20,7 @@ namespace Specify.Configuration
         {
             var scenario = (IScenario<TSut>) Configuration.ApplicationContainer.Get(testObject.GetType());
             var exampleScope = Configuration.ApplicationContainer.Get<TestScope>();
-            scenario.SetExampleScope(exampleScope);
+            scenario.SetTestScope(exampleScope);
             _testEngine.Execute(scenario);
         }
 

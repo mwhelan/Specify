@@ -1,9 +1,6 @@
-﻿using System.IO;
-//using ApprovalTests;
+﻿//using ApprovalTests;
 //using ApprovalTests.Reporters;
 using NUnit.Framework;
-using Shouldly;
-using Specify.Configuration;
 
 namespace Specify.Tests.Configuration
 {

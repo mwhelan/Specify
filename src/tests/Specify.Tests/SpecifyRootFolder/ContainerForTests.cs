@@ -43,60 +43,6 @@ namespace Specify.Tests.SpecifyRootFolder
         }
 
         [Test]
-        public void SetType_should_register_type_if_SUT_not_set()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.Set<ConcreteObjectWithNoConstructor>();
-            sut.SourceContainer.Received<IContainer>().Set<ConcreteObjectWithNoConstructor>();
-        }
-
-        [Test]
-        public void SetType_should_throw_if_SUT_is_set()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            var result = sut.SystemUnderTest;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Set<ConcreteObjectWithNoConstructor>())
-                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
-        }
-
-        [Test]
-        public void SetService_should_register_service_if_SUT_not_set()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();
-            sut.Set<IDependency1, Dependency1>();
-            sut.SourceContainer.Received<IContainer>().Set<IDependency1, Dependency1>();
-        }
-
-        [Test]
-        public void SetService_should_throw_if_SUT_is_set()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            var result = sut.SystemUnderTest;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Set<IDependency1, Dependency1>())
-                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.Dependency1 after SUT is created");
-        }
-
-        [Test]
-        public void SetInstance_should_register_instance_if_SUT_not_set()
-        {
-            var instance = new ConcreteObjectWithNoConstructor();
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-
-            sut.Set(instance);
-
-            sut.SourceContainer.Received<IContainer>().Set(instance);
-        }
-
-        [Test]
-        public void SetInstance_should_throw_if_SUT_is_set()
-        {
-            var sut = this.CreateSut<ConcreteObjectWithMultipleConstructors>();
-            var result = sut.SystemUnderTest;
-            Should.Throw<InterfaceRegistrationException>(() => sut.Set(new ConcreteObjectWithNoConstructor()))
-                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
-        }
-
-        [Test]
         public void Get_generic_should_resolve_service()
         {
             var sut = this.CreateSut<ConcreteObjectWithNoConstructor>();

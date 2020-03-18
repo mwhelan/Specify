@@ -36,20 +36,6 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
         }
 
         [Test]
-        public void Set_should_register_service_by_type()
-        {
-            SUT.Set<IDependency1, Dependency1>();
-            SUT.CanResolve<IDependency1>().ShouldBe(true);
-        }
-
-        [Test]
-        public void Set_should_register_singleton_lifetime()
-        {
-            SUT.Set<IDependency2, Dependency2>();
-            SUT.Get<IDependency2>().ShouldBeSameAs(SUT.Get<IDependency2>());
-        }
-
-        [Test]
         public void Get_should_resolve_for_all_concrete_types_where_dependency_chains_are_resolvable()
         {
             SUT.Get<SealedDependencyWithNoConstructor>().ShouldNotBeNull();

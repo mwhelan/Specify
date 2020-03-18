@@ -1,17 +1,14 @@
 ﻿using System;
 using Autofac;
-using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Autofac;
 using Specify.Configuration;
 using Specify.Configuration.Examples;
 using Specify.Configuration.StepScanners;
-using Specify.Containers;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
-using TinyIoC;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -55,7 +52,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
 
             SUT = CreateSut();
             _scenario = SUT.Get<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
-            _scenario.SetExampleScope(SUT.Get<TestScope>());
+            _scenario.SetTestScope(SUT.Get<TestScope>());
 
             _scenario
                 .WithExamples(_scenario.Examples)

@@ -1,5 +1,4 @@
-﻿using System;
-using Specify.Configuration;
+﻿using Specify.Configuration;
 using Specify.Configuration.Scanners;
 using Specify.Logging;
 

@@ -1,7 +1,4 @@
-﻿using System.Dynamic;
-using Specify.Containers;
-
-namespace Specify
+﻿namespace Specify
 {
     public interface IContainerRoot : IContainer
     {

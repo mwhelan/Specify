@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Autofac;
-using Autofac.Builder;
 using Autofac.Core;
 
 namespace Specify.Autofac
@@ -61,46 +60,6 @@ namespace Specify.Autofac
         }
 
         /// <inheritdoc />
-        public void Set<T>() where T : class
-        {
-            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
-                .InstancePerLifetimeScope()
-                .CreateRegistration());
-        }
-
-        /// <inheritdoc />
-        public void Set<TService, TImplementation>()
-            where TService : class
-            where TImplementation : class, TService
-        {
-            Container
-                .ComponentRegistry
-                .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>()
-                .InstancePerLifetimeScope()
-                .CreateRegistration());
-        }
-
-        /// <inheritdoc />
-        public T Set<T>(T valueToSet, string key = null) where T : class
-        {
-            if (key == null)
-            {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .InstancePerLifetimeScope().CreateRegistration());
-
-            }
-            else
-            {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .As(new KeyedService(key, typeof(T)))
-                        .InstancePerLifetimeScope().CreateRegistration());
-            }
-            return Get<T>(key);
-        }
-
-        /// <inheritdoc />
         public T Get<T>(string key = null) where T : class
         {
             if (key == null)
@@ -143,25 +102,6 @@ namespace Specify.Autofac
         public IEnumerable<T> GetMultiple<T>() where T : class
         {
             return Container.Resolve<IEnumerable<T>>();
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
-        {
-            foreach (var type in implementationTypes)
-            {
-                Container
-                    .ComponentRegistry
-                    .Register(RegistrationBuilder.ForType(type).As(baseType)
-                        .InstancePerLifetimeScope()
-                        .CreateRegistration());
-            }
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
-        {
-            SetMultiple(typeof(T), implementationTypes);
         }
 
         /// <summary>

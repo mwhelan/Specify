@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Specify.Configuration.Examples;
 using Specify.Containers;
 using Specify.lib;
