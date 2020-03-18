@@ -9,12 +9,12 @@ namespace Specify.Configuration.Examples
         public NullTestScope()
             : base(null) { }
 
-        public override void BeginScope<T>(IScenario<T> scenario) 
+        internal override void BeginScope<T>(IScenario<T> scenario) 
         {
             
         }
 
-        public override void EndScope<T>(IScenario<T> scenario) 
+        internal override void EndScope<T>(IScenario<T> scenario) 
         {
             
         }

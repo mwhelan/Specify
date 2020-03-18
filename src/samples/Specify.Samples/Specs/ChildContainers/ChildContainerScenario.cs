@@ -9,7 +9,7 @@ namespace Specify.Samples.Specs.ChildContainers
 
         public override void RegisterContainerOverrides()
         {
-            TestScope.Registrations.Set<IDependency1, TestDependency1>();
+            TestScope.Set<IDependency1, TestDependency1>();
         }
 
         public void Given_I_have_overridden_the_registrations_in_the_TestScope()
