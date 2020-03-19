@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
@@ -19,16 +20,18 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
+    <Version>3.0.0-beta01</Version>
     <Copyright>Copyright 2020 Michael Whelan</Copyright>
     <VersionPrefix>3.0.0</VersionPrefix>
     <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify.Autofac</AssemblyName>
     <PackageId>Specify.Autofac</PackageId>
     <PackageTags>TDD;BDD;Testing;BDDfy</PackageTags>
-    <PackageLicenseUrl>https://github.com/mwhelan/Specify/blob/master/license.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <ProjectUrl>http://specify-dotnet.readthedocs.org/</ProjectUrl>
     <RepositoryUrl>https://github.com/mwhelan/Specify</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>http://specify-dotnet.readthedocs.org/</PackageProjectUrl>
 
   </PropertyGroup>
 
