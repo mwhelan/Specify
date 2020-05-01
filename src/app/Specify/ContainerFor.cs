@@ -140,27 +140,27 @@ namespace Specify
         }
 
         /// <inheritdoc />
-        public IEnumerable<object> GetMultiple(Type baseType)
+        public IEnumerable<object> GetMultiple(Type serviceType)
         {
-            throw new NotImplementedException();
+            return _sourceContainer.GetMultiple(serviceType);
         }
 
         /// <inheritdoc />
         public IEnumerable<T> GetMultiple<T>() where T : class
         {
-            throw new NotImplementedException();
+            return _sourceContainer.GetMultiple<T>();
         }
 
         /// <inheritdoc />
-        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        public void SetMultiple(Type serviceType, IEnumerable<Type> implementationTypes)
         {
-            throw new NotImplementedException();
+            _sourceContainer.SetMultiple(serviceType, implementationTypes);
         }
 
         /// <inheritdoc />
         public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
         {
-            throw new NotImplementedException();
+            _sourceContainer.SetMultiple<T>(implementationTypes);
         }
 
         /// <inheritdoc />

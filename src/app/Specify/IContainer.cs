@@ -80,9 +80,9 @@ namespace Specify
         /// <summary>
         /// Register multiple implementations of a type.
         /// </summary>
-        /// <param name="baseType">The type that each implementation implements.</param>
+        /// <param name="serviceType">The type that each implementation implements.</param>
         /// <param name="implementationTypes">Types that implement T.</param>
-        void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes);
+        void SetMultiple(Type serviceType, IEnumerable<Type> implementationTypes);
 
         /// <summary>
         /// Register multiple implementations of a type.

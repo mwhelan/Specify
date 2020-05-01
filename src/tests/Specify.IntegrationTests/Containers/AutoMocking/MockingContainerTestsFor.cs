@@ -28,7 +28,7 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
         }
 
         [Test]
-        public void CanResolve_should_return_false_if_service_not_registered_and_dependency_chains_are_not_resolvable()
+        public virtual void CanResolve_should_return_false_if_service_not_registered_and_dependency_chains_are_not_resolvable()
         {
             SUT.CanResolve<ConcreteObjectWithPrivateConstructor>().ShouldBe(false);
             SUT.CanResolve<ConcreteObjectWithOneConcreteConstructorHavingPrivateConstructor>().ShouldBe(false);
@@ -70,11 +70,11 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
         }
 
         [Test]
-        public void Get_should_not_resolve_for_any_concrete_types_where_dependency_chains_are_not_resolvable()
+        public virtual void Get_should_not_resolve_for_any_concrete_types_where_dependency_chains_are_not_resolvable()
         {
-            //ShouldNotResolve<ConcreteObjectWithPrivateConstructor>();
+            ShouldNotResolve<ConcreteObjectWithPrivateConstructor>();
             ShouldNotResolve<ConcreteObjectWithOneConcreteConstructorHavingPrivateConstructor>();
-           // ShouldNotResolve<ConcreteObjectWithOneSealedConstructorHavingPrivateConstructor>();
+            ShouldNotResolve<ConcreteObjectWithOneSealedConstructorHavingPrivateConstructor>();
         }
 
         private void ShouldNotResolve<TService>() where TService : class
