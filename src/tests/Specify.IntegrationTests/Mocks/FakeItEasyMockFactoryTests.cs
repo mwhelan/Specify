@@ -1,4 +1,8 @@
+using System;
+using System.IO;
+using System.Reflection;
 using FakeItEasy;
+using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Mocks;

@@ -3,24 +3,24 @@ using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Autofac;
-using Specify.Configuration.Examples;
 using Specify.Tests.Stubs;
+using TinyIoC;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
-    public abstract class ScenarioConstructorInjectionTests<T> where T : IContainerRoot
+    public abstract class ScenarioConstructorInjectionTests<T> where T : IContainer
     {
         protected abstract T CreateSut();
         private ScenarioWithConstuctorParmeters _scenario;
 
-        public IContainerRoot SUT { get; set; }
+        public IContainer SUT { get; set; }
 
         [SetUp]
         public void SetUp()
         {
             SUT = CreateSut();
             _scenario = SUT.Get<ScenarioWithConstuctorParmeters>();
-            _scenario.SetTestScope(SUT.Get<TestScope>());
+            _scenario.SetContainer(SUT);
             _scenario.BeginTestCase();
         }
 
@@ -42,8 +42,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override AutofacContainer CreateSut()
         {
-            var builder = IocTestHelpers.InitializeAutofaContainerBuilder();
-            
+            var builder = new ContainerBuilder();
+            builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
             builder.RegisterType<ScenarioWithConstuctorParmeters>();
             builder.RegisterType<ConcreteObjectWithOneInterfaceConstructor>();
             builder.RegisterType<Dependency1>().As<IDependency1>().SingleInstance();
@@ -56,7 +56,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override TinyContainer CreateSut()
         {
-            var builder = IocTestHelpers.InitializeTinyIoCContainer();
+            var builder = new TinyIoCContainer();
+            builder.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
             builder.Register<ScenarioWithConstuctorParmeters>();
             builder.Register<ConcreteObjectWithOneInterfaceConstructor>();
             builder.Register<IDependency1, Dependency1>().AsSingleton();

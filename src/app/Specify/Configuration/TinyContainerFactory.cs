@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using Specify.Configuration.Examples;
-using Specify.Containers;
+﻿using System;
+using System.Linq;
 using Specify.lib;
 using Specify.Logging;
 using Specify.Mocks;
@@ -20,7 +19,6 @@ namespace Specify.Configuration
             var container = new TinyIoCContainer();
             RegisterScenarios(container);
             RegisterScenarioContainer(container, mockFactory);
-            RegisterTypes(container);
             return container;
         }
 
@@ -39,22 +37,16 @@ namespace Specify.Configuration
         {
             if (mockFactory.GetType() == typeof(NullMockFactory))
             {
-                container.Register<IContainerRoot>((c, p) => new TinyContainer(c));
+                container.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
                 this.Log()
-                    .DebugFormat("Registered {ScenarioContainer} for IContainer with no mock factory", "TinyContainer");
+                    .DebugFormat("Registered {ScenarioContainer} for IContainer", "TinyContainer");
             }
             else
             {
-                container.Register<IContainerRoot>((c, p) => new TinyMockingContainer(mockFactory, c));
+                container.Register<IContainer>((c, p) => new TinyMockingContainer(mockFactory, c.GetChildContainer()));
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "TinyMockingContainer", mockFactory.MockProviderName);
             }
-        }
-
-        private void RegisterTypes(TinyIoCContainer container)
-        {
-            container.Register<TestScope>();
-            container.Register<IChildContainerBuilder, TinyChildContainerBuilder>();
         }
     }
 }

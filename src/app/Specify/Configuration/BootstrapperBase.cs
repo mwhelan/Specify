@@ -19,10 +19,10 @@ namespace Specify.Configuration
         /// Builds the application container.
         /// </summary>
         /// <returns>IContainer.</returns>
-        protected abstract IContainerRoot BuildApplicationContainer();
+        protected abstract IContainer BuildApplicationContainer();
 
         /// <inheritdoc />
-        public IContainerRoot ApplicationContainer { get; internal set; }
+        public IContainer ApplicationContainer { get; internal set; }
 
         /// <summary>
         /// By default, Specify will detect NSubstitute, FakeItEasy and Moq, in that order.
@@ -89,7 +89,7 @@ namespace Specify.Configuration
             string containerName;
             IList<IPerApplicationAction> perApplicationActions;
             IList<IPerScenarioAction> perScenarioActions;
-            using (var container = ApplicationContainer.Get<IContainerRoot>())
+            using (var container = ApplicationContainer.Get<IContainer>())
             {
                 containerName = container.GetType().FullName;
                 perApplicationActions = container.GetMultiple<IPerApplicationAction>().ToList();

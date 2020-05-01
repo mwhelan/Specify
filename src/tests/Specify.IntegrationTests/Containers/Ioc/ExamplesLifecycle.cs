@@ -1,14 +1,15 @@
 ﻿using System;
 using Autofac;
+using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Autofac;
 using Specify.Configuration;
-using Specify.Configuration.Examples;
 using Specify.Configuration.StepScanners;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
+using TinyIoC;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -18,8 +19,6 @@ namespace Specify.IntegrationTests.Containers.Ioc
         {
             var builder = new ContainerBuilder();
             builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
-            builder.RegisterTypes();
-
             builder.RegisterType<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
             builder.RegisterType<ExampleLifecycleAction1>().As<IPerScenarioAction>();
             builder.RegisterType<ExampleLifecycleAction2>().As<IPerScenarioAction>();
@@ -30,19 +29,20 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override TinyContainer CreateSut()
         {
-            var builder = IocTestHelpers.InitializeTinyIoCContainer();
+            var builder = new TinyIoCContainer();
+            builder.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
             builder.Register<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
             builder.RegisterMultiple<IPerScenarioAction>(new[]
                 {typeof(ExampleLifecycleAction1), typeof(ExampleLifecycleAction2)});
             return new TinyContainer(builder);
         }
     }
-    public abstract class ExamplesLifecycle<T> where T : IContainerRoot
+    public abstract class ExamplesLifecycle<T> where T : IContainer
     {
         protected abstract T CreateSut();
         private UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples _scenario;
 
-        public IContainerRoot SUT { get; set; }
+        public IContainer SUT { get; set; }
 
         [Test]
         public void specify_steps_should_wrap_standard_BDDfy_conventions_with_examples()
@@ -52,7 +52,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
 
             SUT = CreateSut();
             _scenario = SUT.Get<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
-            _scenario.SetTestScope(SUT.Get<TestScope>());
+            _scenario.SetContainer(SUT);
 
             _scenario
                 .WithExamples(_scenario.Examples)

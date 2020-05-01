@@ -1,4 +1,5 @@
 using System;
+using Specify.Configuration;
 using Specify.Configuration.Examples;
 using Specify.Configuration.ExecutableAttributes;
 using Specify.Stories;
@@ -29,7 +30,7 @@ namespace Specify
         /// <summary>
         /// Resets the Container and SUT before every Example.
         /// </summary>
-        public TestScope TestScope { get; set; } = new NullTestScope();
+        public IExampleScope ExampleScope { get; set; } = new NullExampleScope();
 
         /// <inheritdoc />
         public ExampleTable Examples { get; set; }
@@ -53,10 +54,11 @@ namespace Specify
         /// <inheritdoc />
         public int TestCaseNumber { get; private set; }
 
+
         /// <inheritdoc />
-        public virtual void SetTestScope(TestScope testScope)
+        public virtual void SetContainer(IContainer applicationContainer)
         {
-            TestScope = testScope;
+            ExampleScope = new ExampleScope(applicationContainer);
         }
 
         /// <inheritdoc />
@@ -69,19 +71,19 @@ namespace Specify
         public void BeginTestCase()
         {
             TestCaseNumber++;
-            TestScope.BeginScope(this);
+            ExampleScope.BeginScope(this);
         }
 
         [EndTestCase]
         public void EndTestCase()
         {
-            TestScope.EndScope(this);
+            ExampleScope.EndScope(this);
         }
 
         /// <inheritdoc />
         public void Dispose()
         {
-            //Container?.Dispose();
+            Container?.Dispose();
         }
 
         /// <inheritdoc />
@@ -96,8 +98,24 @@ namespace Specify
             return Container.Get(serviceType, key);
         }
 
-        public virtual void RegisterContainerOverrides()
+        /// <inheritdoc />
+        public void SetThe<T>() where T : class
         {
+            Container.Set<T>();
+        }
+
+        /// <inheritdoc />
+        public void SetThe<TService, TImplementation>()
+            where TService : class
+            where TImplementation : class, TService
+        {
+            Container.Set<TService, TImplementation>();
+        }
+
+        /// <inheritdoc />
+        public T SetThe<T>(T valueToSet, string key = null) where T : class
+        {
+            return Container.Set<T>(valueToSet, key);
         }
     }
 }

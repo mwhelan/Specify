@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Specify.Mocks;
 using TinyIoC;
 
@@ -20,11 +21,6 @@ namespace Specify
             : base(container)
         {
             _mockFactory = mockFactory;
-        }
-
-        public override IContainer GetChildContainer()
-        {
-            return new TinyMockingContainer(_mockFactory, Container.GetChildContainer());
         }
 
         /// <inheritdoc />

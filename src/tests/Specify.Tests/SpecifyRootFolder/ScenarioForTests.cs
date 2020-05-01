@@ -3,6 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Configuration.StepScanners;
+using Specify.Exceptions;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
@@ -97,6 +98,43 @@ namespace Specify.Tests.SpecifyRootFolder
             sut.SUT.ShouldNotBeSameAs(original);
         }
 
+        [Test]
+        public void Container_RegisterType_should_call_container_to_register_type_if_SUT_not_set()
+        {
+            var sut = CreateSut();
+            sut.Container.Set<ConcreteObjectWithNoConstructor>();
+            sut.Container.SourceContainer.Received<IContainer>().Set<ConcreteObjectWithNoConstructor>();
+        }
+
+        [Test]
+        public void Container_RegisterType_should_throw_if_SUT_is_set()
+        {
+            var sut = CreateSut();
+            var result = sut.SUT;
+            Should.Throw<InterfaceRegistrationException>(() => sut.Container.Set<ConcreteObjectWithNoConstructor>())
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
+        }
+
+        [Test]
+        public void Container_RegisterInstance_should_call_container_to_register_instance_if_SUT_not_set()
+        {
+            var instance = new ConcreteObjectWithNoConstructor();
+            var sut = CreateSut();
+
+            sut.Container.Set(instance);
+
+            sut.Container.SourceContainer.Received<IContainer>().Set(instance);
+        }
+
+        [Test]
+        public void Container_RegisterInstance_should_throw_if_SUT_is_set()
+        {
+            var sut = CreateSut();
+            var result = sut.SUT;
+            Should.Throw<InterfaceRegistrationException>(() => sut.Container.Set(new ConcreteObjectWithNoConstructor()))
+                .Message.ShouldBe("Cannot register service Specify.Tests.Stubs.ConcreteObjectWithNoConstructor after SUT is created");
+        }    
+    
         [Test]
         public void Container_Get_should_call_container_resolve()
         {

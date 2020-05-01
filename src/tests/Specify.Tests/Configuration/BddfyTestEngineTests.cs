@@ -1,9 +1,11 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Configuration;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
+using TestStack.BDDfy.Reporters;
 
 namespace Specify.Tests.Configuration
 {

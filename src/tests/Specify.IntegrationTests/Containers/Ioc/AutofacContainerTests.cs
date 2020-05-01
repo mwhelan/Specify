@@ -1,4 +1,3 @@
-using Autofac;
 using Specify.Autofac;
 
 namespace Specify.IntegrationTests.Containers.Ioc
@@ -7,10 +6,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override AutofacContainer CreateSut()
         {
-            var builder = new ContainerBuilder();
-            ContainerBuilderExtensions.RegisterTypes(builder);
-
-            return new AutofacContainer(builder);
+            return new AutofacContainer();
         }
     }
 }

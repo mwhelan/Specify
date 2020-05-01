@@ -1,3 +1,5 @@
+using Specify.Tests.SpecifyRootFolder;
+
 namespace Specify.Tests.Stubs
 {
     internal class UnitScenarioWithAllSupportedStepsInRandomOrder 

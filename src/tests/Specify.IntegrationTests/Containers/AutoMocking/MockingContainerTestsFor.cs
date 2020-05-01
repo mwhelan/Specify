@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 namespace Specify.IntegrationTests.Containers.AutoMocking
 {
     public abstract class MockingContainerTestsFor<T> : ContainerSpecsFor<T> 
-        where T : IContainerRoot
+        where T : IContainer
     {
         public T SUT { get; set; }
 
@@ -33,6 +33,20 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
             SUT.CanResolve<ConcreteObjectWithPrivateConstructor>().ShouldBe(false);
             SUT.CanResolve<ConcreteObjectWithOneConcreteConstructorHavingPrivateConstructor>().ShouldBe(false);
             SUT.CanResolve<ConcreteObjectWithOneSealedConstructorHavingPrivateConstructor>().ShouldBe(false);
+        }
+
+        [Test]
+        public void Set_should_register_service_by_type()
+        {
+            SUT.Set<IDependency1, Dependency1>();
+            SUT.CanResolve<IDependency1>().ShouldBe(true);
+        }
+
+        [Test]
+        public void Set_should_register_singleton_lifetime()
+        {
+            SUT.Set<IDependency2, Dependency2>();
+            SUT.Get<IDependency2>().ShouldBeSameAs(SUT.Get<IDependency2>());
         }
 
         [Test]

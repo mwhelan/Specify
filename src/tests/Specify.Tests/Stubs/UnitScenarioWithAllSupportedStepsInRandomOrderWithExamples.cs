@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TestStack.BDDfy;
 
 namespace Specify.Tests.Stubs

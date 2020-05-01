@@ -9,7 +9,7 @@ namespace Specify.Tests.Configuration
     {
         public StubConfig()
         {
-            ApplicationContainer = Substitute.For<IContainerRoot>();
+            ApplicationContainer = Substitute.For<IContainer>();
             StubPerScenarioAction.Reset();
             //PerAppDomainActions.Add(new StubPerApplicationAction { Name = "PerAppDomainAction 1" });
             //PerAppDomainActions.Add(new StubPerApplicationAction { Name = "PerAppDomainAction 2" });

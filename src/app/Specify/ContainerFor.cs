@@ -40,7 +40,62 @@ namespace Specify
             set { _systemUnderTest = value; }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Registers a type to the container.
+        /// </summary>
+        /// <typeparam name="T">The type of the component implementation.</typeparam>
+        /// <exception cref="InterfaceRegistrationException"></exception>
+        public void Set<T>() where T : class
+        {
+            if (_systemUnderTest != null)
+            {
+                throw new InterfaceRegistrationException(typeof(T));
+            }
+            _sourceContainer.Set<T>();
+        }
+
+        /// <summary>
+        /// Registers an implementation type for a service interface
+        /// </summary>
+        /// <typeparam name="TService">The interface type</typeparam>
+        /// <typeparam name="TImplementation">The type that implements the service interface</typeparam>
+        /// <exception cref="InterfaceRegistrationException"></exception>
+        public void Set<TService, TImplementation>()
+            where TService : class
+            where TImplementation : class, TService
+        {
+            if (_systemUnderTest != null)
+            {
+                throw new InterfaceRegistrationException(typeof(TImplementation));
+            }
+            _sourceContainer.Set<TService, TImplementation>();
+        }
+
+        /// <summary>
+        /// Sets a value in the container, so that from now on, it will be returned when you call <see cref="Get{T}" />
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="valueToSet">The value to set.</param>
+        /// <param name="key">The key.</param>
+        /// <returns>T.</returns>
+        /// <exception cref="InterfaceRegistrationException"></exception>
+        public T Set<T>(T valueToSet, string key = null) where T : class
+        {
+            if (_systemUnderTest != null)
+            {
+                throw new InterfaceRegistrationException(typeof(T));
+            }
+            
+            return _sourceContainer.Set(valueToSet, key);
+        }
+
+        /// <summary>
+        /// Gets a value of the specified type from the container, optionally registered under a key.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key">The key.</param>
+        /// <returns>T.</returns>
+        /// <exception cref="InterfaceResolutionException"></exception>
         public T Get<T>(string key = null) where T : class
         {
             try
@@ -53,7 +108,13 @@ namespace Specify
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Gets a value of the specified type from the container, optionally registered under a key.
+        /// </summary>
+        /// <param name="serviceType">Type of the service.</param>
+        /// <param name="key">The key.</param>
+        /// <returns>System.Object.</returns>
+        /// <exception cref="InterfaceResolutionException"></exception>
         public object Get(Type serviceType, string key = null)
         {
             try
@@ -81,13 +142,25 @@ namespace Specify
         /// <inheritdoc />
         public IEnumerable<object> GetMultiple(Type baseType)
         {
-            return _sourceContainer.GetMultiple(baseType);
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
         public IEnumerable<T> GetMultiple<T>() where T : class
         {
-            return _sourceContainer.GetMultiple<T>();
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

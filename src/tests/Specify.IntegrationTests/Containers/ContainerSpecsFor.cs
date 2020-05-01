@@ -1,13 +1,13 @@
 using System;
 using NUnit.Framework;
 using Shouldly;
-using Specify.Configuration.Examples;
+using Specify.Exceptions;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 
 namespace Specify.IntegrationTests.Containers
 {
-    public abstract class ContainerSpecsFor<T> where T : IContainerRoot
+    public abstract class ContainerSpecsFor<T> where T : IContainer
     {
         protected abstract T CreateSut();
 
@@ -16,7 +16,7 @@ namespace Specify.IntegrationTests.Containers
         {
             var container = CreateSut();
             var scenario = new ExampleScenario();
-            scenario.SetTestScope(container.Get<TestScope>());
+            scenario.SetContainer(container);
             Action action = scenario.Specify;
             action.ShouldNotThrow();
         }
@@ -25,6 +25,7 @@ namespace Specify.IntegrationTests.Containers
     class ExampleScenario : ScenarioFor<ConcreteObjectWithOneInterfaceConstructor>
     {
         private int _result;
+        private IDependency1 _dependency;
 
         public ExampleScenario()
         {
@@ -37,7 +38,8 @@ namespace Specify.IntegrationTests.Containers
 
         public void GivenTheValue(int num)
         {
-            Container.Get<IDependency1>().Value = num;
+            _dependency = new Dependency1 { Value = num };
+            Container.Set<IDependency1>(_dependency);
         }
 
         public void WhenICheckTheDependencyValue()
@@ -48,11 +50,6 @@ namespace Specify.IntegrationTests.Containers
         public void ThenItShouldBe_(int result)
         {
             _result.ShouldBe(result);
-        }
-
-        public override void RegisterContainerOverrides()
-        {
-            TestScope.Set<IDependency1,Dependency1>();
         }
     }
 }

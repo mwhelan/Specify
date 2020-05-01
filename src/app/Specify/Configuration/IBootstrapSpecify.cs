@@ -1,4 +1,5 @@
-﻿using Specify.Mocks;
+﻿using System.Collections.Generic;
+using Specify.Mocks;
 
 namespace Specify.Configuration
 {
@@ -11,7 +12,7 @@ namespace Specify.Configuration
         /// Gets the container that will be used for the lifetime of the application.
         /// </summary>
         /// <value>The application container.</value>
-        IContainerRoot ApplicationContainer { get; }
+        IContainer ApplicationContainer { get; }
 
         /// <summary>
         /// Gets the mock provider if one is referenced.

@@ -1,4 +1,5 @@
-﻿using TestStack.BDDfy;
+﻿using System;
+using TestStack.BDDfy;
 
 namespace Specify.Configuration.ExecutableAttributes
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Autofac;
+using Autofac.Builder;
 using Autofac.Core;
 
 namespace Specify.Autofac
@@ -8,7 +9,7 @@ namespace Specify.Autofac
     /// <summary>
     /// Adapter for the Autofac container.
     /// </summary>
-    public class AutofacContainer : Specify.IContainer, IContainerRoot
+    public class AutofacContainer : Specify.IContainer
     {
         private ILifetimeScope _container;
         protected ContainerBuilder ContainerBuilder;
@@ -39,11 +40,6 @@ namespace Specify.Autofac
             ContainerBuilder = containerBuilder;
         }
 
-        public IContainer GetChildContainer()
-        {
-            return new AutofacContainer(_container.BeginLifetimeScope());
-        }
-
         /// <summary>
         /// The Autofac container.
         /// </summary>
@@ -57,6 +53,46 @@ namespace Specify.Autofac
                 }
                 return _container;
             }
+        }
+
+        /// <inheritdoc />
+        public void Set<T>() where T : class
+        {
+            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
+                .InstancePerLifetimeScope()
+                .CreateRegistration());
+        }
+
+        /// <inheritdoc />
+        public void Set<TService, TImplementation>()
+            where TService : class
+            where TImplementation : class, TService
+        {
+            Container
+                .ComponentRegistry
+                .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>()
+                .InstancePerLifetimeScope()
+                .CreateRegistration());
+        }
+
+        /// <inheritdoc />
+        public T Set<T>(T valueToSet, string key = null) where T : class
+        {
+            if (key == null)
+            {
+                Container.ComponentRegistry
+                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
+                        .InstancePerLifetimeScope().CreateRegistration());
+
+            }
+            else
+            {
+                Container.ComponentRegistry
+                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
+                        .As(new KeyedService(key, typeof(T)))
+                        .InstancePerLifetimeScope().CreateRegistration());
+            }
+            return Get<T>(key);
         }
 
         /// <inheritdoc />
@@ -104,6 +140,25 @@ namespace Specify.Autofac
             return Container.Resolve<IEnumerable<T>>();
         }
 
+        /// <inheritdoc />
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            foreach (var type in implementationTypes)
+            {
+                Container
+                    .ComponentRegistry
+                    .Register(RegistrationBuilder.ForType(type).As(baseType)
+                        .InstancePerLifetimeScope()
+                        .CreateRegistration());
+            }
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            SetMultiple(typeof(T), implementationTypes);
+        }
+
         /// <summary>
         /// Determines whether this instance can resolve the specified service type.
         /// The Autofac IsRegistered method can return true if a class is registered but still throw a DependencyResolutionException
@@ -119,7 +174,7 @@ namespace Specify.Autofac
 
         public void Dispose()
         {
-            //  Container.Dispose();
+            Container.Dispose();
         }
     }
 }

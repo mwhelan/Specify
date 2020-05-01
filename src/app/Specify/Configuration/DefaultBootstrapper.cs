@@ -9,12 +9,11 @@ namespace Specify.Configuration
     public class DefaultBootstrapper : BootstrapperBase
     {
         /// <inheritdoc />
-        protected override IContainerRoot BuildApplicationContainer()
+        protected override IContainer BuildApplicationContainer()
         {
-            var tinyContainer = new TinyContainerFactory().Create(MockFactory);
-            ConfigureContainer(tinyContainer);
-            var containerRoot = tinyContainer.Resolve<IContainerRoot>();
-            return containerRoot;
+            var container = new TinyContainerFactory().Create(MockFactory);
+            ConfigureContainer(container);
+            return new TinyContainer(container);
         }
 
         /// <summary>

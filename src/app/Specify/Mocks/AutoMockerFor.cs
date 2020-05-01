@@ -15,7 +15,7 @@ namespace Specify.Mocks
 
         private static IContainer CreateContainer()
         {
-            return Host.Configuration.ApplicationContainer.GetChildContainer();
+            return Host.Configuration.ApplicationContainer.Get<IContainer>();
         }
     }
 }

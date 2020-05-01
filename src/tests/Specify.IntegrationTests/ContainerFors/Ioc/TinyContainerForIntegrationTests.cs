@@ -7,18 +7,14 @@ namespace Specify.IntegrationTests.ContainerFors.Ioc
     {
         protected override ContainerFor<T> CreateSut<T>()
         {
-            var container = new TinyIoCContainer();
-
-            container.Register<IDependency1, Dependency1>();
-            container.Register<IDependency2, Dependency2>();
-            container.RegisterMultiple<IDependency3>(new[] { typeof(Dependency3), typeof(Dependency4) });
-            container.Register<ConcreteObjectWithNoConstructor>();
-            container.Register<ConcreteObjectWithMultipleConstructors>();
-            container.Register<ConcreteObjectWithOneInterfaceCollectionConstructor>();
-
-            var tinyContainer = new TinyContainer(container);
-
-            return new ContainerFor<T>(tinyContainer);
+            var container = new TinyContainer(new TinyIoCContainer());
+            container.Set<IDependency1, Dependency1>();
+            container.Set<IDependency2, Dependency2>();
+            container.SetMultiple<IDependency3>(new []{typeof(Dependency3), typeof(Dependency4)});
+            container.Set<ConcreteObjectWithNoConstructor>();
+            container.Set<ConcreteObjectWithMultipleConstructors>();
+            container.Set<ConcreteObjectWithOneInterfaceCollectionConstructor>();
+            return new ContainerFor<T>(container);
         }
     }
 }
