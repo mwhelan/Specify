@@ -1,15 +1,16 @@
 ﻿using System;
 using Autofac;
-using NSubstitute;
+using DryIoc;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Autofac;
 using Specify.Configuration;
 using Specify.Configuration.StepScanners;
+using Specify.Containers;
+using Specify.Mocks;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Configuration;
-using TinyIoC;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -25,16 +26,19 @@ namespace Specify.IntegrationTests.Containers.Ioc
             return new AutofacContainer(builder);
         }
     }
-    public class TinyExamplesLifecycleTests : ExamplesLifecycle<TinyContainer>
+    public class DryExamplesLifecycleTests : ExamplesLifecycle<DryContainer>
     {
-        protected override TinyContainer CreateSut()
+        protected override DryContainer CreateSut()
         {
-            var builder = new TinyIoCContainer();
-            builder.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
-            builder.Register<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
-            builder.RegisterMultiple<IPerScenarioAction>(new[]
-                {typeof(ExampleLifecycleAction1), typeof(ExampleLifecycleAction2)});
-            return new TinyContainer(builder);
+            //var container = new Container(rules => rules
+            //    .WithConcreteTypeDynamicRegistrations()
+            //    .With(FactoryMethod.ConstructorWithResolvableArguments));
+   //         container.RegisterDelegate<IContainer>(r => new DryContainer(container.WithRegistrationsCopy()));
+   var container = new DryContainerFactory().Create(new NullMockFactory());
+            container.Register<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>(Reuse.ScopedOrSingleton);
+            container.Register<IPerScenarioAction, ExampleLifecycleAction1>(Reuse.ScopedOrSingleton);
+            container.Register<IPerScenarioAction, ExampleLifecycleAction2>(Reuse.ScopedOrSingleton);
+            return new DryContainer(container);
         }
     }
     public abstract class ExamplesLifecycle<T> where T : IContainer

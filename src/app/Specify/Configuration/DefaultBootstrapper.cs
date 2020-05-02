@@ -1,4 +1,5 @@
-﻿using TinyIoC;
+﻿using DryIoc;
+using Specify.Containers;
 
 namespace Specify.Configuration
 {
@@ -11,16 +12,16 @@ namespace Specify.Configuration
         /// <inheritdoc />
         protected override IContainer BuildApplicationContainer()
         {
-            var container = new TinyContainerFactory().Create(MockFactory);
+            var container = new DryContainerFactory().Create(MockFactory);
             ConfigureContainer(container);
-            return new TinyContainer(container);
+            return new DryContainer(container);
         }
 
         /// <summary>
-        /// Register any additional items into the TinyIoc container. 
+        /// Register any additional items into the DryIoc container. 
         /// </summary>
-        /// <param name="container">The <see cref="TinyIoCContainer"/> container.</param>
-        public virtual void ConfigureContainer(TinyIoCContainer container)
+        /// <param name="container">The DryIoc <see cref="Container"/> container.</param>
+        public virtual void ConfigureContainer(Container container)
         {
 
         }

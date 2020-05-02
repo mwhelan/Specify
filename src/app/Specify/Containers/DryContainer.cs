@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using DryIoc;
 
 namespace Specify.Containers
@@ -41,7 +40,8 @@ namespace Specify.Containers
         /// <inheritdoc />
         public T Set<T>(T valueToSet, string key = null) where T : class
         {
-            Container.RegisterDelegate(_ => valueToSet, ifAlreadyRegistered: IfAlreadyRegistered.Replace);
+            Container.RegisterDelegate(_ => valueToSet, ifAlreadyRegistered: IfAlreadyRegistered.Replace,
+                serviceKey:key);
             return valueToSet;
         }
 
@@ -52,13 +52,10 @@ namespace Specify.Containers
         /// <param name="implementationTypes">Types that implement T.</param>
         public void SetMultiple(Type serviceType, IEnumerable<Type> implementationTypes)
         {
-            //Container.reg.RegisterMultiple(baseType, implementationTypes);
             foreach (var implementationType in implementationTypes)
             {
-                //Container.Register(type, ifAlreadyRegistered: IfAlreadyRegistered.AppendNewImplementation);
                 Container.Register(serviceType, implementationType);
             }
-            //  Container.RegisterMany(implementationTypes.ToArray(), baseType);
         }
 
         /// <summary>

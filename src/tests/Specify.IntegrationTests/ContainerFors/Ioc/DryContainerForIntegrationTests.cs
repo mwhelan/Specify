@@ -1,13 +1,16 @@
-﻿using Specify.Tests.Stubs;
-using TinyIoC;
+﻿using DryIoc;
+using Specify.Containers;
+using Specify.Mocks;
+using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.ContainerFors.Ioc
 {
-    public class TinyContainerForIntegrationTests : ContainerForIntegrationTestsBase
+    public class DryContainerForIntegrationTests : ContainerForIntegrationTestsBase
     {
         protected override ContainerFor<T> CreateSut<T>()
         {
-            var container = new TinyContainer(new TinyIoCContainer());
+            var dryContainer = new DryContainerFactory().Create(new NullMockFactory());
+            var container = new DryContainer(dryContainer);
             container.Set<IDependency1, Dependency1>();
             container.Set<IDependency2, Dependency2>();
             container.SetMultiple<IDependency3>(new []{typeof(Dependency3), typeof(Dependency4)});

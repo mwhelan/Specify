@@ -1,10 +1,11 @@
 ﻿using Autofac;
+using DryIoc;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Specify.Autofac;
+using Specify.Containers;
 using Specify.Tests.Stubs;
-using TinyIoC;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -52,17 +53,19 @@ namespace Specify.IntegrationTests.Containers.Ioc
         }
     }
 
-    public class TinyScenarioConstructorInjectionTests : ScenarioConstructorInjectionTests<TinyContainer>
+    public class DryScenarioConstructorInjectionTests : ScenarioConstructorInjectionTests<DryContainer>
     {
-        protected override TinyContainer CreateSut()
+        protected override DryContainer CreateSut()
         {
-            var builder = new TinyIoCContainer();
-            builder.Register<IContainer>((c, p) => new TinyContainer(c.GetChildContainer()));
-            builder.Register<ScenarioWithConstuctorParmeters>();
-            builder.Register<ConcreteObjectWithOneInterfaceConstructor>();
-            builder.Register<IDependency1, Dependency1>().AsSingleton();
-            builder.Register<IDependency2>((c, p) => Substitute.For<IDependency2>());
-            return new TinyContainer(builder);
+            var container = new Container(rules => rules
+                .WithConcreteTypeDynamicRegistrations()
+                .With(FactoryMethod.ConstructorWithResolvableArguments));
+            container.RegisterDelegate<IContainer>(r => new DryContainer(container.WithRegistrationsCopy()));
+            container.Register<ScenarioWithConstuctorParmeters>();
+            container.Register<ConcreteObjectWithOneInterfaceConstructor>();
+            container.Register<IDependency1, Dependency1>(Reuse.Singleton);
+            container.RegisterDelegate<IDependency2>(r => Substitute.For<IDependency2>());
+            return new DryContainer(container);
         }
     }
 

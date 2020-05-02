@@ -15,7 +15,10 @@ namespace Specify.Containers
                 mockFactory = new NullMockFactory();
             }
 
-            var container = new Container(rules => rules.WithConcreteTypeDynamicRegistrations());
+            var container = new Container(rules => rules
+                .WithConcreteTypeDynamicRegistrations()
+                .With(FactoryMethod.ConstructorWithResolvableArguments));// handle multiple constructors
+
             RegisterScenarios(container);
             RegisterScenarioContainer(container, mockFactory);
             return container;
@@ -37,13 +40,15 @@ namespace Specify.Containers
         {
             if (mockFactory.GetType() == typeof(NullMockFactory))
             {
-                container.RegisterDelegate<IContainer>(r => new DryContainer(container.WithRegistrationsCopy()));
+                container.RegisterDelegate<IContainer>(r => new DryContainer(container
+                    .WithRegistrationsCopy()
+                    .With(scopeContext: new AsyncExecutionFlowScopeContext())));
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer", "DryContainer");
             }
             else
             {
-                container.RegisterDelegate<IContainer>(r => new DryMockingContainer(mockFactory, container.WithRegistrationsCopy()));
+                container.RegisterDelegate<IContainer>(r => new DryMockingContainer(mockFactory, container.CreateFacade()));
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "DryMockingContainer", mockFactory.MockProviderName);
             }

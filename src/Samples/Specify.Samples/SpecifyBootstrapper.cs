@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
+using DryIoc;
 using Specify.Configuration;
-using TinyIoC;
 
 namespace Specify.Samples
 {
@@ -29,8 +29,8 @@ namespace Specify.Samples
         /// <summary>
         /// Register any additional items into the TinyIoc container or leave it as it is. 
         /// </summary>
-        /// <param name="container">The <see cref="TinyIoC.TinyIoCContainer"/> container.</param>
-        public override void ConfigureContainer(TinyIoCContainer container)
+        /// <param name="container">The <see cref="Container"/> container.</param>
+        public override void ConfigureContainer(Container container)
         {
 
         }
