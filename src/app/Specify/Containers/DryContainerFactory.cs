@@ -17,11 +17,22 @@ namespace Specify.Containers
 
             var container = new Container(rules => rules
                 .WithConcreteTypeDynamicRegistrations()
+                .WithoutThrowOnRegisteringDisposableTransient()
                 .With(FactoryMethod.ConstructorWithResolvableArguments));// handle multiple constructors
 
             RegisterScenarios(container);
             RegisterScenarioContainer(container, mockFactory);
             return container;
+        }
+
+        private DryIoc.IContainer CreateChildContainer(Container parent)
+        {
+            var child = parent.With(
+                parent.Rules,
+                parent.ScopeContext,
+                RegistrySharing.CloneAndDropCache,
+                parent.SingletonScope.Clone());
+            return child;
         }
 
         private void RegisterScenarios(Container container)
@@ -31,7 +42,8 @@ namespace Specify.Containers
                 .Where(type => type.IsScenario())
                 .ToList();
 
-            scenarioTypes.Each(scenario => container.Register(typeof(IScenario), scenario, Reuse.Scoped));
+            scenarioTypes.Each(scenario => 
+                container.Register(typeof(IScenario), scenario, Reuse.Scoped));
 
             this.Log().DebugFormat("Registered {RegisteredScenarioCount} Scenarios", scenarioTypes.Count);
         }
@@ -40,15 +52,17 @@ namespace Specify.Containers
         {
             if (mockFactory.GetType() == typeof(NullMockFactory))
             {
-                container.RegisterDelegate<IContainer>(r => new DryContainer(container
-                    .WithRegistrationsCopy()
-                    .With(scopeContext: new AsyncExecutionFlowScopeContext())));
+                container.RegisterDelegate<IContainer>(r => 
+                    new DryContainer(CreateChildContainer(container)));
+                
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer", "DryContainer");
             }
             else
             {
-                container.RegisterDelegate<IContainer>(r => new DryMockingContainer(mockFactory, container.CreateFacade()));
+                container.RegisterDelegate<IContainer>(r =>
+                    new DryMockingContainer(mockFactory, CreateChildContainer(container)));
+                
                 this.Log()
                     .DebugFormat("Registered {ScenarioContainer} for IContainer with mock factory {MockFactory}", "DryMockingContainer", mockFactory.MockProviderName);
             }

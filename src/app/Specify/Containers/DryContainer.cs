@@ -40,7 +40,7 @@ namespace Specify.Containers
         /// <inheritdoc />
         public T Set<T>(T valueToSet, string key = null) where T : class
         {
-            Container.RegisterDelegate(_ => valueToSet, ifAlreadyRegistered: IfAlreadyRegistered.Replace,
+            Container.RegisterDelegate(_ => valueToSet, Reuse.Singleton, ifAlreadyRegistered: IfAlreadyRegistered.Replace,
                 serviceKey:key);
             return valueToSet;
         }
@@ -54,7 +54,7 @@ namespace Specify.Containers
         {
             foreach (var implementationType in implementationTypes)
             {
-                Container.Register(serviceType, implementationType);
+                Container.Register(serviceType, implementationType, Reuse.Singleton);
             }
         }
 

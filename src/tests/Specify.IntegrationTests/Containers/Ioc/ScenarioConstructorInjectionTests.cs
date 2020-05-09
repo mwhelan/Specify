@@ -61,10 +61,10 @@ namespace Specify.IntegrationTests.Containers.Ioc
                 .WithConcreteTypeDynamicRegistrations()
                 .With(FactoryMethod.ConstructorWithResolvableArguments));
             container.RegisterDelegate<IContainer>(r => new DryContainer(container.WithRegistrationsCopy()));
-            container.Register<ScenarioWithConstuctorParmeters>();
-            container.Register<ConcreteObjectWithOneInterfaceConstructor>();
+            container.Register<ScenarioWithConstuctorParmeters>(Reuse.Singleton);
+            container.Register<ConcreteObjectWithOneInterfaceConstructor>(Reuse.Singleton);
             container.Register<IDependency1, Dependency1>(Reuse.Singleton);
-            container.RegisterDelegate<IDependency2>(r => Substitute.For<IDependency2>());
+            container.RegisterDelegate<IDependency2>(r => Substitute.For<IDependency2>(), Reuse.Singleton);
             return new DryContainer(container);
         }
     }
