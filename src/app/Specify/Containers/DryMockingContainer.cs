@@ -47,7 +47,7 @@ namespace Specify.Containers
         {
             if (serviceType.IsInterface())
             {
-                if (!CanResolve(serviceType))
+                if (!Container.IsRegistered(serviceType))
                 {
                     RegisterMock(serviceType);
                 }
@@ -64,7 +64,7 @@ namespace Specify.Containers
 
                 foreach (var parameterInfo in constructor.GetParameters())
                 {
-                    if (!base.CanResolve(parameterInfo.ParameterType))
+                    if (!Container.IsRegistered(parameterInfo.ParameterType))
                     {
                         if (parameterInfo.ParameterType.IsSealed())
                         {
