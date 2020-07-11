@@ -1,0 +1,2 @@
+﻿This folder holds a fullish suite of specs for the sample ToDo endpoints, which covers the main HTTP verbs.
+Hopefully, it provides a useful starting point for examples of the sorts of specs required for each of these endpoints.
