@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System;
 using Autofac;
-using Autofac.Features.ResolveAnything;
 using Specify.Autofac;
 using Specify.Mocks;
+using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.AutoMocking
 {
@@ -12,12 +11,8 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
     {
         protected override AutofacContainer CreateSut()
         {
-            var mockFactoryInstance = typeof(TMockFactory).Create<IMockFactory>();
-            var builder = new ContainerBuilder();
-            builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource(x => x.GetConstructors().Any()));
-            builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactoryInstance));
-            var container = builder.Build();
-            return new AutofacContainer(container);
+            Action<ContainerBuilder> registrations = builder => builder.RegisterType<ConcreteObjectWithOneInterfaceConstructor>();
+            return ContainerFactory.CreateAutofacContainer<TMockFactory>(registrations);
         }
     }
 

@@ -169,12 +169,29 @@ namespace Specify.Autofac
         /// <returns><c>true</c> if this instance can resolve the specified service type; otherwise, <c>false</c>.</returns>
         public bool CanResolve(Type serviceType)
         {
-            return serviceType.CanBeResolvedUsingContainer(x => Container.IsRegistered(x));
+            return serviceType.CanBeResolvedUsingContainer(TryResolve);
         }
 
         public void Dispose()
         {
             Container.Dispose();
+        }
+
+        private bool TryResolve(Type serviceType)
+        {
+            // the use of the AnyConcreteTypeNotAlreadyRegisteredSource means IsRegistered might return true but then Resolve will still fail.
+            // Only solution seems to be to try the Resolve and catch the exception as even ResolveOptional and TryResolve throw DependencyResolutionException
+            // See Autofac docs: https://autofaccn.readthedocs.io/en/latest/resolve/
+
+            try
+            {
+                Container.Resolve(serviceType);
+                return true;
+            }
+            catch (DependencyResolutionException)
+            {
+                return false;
+            }
         }
     }
 }

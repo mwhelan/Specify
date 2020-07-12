@@ -1,4 +1,8 @@
+using System;
+using Autofac;
 using Specify.Autofac;
+using Specify.Mocks;
+using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -6,7 +10,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override AutofacContainer CreateSut()
         {
-            return new AutofacContainer();
+            Action<ContainerBuilder> registrations = builder => builder.RegisterType<ConcreteObjectWithOneInterfaceConstructor>();
+            return ContainerFactory.CreateAutofacContainer<NullMockFactory>(registrations);
         }
     }
 }

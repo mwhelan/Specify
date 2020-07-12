@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Autofac;
 using DryIoc;
 using NUnit.Framework;
@@ -18,27 +19,28 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override AutofacContainer CreateSut()
         {
-            var builder = new ContainerBuilder();
-            builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
-            builder.RegisterType<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
-            builder.RegisterType<ExampleLifecycleAction1>().As<IPerScenarioAction>();
-            builder.RegisterType<ExampleLifecycleAction2>().As<IPerScenarioAction>();
-            return new AutofacContainer(builder);
+            Action<ContainerBuilder> registrations = builder =>
+            {
+                builder.RegisterType<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>();
+                builder.RegisterType<ExampleLifecycleAction1>().As<IPerScenarioAction>();
+                builder.RegisterType<ExampleLifecycleAction2>().As<IPerScenarioAction>();
+            };
+
+            return ContainerFactory.CreateAutofacContainer<NullMockFactory>(registrations);
         }
     }
     public class DryExamplesLifecycleTests : ExamplesLifecycle<DryContainer>
     {
         protected override DryContainer CreateSut()
         {
-            //var container = new Container(rules => rules
-            //    .WithConcreteTypeDynamicRegistrations()
-            //    .With(FactoryMethod.ConstructorWithResolvableArguments));
-   //         container.RegisterDelegate<IContainer>(r => new DryContainer(container.WithRegistrationsCopy()));
-   var container = new DryContainerFactory().Create(new NullMockFactory());
-            container.Register<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>(Reuse.ScopedOrSingleton);
-            container.Register<IPerScenarioAction, ExampleLifecycleAction1>(Reuse.ScopedOrSingleton);
-            container.Register<IPerScenarioAction, ExampleLifecycleAction2>(Reuse.ScopedOrSingleton);
-            return new DryContainer(container);
+            Action<Container> registrations = container =>
+            {
+                container.Register<UnitScenarioWithAllSupportedStepsInRandomOrderWithExamples>(Reuse.ScopedOrSingleton);
+                container.Register<IPerScenarioAction, ExampleLifecycleAction1>(Reuse.ScopedOrSingleton);
+                container.Register<IPerScenarioAction, ExampleLifecycleAction2>(Reuse.ScopedOrSingleton);
+            };
+
+            return ContainerFactory.CreateDryContainer<NullMockFactory>(registrations);
         }
     }
     public abstract class ExamplesLifecycle<T> where T : IContainer

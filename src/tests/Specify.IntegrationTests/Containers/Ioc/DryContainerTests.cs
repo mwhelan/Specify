@@ -1,5 +1,8 @@
-﻿using DryIoc;
+﻿using System;
+using DryIoc;
 using Specify.Containers;
+using Specify.Mocks;
+using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -7,7 +10,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override DryContainer CreateSut()
         {
-            return new DryContainer(new Container());
+            Action<Container> registrations = container => container.Register<ConcreteObjectWithOneInterfaceConstructor>();
+            return ContainerFactory.CreateDryContainer<NullMockFactory>(registrations);
         }
     }
 }

@@ -15,10 +15,21 @@ namespace Specify.Containers
                 mockFactory = new NullMockFactory();
             }
 
-            var container = new Container(rules => rules
-                .WithConcreteTypeDynamicRegistrations()
-                .WithoutThrowOnRegisteringDisposableTransient()
-                .With(FactoryMethod.ConstructorWithResolvableArguments));// handle multiple constructors
+            Container container;
+
+            if (mockFactory is NullMockFactory)
+            {
+                container = new Container(rules => rules
+                    .WithoutThrowOnRegisteringDisposableTransient()
+                    .With(FactoryMethod.ConstructorWithResolvableArguments)); // handle multiple constructors
+            }
+            else
+            {
+                container = new Container(rules => rules
+                    .WithConcreteTypeDynamicRegistrations()
+                    .WithoutThrowOnRegisteringDisposableTransient()
+                    .With(FactoryMethod.ConstructorWithResolvableArguments)); // handle multiple constructors
+            }
 
             RegisterScenarios(container);
             RegisterScenarioContainer(container, mockFactory);

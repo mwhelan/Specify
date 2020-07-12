@@ -9,7 +9,7 @@ namespace Specify.Autofac
 {
     public static class ContainerBuilderExtensions
     {
-        public static void RegisterSpecify(this ContainerBuilder builder, IMockFactory mockFactory = null)
+        public static void RegisterSpecify(this ContainerBuilder builder, IMockFactory mockFactory = null, bool registerScenarios = true)
         {
             if (builder == null)
             {
@@ -21,7 +21,10 @@ namespace Specify.Autofac
                 mockFactory = new NullMockFactory();
             }
 
-            RegisterScenarios(builder);
+            if (registerScenarios)
+            {
+                RegisterScenarios(builder);
+            }
             RegisterScenarioContainer(builder, mockFactory);
         }
 
