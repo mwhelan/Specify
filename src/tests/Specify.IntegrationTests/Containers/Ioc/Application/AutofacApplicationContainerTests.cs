@@ -8,9 +8,7 @@ namespace Specify.IntegrationTests.Containers.Ioc.Application
     {
         protected override AutofacContainer CreateSut()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterSpecify(new NullMockFactory());
-            return new AutofacContainer(builder);
+            return ContainerFactory.CreateAutofacContainer<NullMockFactory>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DryIoc;
 using Specify.Containers;
+using Specify.Mocks;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -7,7 +8,8 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override DryContainer CreateSut()
         {
-            return new DryContainer(new Container());
+            var container = new DryContainerFactory().Create(new NullMockFactory());
+            return new DryContainer(container);
         }
     }
 }

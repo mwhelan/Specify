@@ -38,12 +38,22 @@ namespace Specify.Autofac
         {
             if (mockFactory.GetType() == typeof(NullMockFactory))
             {
-                builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
+                builder.Register<IContainer>(c =>
+                {
+                    var container = c.Resolve<ILifetimeScope>();
+                    var scope = container.BeginLifetimeScope();
+                    return new AutofacContainer(container);
+                });
                 nameof(ContainerBuilderExtensions).Log().DebugFormat("Registered {ScenarioContainer} for IContainer", "AutofacContainer");
             }
             else
             {
-                builder.Register<IContainer>(c => new AutofacContainer(c.Resolve<ILifetimeScope>().BeginLifetimeScope()));
+                builder.Register<IContainer>(c =>
+                {
+                    var container = c.Resolve<ILifetimeScope>();
+                    var scope = container.BeginLifetimeScope();
+                    return new AutofacContainer(container);
+                });
                 builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
                 builder.RegisterSource(new AutofacMockRegistrationHandler(mockFactory));
 

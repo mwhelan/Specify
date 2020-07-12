@@ -1,4 +1,5 @@
 using Specify.Autofac;
+using Specify.Mocks;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
@@ -6,7 +7,7 @@ namespace Specify.IntegrationTests.Containers.Ioc
     {
         protected override AutofacContainer CreateSut()
         {
-            return new AutofacContainer();
+            return ContainerFactory.CreateAutofacContainer<NullMockFactory>();
         }
     }
 }

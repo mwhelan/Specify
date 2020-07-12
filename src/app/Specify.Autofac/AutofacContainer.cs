@@ -11,8 +11,11 @@ namespace Specify.Autofac
     /// </summary>
     public class AutofacContainer : Specify.IContainer
     {
-        private ILifetimeScope _container;
+        private ILifetimeScope _parentContainer;
+        private ILifetimeScope _childContainer;
         protected ContainerBuilder ContainerBuilder;
+
+        public List<Action<ContainerBuilder>> BuilderActions { get; } = new List<Action<ContainerBuilder>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AutofacContainer"/> class.
@@ -28,7 +31,7 @@ namespace Specify.Autofac
         /// <param name="container">An <see cref="ILifetimeScope"/> tracks the instantiation of component instances.</param>
         public AutofacContainer(ILifetimeScope container)
         {
-            _container = container;
+            _parentContainer = container;
         }
 
         /// <summary>
@@ -47,20 +50,18 @@ namespace Specify.Autofac
         {
             get
             {
-                if (_container == null)
+                if (_childContainer == null)
                 {
-                    _container = ContainerBuilder.Build();
+                    _childContainer = BuildChildContainer();
                 }
-                return _container;
+                return _childContainer;
             }
         }
 
         /// <inheritdoc />
         public void Set<T>() where T : class
         {
-            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
-                .InstancePerLifetimeScope()
-                .CreateRegistration());
+            BuilderActions.Add(builder => builder.RegisterType<T>().InstancePerLifetimeScope());
         }
 
         /// <inheritdoc />
@@ -68,11 +69,10 @@ namespace Specify.Autofac
             where TService : class
             where TImplementation : class, TService
         {
-            Container
-                .ComponentRegistry
-                .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>()
-                .InstancePerLifetimeScope()
-                .CreateRegistration());
+            BuilderActions.Add(builder => builder
+                .RegisterType<TImplementation>()
+                .As<TService>()
+                .InstancePerLifetimeScope());
         }
 
         /// <inheritdoc />
@@ -80,19 +80,37 @@ namespace Specify.Autofac
         {
             if (key == null)
             {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .InstancePerLifetimeScope().CreateRegistration());
-
+                BuilderActions.Add(builder => builder
+                    .Register((c, p) => valueToSet)
+                    .As<T>()
+                    .InstancePerLifetimeScope());
             }
             else
             {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .As(new KeyedService(key, typeof(T)))
-                        .InstancePerLifetimeScope().CreateRegistration());
+                BuilderActions.Add(builder => builder
+                    .Register((c, p) => valueToSet)
+                    .As(new KeyedService(key, typeof(T)))
+                    .InstancePerLifetimeScope());
             }
-            return Get<T>(key);
+
+            return valueToSet;
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            foreach (var type in implementationTypes)
+            {
+                BuilderActions.Add(builder => builder
+                    .RegisterType(type)
+                    .As(baseType)
+                    .InstancePerLifetimeScope());
+            }
+        }
+
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            SetMultiple(typeof(T), implementationTypes);
         }
 
         /// <inheritdoc />
@@ -100,7 +118,8 @@ namespace Specify.Autofac
         {
             if (key == null)
             {
-                return Container.Resolve<T>();
+                var implementation = Container.Resolve<T>();
+                return implementation;
             }
             else
             {
@@ -140,25 +159,6 @@ namespace Specify.Autofac
             return Container.Resolve<IEnumerable<T>>();
         }
 
-        /// <inheritdoc />
-        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
-        {
-            foreach (var type in implementationTypes)
-            {
-                Container
-                    .ComponentRegistry
-                    .Register(RegistrationBuilder.ForType(type).As(baseType)
-                        .InstancePerLifetimeScope()
-                        .CreateRegistration());
-            }
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
-        {
-            SetMultiple(typeof(T), implementationTypes);
-        }
-
         /// <summary>
         /// Determines whether this instance can resolve the specified service type.
         /// The Autofac IsRegistered method can return true if a class is registered but still throw a DependencyResolutionException
@@ -175,6 +175,39 @@ namespace Specify.Autofac
         public void Dispose()
         {
             Container.Dispose();
+        }
+
+        private ILifetimeScope BuildChildContainer()
+        {
+            if (_parentContainer != null)
+            {
+                ILifetimeScope container;
+                if (BuilderActions.Count == 0)
+                {
+                    container = _parentContainer.BeginLifetimeScope();
+                }
+                else
+                {
+                    container = _parentContainer.BeginLifetimeScope(builder =>
+                    {
+                        foreach (var action in BuilderActions)
+                        {
+                            action(builder);
+                        }
+                    });
+                }
+
+                return container;
+            }
+            else
+            {
+                foreach (var action in BuilderActions)
+                {
+                    action(ContainerBuilder);
+                }
+
+                return ContainerBuilder.Build();
+            }
         }
     }
 }

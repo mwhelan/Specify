@@ -1,7 +1,9 @@
 using System;
 using NUnit.Framework;
 using Shouldly;
+using Specify.Configuration;
 using Specify.Exceptions;
+using Specify.Tests.Configuration;
 using Specify.Tests.Stubs;
 using TestStack.BDDfy;
 
@@ -17,7 +19,8 @@ namespace Specify.IntegrationTests.Containers
             var container = CreateSut();
             var scenario = new ExampleScenario();
             scenario.SetContainer(container);
-            Action action = scenario.Specify;
+            var engine = new BddfyTestEngine();
+            Action action = () => engine.Execute(scenario);
             action.ShouldNotThrow();
         }
     }
