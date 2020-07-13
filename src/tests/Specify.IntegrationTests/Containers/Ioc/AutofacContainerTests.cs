@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
-    public class AutofacContainerTests : IocContainerTestsFor<AutofacContainer>
+    public class AutofacContainerTests : IocContainerGetTestsFor<AutofacContainer>
     {
         protected override AutofacContainer CreateSut()
         {

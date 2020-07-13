@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.AutoMocking
 {
-    public abstract class AutofacMockingContainerTestsFor<TMockFactory> : MockingContainerTestsFor<AutofacContainer>
+    public abstract class AutofacMockingContainerTestsFor<TMockFactory> : MockingContainerGetTestsFor<AutofacContainer>
         where TMockFactory : IMockFactory
     {
         protected override AutofacContainer CreateSut()
@@ -16,12 +16,12 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
         }
     }
 
-    public class AutofacNSubstituteContainerForIntegrationTests
+    public class AutofacNSubstituteMockingContainerGetTests
         : AutofacMockingContainerTestsFor<NSubstituteMockFactory> { }
 
-    public class AutofacMoqContainerForIntegrationTests
+    public class AutofacMoqMockingContainerGetTests
         : AutofacMockingContainerTestsFor<MoqMockFactory> { }
 
-    public class AutofacFakeItEasyContainerForIntegrationTests
+    public class AutofacFakeItEasyMockingContainerGetTests
         : AutofacMockingContainerTestsFor<FakeItEasyMockFactory> { }
 }

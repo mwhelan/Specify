@@ -58,9 +58,7 @@ namespace Specify.Autofac
         /// <inheritdoc />
         public void Set<T>() where T : class
         {
-            Container.ComponentRegistry.Register(RegistrationBuilder.ForType<T>()
-                .InstancePerLifetimeScope()
-                .CreateRegistration());
+            throw new AutofacImmutableContainerException();
         }
 
         /// <inheritdoc />
@@ -68,31 +66,25 @@ namespace Specify.Autofac
             where TService : class
             where TImplementation : class, TService
         {
-            Container
-                .ComponentRegistry
-                .Register(RegistrationBuilder.ForType<TImplementation>().As<TService>()
-                .InstancePerLifetimeScope()
-                .CreateRegistration());
+            throw new AutofacImmutableContainerException();
         }
 
         /// <inheritdoc />
         public T Set<T>(T valueToSet, string key = null) where T : class
         {
-            if (key == null)
-            {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .InstancePerLifetimeScope().CreateRegistration());
+            throw new AutofacImmutableContainerException();
+        }
 
-            }
-            else
-            {
-                Container.ComponentRegistry
-                    .Register(RegistrationBuilder.ForDelegate((c, p) => valueToSet)
-                        .As(new KeyedService(key, typeof(T)))
-                        .InstancePerLifetimeScope().CreateRegistration());
-            }
-            return Get<T>(key);
+        /// <inheritdoc />
+        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
+        {
+            throw new AutofacImmutableContainerException();
+        }
+
+        /// <inheritdoc />
+        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
+        {
+            throw new AutofacImmutableContainerException();
         }
 
         /// <inheritdoc />
@@ -138,25 +130,6 @@ namespace Specify.Autofac
         public IEnumerable<T> GetMultiple<T>() where T : class
         {
             return Container.Resolve<IEnumerable<T>>();
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple(Type baseType, IEnumerable<Type> implementationTypes)
-        {
-            foreach (var type in implementationTypes)
-            {
-                Container
-                    .ComponentRegistry
-                    .Register(RegistrationBuilder.ForType(type).As(baseType)
-                        .InstancePerLifetimeScope()
-                        .CreateRegistration());
-            }
-        }
-
-        /// <inheritdoc />
-        public void SetMultiple<T>(IEnumerable<Type> implementationTypes)
-        {
-            SetMultiple(typeof(T), implementationTypes);
         }
 
         /// <summary>

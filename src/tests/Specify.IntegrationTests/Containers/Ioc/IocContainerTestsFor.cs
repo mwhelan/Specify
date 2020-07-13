@@ -6,9 +6,11 @@ using Specify.Tests.Stubs;
 namespace Specify.IntegrationTests.Containers.Ioc
 {
     [TestFixture]
-    public abstract class IocContainerTestsFor<T> : ContainerSpecsFor<T> 
+    public abstract class IocContainerGetTestsFor<T> 
         where T : IContainer
     {
+        protected abstract T CreateSut();
+
         [Test]
         public void CanResolve_should_return_false_if_service_not_registered()
         {
@@ -18,6 +20,29 @@ namespace Specify.IntegrationTests.Containers.Ioc
             sut.CanResolve<IDependency1>().ShouldBe(false);
         }
 
+        [Test]
+        public void GetMultiple_generic_NoTypesRegistered_ReturnsIEnumerableWithNoItems()
+        {
+            var sut = CreateSut();
+            var result = sut.GetMultiple<IDependency3>();
+            result.ShouldBe(Enumerable.Empty<object>());
+            result.Count().ShouldBe(0);
+        }
+
+        [Test]
+        public void GetMultiple_type_NoTypesRegistered_ReturnsIEnumerableWithNoItems()
+        {
+            var sut = CreateSut();
+            var result = sut.GetMultiple(typeof(IDependency3));
+            result.ShouldBe(Enumerable.Empty<object>());
+            result.Count().ShouldBe(0);
+        }
+    }
+
+    [TestFixture]
+    public abstract class IocContainerSetTestsFor<T> : ContainerSpecsFor<T>
+        where T : IContainer
+    {
         [Test]
         public void CanResolve_should_return_true_if_service_is_registered()
         {
@@ -105,24 +130,6 @@ namespace Specify.IntegrationTests.Containers.Ioc
             var result = sut.GetMultiple(typeof(IDependency3)).ToList();
             result.Count.ShouldBe(2);
             result.ForEach(x => x.ShouldBeAssignableTo<IDependency3>());
-        }
-
-        [Test]
-        public void GetMultiple_generic_NoTypesRegistered_ReturnsIEnumerableWithNoItems()
-        {
-            var sut = CreateSut();
-            var result = sut.GetMultiple<IDependency3>();
-            result.ShouldBe(Enumerable.Empty<object>());
-            result.Count().ShouldBe(0);
-        }
-
-        [Test]
-        public void GetMultiple_type_NoTypesRegistered_ReturnsIEnumerableWithNoItems()
-        {
-            var sut = CreateSut();
-            var result = sut.GetMultiple(typeof(IDependency3));
-            result.ShouldBe(Enumerable.Empty<object>());
-            result.Count().ShouldBe(0);
         }
     }
 }

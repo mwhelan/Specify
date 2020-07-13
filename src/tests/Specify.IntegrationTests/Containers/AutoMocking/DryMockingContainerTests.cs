@@ -4,7 +4,7 @@ using Specify.Mocks;
 
 namespace Specify.IntegrationTests.Containers.AutoMocking
 {
-    public abstract class DryMockingContainerTestsFor<TMockFactory> : MockingContainerTestsFor<DryMockingContainer>
+    public abstract class DryMockingContainerGetTestsFor<TMockFactory> : MockingContainerGetTestsFor<DryMockingContainer>
         where TMockFactory : IMockFactory
     {
         protected override DryMockingContainer CreateSut()
@@ -26,15 +26,39 @@ namespace Specify.IntegrationTests.Containers.AutoMocking
         }
     }
 
-    public class DryNSubstituteContainerForIntegrationTests
-        : DryMockingContainerTestsFor<NSubstituteMockFactory>
+    public class DryNSubstituteMockingContainerGetTests
+        : DryMockingContainerGetTestsFor<NSubstituteMockFactory>
     { }
 
-    public class DryMoqContainerForIntegrationTests
-        : DryMockingContainerTestsFor<MoqMockFactory>
+    public class DryMoqMockingContainerGetTests
+        : DryMockingContainerGetTestsFor<MoqMockFactory>
     { }
 
-    public class DryFakeItEasyContainerForIntegrationTests
-        : DryMockingContainerTestsFor<FakeItEasyMockFactory>
+    public class DryFakeItEasyMockingContainerGetTests
+        : DryMockingContainerGetTestsFor<FakeItEasyMockFactory>
+    { }
+
+    public abstract class DryMockingContainerSetTestsFor<TMockFactory> : MockingContainerSetTestsFor<DryMockingContainer>
+        where TMockFactory : IMockFactory
+    {
+        protected override DryMockingContainer CreateSut()
+        {
+            var mockFactoryInstance = typeof(TMockFactory).Create<IMockFactory>();
+            var container = new DryContainerFactory().Create(mockFactoryInstance);
+            var mockingContainer = container.Resolve<IContainer>() as DryMockingContainer;
+            return mockingContainer;
+        }
+    }
+
+    public class DryNSubstituteMockingContainerSetTests
+        : DryMockingContainerSetTestsFor<NSubstituteMockFactory>
+    { }
+
+    public class DryMoqMockingContainerSetTests
+        : DryMockingContainerSetTestsFor<MoqMockFactory>
+    { }
+
+    public class DryFakeItEasyMockingContainerSetTests
+        : DryMockingContainerSetTestsFor<FakeItEasyMockFactory>
     { }
 }

@@ -6,12 +6,12 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.Ioc.Application
 {
-    public class AutofacApplicationContainerTests : ApplicationContainerTestsFor<AutofacContainer>
-    {
-        protected override AutofacContainer CreateSut()
-        {
-            Action<ContainerBuilder> registrations = builder => builder.RegisterType<ConcreteObjectWithOneInterfaceConstructor>();
-            return ContainerFactory.CreateAutofacContainer<NullMockFactory>(registrations);
-        }
-    }
+    //public class AutofacApplicationContainerTests : ApplicationContainerTestsFor<AutofacContainer>
+    //{
+    //    protected override AutofacContainer CreateSut()
+    //    {
+    //        Action<ContainerBuilder> registrations = builder => builder.RegisterType<ConcreteObjectWithOneInterfaceConstructor>();
+    //        return ContainerFactory.CreateAutofacContainer<NullMockFactory>(registrations);
+    //    }
+    //}
 }

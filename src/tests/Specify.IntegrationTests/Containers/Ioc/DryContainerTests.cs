@@ -6,7 +6,7 @@ using Specify.Tests.Stubs;
 
 namespace Specify.IntegrationTests.Containers.Ioc
 {
-    public class DryContainerTests : IocContainerTestsFor<DryContainer>
+    public class DryContainerGetTests : IocContainerGetTestsFor<DryContainer>
     {
         protected override DryContainer CreateSut()
         {
@@ -14,4 +14,14 @@ namespace Specify.IntegrationTests.Containers.Ioc
             return ContainerFactory.CreateDryContainer<NullMockFactory>(registrations);
         }
     }
+
+    public class DryContainerSetTests : IocContainerSetTestsFor<DryContainer>
+    {
+        protected override DryContainer CreateSut()
+        {
+            Action<Container> registrations = container => container.Register<ConcreteObjectWithOneInterfaceConstructor>();
+            return ContainerFactory.CreateDryContainer<NullMockFactory>(registrations);
+        }
+    }
+
 }
