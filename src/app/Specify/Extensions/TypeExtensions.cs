@@ -156,14 +156,19 @@ namespace Specify
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if the specified type is enumerable; otherwise, <c>false</c>.</returns>
-        internal static bool IsEnumerable(this Type type)
+        internal static bool IsCollection(this Type type)
         {
-            var isGenericEnumerable = typeof(IEnumerable<>).IsAssignableFrom(type);
-            var legacyEnumerable = typeof(IEnumerable).IsAssignableFrom(type);
-
-            return isGenericEnumerable ||
-                   legacyEnumerable;
+             return type.IsArray || type.IsGenericEnumerable();
         }
+
+        internal static bool IsGenericEnumerable(this Type type)
+        {
+            if (type == null) return false;
+
+            var genericArgs = type.GetGenericArguments();
+            return genericArgs.Length == 1 && typeof(IEnumerable<>).MakeGenericType(genericArgs).IsAssignableFrom(type);
+        }
+
 
         internal static bool HasOneReferenceTypeGenericArg(this Type type)
         {

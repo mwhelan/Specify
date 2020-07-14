@@ -76,17 +76,17 @@ namespace Specify.Tests.SpecifyRootFolder
 
 
         [Test]
-        public void IsEnumerable_should_return_true_if_type_is_enumerable()
+        public void IsCollection_should_return_true_if_type_is_enumerable()
         {
             var array = new[] { "apples", "oranges", "pears" };
             var list = new List<int> { 1, 2, 3 };
             IList<string> ilist = new List<string> { "apples", "oranges", "pears" };
             IEnumerable<string> enumerable = Enumerable.Empty<string>();
 
-            array.GetType().IsEnumerable().ShouldBe(true);
-            list.GetType().IsEnumerable().ShouldBe(true);
-            ilist.GetType().IsEnumerable().ShouldBe(true);
-            enumerable.GetType().IsEnumerable().ShouldBe(true);
+            array.GetType().IsCollection().ShouldBe(true);
+            list.GetType().IsCollection().ShouldBe(true);
+            ilist.GetType().IsCollection().ShouldBe(true);
+            enumerable.GetType().IsCollection().ShouldBe(true);
         }
 
         //[Test]

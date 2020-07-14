@@ -33,7 +33,7 @@ namespace Specify.Containers
         /// <inheritdoc />
         public override object Get(Type serviceType, string key = null)
         {
-            if (serviceType.IsEnumerable())
+            if (serviceType.IsCollection())
             {
                 return GetMultiple(serviceType);
             }
@@ -82,7 +82,7 @@ namespace Specify.Containers
         /// <inheritdoc />
         public override IEnumerable<object> GetMultiple(Type baseType)
         {
-            if (!baseType.IsEnumerable())
+            if (!baseType.IsCollection())
             {
                 throw new ArgumentException(
                     $"Only IEnumerable<T> types can be passed to the GetMultiple method.  {baseType.AssemblyQualifiedName} is invalid");
