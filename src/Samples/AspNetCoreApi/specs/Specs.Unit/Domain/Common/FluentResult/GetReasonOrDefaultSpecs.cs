@@ -8,7 +8,7 @@ namespace Specs.Unit.ApiTemplate.Domain.Common.FluentResult
     {
         public void Given_a_Result_with_a_RecordCreatedReason()
         {
-            SUT = Results.Ok().WithReason(new RecordsCreatedSuccess(22));
+            SUT = Result.Ok().WithReason(new RecordsCreatedSuccess(22));
         }
 
         public void When_GetReason_is_called()

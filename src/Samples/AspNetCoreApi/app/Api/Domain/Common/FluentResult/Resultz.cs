@@ -6,31 +6,31 @@ namespace ApiTemplate.Api.Domain.Common.FluentResult
     {
         public static Result RecordNotFound(string propertyName, int id)
         {
-            return Results.Ok()
+            return Result.Ok()
                 .WithReason(new RecordsNotFoundAppError(propertyName, id));
         }
 
         public static Result Error(string propertyName, string message, int rowKey = int.MinValue)
         {
-            return Results.Ok()
+            return Result.Ok()
                 .WithReason(new AppError(propertyName, message, rowKey));
         }
 
         public static Result Error(string message, int rowKey = int.MinValue)
         {
-            return Results.Ok()
+            return Result.Ok()
                 .WithReason(new AppError(message, rowKey));
         }
 
         public static Result Warning(string propertyName, string message, int rowKey = int.MinValue)
         {
-            return Results.Ok()
+            return Result.Ok()
                 .WithReason(new AppWarning(propertyName, message, rowKey));
         }
 
         public static Result Warning(string message, int rowKey = int.MinValue)
         {
-            return Results.Ok()
+            return Result.Ok()
                 .WithReason(new AppWarning(message, rowKey));
         }
 

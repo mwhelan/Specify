@@ -9,7 +9,7 @@ namespace Specs.Unit.ApiTemplate.Domain.Common.FluentResult
     {
         public void Given_a_Result_with_a_Reason()
         {
-            SUT  = Results.Ok().WithReason(new RecordsNotFoundAppError("Id", 22));
+            SUT  = Result.Ok().WithReason(new RecordsNotFoundAppError("Id", 22));
         }
 
         public void When_GetReason_is_called_for_that_type_of_Reason()

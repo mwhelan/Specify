@@ -9,7 +9,7 @@ namespace ApiTemplate.Api.Domain.Common.Guards
     /// </summary>
     public class Ensure
     {
-        private Result _result = Results.Ok();
+        private Result _result = Result.Ok();
         private readonly int _rowKey;
 
         private Ensure(int rowKey = int.MinValue)

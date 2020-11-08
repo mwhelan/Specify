@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+using Autofac.Core.Activators.Reflection;
 
 namespace Specify.Autofac
 {
@@ -162,6 +163,10 @@ namespace Specify.Autofac
                 return true;
             }
             catch (DependencyResolutionException)
+            {
+                return false;
+            }
+            catch (NoConstructorsFoundException)
             {
                 return false;
             }

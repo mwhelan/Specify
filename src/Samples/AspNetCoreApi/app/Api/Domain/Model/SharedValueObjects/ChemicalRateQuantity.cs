@@ -20,7 +20,7 @@ namespace ApiTemplate.Api.Domain.Model.SharedValueObjects
 
         public static Result<ChemicalRateQuantity> Create(decimal? quantityPer100Litre, decimal? quantityPerHectare)
         {
-            Result result = Results.Ok()
+            Result result = Result.Ok()
                 .AddResult(PositiveDecimal.CreateNullable(quantityPer100Litre), out Result<PositiveDecimal?> qtyPer100L)
                 .AddResult(PositiveDecimal.CreateNullable(quantityPerHectare), out Result<PositiveDecimal?> qtyPerHa);
 

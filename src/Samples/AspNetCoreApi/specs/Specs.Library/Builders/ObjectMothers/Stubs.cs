@@ -63,7 +63,7 @@ namespace Specs.Library.Builders.ObjectMothers
         public Task<Result> Handle(TestCommand request, CancellationToken cancellationToken)
         {
             // Do some stuff
-            return Task.FromResult(Results.Ok());
+            return Task.FromResult(Result.Ok());
         }
     }
 }

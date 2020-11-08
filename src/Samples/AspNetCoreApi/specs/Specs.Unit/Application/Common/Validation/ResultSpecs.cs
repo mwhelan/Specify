@@ -12,8 +12,8 @@ namespace Specs.Unit.ApiTemplate.Application.Common.Validation
 
         public void Given_two_success_results()
         {
-            _okResult1 = Results.Ok().WithReason(new AppWarning("Property1", "Message1"));
-            _okResult2 = Results.Ok().WithReason(new AppWarning("Property2", "Message2"));
+            _okResult1 = Result.Ok().WithReason(new AppWarning("Property1", "Message1"));
+            _okResult2 = Result.Ok().WithReason(new AppWarning("Property2", "Message2"));
         }
 
         public void When_they_are_merged()
@@ -41,8 +41,8 @@ namespace Specs.Unit.ApiTemplate.Application.Common.Validation
 
         public void Given_one_success_and_one_fail_result()
         {
-            _okResult = Results.Ok().WithReason(new AppWarning("Property1", "Message1"));
-            _failResult = Results.Ok().WithReason(new AppError("Property2", "Message2"));
+            _okResult = Result.Ok().WithReason(new AppWarning("Property1", "Message1"));
+            _failResult = Result.Ok().WithReason(new AppError("Property2", "Message2"));
         }
 
         public void When_they_are_merged()

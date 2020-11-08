@@ -105,7 +105,7 @@ namespace ApiTemplate.Api.Controllers.MasterFiles
 
         protected Result ValidateModel(List<TDto> list)
         {
-            var result = Results.Ok();
+            var result = Result.Ok();
 
             if (!Validators.Any())
             {

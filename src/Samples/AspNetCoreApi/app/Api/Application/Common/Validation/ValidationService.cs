@@ -19,7 +19,7 @@ namespace ApiTemplate.Api.Application.Common.Validation
 
         public Result ValidateCommand<TCommand>(TCommand command) where TCommand : CommandBase
         {
-            var result = Results.Ok();
+            var result = Result.Ok();
 
             if (!FluentValidators.Any())
             {
@@ -52,7 +52,7 @@ namespace ApiTemplate.Api.Application.Common.Validation
             {
                 if (command.IgnoreWarnings)
                 {
-                    return Results.Ok()
+                    return Result.Ok()
                         .WithValidationResults(failures);
                 }
                 else

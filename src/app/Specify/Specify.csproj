@@ -22,7 +22,7 @@
     <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify</AssemblyName>
     <PackageId>Specify</PackageId>
-    <PackageVersion>3.0.0-beta02</PackageVersion>
+    <PackageVersion>3.0.0</PackageVersion>
     <PackageDescription>Specify is a .Net testing library that builds on top of BDDfy from TestStack</PackageDescription>
     <PackageTags>TDD;BDD;Testing;BDDfy</PackageTags>
     <PackageLicenseUrl>https://github.com/mwhelan/Specify/blob/master/license.txt</PackageLicenseUrl>
@@ -32,7 +32,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DryIoc" Version="4.2.3" >
+    <PackageReference Include="DryIoc" Version="4.5.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>all</IncludeAssets>
     </PackageReference>
@@ -40,7 +40,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.6" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

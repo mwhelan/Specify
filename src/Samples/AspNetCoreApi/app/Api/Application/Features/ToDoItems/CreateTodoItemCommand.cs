@@ -48,7 +48,7 @@ namespace ApiTemplate.Api.Application.Features.ToDoItems
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Results.Ok()
+            return Result.Ok()
                 .WithReason(new RecordsCreatedSuccess(entity.Id));
         }
     }

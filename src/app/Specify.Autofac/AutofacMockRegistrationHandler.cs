@@ -32,12 +32,15 @@ namespace Specify.Autofac
         /// Registrations for the service.
         /// </returns>
         public IEnumerable<IComponentRegistration> RegistrationsFor
-            (Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
+            (Service service, Func<Service, IEnumerable<ServiceRegistration>> registrationAccessor)
         {
             if (service == null)
-                throw new ArgumentNullException("service");
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
 
             var typedService = service as IServiceWithType;
+            
             if (typedService == null ||
                 !typedService.ServiceType.IsInterface() ||
                 typedService.ServiceType.IsGenericType() &&
@@ -47,7 +50,7 @@ namespace Specify.Autofac
                 service is DecoratorService)
                 return Enumerable.Empty<IComponentRegistration>();
 
-            var rb = RegistrationBuilder.ForDelegate<object>(
+            var rb = RegistrationBuilder.ForDelegate(
                     (c, p) => _mockFactory.CreateMock(typedService.ServiceType))
                 .As(service)
                 .InstancePerLifetimeScope();

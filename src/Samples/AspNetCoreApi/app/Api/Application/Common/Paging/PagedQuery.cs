@@ -21,7 +21,7 @@ namespace ApiTemplate.Api.Application.Common.Paging
                 return Resultz.Error("FilterText", ValidationMessages.IsRequiredFor(nameof(FilterText)));
             }
 
-            return Results.Ok();
+            return Result.Ok();
         }
     }
 }

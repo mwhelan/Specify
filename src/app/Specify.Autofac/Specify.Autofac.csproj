@@ -22,7 +22,7 @@
     <Authors>Michael Whelan</Authors>
     <AssemblyName>Specify.Autofac</AssemblyName>
     <PackageId>Specify.Autofac</PackageId>
-    <PackageVersion>3.0.0-beta02</PackageVersion>
+    <PackageVersion>3.0.0</PackageVersion>
     <PackageTags>TDD;BDD;Testing;BDDfy</PackageTags>
     <PackageDescription>Specify is a .Net testing library that builds on top of BDDfy from TestStack</PackageDescription>
     <PackageLicenseUrl>https://github.com/mwhelan/Specify/blob/master/license.txt</PackageLicenseUrl>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.0.0" />
+    <PackageReference Include="Autofac" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

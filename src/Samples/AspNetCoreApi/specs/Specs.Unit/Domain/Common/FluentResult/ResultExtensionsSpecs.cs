@@ -33,7 +33,7 @@ namespace Specs.Unit.ApiTemplate.Domain.Common.FluentResult
     {
         public void Then_Result_with_no_Errors_or_Warnings_should_not_have_failures()
         {
-            Results.Ok().HasFailures().Should().BeFalse();
+            Result.Ok().HasFailures().Should().BeFalse();
         }
 
         public void AndThen_Result_with_Errors_and_Warnings_should_have_failures()
@@ -79,7 +79,7 @@ namespace Specs.Unit.ApiTemplate.Domain.Common.FluentResult
 
         public void AndThen_Result_without_Warnings_should_not_have_Warnings()
         {
-            Results.Ok().HasWarnings().Should().BeFalse();
+            Result.Ok().HasWarnings().Should().BeFalse();
         }
     }
 
@@ -121,7 +121,7 @@ namespace Specs.Unit.ApiTemplate.Domain.Common.FluentResult
     {
         public void Then_AddError_with_property_should_include_property()
         {
-            (Results.Ok()
+            (Result.Ok()
                 .AddError("propertyName", "message", 99)
                 .Errors[0] as AppError)
                 .Should().BeEquivalentTo(new AppError("propertyName", "message", 99));
@@ -129,7 +129,7 @@ namespace Specs.Unit.ApiTemplate.Domain.Common.FluentResult
 
         public void Then_AddError_without_property_should_not_include_property()
         {
-            (Results.Ok()
+            (Result.Ok()
                     .AddError("message", 99)
                     .Errors[0] as AppError)
                 .Should().BeEquivalentTo(new AppError("message", 99));
@@ -137,7 +137,7 @@ namespace Specs.Unit.ApiTemplate.Domain.Common.FluentResult
 
         public void Then_AddWarning_with_property_should_include_property()
         {
-            (Results.Ok()
+            (Result.Ok()
                     .AddWarning("propertyName", "message", 99)
                     .GetWarnings()[0] as AppWarning)
                 .Should().BeEquivalentTo(new AppWarning("propertyName", "message", 99));
@@ -145,7 +145,7 @@ namespace Specs.Unit.ApiTemplate.Domain.Common.FluentResult
 
         public void Then_AddWarning_without_property_should_not_include_property()
         {
-            (Results.Ok()
+            (Result.Ok()
                     .AddWarning("message", 99)
                     .GetWarnings()[0] as AppWarning)
                 .Should().BeEquivalentTo(new AppWarning("message", 99));

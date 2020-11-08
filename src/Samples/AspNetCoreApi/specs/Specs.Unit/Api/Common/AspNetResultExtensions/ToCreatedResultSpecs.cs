@@ -38,7 +38,7 @@ namespace Specs.Unit.ApiTemplate.Api.Common.AspNetResultExtensions
 
         public void Given_an_OkResult_with_a_RecordCreatedReason()
         {
-            SUT = Results.Ok().WithReason(new RecordsCreatedSuccess(22));
+            SUT = Result.Ok().WithReason(new RecordsCreatedSuccess(22));
         }
 
         public void When_ToCreatedResult_is_called()
